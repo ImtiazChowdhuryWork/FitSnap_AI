@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<colors>
+
+
+///Initial Colors Start
+<color name="scaffoldColor">#FFf9efef</color>
+<color name="allPrimaryColor">#FF107631</color>
+<color name="secondaryColor">#FFFFB75A</color>
+<color name="primaruDarki">#FF02BF65</color>
+<color name="cFFFFFF">#FFFFFFFF</color>
+<color name="c02BF65">#FF02BF65</color>
+<color name="c012d4d">#FF012d4d</color>
+<color name="c6b7280">#FF6b7280</color>
+<color name="cF4F4F4">#FFF4F4F4</color>
+<color name="c000000">#FF000000</color>
+<color name="cE6E8ED">#FFE6E8ED</color>
+<color name="c252c32">#FF252c32</color>
+<color name="cB0BABF">#FFB0BABF</color>
+<color name="c292E34">#FF292E34</color>
+<color name="c54585C">#FF54585C</color>
+<color name="c026cb7">#FF026cb7</color>
+<color name="cC4C4C4">#FFC4C4C4</color>
+<color name="c38686A">#FF38686A</color>
+<color name="ce7e5df">#FFe7e5df</color>
+<color name="c394456">#FF394456</color>
+<color name="c0000ff">#FF0000ff</color>
+<color name="c0B61D4">#FF0B61D4</color>
+<color name="c3296E8">#FF3296E8</color>
+<color name="c3B3BF9">#FF3B3BF9</color>
+<color name="cd9d9d9">#FFd9d9d9</color>
+
+
+
+<!-- <color name="gradiant2">#FF955EF9</color>
+<color name="disableColour">#FFE0EDFF</color>
+<color name="boxShadow">#FF0D6BF8</color>
+<color name="cffffff">#FFffffff</color>
+<color name="c919293">#FF919293</color>
+<color name="cEBEBEB">#FFEBEBEB</color>
+<color name="c9B9B9B">#FF9B9B9B</color>
+<color name="cEDBB43">#FFEDBB43</color>
+<color name="c86d72f">#FF86d72f</color> -->
+///Initial Colors Ends
+
+</colors>
+
+
+
