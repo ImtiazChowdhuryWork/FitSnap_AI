@@ -48,5 +48,5 @@ final class UIHelper {
         color: AppColors.c000000.withOpacity(.3),
         width: double.infinity,
       );
-  static double kDefaulutPadding() => 30.sp;
+  static double kDefaulutPadding() => 20.sp;
 }

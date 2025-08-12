@@ -9,8 +9,9 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.primaruDarki,
-        title: Text("Profile Screen"),
+        automaticallyImplyLeading: false,
+        backgroundColor: AppColors.c0000ff,
+        title: Text("Ai Cam Screen"),
       ),
     );
   }

@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:fitsnap_ai/features/add_payment_method/add_payment_method_screen.dart';
+import 'package:fitsnap_ai/features/ceckout/checkout_screen.dart';
 import 'package:fitsnap_ai/features/create_customize_plan/create_customize_plan_screen.dart';
 import 'package:fitsnap_ai/features/sign_in/sign_in_screen.dart';
 import 'package:fitsnap_ai/features/registration_successful/registration_successful_screen.dart';
@@ -31,6 +33,8 @@ final class Routes {
   static const String signinScreen = '/signinScreen';
   static const String signUpScreen = '/signUpScreen';
   static const String navBarScreen = '/navBarScreen';
+  static const String checkoutScreen = '/checkoutScreen';
+  static const String addPaymentMethodScreen = '/addPaymentMethodScreen';
   static const String sendVerificationScreen = '/sendVerificationScreen';
   static const String verifyCodeScreen = '/verifyCodeScreen';
   static const String resetPasswordScreen = '/resetPasswordScreen';
@@ -158,6 +162,28 @@ final class RouteGenerator {
               )
             : CupertinoPageRoute(
                 builder: (context) => CreateCustomizePlanScreen(),
+              );
+
+      ///createCustomizePlanScreen
+      case Routes.checkoutScreen:
+        return Platform.isAndroid
+            ? _FadedTransitionRoute(
+                widget: CheckoutScreen(),
+                settings: settings,
+              )
+            : CupertinoPageRoute(
+                builder: (context) => CheckoutScreen(),
+              );
+
+      ///createCustomizePlanScreen
+      case Routes.addPaymentMethodScreen:
+        return Platform.isAndroid
+            ? _FadedTransitionRoute(
+                widget: AddPaymentMethodScreen(),
+                settings: settings,
+              )
+            : CupertinoPageRoute(
+                builder: (context) => AddPaymentMethodScreen(),
               );
 
       default:

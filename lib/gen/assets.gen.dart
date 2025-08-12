@@ -104,6 +104,22 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/add_payment_method_screen_image.png
+  AssetGenImage get addPaymentMethodScreenImage =>
+      const AssetGenImage('assets/images/add_payment_method_screen_image.png');
+
+  /// File path: assets/images/card_icon.png
+  AssetGenImage get cardIcon =>
+      const AssetGenImage('assets/images/card_icon.png');
+
+  /// File path: assets/images/checkout_boy_image.png
+  AssetGenImage get checkoutBoyImage =>
+      const AssetGenImage('assets/images/checkout_boy_image.png');
+
+  /// File path: assets/images/checkout_girl_image.png
+  AssetGenImage get checkoutGirlImage =>
+      const AssetGenImage('assets/images/checkout_girl_image.png');
+
   /// File path: assets/images/error_image.png
   AssetGenImage get errorImage =>
       const AssetGenImage('assets/images/error_image.png');
@@ -120,16 +136,25 @@ class $AssetsImagesGen {
   AssetGenImage get mealImageLunch =>
       const AssetGenImage('assets/images/meal_image_lunch.png');
 
+  /// File path: assets/images/rainbox_circle_icon.png
+  AssetGenImage get rainboxCircleIcon =>
+      const AssetGenImage('assets/images/rainbox_circle_icon.png');
+
   /// File path: assets/images/user_choice_image.png
   AssetGenImage get userChoiceImage =>
       const AssetGenImage('assets/images/user_choice_image.png');
 
   /// List of all assets
   List<AssetGenImage> get values => [
+        addPaymentMethodScreenImage,
+        cardIcon,
+        checkoutBoyImage,
+        checkoutGirlImage,
         errorImage,
         mealImageBreakfast,
         mealImageDesart,
         mealImageLunch,
+        rainboxCircleIcon,
         userChoiceImage
       ];
 }

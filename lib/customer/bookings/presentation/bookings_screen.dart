@@ -9,8 +9,9 @@ class BookingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.primaruDarki,
-        title: Text("Bookings Screen"),
+        automaticallyImplyLeading: false,
+        backgroundColor: AppColors.c0000ff,
+        title: Text("Workouts Plan Screen"),
       ),
     );
   }

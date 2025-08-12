@@ -1,3 +1,4 @@
+import 'package:fitsnap_ai/features/ceckout/models/subscription_type_model.dart';
 import 'package:fitsnap_ai/gen/assets.gen.dart';
 
 import '../features/meal/models/custom_meal_card_model.dart';
@@ -52,5 +53,12 @@ class AppList {
       mealDescription: "Banana + Nuts. Instant energy boost",
       mealImage: Assets.images.mealImageDesart.path,
     ),
+  ];
+
+  ///Subscription Type List
+  static List<SubscriptionTypeModel> subscriptionTypeList = [
+    SubscriptionTypeModel(type: "Free", price: "7days"),
+    SubscriptionTypeModel(type: "1 month ", price: "500"),
+    SubscriptionTypeModel(type: "1 year", price: "6000"),
   ];
 }

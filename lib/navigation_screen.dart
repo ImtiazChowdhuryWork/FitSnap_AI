@@ -1,11 +1,11 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
+import 'package:fitsnap_ai/features/ceckout/checkout_screen.dart';
 import 'package:fitsnap_ai/features/meal/meal_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import 'customer/bookings/presentation/bookings_screen.dart';
-import 'customer/chats/presentation/chats_screen.dart';
 import 'customer/job_posts/presentation/job_posts_screen.dart';
 import 'customer/profile/presentation/profile_screen.dart';
 import 'gen/assets.gen.dart';
@@ -30,7 +30,7 @@ class NavigationScreen extends StatelessWidget {
           const BookingsScreen(),
           const ProfileScreen(),
           const MealScreen(),
-          const ProfileScreen(),
+          const CheckoutScreen(),
         ];
 
         return Scaffold(

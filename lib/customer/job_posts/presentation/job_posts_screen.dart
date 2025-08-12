@@ -9,8 +9,9 @@ class JobPostsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.primaruDarki,
-        title: Text("Job Posts Screen"),
+        automaticallyImplyLeading: false,
+        backgroundColor: AppColors.c0000ff,
+        title: Text("My Plan Screen"),
       ),
     );
   }
