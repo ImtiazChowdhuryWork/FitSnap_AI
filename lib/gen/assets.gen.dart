@@ -124,6 +124,10 @@ class $AssetsImagesGen {
   AssetGenImage get errorImage =>
       const AssetGenImage('assets/images/error_image.png');
 
+  /// File path: assets/images/first_day_image.png
+  AssetGenImage get firstDayImage =>
+      const AssetGenImage('assets/images/first_day_image.png');
+
   /// File path: assets/images/meal_image_breakfast.png
   AssetGenImage get mealImageBreakfast =>
       const AssetGenImage('assets/images/meal_image_breakfast.png');
@@ -140,6 +144,10 @@ class $AssetsImagesGen {
   AssetGenImage get rainboxCircleIcon =>
       const AssetGenImage('assets/images/rainbox_circle_icon.png');
 
+  /// File path: assets/images/tropy_image.png
+  AssetGenImage get tropyImage =>
+      const AssetGenImage('assets/images/tropy_image.png');
+
   /// File path: assets/images/user_choice_image.png
   AssetGenImage get userChoiceImage =>
       const AssetGenImage('assets/images/user_choice_image.png');
@@ -151,10 +159,12 @@ class $AssetsImagesGen {
         checkoutBoyImage,
         checkoutGirlImage,
         errorImage,
+        firstDayImage,
         mealImageBreakfast,
         mealImageDesart,
         mealImageLunch,
         rainboxCircleIcon,
+        tropyImage,
         userChoiceImage
       ];
 }

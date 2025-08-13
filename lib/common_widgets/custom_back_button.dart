@@ -1,8 +1,11 @@
+import 'package:fitsnap_ai/gen/colors.gen.dart';
 import 'package:fitsnap_ai/helpers/navigation_service.dart';
 import 'package:flutter/material.dart';
 
 class CustomBackButton extends StatelessWidget {
-  const CustomBackButton({super.key});
+  final Color? iconColor;
+  final AlignmentGeometry? alignment;
+  const CustomBackButton({super.key, this.iconColor, this.alignment});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +13,13 @@ class CustomBackButton extends StatelessWidget {
       onTap: () {
         NavigationService.goBack();
       },
-      child: Icon(Icons.arrow_back_ios),
+      child: Align(
+        alignment: alignment ?? Alignment.centerLeft,
+        child: Icon(
+          Icons.arrow_back_ios,
+          color: iconColor ?? AppColors.c000000,
+        ),
+      ),
     );
   }
 }
