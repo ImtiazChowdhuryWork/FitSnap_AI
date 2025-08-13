@@ -3,12 +3,14 @@ import 'dart:io';
 import 'package:fitsnap_ai/features/add_payment_method/add_payment_method_screen.dart';
 import 'package:fitsnap_ai/features/ceckout/checkout_screen.dart';
 import 'package:fitsnap_ai/features/create_customize_plan/create_customize_plan_screen.dart';
+import 'package:fitsnap_ai/features/first_day/first_day_screen.dart';
 import 'package:fitsnap_ai/features/sign_in/sign_in_screen.dart';
 import 'package:fitsnap_ai/features/registration_successful/registration_successful_screen.dart';
 import 'package:fitsnap_ai/features/reset_password/reset_pasword_screen.dart';
 import 'package:fitsnap_ai/features/send_verification_code/send_verificatin_code_screen.dart';
 import 'package:fitsnap_ai/features/sign_up/sign_up_screen.dart';
 import 'package:fitsnap_ai/features/verify_code/verify_code_screen.dart';
+import 'package:fitsnap_ai/features/well_done/well_done_screen.dart';
 import 'package:fitsnap_ai/navigation_screen.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -34,6 +36,8 @@ final class Routes {
   static const String signUpScreen = '/signUpScreen';
   static const String navBarScreen = '/navBarScreen';
   static const String checkoutScreen = '/checkoutScreen';
+  static const String wellDoneScreen = '/wellDoneScreen';
+  static const String firstDayScreen = '/firstDayScreen';
   static const String addPaymentMethodScreen = '/addPaymentMethodScreen';
   static const String sendVerificationScreen = '/sendVerificationScreen';
   static const String verifyCodeScreen = '/verifyCodeScreen';
@@ -164,7 +168,7 @@ final class RouteGenerator {
                 builder: (context) => CreateCustomizePlanScreen(),
               );
 
-      ///createCustomizePlanScreen
+      ///checkoutScreen
       case Routes.checkoutScreen:
         return Platform.isAndroid
             ? _FadedTransitionRoute(
@@ -175,7 +179,7 @@ final class RouteGenerator {
                 builder: (context) => CheckoutScreen(),
               );
 
-      ///createCustomizePlanScreen
+      ///addPaymentMethodScreen
       case Routes.addPaymentMethodScreen:
         return Platform.isAndroid
             ? _FadedTransitionRoute(
@@ -184,6 +188,28 @@ final class RouteGenerator {
               )
             : CupertinoPageRoute(
                 builder: (context) => AddPaymentMethodScreen(),
+              );
+
+      ///wellDoneScreen
+      case Routes.wellDoneScreen:
+        return Platform.isAndroid
+            ? _FadedTransitionRoute(
+                widget: WellDoneScreen(),
+                settings: settings,
+              )
+            : CupertinoPageRoute(
+                builder: (context) => WellDoneScreen(),
+              );
+
+      ///firstDayScreen
+      case Routes.firstDayScreen:
+        return Platform.isAndroid
+            ? _FadedTransitionRoute(
+                widget: FirstDayScreen(),
+                settings: settings,
+              )
+            : CupertinoPageRoute(
+                builder: (context) => FirstDayScreen(),
               );
 
       default:

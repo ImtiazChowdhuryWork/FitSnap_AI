@@ -1,6 +1,8 @@
 import 'package:fitsnap_ai/constants/text_font_style.dart';
 import 'package:fitsnap_ai/gen/assets.gen.dart';
 import 'package:fitsnap_ai/gen/colors.gen.dart';
+import 'package:fitsnap_ai/helpers/all_routes.dart';
+import 'package:fitsnap_ai/helpers/navigation_service.dart';
 import 'package:fitsnap_ai/helpers/ui_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -109,7 +111,9 @@ class AddPaymentMethodScreen extends StatelessWidget {
 
             ///Add Card Section
             InkWell(
-              onTap: () {},
+              onTap: () {
+                NavigationService.navigateTo(Routes.wellDoneScreen);
+              },
               child: Container(
                 width: 0.9.sw,
                 padding: EdgeInsets.all(10.sp),
