@@ -4,6 +4,7 @@ import 'package:fitsnap_ai/features/add_payment_method/add_payment_method_screen
 import 'package:fitsnap_ai/features/ceckout/checkout_screen.dart';
 import 'package:fitsnap_ai/features/create_customize_plan/create_customize_plan_screen.dart';
 import 'package:fitsnap_ai/features/first_day/first_day_screen.dart';
+import 'package:fitsnap_ai/features/my_plan/my_plan_screen.dart';
 import 'package:fitsnap_ai/features/sign_in/sign_in_screen.dart';
 import 'package:fitsnap_ai/features/registration_successful/registration_successful_screen.dart';
 import 'package:fitsnap_ai/features/reset_password/reset_pasword_screen.dart';
@@ -38,6 +39,7 @@ final class Routes {
   static const String checkoutScreen = '/checkoutScreen';
   static const String wellDoneScreen = '/wellDoneScreen';
   static const String firstDayScreen = '/firstDayScreen';
+  static const String myPlanScreen = '/myPlanScreen';
   static const String addPaymentMethodScreen = '/addPaymentMethodScreen';
   static const String sendVerificationScreen = '/sendVerificationScreen';
   static const String verifyCodeScreen = '/verifyCodeScreen';
@@ -210,6 +212,17 @@ final class RouteGenerator {
               )
             : CupertinoPageRoute(
                 builder: (context) => FirstDayScreen(),
+              );
+
+      ///myPlanScreen
+      case Routes.myPlanScreen:
+        return Platform.isAndroid
+            ? _FadedTransitionRoute(
+                widget: MyPlanScreen(),
+                settings: settings,
+              )
+            : CupertinoPageRoute(
+                builder: (context) => MyPlanScreen(),
               );
 
       default:
