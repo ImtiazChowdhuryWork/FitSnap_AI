@@ -1,6 +1,8 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
+import 'package:fitsnap_ai/features/ai_cam/ai_cam_screen.dart';
 import 'package:fitsnap_ai/features/ceckout/checkout_screen.dart';
 import 'package:fitsnap_ai/features/meal/meal_screen.dart';
+import 'package:fitsnap_ai/features/my_plan/my_plan_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -26,9 +28,9 @@ class NavigationScreen extends StatelessWidget {
         final int currentIndex = navigationProvider.currentIndex;
 
         final List<Widget> screens = [
-          const JobPostsScreen(),
+          const MyPlanScreen(),
           const BookingsScreen(),
-          const ProfileScreen(),
+          const AiCamScreen(),
           const MealScreen(),
           const CheckoutScreen(),
         ];

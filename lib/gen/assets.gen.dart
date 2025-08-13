@@ -108,6 +108,10 @@ class $AssetsImagesGen {
   AssetGenImage get addPaymentMethodScreenImage =>
       const AssetGenImage('assets/images/add_payment_method_screen_image.png');
 
+  /// File path: assets/images/camera_icon.png
+  AssetGenImage get cameraIcon =>
+      const AssetGenImage('assets/images/camera_icon.png');
+
   /// File path: assets/images/card_icon.png
   AssetGenImage get cardIcon =>
       const AssetGenImage('assets/images/card_icon.png');
@@ -148,6 +152,10 @@ class $AssetsImagesGen {
   AssetGenImage get tropyImage =>
       const AssetGenImage('assets/images/tropy_image.png');
 
+  /// File path: assets/images/upload_from_gallery_icon.png
+  AssetGenImage get uploadFromGalleryIcon =>
+      const AssetGenImage('assets/images/upload_from_gallery_icon.png');
+
   /// File path: assets/images/user_choice_image.png
   AssetGenImage get userChoiceImage =>
       const AssetGenImage('assets/images/user_choice_image.png');
@@ -155,6 +163,7 @@ class $AssetsImagesGen {
   /// List of all assets
   List<AssetGenImage> get values => [
         addPaymentMethodScreenImage,
+        cameraIcon,
         cardIcon,
         checkoutBoyImage,
         checkoutGirlImage,
@@ -165,6 +174,7 @@ class $AssetsImagesGen {
         mealImageLunch,
         rainboxCircleIcon,
         tropyImage,
+        uploadFromGalleryIcon,
         userChoiceImage
       ];
 }

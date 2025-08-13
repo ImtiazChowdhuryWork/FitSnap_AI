@@ -1,6 +1,7 @@
 import 'package:provider/provider.dart';
 
 import '../provider/custom_radius_button_controller.dart';
+import '../provider/impage_picker_provider.dart';
 import '../provider/navigation_provider.dart';
 
 var providers = [
@@ -8,4 +9,6 @@ var providers = [
       create: ((context) => NavigationProvider())),
   ChangeNotifierProvider<CustomRadiusButtonController>(
       create: ((context) => CustomRadiusButtonController())),
+  ChangeNotifierProvider<ImagePickerProvider>(
+      create: ((context) => ImagePickerProvider())),
 ];

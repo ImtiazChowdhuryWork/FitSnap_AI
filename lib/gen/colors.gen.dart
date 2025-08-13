@@ -53,8 +53,14 @@ class AppColors {
   /// Color: #FF3B3BF9
   static const Color c3B3BF9 = Color(0xFF3B3BF9);
 
+  /// Color: #FF3f421a
+  static const Color c3f421a = Color(0xFF3F421A);
+
   /// Color: #FF54585C
   static const Color c54585C = Color(0xFF54585C);
+
+  /// Color: #FF5D5C5C
+  static const Color c5D5C5C = Color(0xFF5D5C5C);
 
   /// Color: #FF6b7280
   static const Color c6b7280 = Color(0xFF6B7280);
@@ -80,8 +86,14 @@ class AppColors {
   /// Color: #FFd9d9d9
   static const Color cd9d9d9 = Color(0xFFD9D9D9);
 
+  /// Color: #FFdfe0f9
+  static const Color cdfe0f9 = Color(0xFFDFE0F9);
+
   /// Color: #FFe7e5df
   static const Color ce7e5df = Color(0xFFE7E5DF);
+
+  /// Color: #FFeb4326
+  static const Color ceb4326 = Color(0xFFEB4326);
 
   /// Color: #FF02BF65
   static const Color primaruDarki = Color(0xFF02BF65);
