@@ -8,8 +8,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import 'customer/bookings/presentation/bookings_screen.dart';
-import 'customer/job_posts/presentation/job_posts_screen.dart';
-import 'customer/profile/presentation/profile_screen.dart';
 import 'gen/assets.gen.dart';
 import 'gen/colors.gen.dart';
 import 'provider/navigation_provider.dart';
