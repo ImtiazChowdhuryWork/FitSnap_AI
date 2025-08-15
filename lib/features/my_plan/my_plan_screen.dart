@@ -9,12 +9,23 @@ import 'package:fitsnap_ai/helpers/ui_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../common_widgets/custom_drawer.dart';
+
 class MyPlanScreen extends StatelessWidget {
   const MyPlanScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: CustomDrawer(),
+      appBar: AppBar(
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: Icon(Icons.menu, color: Colors.black),
+            onPressed: () => Scaffold.of(context).openDrawer(),
+          ),
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(UIHelper.kDefaulutPadding()),
@@ -22,7 +33,7 @@ class MyPlanScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ///Text : Subscription & Billing
+                /// Text : Subscription & Billing
                 Text(
                   "Subscription & Billing",
                   textAlign: TextAlign.center,
@@ -34,12 +45,7 @@ class MyPlanScreen extends StatelessWidget {
                 ),
                 UIHelper.verticalSpace(60.h),
 
-                ///Button : Upgrade Plan Button
-                ///Text : Subscription Type
-                ///Text : Subscription Price
-                ///Text : Subscription Length
-                ///Start Date
-                ///End Date
+                /// Subscription Card
                 Container(
                   width: 1.sw,
                   padding: EdgeInsets.all(10.sp),
@@ -52,7 +58,7 @@ class MyPlanScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ///Button : Upgrade Plan Button
+                      /// Upgrade Plan Button
                       UpgradePlanButton(
                         onTap: () {
                           NavigationService.navigateTo(Routes.checkoutScreen);
@@ -61,9 +67,7 @@ class MyPlanScreen extends StatelessWidget {
                       ),
                       UIHelper.verticalSpace(10.h),
 
-                      ///Text : Subscription Type
-                      ///Text : Subscription Price
-                      ///Text : Subscription Length
+                      /// Subscription Details
                       SubcriptionPackageType(
                         subscriptionPackageType: "Pro Plan",
                         subscriptonPackagePrice: 500,
@@ -71,21 +75,17 @@ class MyPlanScreen extends StatelessWidget {
                       ),
                       UIHelper.verticalSpace(20.h),
 
-                      ///Start Date
-                      ///End Date
+                      /// Start & End Date
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          ///Start Date
                           ShowDate(
                             title: "Start Date :",
                             date: "5/22/2025",
                           ),
-
-                          ///End Date
                           ShowDate(
-                            title: "Start Date :",
-                            date: "5/22/2025",
+                            title: "End Date :",
+                            date: "6/22/2025",
                           ),
                         ],
                       ),
