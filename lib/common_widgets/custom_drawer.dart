@@ -70,7 +70,6 @@ class CustomDrawer extends StatelessWidget {
                     UIHelper.verticalSpace(15.h),
 
                     ///Favourites
-
                     CustomContainer(
                       padding: EdgeInsets.zero,
                       alignment: Alignment.centerRight,
@@ -90,7 +89,8 @@ class CustomDrawer extends StatelessWidget {
                       alignment: Alignment.centerRight,
                       child: CustomListTile(
                         onTap: () {
-                          NavigationService.navigateTo(Routes.checkoutScreen);
+                          NavigationService.navigateTo(
+                              Routes.subscriptionAndBillingScreen);
                         },
                         title: "Subscriptions & Billing",
                         leadingIcon: Icons.payment,
@@ -99,7 +99,6 @@ class CustomDrawer extends StatelessWidget {
                     UIHelper.verticalSpace(15.h),
 
                     ///Terms of Services
-
                     CustomContainer(
                       padding: EdgeInsets.zero,
                       alignment: Alignment.centerRight,
