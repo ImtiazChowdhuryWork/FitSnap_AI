@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 
-class ImagePickerProvider extends ChangeNotifier {
+class UpdateProfileInfoProvider extends ChangeNotifier {
+  ///Profile Image Picker Start
+  ///
   File? _selectedImage;
   File? get selectedImage => _selectedImage;
 
@@ -28,4 +30,9 @@ class ImagePickerProvider extends ChangeNotifier {
     _selectedImage = null;
     notifyListeners();
   }
+
+  ///Profile Image Picker End
+  ///
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
 }

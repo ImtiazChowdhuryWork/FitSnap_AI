@@ -52,7 +52,10 @@ class ProfileScreen extends StatelessWidget {
 
                     ///View & Update profile details
                     CustomListTile(
-                      onTap: () {},
+                      onTap: () {
+                        NavigationService.navigateTo(
+                            Routes.updateProfileScreen);
+                      },
                       title: "Update Profile Info",
                       leadingIcon: Icons.edit,
                       trailingIcon: Icons.arrow_forward,
