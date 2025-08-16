@@ -23,7 +23,7 @@ class AiCamOptionButton extends StatelessWidget {
       onTap: onTap,
       child: Column(
         children: [
-          ///Image : Take New Photo Container
+          ///Image : Opton Image
           Container(
             padding: EdgeInsets.all(20.sp),
             alignment: Alignment.center,
@@ -41,7 +41,7 @@ class AiCamOptionButton extends StatelessWidget {
           ),
           UIHelper.verticalSpace(10.h),
 
-          ///Text : Take New Photo Container
+          ///Text : Option Title
           Text(
             title,
             style: TextFontStyle.headline25BoldcFFFFFFStyleInter.copyWith(

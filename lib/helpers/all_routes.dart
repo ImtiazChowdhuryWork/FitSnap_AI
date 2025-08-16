@@ -6,6 +6,7 @@ import 'package:fitsnap_ai/features/create_customize_plan/create_customize_plan_
 import 'package:fitsnap_ai/features/first_day/first_day_screen.dart';
 import 'package:fitsnap_ai/features/my_plan/my_plan_screen.dart';
 import 'package:fitsnap_ai/features/profile/profile_screen.dart';
+import 'package:fitsnap_ai/features/profile/update_profile_info_screen.dart';
 import 'package:fitsnap_ai/features/profile/view_profile_info_screen.dart';
 import 'package:fitsnap_ai/features/sign_in/sign_in_screen.dart';
 import 'package:fitsnap_ai/features/registration_successful/registration_successful_screen.dart';
@@ -44,6 +45,7 @@ final class Routes {
   static const String firstDayScreen = '/firstDayScreen';
   static const String myPlanScreen = '/myPlanScreen';
   static const String profileScreen = '/profileScreen';
+  static const String updateProfileScreen = '/updateProfileScreen';
   static const String viewProfileInfoScreen = '/viewProfileInfoScreen';
   static const String subscriptionAndBillingScreen =
       '/subscriptionAndBillingScreen';
@@ -263,6 +265,17 @@ final class RouteGenerator {
               )
             : CupertinoPageRoute(
                 builder: (context) => ViewProfileInfoScreen(),
+              );
+
+      ///updateProfileScreen
+      case Routes.updateProfileScreen:
+        return Platform.isAndroid
+            ? _FadedTransitionRoute(
+                widget: UpdateProfileInfoScreen(),
+                settings: settings,
+              )
+            : CupertinoPageRoute(
+                builder: (context) => UpdateProfileInfoScreen(),
               );
 
       default:
