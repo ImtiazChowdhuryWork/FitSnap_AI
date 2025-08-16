@@ -6,11 +6,13 @@ import 'package:fitsnap_ai/features/create_customize_plan/create_customize_plan_
 import 'package:fitsnap_ai/features/first_day/first_day_screen.dart';
 import 'package:fitsnap_ai/features/my_plan/my_plan_screen.dart';
 import 'package:fitsnap_ai/features/profile/profile_screen.dart';
+import 'package:fitsnap_ai/features/profile/view_profile_info_screen.dart';
 import 'package:fitsnap_ai/features/sign_in/sign_in_screen.dart';
 import 'package:fitsnap_ai/features/registration_successful/registration_successful_screen.dart';
 import 'package:fitsnap_ai/features/reset_password/reset_pasword_screen.dart';
 import 'package:fitsnap_ai/features/send_verification_code/send_verificatin_code_screen.dart';
 import 'package:fitsnap_ai/features/sign_up/sign_up_screen.dart';
+import 'package:fitsnap_ai/features/subscription_billing/subscription_billing_screen.dart';
 import 'package:fitsnap_ai/features/verify_code/verify_code_screen.dart';
 import 'package:fitsnap_ai/features/well_done/well_done_screen.dart';
 import 'package:fitsnap_ai/navigation_screen.dart';
@@ -42,6 +44,9 @@ final class Routes {
   static const String firstDayScreen = '/firstDayScreen';
   static const String myPlanScreen = '/myPlanScreen';
   static const String profileScreen = '/profileScreen';
+  static const String viewProfileInfoScreen = '/viewProfileInfoScreen';
+  static const String subscriptionAndBillingScreen =
+      '/subscriptionAndBillingScreen';
   static const String addPaymentMethodScreen = '/addPaymentMethodScreen';
   static const String sendVerificationScreen = '/sendVerificationScreen';
   static const String verifyCodeScreen = '/verifyCodeScreen';
@@ -236,6 +241,28 @@ final class RouteGenerator {
               )
             : CupertinoPageRoute(
                 builder: (context) => ProfileScreen(),
+              );
+
+      ///subscriptionAndBillingScreen
+      case Routes.subscriptionAndBillingScreen:
+        return Platform.isAndroid
+            ? _FadedTransitionRoute(
+                widget: SubscriptionBillingScreen(),
+                settings: settings,
+              )
+            : CupertinoPageRoute(
+                builder: (context) => SubscriptionBillingScreen(),
+              );
+
+      ///viewProfileInfoScreen
+      case Routes.viewProfileInfoScreen:
+        return Platform.isAndroid
+            ? _FadedTransitionRoute(
+                widget: ViewProfileInfoScreen(),
+                settings: settings,
+              )
+            : CupertinoPageRoute(
+                builder: (context) => ViewProfileInfoScreen(),
               );
 
       default:

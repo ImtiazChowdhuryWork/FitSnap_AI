@@ -1,11 +1,18 @@
+import 'package:fitsnap_ai/common_widgets/custom_elevated_button.dart';
 import 'package:fitsnap_ai/constants/text_font_style.dart';
 import 'package:fitsnap_ai/common_widgets/custom_container.dart';
 import 'package:fitsnap_ai/common_widgets/custom_list_tile.dart';
+import 'package:fitsnap_ai/features/profile/widgets/delete_account_bottom_sheet.dart';
+import 'package:fitsnap_ai/features/profile/widgets/sign_out_bottom_sheet.dart';
+import 'package:fitsnap_ai/features/profile/widgets/user_image_name_widget.dart';
 import 'package:fitsnap_ai/gen/assets.gen.dart';
 import 'package:fitsnap_ai/gen/colors.gen.dart';
+import 'package:fitsnap_ai/helpers/all_routes.dart';
+import 'package:fitsnap_ai/helpers/navigation_service.dart';
 import 'package:fitsnap_ai/helpers/ui_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -21,37 +28,9 @@ class ProfileScreen extends StatelessWidget {
             children: [
               ///Image
               ///User Name
-              Container(
-                width: 1.sw,
-                padding: EdgeInsets.all(10.sp),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: AppColors.c0000ff.withAlpha(150),
-                  border: Border.all(
-                    color: AppColors.c0000ff,
-                  ),
-                  borderRadius: BorderRadius.circular(10.r),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ///Profile Image
-                    CircleAvatar(
-                      radius: 60.sp,
-                      backgroundImage: AssetImage(
-                        Assets.images.addPaymentMethodScreenImage.path,
-                      ),
-                    ),
-                    UIHelper.verticalSpace(10.h),
-
-                    ///User Name
-                    Text(
-                      "Imtiaz Chowdhury",
-                      style: TextFontStyle.headline25BoldcFFFFFFStyleInter,
-                    ),
-                  ],
-                ),
+              UserImageAndNameWidget(
+                userImage: Assets.images.addPaymentMethodScreenImage.path,
+                userName: "Imtiaz Chowdhury",
               ),
               UIHelper.verticalSpace(20.h),
 
@@ -62,7 +41,10 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     ///View only profile details
                     CustomListTile(
-                      onTap: () {},
+                      onTap: () {
+                        NavigationService.navigateTo(
+                            Routes.viewProfileInfoScreen);
+                      },
                       title: "View Profile Info",
                       leadingIcon: Icons.account_circle_outlined,
                       trailingIcon: Icons.arrow_forward,
@@ -96,7 +78,7 @@ class ProfileScreen extends StatelessWidget {
                     ///View & Update profile details
                     CustomListTile(
                       onTap: () {},
-                      title: "TErms of Services",
+                      title: "Terms of Services",
                       leadingIcon: Icons.description_outlined,
                       trailingIcon: Icons.arrow_forward,
                     ),
@@ -108,7 +90,12 @@ class ProfileScreen extends StatelessWidget {
               ///Section : Delete Account
               CustomContainer(
                 child: CustomListTile(
-                  onTap: () {},
+                  onTap: () {
+                    Get.bottomSheet(
+                      backgroundColor: AppColors.c0000ff.withAlpha(20),
+                      DeleteAccountBottomSheet(),
+                    );
+                  },
                   title: "Delete Account",
                   titleColor: AppColors.cdc2626,
                   trailingIcon: Icons.delete_forever,
@@ -120,7 +107,12 @@ class ProfileScreen extends StatelessWidget {
               ///Section : Delete Account
               CustomContainer(
                 child: CustomListTile(
-                  onTap: () {},
+                  onTap: () {
+                    Get.bottomSheet(
+                      backgroundColor: AppColors.c0000ff.withAlpha(20),
+                      SignOutBottomSheet(),
+                    );
+                  },
                   title: "Sign Out",
                   isLeadingUsed: false,
                   leadingIcon: Icons.login_outlined,
