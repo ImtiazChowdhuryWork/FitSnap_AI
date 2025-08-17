@@ -35,4 +35,19 @@ class UpdateProfileInfoProvider extends ChangeNotifier {
   ///
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
+
+  bool _isEditMode = false;
+  bool get isEditModeOn => _isEditMode;
+
+  ///Set edit mode : True
+  void setEditModeTrue() {
+    _isEditMode = true;
+    notifyListeners();
+  }
+
+  ///Set edit mode : False
+  void setEditModeFalse() {
+    _isEditMode = false;
+    notifyListeners();
+  }
 }

@@ -35,6 +35,7 @@ final class CustomFormField extends StatelessWidget {
   final EdgeInsetsGeometry? contentPadding;
   final TextStyle? hintTextStyle;
   final Color? borderColor;
+  final InputBorder? focusedBorder;
 
   const CustomFormField({
     super.key,
@@ -68,6 +69,7 @@ final class CustomFormField extends StatelessWidget {
     this.hintFontSize,
     this.hintTextStyle,
     this.borderColor,
+    this.focusedBorder,
   });
 
   @override
@@ -120,12 +122,13 @@ final class CustomFormField extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(borderRadius ?? 8.r),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: borderColor ?? AppColors.ce7e5df,
-            ),
-            borderRadius: BorderRadius.circular(borderRadius ?? 12.r),
-          ),
+          focusedBorder: focusedBorder ??
+              OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: borderColor ?? AppColors.ce7e5df,
+                ),
+                borderRadius: BorderRadius.circular(borderRadius ?? 12.r),
+              ),
           // disabledBorder: OutlineInputBorder(
           //   borderRadius: BorderRadius.circular(borderRadius ?? 48.0.r),
           //   borderSide: const BorderSide(

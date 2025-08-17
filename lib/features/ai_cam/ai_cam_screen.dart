@@ -1,5 +1,5 @@
 import 'package:fitsnap_ai/constants/text_font_style.dart';
-import 'package:fitsnap_ai/features/ai_cam/widgets/ai_cam_option_button.dart';
+import 'package:fitsnap_ai/common_widgets/cam_option_button.dart';
 import 'package:fitsnap_ai/features/ai_cam/widgets/remove_image_widget.dart';
 import 'package:fitsnap_ai/gen/assets.gen.dart';
 import 'package:fitsnap_ai/gen/colors.gen.dart';
@@ -57,8 +57,8 @@ class AiCamScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ///Option : Take a new photo
-                      AiCamOptionButton(
+                      ///Option : Take a new photo from Camera
+                      CamOptionButton(
                         onTap: () {
                           imagePickerController.pickImageFromCamera();
                         },
@@ -66,8 +66,8 @@ class AiCamScreen extends StatelessWidget {
                         title: "Take a New Photo",
                       ),
 
-                      ///Upload from Gallery
-                      AiCamOptionButton(
+                      ///Option : Upload from Gallery
+                      CamOptionButton(
                         onTap: () {
                           imagePickerController.pickImageFromGallery();
                         },
