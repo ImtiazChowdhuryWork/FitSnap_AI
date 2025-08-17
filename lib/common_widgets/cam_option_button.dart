@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../constants/text_font_style.dart';
-import '../../../gen/assets.gen.dart';
-import '../../../gen/colors.gen.dart';
-import '../../../helpers/ui_helpers.dart';
+import '../constants/text_font_style.dart';
+import '../gen/colors.gen.dart';
+import '../helpers/ui_helpers.dart';
 
-class AiCamOptionButton extends StatelessWidget {
+class CamOptionButton extends StatelessWidget {
   final String image;
   final String title;
+  final double? imageHeight;
+  final double? imageWidth;
   final void Function()? onTap;
-  const AiCamOptionButton({
+  const CamOptionButton({
     super.key,
     required this.image,
     required this.title,
     this.onTap,
+    this.imageHeight,
+    this.imageWidth,
   });
 
   @override
@@ -32,8 +35,8 @@ class AiCamOptionButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.r),
             ),
             child: Image.asset(
-              width: 100.w,
-              height: 100.h,
+              width: imageWidth ?? 100.w,
+              height: imageHeight ?? 100.h,
               color: AppColors.c3f421a,
               fit: BoxFit.cover,
               image,
