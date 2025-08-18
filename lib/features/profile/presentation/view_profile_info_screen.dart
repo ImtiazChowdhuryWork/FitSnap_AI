@@ -5,7 +5,7 @@ import 'package:fitsnap_ai/helpers/ui_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../gen/assets.gen.dart';
+import '../../../gen/assets.gen.dart';
 
 class ViewProfileInfoScreen extends StatelessWidget {
   const ViewProfileInfoScreen({super.key});

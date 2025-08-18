@@ -3,10 +3,10 @@ import 'package:fitsnap_ai/helpers/ui_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../common_widgets/custom_elevated_button.dart';
-import '../../gen/colors.gen.dart';
-import '../../helpers/all_routes.dart';
-import '../../helpers/navigation_service.dart';
+import '../../../common_widgets/custom_elevated_button.dart';
+import '../../../gen/colors.gen.dart';
+import '../../../helpers/all_routes.dart';
+import '../../../helpers/navigation_service.dart';
 
 class RegistrationSuccessfulScreen extends StatelessWidget {
   const RegistrationSuccessfulScreen({super.key});

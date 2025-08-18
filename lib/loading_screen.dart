@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'constants/app_constants.dart';
-import 'features/terms_condition/terms_conditions_accept_screen.dart';
+import 'features/terms_condition/presentation/terms_conditions_accept_screen.dart';
 import 'helpers/di.dart';
 import 'helpers/helper_methods.dart';
 import 'helpers/post_login.dart';

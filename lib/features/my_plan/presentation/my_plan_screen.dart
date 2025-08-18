@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../common_widgets/custom_drawer.dart';
+import '../../../common_widgets/custom_drawer.dart';
 
 class MyPlanScreen extends StatelessWidget {
   const MyPlanScreen({super.key});
