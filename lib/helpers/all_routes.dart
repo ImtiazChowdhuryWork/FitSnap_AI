@@ -12,7 +12,7 @@ import 'package:fitsnap_ai/features/auth/presentation/sign_in/sign_in_screen.dar
 import 'package:fitsnap_ai/features/registration_successful/presentation/registration_successful_screen.dart';
 import 'package:fitsnap_ai/features/auth/presentation/reset_password/reset_pasword_screen.dart';
 import 'package:fitsnap_ai/features/auth/presentation/send_verification_code/send_verificatin_code_screen.dart';
-import 'package:fitsnap_ai/features/auth/presentation/sign_up/sign_up_screen.dart';
+import 'package:fitsnap_ai/features/auth/presentation/sign_up/presentation/sign_up_screen.dart';
 import 'package:fitsnap_ai/features/subscription_billing/presentation/subscription_billing_screen.dart';
 import 'package:fitsnap_ai/features/auth/presentation/verify_code/verify_code_screen.dart';
 import 'package:fitsnap_ai/features/well_done/presentation/well_done_screen.dart';
