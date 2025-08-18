@@ -96,8 +96,18 @@
 
 // PostAddQuoteRX postAddQuoteRX =
 //     PostAddQuoteRX(empty: {}, dataFetcher: BehaviorSubject<Map>());
-// // GetThemeRx getThemeRx =
-// //     GetThemeRx(empty: {}, dataFetcher: BehaviorSubject<Map>());
-// //put
-// // PutUpdatePasswordRX putUpdatePasswordRXObj =
-// //     PutUpdatePasswordRX(empty: {}, dataFetcher: BehaviorSubject<Map>());
+// GetThemeRx getThemeRx =
+//     GetThemeRx(empty: {}, dataFetcher: BehaviorSubject<Map>());
+//put
+// PutUpdatePasswordRX putUpdatePasswordRXObj =
+//     PutUpdatePasswordRX(empty: {}, dataFetcher: BehaviorSubject<Map>());
+
+import 'package:fitsnap_ai/features/auth/data/rx_post_sign_up/rx.dart';
+import 'package:fitsnap_ai/features/auth/presentation/sign_up/model/sign_up_model.dart';
+import 'package:rxdart/subjects.dart';
+
+///FitSnapAI Start
+PostSignUpRx postSignUpRx = PostSignUpRx(
+    empty: SignUpModel(), dataFetcher: BehaviorSubject<SignUpModel>());
+
+///FitSnapAI End

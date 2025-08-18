@@ -1,6 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
-const String url = "";
+const String url = "https://a870da883438.ngrok-free.app/api";
 
 final class NetworkConstants {
   NetworkConstants._();
@@ -22,7 +22,10 @@ final class PaymentGateway {
 final class Endpoints {
   Endpoints._();
   //backend_url
-  static String signUp() => "/api/register";
+  ///FitSnapAI Start
+  static String signUp() => "/signup/";
+
+  ///FitSnapAI End
   static String logIn() => "/api/login";
   static String resendEmailVarificationOtp() =>
       "/api/resend-email-verification-otp";
