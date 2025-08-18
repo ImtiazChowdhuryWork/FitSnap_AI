@@ -11,8 +11,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-import '../../gen/assets.gen.dart';
-import '../../gen/colors.gen.dart';
+import '../../../gen/assets.gen.dart';
+import '../../../gen/colors.gen.dart';
 
 class UpdateProfileInfoScreen extends StatelessWidget {
   const UpdateProfileInfoScreen({super.key});

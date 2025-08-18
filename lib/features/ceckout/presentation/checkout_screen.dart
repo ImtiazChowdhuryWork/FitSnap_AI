@@ -7,9 +7,9 @@ import 'package:fitsnap_ai/gen/assets.gen.dart';
 import 'package:fitsnap_ai/gen/colors.gen.dart';
 import 'package:fitsnap_ai/helpers/ui_helpers.dart';
 
-import '../../common_widgets/custom_elevated_button.dart';
-import '../../helpers/all_routes.dart';
-import '../../helpers/navigation_service.dart';
+import '../../../common_widgets/custom_elevated_button.dart';
+import '../../../helpers/all_routes.dart';
+import '../../../helpers/navigation_service.dart';
 
 class CheckoutScreen extends StatelessWidget {
   const CheckoutScreen({super.key});

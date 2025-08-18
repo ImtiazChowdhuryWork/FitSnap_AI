@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';
 import 'package:get/get.dart';
 
-import '../../../constants/text_font_style.dart';
+import '../../../../../constants/text_font_style.dart';
 
 class CustomPinInput extends StatelessWidget {
   final void Function(String pin)? onCompleted;

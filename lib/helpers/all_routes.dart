@@ -1,26 +1,26 @@
 import 'dart:io';
 
-import 'package:fitsnap_ai/features/add_payment_method/add_payment_method_screen.dart';
-import 'package:fitsnap_ai/features/ceckout/checkout_screen.dart';
-import 'package:fitsnap_ai/features/create_customize_plan/create_customize_plan_screen.dart';
-import 'package:fitsnap_ai/features/first_day/first_day_screen.dart';
-import 'package:fitsnap_ai/features/my_plan/my_plan_screen.dart';
-import 'package:fitsnap_ai/features/profile/profile_screen.dart';
-import 'package:fitsnap_ai/features/profile/update_profile_info_screen.dart';
-import 'package:fitsnap_ai/features/profile/view_profile_info_screen.dart';
-import 'package:fitsnap_ai/features/sign_in/sign_in_screen.dart';
-import 'package:fitsnap_ai/features/registration_successful/registration_successful_screen.dart';
-import 'package:fitsnap_ai/features/reset_password/reset_pasword_screen.dart';
-import 'package:fitsnap_ai/features/send_verification_code/send_verificatin_code_screen.dart';
-import 'package:fitsnap_ai/features/sign_up/sign_up_screen.dart';
-import 'package:fitsnap_ai/features/subscription_billing/subscription_billing_screen.dart';
-import 'package:fitsnap_ai/features/verify_code/verify_code_screen.dart';
-import 'package:fitsnap_ai/features/well_done/well_done_screen.dart';
+import 'package:fitsnap_ai/features/add_payment_method/presentation/add_payment_method_screen.dart';
+import 'package:fitsnap_ai/features/ceckout/presentation/checkout_screen.dart';
+import 'package:fitsnap_ai/features/create_customize_plan/presentation/create_customize_plan_screen.dart';
+import 'package:fitsnap_ai/features/first_day/presentation/first_day_screen.dart';
+import 'package:fitsnap_ai/features/my_plan/presentation/my_plan_screen.dart';
+import 'package:fitsnap_ai/features/profile/presentation/profile_screen.dart';
+import 'package:fitsnap_ai/features/profile/presentation/update_profile_info_screen.dart';
+import 'package:fitsnap_ai/features/profile/presentation/view_profile_info_screen.dart';
+import 'package:fitsnap_ai/features/auth/presentation/sign_in/sign_in_screen.dart';
+import 'package:fitsnap_ai/features/registration_successful/presentation/registration_successful_screen.dart';
+import 'package:fitsnap_ai/features/auth/presentation/reset_password/reset_pasword_screen.dart';
+import 'package:fitsnap_ai/features/auth/presentation/send_verification_code/send_verificatin_code_screen.dart';
+import 'package:fitsnap_ai/features/auth/presentation/sign_up/sign_up_screen.dart';
+import 'package:fitsnap_ai/features/subscription_billing/presentation/subscription_billing_screen.dart';
+import 'package:fitsnap_ai/features/auth/presentation/verify_code/verify_code_screen.dart';
+import 'package:fitsnap_ai/features/well_done/presentation/well_done_screen.dart';
 import 'package:fitsnap_ai/navigation_screen.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../customer/job_posts/presentation/job_posts_screen.dart';
-import '../features/terms_condition/terms_conditions_accept_screen.dart';
+import '../features/terms_condition/presentation/terms_conditions_accept_screen.dart';
 
 final class Routes {
   static final Routes _routes = Routes._internal();

@@ -7,8 +7,8 @@ import 'package:fitsnap_ai/helpers/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../common_widgets/custom_back_button.dart';
-import '../../helpers/ui_helpers.dart';
+import '../../../../common_widgets/custom_back_button.dart';
+import '../../../../helpers/ui_helpers.dart';
 
 class SigninScreen extends StatelessWidget {
   const SigninScreen({super.key});

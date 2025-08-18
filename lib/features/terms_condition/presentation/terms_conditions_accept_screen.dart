@@ -5,7 +5,7 @@ import 'package:fitsnap_ai/helpers/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../helpers/ui_helpers.dart';
+import '../../../helpers/ui_helpers.dart';
 
 class TermsConditionsAcceptScreen extends StatelessWidget {
   const TermsConditionsAcceptScreen({super.key});

@@ -1,8 +1,8 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
-import 'package:fitsnap_ai/features/ai_cam/ai_cam_screen.dart';
-import 'package:fitsnap_ai/features/ceckout/checkout_screen.dart';
-import 'package:fitsnap_ai/features/meal/meal_screen.dart';
-import 'package:fitsnap_ai/features/my_plan/my_plan_screen.dart';
+import 'package:fitsnap_ai/features/ai_cam/presentation/ai_cam_screen.dart';
+import 'package:fitsnap_ai/features/ceckout/presentation/checkout_screen.dart';
+import 'package:fitsnap_ai/features/meal/presentation/meal_screen.dart';
+import 'package:fitsnap_ai/features/my_plan/presentation/my_plan_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';

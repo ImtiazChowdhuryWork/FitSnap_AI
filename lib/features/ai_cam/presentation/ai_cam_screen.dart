@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-import '../../provider/ai_cam_impage_picker_provider.dart';
+import '../../../provider/ai_cam_impage_picker_provider.dart';
 
 class AiCamScreen extends StatelessWidget {
   const AiCamScreen({super.key});

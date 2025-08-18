@@ -1,7 +1,7 @@
 import 'package:fitsnap_ai/common_widgets/custom_back_button.dart';
 import 'package:fitsnap_ai/common_widgets/custom_elevated_button.dart';
 import 'package:fitsnap_ai/constants/text_font_style.dart';
-import 'package:fitsnap_ai/features/verify_code/widget/custom_pinput.dart';
+import 'package:fitsnap_ai/features/auth/presentation/verify_code/widget/custom_pinput.dart';
 import 'package:fitsnap_ai/gen/colors.gen.dart';
 import 'package:fitsnap_ai/helpers/all_routes.dart';
 import 'package:fitsnap_ai/helpers/navigation_service.dart';
