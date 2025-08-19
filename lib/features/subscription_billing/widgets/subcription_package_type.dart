@@ -33,7 +33,7 @@ class SubcriptionPackageType extends StatelessWidget {
 
         ///Text : $500/ month
         Text(
-          "\$${subscriptonPackagePrice}/${subscriptionPackageLength}",
+          "\$$subscriptonPackagePrice/$subscriptionPackageLength",
           style: TextFontStyle.headline25BoldcFFFFFFStyleInter.copyWith(
             color: AppColors.c000000,
             fontSize: 20.sp,

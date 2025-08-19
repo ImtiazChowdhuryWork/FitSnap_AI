@@ -1,6 +1,5 @@
 import 'package:fitsnap_ai/common_widgets/custom_container.dart';
 import 'package:fitsnap_ai/common_widgets/custom_list_tile.dart';
-import 'package:fitsnap_ai/constants/text_font_style.dart';
 import 'package:fitsnap_ai/gen/colors.gen.dart';
 import 'package:fitsnap_ai/helpers/ui_helpers.dart';
 import 'package:flutter/material.dart';

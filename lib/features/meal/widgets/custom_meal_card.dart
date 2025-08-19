@@ -1,5 +1,4 @@
 import 'package:fitsnap_ai/constants/text_font_style.dart';
-import 'package:fitsnap_ai/gen/assets.gen.dart';
 import 'package:fitsnap_ai/gen/colors.gen.dart';
 import 'package:fitsnap_ai/helpers/ui_helpers.dart';
 import 'package:flutter/material.dart';

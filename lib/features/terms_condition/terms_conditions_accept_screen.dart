@@ -1,5 +1,4 @@
 import 'package:fitsnap_ai/common_widgets/custom_elevated_button.dart';
-import 'package:fitsnap_ai/constants/text_font_style.dart';
 import 'package:fitsnap_ai/helpers/all_routes.dart';
 import 'package:fitsnap_ai/helpers/navigation_service.dart';
 import 'package:flutter/material.dart';

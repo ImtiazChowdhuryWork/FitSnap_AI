@@ -126,6 +126,5 @@ class SigninScreen extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }

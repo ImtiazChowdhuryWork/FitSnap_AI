@@ -5,8 +5,7 @@ import '../gen/colors.gen.dart';
 
 class CustomSeparator extends StatelessWidget {
   const CustomSeparator(
-      {Key? key, this.height = 1, this.color = AppColors.cC4C4C4, this.padding})
-      : super(key: key);
+      {super.key, this.height = 1, this.color = AppColors.cC4C4C4, this.padding});
   final double height;
   final Color color;
   final double? padding;
@@ -22,6 +21,8 @@ class CustomSeparator extends StatelessWidget {
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: padding ?? 20.w),
           child: Flex(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            direction: Axis.horizontal,
             children: List.generate(dashCount, (_) {
               return SizedBox(
                 width: dashWidth,
@@ -31,8 +32,6 @@ class CustomSeparator extends StatelessWidget {
                 ),
               );
             }),
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            direction: Axis.horizontal,
           ),
         );
       },

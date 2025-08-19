@@ -1,8 +1,6 @@
-import 'package:fitsnap_ai/constants/text_font_style.dart';
 import 'package:fitsnap_ai/features/ai_cam/widgets/ai_cam_option_button.dart';
 import 'package:fitsnap_ai/features/ai_cam/widgets/remove_image_widget.dart';
 import 'package:fitsnap_ai/gen/assets.gen.dart';
-import 'package:fitsnap_ai/gen/colors.gen.dart';
 import 'package:fitsnap_ai/helpers/ui_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

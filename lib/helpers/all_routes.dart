@@ -7,10 +7,10 @@ import 'package:fitsnap_ai/features/first_day/first_day_screen.dart';
 import 'package:fitsnap_ai/features/my_plan/my_plan_screen.dart';
 import 'package:fitsnap_ai/features/profile/profile_screen.dart';
 import 'package:fitsnap_ai/features/profile/view_profile_info_screen.dart';
-import 'package:fitsnap_ai/features/sign_in/sign_in_screen.dart';
 import 'package:fitsnap_ai/features/registration_successful/registration_successful_screen.dart';
 import 'package:fitsnap_ai/features/reset_password/reset_pasword_screen.dart';
 import 'package:fitsnap_ai/features/send_verification_code/send_verificatin_code_screen.dart';
+import 'package:fitsnap_ai/features/sign_in/sign_in_screen.dart';
 import 'package:fitsnap_ai/features/sign_up/sign_up_screen.dart';
 import 'package:fitsnap_ai/features/subscription_billing/subscription_billing_screen.dart';
 import 'package:fitsnap_ai/features/verify_code/verify_code_screen.dart';
@@ -19,6 +19,7 @@ import 'package:fitsnap_ai/navigation_screen.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../customer/job_posts/presentation/job_posts_screen.dart';
+import '../features/onboarding/onboarding_screen.dart';
 import '../features/terms_condition/terms_conditions_accept_screen.dart';
 
 final class Routes {
@@ -57,6 +58,9 @@ final class Routes {
       '/termsConditionsAcceptScreen';
   static const String createCustomizePlanScreen = '/createCustomizePlanScreen';
 
+  // Onboarding Screen
+  static const String onboardingScreen = '/onboardingScreen';
+
   ///Instat App routes Ends
 }
 
@@ -76,6 +80,17 @@ final class RouteGenerator {
               )
             : CupertinoPageRoute(
                 builder: (context) => JobPostsScreen(),
+              );
+
+      ///Onboarding Screen
+      case Routes.onboardingScreen:
+        return Platform.isAndroid
+            ? _FadedTransitionRoute(
+                widget: OnboardingScreen(),
+                settings: settings,
+              )
+            : CupertinoPageRoute(
+                builder: (context) => OnboardingScreen(),
               );
 
       ///Sign up Screen
