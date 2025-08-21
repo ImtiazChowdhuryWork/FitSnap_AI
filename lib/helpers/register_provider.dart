@@ -15,7 +15,7 @@ var providers = [
   ChangeNotifierProvider<AiCamImagePickerProvider>(
       create: ((context) => AiCamImagePickerProvider())),
   ChangeNotifierProvider<OnboardingProvider>(
-      create: ((context) => OnboardingProvider()))
+      create: ((context) => OnboardingProvider())),
   ChangeNotifierProvider<UpdateProfileInfoProvider>(
       create: ((context) => UpdateProfileInfoProvider())),
   ChangeNotifierProvider<SignUpScreenProvider>(
