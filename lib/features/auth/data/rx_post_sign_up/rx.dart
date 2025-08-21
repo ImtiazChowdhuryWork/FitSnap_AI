@@ -38,6 +38,7 @@ final class PostSignUpRx extends RxResponseInt<SignUpModel> {
   ///Success
   @override
   handleSuccessWithReturn(SignUpModel data) async {
+    await appData.write(kKeyIsLoggedIn, true);
     await appData.write(kKeyFirstName, data.data!.firstName);
     await appData.write(kKeyLastName, data.data!.lastName);
     await appData.write(kEmail, data.data!.email);
