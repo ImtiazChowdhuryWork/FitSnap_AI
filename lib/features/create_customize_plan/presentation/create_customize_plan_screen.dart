@@ -4,7 +4,6 @@ import 'package:fitsnap_ai/gen/colors.gen.dart';
 import 'package:fitsnap_ai/helpers/ui_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 import '../../../common_widgets/custom_elevated_button.dart';
 import '../../../helpers/all_routes.dart';
@@ -24,7 +23,7 @@ class CreateCustomizePlanScreen extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios, color: Colors.black),
           onPressed: () {
-            Get.back();
+            NavigationService.goBack();
           },
         ),
       ),
@@ -72,7 +71,7 @@ class CreateCustomizePlanScreen extends StatelessWidget {
                     /// Button : Continue
                     CustomElevatedButton(
                       onTap: () {
-                        NavigationService.navigateTo(Routes.navBarScreen);
+                        NavigationService.navigateTo(Routes.onboardingScreen);
                       },
                       buttonTitle: "Continue",
                       borderRadius: 20.r,

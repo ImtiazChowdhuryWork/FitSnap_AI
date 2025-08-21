@@ -20,6 +20,7 @@ import 'package:fitsnap_ai/navigation_screen.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../customer/job_posts/presentation/job_posts_screen.dart';
+import '../features/onboarding/onboarding_screen.dart';
 import '../features/terms_condition/presentation/terms_conditions_accept_screen.dart';
 
 final class Routes {
@@ -59,6 +60,9 @@ final class Routes {
       '/termsConditionsAcceptScreen';
   static const String createCustomizePlanScreen = '/createCustomizePlanScreen';
 
+  // Onboarding Screen
+  static const String onboardingScreen = '/onboardingScreen';
+
   ///Instat App routes Ends
 }
 
@@ -78,6 +82,17 @@ final class RouteGenerator {
               )
             : CupertinoPageRoute(
                 builder: (context) => JobPostsScreen(),
+              );
+
+      ///Onboarding Screen
+      case Routes.onboardingScreen:
+        return Platform.isAndroid
+            ? _FadedTransitionRoute(
+                widget: OnboardingScreen(),
+                settings: settings,
+              )
+            : CupertinoPageRoute(
+                builder: (context) => OnboardingScreen(),
               );
 
       ///Sign up Screen

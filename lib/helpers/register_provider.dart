@@ -1,5 +1,6 @@
 import 'package:provider/provider.dart';
 
+import '../features/onboarding/providers/onboarding_provider.dart';
 import '../provider/custom_radius_button_controller.dart';
 import '../provider/ai_cam_impage_picker_provider.dart';
 import '../provider/navigation_provider.dart';
@@ -13,6 +14,8 @@ var providers = [
       create: ((context) => CustomRadiusButtonController())),
   ChangeNotifierProvider<AiCamImagePickerProvider>(
       create: ((context) => AiCamImagePickerProvider())),
+  ChangeNotifierProvider<OnboardingProvider>(
+      create: ((context) => OnboardingProvider()))
   ChangeNotifierProvider<UpdateProfileInfoProvider>(
       create: ((context) => UpdateProfileInfoProvider())),
   ChangeNotifierProvider<SignUpScreenProvider>(

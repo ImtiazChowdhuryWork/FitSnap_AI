@@ -36,6 +36,8 @@ final class CustomFormField extends StatelessWidget {
   final TextStyle? hintTextStyle;
   final Color? borderColor;
   final InputBorder? focusedBorder;
+  final Color? fillColor;
+  final TextStyle? style;
 
   const CustomFormField({
     super.key,
@@ -70,6 +72,8 @@ final class CustomFormField extends StatelessWidget {
     this.hintTextStyle,
     this.borderColor,
     this.focusedBorder,
+    this.fillColor,
+    this.style,
   });
 
   @override
@@ -94,10 +98,11 @@ final class CustomFormField extends StatelessWidget {
         onChanged: onChanged,
         inputFormatters: inputFormatters,
         enabled: isEnabled,
+        style: style,
         // obscuringCharacter: ".",
         decoration: InputDecoration(
           filled: true,
-          fillColor: AppColors.cFFFFFF,
+          fillColor: fillColor ?? AppColors.cFFFFFF,
           suffixIcon: suffixIcon,
           prefixIcon: prefixIcon != null
               ? Padding(

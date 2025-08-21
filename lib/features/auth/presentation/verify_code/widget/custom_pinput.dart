@@ -3,7 +3,6 @@ import 'package:fitsnap_ai/gen/colors.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';
-import 'package:get/get.dart';
 
 import '../../../../../constants/text_font_style.dart';
 
@@ -12,10 +11,10 @@ class CustomPinInput extends StatelessWidget {
   final String correctPin;
 
   const CustomPinInput({
-    Key? key,
+    super.key,
     this.onCompleted,
     this.correctPin = '2222',
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

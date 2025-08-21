@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../constants/text_font_style.dart';
-import '../../../gen/assets.gen.dart';
 import '../../../gen/colors.gen.dart';
 import '../../../helpers/ui_helpers.dart';
 

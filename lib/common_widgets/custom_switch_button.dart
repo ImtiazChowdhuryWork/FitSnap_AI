@@ -33,7 +33,7 @@ class CustomSwitch extends StatelessWidget {
         ),
         child: Switch(
           value: value,
-          activeColor: activeColor ?? AppColors.cFFFFFF,
+          activeThumbColor: activeColor ?? AppColors.cFFFFFF,
           activeTrackColor: activeTrackColor ?? AppColors.c026cb7,
           inactiveThumbColor: thumbColor ?? AppColors.cFFFFFF,
           inactiveTrackColor: inactiveColor ?? AppColors.c6b7280,
