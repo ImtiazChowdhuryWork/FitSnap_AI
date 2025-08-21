@@ -128,9 +128,45 @@ class $AssetsImagesGen {
   AssetGenImage get errorImage =>
       const AssetGenImage('assets/images/error_image.png');
 
+  /// File path: assets/images/fbodytransform.png
+  AssetGenImage get fbodytransform =>
+      const AssetGenImage('assets/images/fbodytransform.png');
+
+  /// File path: assets/images/fbuildmuscle.png
+  AssetGenImage get fbuildmuscle =>
+      const AssetGenImage('assets/images/fbuildmuscle.png');
+
+  /// File path: assets/images/fimproveflexibility.png
+  AssetGenImage get fimproveflexibility =>
+      const AssetGenImage('assets/images/fimproveflexibility.png');
+
   /// File path: assets/images/first_day_image.png
   AssetGenImage get firstDayImage =>
       const AssetGenImage('assets/images/first_day_image.png');
+
+  /// File path: assets/images/fkeepfit.png
+  AssetGenImage get fkeepfit =>
+      const AssetGenImage('assets/images/fkeepfit.png');
+
+  /// File path: assets/images/flooseweight.png
+  AssetGenImage get flooseweight =>
+      const AssetGenImage('assets/images/flooseweight.png');
+
+  /// File path: assets/images/fwhatisyourfocusarea.png
+  AssetGenImage get fwhatisyourfocusarea =>
+      const AssetGenImage('assets/images/fwhatisyourfocusarea.png');
+
+  /// File path: assets/images/mbodytransform.png
+  AssetGenImage get mbodytransform =>
+      const AssetGenImage('assets/images/mbodytransform.png');
+
+  /// File path: assets/images/mbuildmuscle.png
+  AssetGenImage get mbuildmuscle =>
+      const AssetGenImage('assets/images/mbuildmuscle.png');
+
+  /// File path: assets/images/mburnfat.png
+  AssetGenImage get mburnfat =>
+      const AssetGenImage('assets/images/mburnfat.png');
 
   /// File path: assets/images/meal_image_breakfast.png
   AssetGenImage get mealImageBreakfast =>
@@ -143,6 +179,18 @@ class $AssetsImagesGen {
   /// File path: assets/images/meal_image_lunch.png
   AssetGenImage get mealImageLunch =>
       const AssetGenImage('assets/images/meal_image_lunch.png');
+
+  /// File path: assets/images/mstayactive.png
+  AssetGenImage get mstayactive =>
+      const AssetGenImage('assets/images/mstayactive.png');
+
+  /// File path: assets/images/mtonearmsabs.png
+  AssetGenImage get mtonearmsabs =>
+      const AssetGenImage('assets/images/mtonearmsabs.png');
+
+  /// File path: assets/images/mwhatisyourfocusarea.png
+  AssetGenImage get mwhatisyourfocusarea =>
+      const AssetGenImage('assets/images/mwhatisyourfocusarea.png');
 
   /// File path: assets/images/rainbox_circle_icon.png
   AssetGenImage get rainboxCircleIcon =>
@@ -168,10 +216,22 @@ class $AssetsImagesGen {
         checkoutBoyImage,
         checkoutGirlImage,
         errorImage,
+        fbodytransform,
+        fbuildmuscle,
+        fimproveflexibility,
         firstDayImage,
+        fkeepfit,
+        flooseweight,
+        fwhatisyourfocusarea,
+        mbodytransform,
+        mbuildmuscle,
+        mburnfat,
         mealImageBreakfast,
         mealImageDesart,
         mealImageLunch,
+        mstayactive,
+        mtonearmsabs,
+        mwhatisyourfocusarea,
         rainboxCircleIcon,
         tropyImage,
         uploadFromGalleryIcon,
