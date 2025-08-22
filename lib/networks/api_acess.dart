@@ -106,8 +106,12 @@ import 'package:fitsnap_ai/features/auth/data/rx_post_sign_up/rx.dart';
 import 'package:fitsnap_ai/features/auth/presentation/sign_up/model/sign_up_model.dart';
 import 'package:rxdart/subjects.dart';
 
+import '../features/auth/data/rx_post_logout/rx.dart';
+
 ///FitSnapAI Start
 PostSignUpRx postSignUpRx = PostSignUpRx(
     empty: SignUpModel(), dataFetcher: BehaviorSubject<SignUpModel>());
+PostLogOutRX postLogOutRX =
+    PostLogOutRX(empty: {}, dataFetcher: BehaviorSubject<Map>());
 
 ///FitSnapAI End

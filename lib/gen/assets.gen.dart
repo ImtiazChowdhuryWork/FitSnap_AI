@@ -152,6 +152,10 @@ class $AssetsImagesGen {
   AssetGenImage get tropyImage =>
       const AssetGenImage('assets/images/tropy_image.png');
 
+  /// File path: assets/images/two_men_women_holding_welcome_sign.png
+  AssetGenImage get twoMenWomenHoldingWelcomeSign => const AssetGenImage(
+      'assets/images/two_men_women_holding_welcome_sign.png');
+
   /// File path: assets/images/upload_from_gallery_icon.png
   AssetGenImage get uploadFromGalleryIcon =>
       const AssetGenImage('assets/images/upload_from_gallery_icon.png');
@@ -174,6 +178,7 @@ class $AssetsImagesGen {
         mealImageLunch,
         rainboxCircleIcon,
         tropyImage,
+        twoMenWomenHoldingWelcomeSign,
         uploadFromGalleryIcon,
         userChoiceImage
       ];

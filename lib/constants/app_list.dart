@@ -61,4 +61,25 @@ class AppList {
     SubscriptionTypeModel(type: "1 month ", price: "500"),
     SubscriptionTypeModel(type: "1 year", price: "6000"),
   ];
+
+  static List<String> planSuggestionList = [
+    "BMI is 27.5 — which falls into the Overweight",
+    "The health risk has increased slightly  especially if the weight continues to rise or if there is no regular exercise.",
+    "BMI is 27.5 — which falls into the Overweight",
+    "The health risk has increased slightly  especially if the weight continues to rise or if there is no regular exercise.",
+    "BMI is 27.5 — which falls into the Overweight",
+    "The health risk has increased slightly  especially if the weight continues to rise or if there is no regular exercise.",
+    "BMI is 27.5 — which falls into the Overweight",
+    "The health risk has increased slightly  especially if the weight continues to rise or if there is no regular exercise.",
+    "BMI is 27.5 — which falls into the Overweight",
+    "The health risk has increased slightly  especially if the weight continues to rise or if there is no regular exercise.",
+    "BMI is 27.5 — which falls into the Overweight",
+    "The health risk has increased slightly  especially if the weight continues to rise or if there is no regular exercise.",
+    "BMI is 27.5 — which falls into the Overweight",
+    "The health risk has increased slightly  especially if the weight continues to rise or if there is no regular exercise.",
+    "BMI is 27.5 — which falls into the Overweight",
+    "The health risk has increased slightly  especially if the weight continues to rise or if there is no regular exercise.",
+    "BMI is 27.5 — which falls into the Overweight",
+    "The health risk has increased slightly  especially if the weight continues to rise or if there is no regular exercise.",
+  ];
 }
