@@ -105,7 +105,7 @@ class CreateCustomizePlanScreen extends StatelessWidget {
                             style: TextFontStyle.headline25BoldcFFFFFFStyleInter
                                 .copyWith(
                               color: AppColors.c0000ff,
-                              fontSize: 20.sp,
+                              fontSize: 18.sp,
                             ),
                           ),
                         ),

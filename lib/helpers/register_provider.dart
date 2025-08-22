@@ -1,3 +1,4 @@
+import 'package:fitsnap_ai/provider/impage_picker_provider_fitsnap.dart';
 import 'package:provider/provider.dart';
 
 import '../features/onboarding/providers/onboarding_provider.dart';
@@ -12,8 +13,8 @@ var providers = [
       create: ((context) => NavigationProvider())),
   ChangeNotifierProvider<CustomRadiusButtonController>(
       create: ((context) => CustomRadiusButtonController())),
-  ChangeNotifierProvider<AiCamImagePickerProvider>(
-      create: ((context) => AiCamImagePickerProvider())),
+  ChangeNotifierProvider<ImagePickerProviderFitsnap>(
+      create: ((context) => ImagePickerProviderFitsnap())),
   ChangeNotifierProvider<OnboardingProvider>(
       create: ((context) => OnboardingProvider())),
   ChangeNotifierProvider<UpdateProfileInfoProvider>(
