@@ -1,3 +1,4 @@
+import 'package:fitsnap_ai/features/plan_intro/presentation/plan_intro_screen.dart';
 import 'package:flutter/material.dart';
 import 'constants/app_constants.dart';
 import 'features/terms_condition/presentation/terms_conditions_accept_screen.dart';
@@ -48,8 +49,10 @@ class _LoadingState extends State<Loading> {
       return appData.read(kKeyIsLoggedIn)
           ? const WelcomeScreen()
           : appData.read(kKeyfirstTime)
-              ? const TermsConditionsAcceptScreen()
-              : const WelcomeScreen();
+              ? const PlanIntroScreen()
+              // ? const TermsConditionsAcceptScreen()
+              // : const WelcomeScreen();
+              : const PlanIntroScreen();
     }
   }
 }
