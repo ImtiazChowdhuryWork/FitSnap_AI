@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:rxdart/rxdart.dart';
 
+import '../../../../constants/app_constants.dart';
+import '../../../../helpers/di.dart';
 import '../../../../networks/rx_base.dart';
 import 'api.dart';
 
@@ -24,10 +26,15 @@ final class PostLogOutRX extends RxResponseInt {
   }
 
   @override
-  handleSuccessWithReturn(data) {
+  handleSuccessWithReturn(data) async{
     dataFetcher.sink.add(data);
 
     var success = data["message"];
+    if (success == true) {
+      await appData.remove(kKeyAccessToken);
+      await appData.write(kKeyIsLoggedIn, false);
+      await appData.write(kKeyfirstTime, false);
+    }
     // message = data["message"];
     // if (data["success"] == false) throw Exception();
     return true;
