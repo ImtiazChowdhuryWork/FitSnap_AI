@@ -1,4 +1,3 @@
-import 'package:fitsnap_ai/features/plan_intro/presentation/plan_intro_screen.dart';
 import 'package:fitsnap_ai/navigation_screen.dart';
 import 'package:flutter/material.dart';
 import 'constants/app_constants.dart';

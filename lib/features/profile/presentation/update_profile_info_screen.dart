@@ -1,4 +1,3 @@
-import 'package:fitsnap_ai/common_widgets/cam_option_button.dart';
 import 'package:fitsnap_ai/common_widgets/custom_container.dart';
 import 'package:fitsnap_ai/common_widgets/custom_elevated_button.dart';
 import 'package:fitsnap_ai/common_widgets/custom_text_form_field.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class SignUpScreenProvider extends ChangeNotifier {
   ///Password
-  bool _passwordHidden = true;
+  final bool _passwordHidden = true;
   bool get passwordMode => _passwordHidden;
 
   ///Set Password Mode
