@@ -150,7 +150,7 @@ class SignUpScreen extends StatelessWidget {
 
                           if (isSuccess) {
                             NavigationService.navigateToUntilReplacement(
-                                Routes.navBarScreen);
+                                Routes.signinScreen);
                             CustomToastMessage('Success',
                                 'Signup succeded. Welcome to FitSnapAI');
                           } else {
