@@ -60,6 +60,8 @@ class OnboardingScreen extends StatelessWidget {
                   onboardingProvider.getQuestionKey(question.questionText);
 
               return Container(
+                height: 1.sh,
+                width: 1.sw,
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                 decoration: BoxDecoration(
                   gradient: onboardingProvider.currentQuestionIndex == 4
@@ -85,16 +87,21 @@ class OnboardingScreen extends StatelessWidget {
                       valueColor:
                           AlwaysStoppedAnimation<Color>(AppColors.c3B13CA),
                     ),
-                    Text(
-                      question.questionText,
-                      style: TextStyle(
-                        color: AppColors.c000000,
-                        fontFamily: "Inter",
-                        fontWeight: FontWeight.w500,
-                        fontSize: 30.sp,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
+                    question.questionText
+                                .contains("Do you wanna lose weight") ||
+                            question.questionText.contains(
+                                "Do you want to get an attractive body?")
+                        ? SizedBox.shrink()
+                        : Text(
+                            question.questionText,
+                            style: TextStyle(
+                              color: AppColors.c000000,
+                              fontFamily: "Inter",
+                              fontWeight: FontWeight.w500,
+                              fontSize: 30.sp,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -113,7 +120,8 @@ class OnboardingScreen extends StatelessWidget {
                                                   "statement below") ||
                                               question.questionText
                                                   .contains("just like you") ||
-                                              question.questionText.isEmpty
+                                              question.questionText
+                                                  .contains("attractive body")
                                           ? .85.sw
                                           : null,
                               fit: question.questionImage ==
@@ -536,6 +544,14 @@ class OnboardingScreen extends StatelessWidget {
                                 onTap: () async {
                                   await imagePickerProvider
                                       .pickImageFromCamera();
+                                  // If image picked, save path to onboarding responses
+                                  if (imagePickerProvider.selectedImage !=
+                                      null) {
+                                    onboardingProvider.setTextInput(
+                                        imagePickerProvider.selectedImage!.path,
+                                        'body_image',
+                                        affectSelection: false);
+                                  }
                                 },
                                 child: CustomContainer(
                                   width: .3.sw,
@@ -569,12 +585,19 @@ class OnboardingScreen extends StatelessWidget {
                                 onTap: () async {
                                   await imagePickerProvider
                                       .pickImageFromGallery();
+                                  if (imagePickerProvider.selectedImage !=
+                                      null) {
+                                    onboardingProvider.setTextInput(
+                                        imagePickerProvider.selectedImage!.path,
+                                        'body_image',
+                                        affectSelection: false);
+                                  }
                                 },
                                 child: CustomContainer(
                                   width: .3.sw,
                                   height: .3.sw,
                                   child: (imagePickerProvider.isFromCamera ==
-                                              true &&
+                                              false &&
                                           imagePickerProvider.selectedImage !=
                                               null)
                                       ? Image.file(
@@ -662,7 +685,7 @@ class OnboardingScreen extends StatelessWidget {
                         ],
                       ),
                     if (onboardingProvider.bmi != null &&
-                        question.questionText.contains("weight")) ...[
+                        question.questionText.contains("current weight")) ...[
                       UIHelper.verticalSpaceExtraLarge,
                       UIHelper.verticalSpaceLarge,
                       CustomContainer(

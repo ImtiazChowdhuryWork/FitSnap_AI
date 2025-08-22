@@ -42,6 +42,9 @@ class OnboardingProvider extends ChangeNotifier {
       _selectedGender = optionText;
     }
 
+    // Debug: log selection writes
+    debugPrint('selectOption -> [$questionKey] = $optionText');
+
     notifyListeners();
   }
 
@@ -52,6 +55,8 @@ class OnboardingProvider extends ChangeNotifier {
       _selectedOptionForCurrentQuestion =
           inputText.isNotEmpty ? inputText : null;
     }
+    // Debug: log text writes
+    debugPrint('setTextInput -> [$questionKey] = $inputText');
     notifyListeners();
   }
 
@@ -78,52 +83,76 @@ class OnboardingProvider extends ChangeNotifier {
   }
 
   void _computeBMI() {
-    // Expect keys: whats_your_height, whats_your_current_weight
-    final heightStr = _responses['whats_your_height'];
-    final weightStr = _responses['whats_your_current_weight'];
-    if (heightStr == null ||
-        heightStr.isEmpty ||
-        weightStr == null ||
-        weightStr.isEmpty) {
-      _bmi = null;
-      _bmiCategory = null;
-      return;
-    }
+    // Compute BMI from stored height and weight if possible.
+    try {
+      updateCombinedHeight('whats_your_height');
+    } catch (_) {}
+
+    final heightStr = _responses['whats_your_height'] ??
+        _responses['what_is_your_height'] ??
+        '';
+    final weightStr = _responses['whats_your_current_weight'] ??
+        _responses['whats_is_your_current_weight'] ??
+        _responses['what_is_your_current_weight'] ??
+        '';
+
     double? meters;
-    if (heightStr.contains('cm')) {
-      final numMatch = RegExp(r"(\d+(?:\.\d+)?)").firstMatch(heightStr);
-      if (numMatch != null) {
-        meters = double.tryParse(numMatch.group(1)!)! / 100.0;
+    // parse cm
+    if (heightStr.toLowerCase().contains('cm')) {
+      final num =
+          double.tryParse(heightStr.replaceAll(RegExp(r'[^0-9\.]'), ''));
+      if (num != null) meters = num / 100.0;
+    } else {
+      // parse ft and in like '5 ft 7 in' or '5ft 7in'
+      final ftIn = RegExp(r"(\d+)\s*ft(?:\s*(\d+)\s*in)?", caseSensitive: false)
+          .firstMatch(heightStr);
+      if (ftIn != null) {
+        final ft = int.tryParse(ftIn.group(1) ?? '0') ?? 0;
+        final inch = int.tryParse(ftIn.group(2) ?? '0') ?? 0;
+        final totalInches = ft * 12 + inch;
+        meters = totalInches * 0.0254;
+      } else {
+        // fallback: try to parse a plain number and treat > 3 as cm
+        final num =
+            double.tryParse(heightStr.replaceAll(RegExp(r'[^0-9\.]'), ''));
+        if (num != null) {
+          if (num > 3) {
+            meters = num / 100.0;
+          } else {
+            meters = num; // assume meters
+          }
+        }
       }
-    } else if (heightStr.contains('ft')) {
-      final ftMatch = RegExp(r"(\d+) ft").firstMatch(heightStr);
-      final inMatch = RegExp(r"(\d+) in").firstMatch(heightStr);
-      final ft = ftMatch != null ? double.tryParse(ftMatch.group(1)!) ?? 0 : 0;
-      final inch =
-          inMatch != null ? double.tryParse(inMatch.group(1)!) ?? 0 : 0;
-      meters = ((ft * 12) + inch) * 0.0254;
     }
-    if (meters == null || meters == 0) {
-      _bmi = null;
-      _bmiCategory = null;
-      return;
-    }
+
     double? kg;
-    if (weightStr.contains('kg')) {
-      final m = RegExp(r"(\d+(?:\.\d+)?)").firstMatch(weightStr);
-      if (m != null) kg = double.tryParse(m.group(1)!);
-    } else if (weightStr.contains('lbs')) {
-      final m = RegExp(r"(\d+(?:\.\d+)?)").firstMatch(weightStr);
-      if (m != null) {
-        final lbs = double.tryParse(m.group(1)!);
-        if (lbs != null) kg = lbs * 0.45359237;
+    if (weightStr.toLowerCase().contains('kg')) {
+      final num =
+          double.tryParse(weightStr.replaceAll(RegExp(r'[^0-9\.]'), ''));
+      if (num != null) kg = num;
+    } else if (weightStr.toLowerCase().contains('lb')) {
+      final num =
+          double.tryParse(weightStr.replaceAll(RegExp(r'[^0-9\.]'), ''));
+      if (num != null) kg = num * 0.45359237;
+    } else {
+      final num =
+          double.tryParse(weightStr.replaceAll(RegExp(r'[^0-9\.]'), ''));
+      if (num != null) {
+        // ambiguous unit; assume kg if plausible
+        if (num > 30) {
+          kg = num; // assume kg
+        } else {
+          kg = num; // small weights still treat as kg
+        }
       }
     }
-    if (kg == null || kg == 0) {
+
+    if (kg == null || meters == null || meters == 0) {
       _bmi = null;
       _bmiCategory = null;
       return;
     }
+
     _bmi = kg / (meters * meters);
     if (_bmi! < 18.5) {
       _bmiCategory = 'Underweight';
@@ -134,6 +163,35 @@ class OnboardingProvider extends ChangeNotifier {
     } else {
       _bmiCategory = 'Obese';
     }
+  }
+
+  // Normalize and find helper used when building final payload
+  String? _find(String canonical) {
+    String normalize(String s) => s
+        .toLowerCase()
+        .replaceAll(RegExp(r"[’'`\u2019]"), '')
+        .replaceAll(RegExp(r"[^a-z0-9]"), '_')
+        .replaceAll(RegExp(r"_+"), '_')
+        .replaceAll(RegExp(r"^_|_"), '');
+
+    final target = normalize(canonical);
+    for (final entry in _responses.entries) {
+      if (normalize(entry.key) == target) return entry.value;
+    }
+    return null;
+  }
+
+  // Find a response where the normalized key contains all provided keywords.
+  String? _findByKeywords(List<String> keywords) {
+    if (keywords.isEmpty) return null;
+    final wantList = keywords.map((k) => k.toLowerCase()).toList();
+    for (final entry in _responses.entries) {
+      final nk = entry.key.toLowerCase().replaceAll(RegExp(r"[’'`\u2019]"), '').replaceAll(RegExp(r"[^a-z0-9]"), '_');
+      final condensed = nk.replaceAll(RegExp(r"_+"), '_').replaceAll(RegExp(r"^_|_"), '');
+      final matched = wantList.every((kw) => condensed.contains(kw));
+      if (matched) return entry.value;
+    }
+    return null;
   }
 
   void updateWeight(String baseKey, String rawDigits) {
@@ -173,35 +231,81 @@ class OnboardingProvider extends ChangeNotifier {
   }
 
   void completeOnboarding() {
+    // Ensure combined height stored from parts before packaging
+    try {
+      updateCombinedHeight('whats_your_height');
+    } catch (_) {}
+
+    // Debug: show all collected responses
+    debugPrint('DEBUG responses: $_responses');
+
+    // Capture any responses that were written with an empty key ("")
+    final blankKeyValues = _responses.entries
+        .where((e) => e.key.trim().isEmpty)
+        .map((e) => e.value)
+        .toList();
+
+    // Helper to pop a value from blankKeyValues if available
+    String? popBlank() =>
+        blankKeyValues.isNotEmpty ? blankKeyValues.removeAt(0) : null;
+
+    final who = _find('who_are_you');
+    final motive = _find('what_motivates_you_most');
+    final goal = _find('whats_your_main_goal');
+    final focus = _find('what_is_your_focus_area');
+    final height = _find('whats_your_height') ?? _find('what_is_your_height');
+    final currentWeight = _find('whats_your_current_weight') ??
+        _find('what_is_your_current_weight');
+    final targetWeight =
+        _find('whats_your_target_weight') ?? _find('target_weight');
+    final bodyType = _find('whats_your_current_body_type') ??
+        _find('what_is_your_current_body_type');
+    final injured = _find('have_you_ever_been_injured_in_these_areas');
+    final workoutType =
+        _find('what_type_of_workout_suits_you_best') ?? _find('workout_type');
+    final activity = _find('what_is_your_activity_level') ??
+        _find('whats_your_activity_level');
+    final fitness =
+        _find('choose_your_fitness_level') ?? _find('choose_fitness_level');
+    final touchFloor =
+        _find('can_you_touch_the_floor_without_bending_your_knees');
+    final stairs = _find('how_do_you_feel_after_climbing_some_stairs') ??
+        _find('how_do_you_feel_after_climbing_stairs');
+    final relate = _find('do_you_relate_to_the_statement_below') ??
+        _find('do_you_relate_to_the__statement_below');
+
+  // The two boolean questions sometimes were written with empty keys in logs.
+  // Use keyword-based search and blankKeyValues as fallbacks if missing.
+  final wannaLose = _find('do_you_wanna_lose_weight') ??
+    _findByKeywords(['lose', 'weight']) ??
+    popBlank();
+  final wannaAttractive = _find('do_you_wanna_get_an_attractive_body') ??
+    _findByKeywords(['attractive', 'body']) ??
+    popBlank();
+
     final onboardingData = OnboardingData(
-      whoAreYou: _responses["who_are_you"],
-      whatMotivatesYouMost: _responses["what_motivates_you_most"],
-      whatsYourMainGoal: _responses["whats_your_main_goal"],
-      whatIsYourFocusArea: _responses["what_is_your_focus_area"],
-      whatIsYourHeight: _responses["what_is_your_height"],
-      whatsIsYourCurrentWeight: _responses["whats_is_your_current_weight"],
-      whatsIsYourTargetWeight: _responses["whats_is_your_target_weight"],
-      whatsIsYourCurrentBodyType: _responses["whats_is_your_current_body_type"],
-      haveYouEverBeenInjuredInTheseAreas:
-          _responses["have_you_ever_been_injured_in_these_areas"],
-      whatTypeOfWorkoutSuitsYouBest:
-          _responses["what_type_of_workout_suits_you_best"],
-      whatIsYourActivityLevel: _responses["what_is_your_activity_level"],
-      chooseFitnessLevel: _responses["choose_fitness_level"],
-      canYouTouchTheFloorWithoutBendingYourKnees:
-          _responses["can_you_touch_the_floor_without_bending_your_knees"],
-      howDoYouFeelAfterClimbingSomeStairs:
-          _responses["how_do_you_feel_after_climbing_some_stairs"],
-      doYouRelateToTheStatementBelow:
-          _responses["do_you_relate_to_the_statement_below"],
-      doYouWannaLoseWeight: _responses["do_you_wanna_lose_weight"],
-      doYouWannaGetAnAttractiveBody:
-          _responses["do_you_wanna_get_an_attractive_body"],
+      whoAreYou: who,
+      whatMotivatesYouMost: motive,
+      whatsYourMainGoal: goal,
+      whatIsYourFocusArea: focus,
+      whatIsYourHeight: height,
+      whatsIsYourCurrentWeight: currentWeight,
+      whatsIsYourTargetWeight: targetWeight,
+      whatsIsYourCurrentBodyType: bodyType,
+      haveYouEverBeenInjuredInTheseAreas: injured,
+      whatTypeOfWorkoutSuitsYouBest: workoutType,
+      whatIsYourActivityLevel: activity,
+      chooseFitnessLevel: fitness,
+      canYouTouchTheFloorWithoutBendingYourKnees: touchFloor,
+      howDoYouFeelAfterClimbingSomeStairs: stairs,
+      doYouRelateToTheStatementBelow: relate,
+      doYouWannaLoseWeight: wannaLose,
+      doYouWannaGetAnAttractiveBody: wannaAttractive,
     );
 
     final onboardingResponse = OnboardingResponseModel(
       onboarding: onboardingData,
-      // bodyImage: will be added later
+      bodyImage: _responses['body_image'],
     );
 
     // Print or send to API
@@ -224,15 +328,11 @@ class OnboardingProvider extends ChangeNotifier {
       case "What is your name?":
         return "what_is_your_name";
       case "What's your height?":
-        return "whats_your_height";
+        return _normalizeKey("whats_your_height");
       case "What's your current weight?":
-        return "whats_your_current_weight";
+        return _normalizeKey("whats_your_current_weight");
       default:
-        return questionText
-            .toLowerCase()
-            .replaceAll(" ", "_")
-            .replaceAll("?", "")
-            .replaceAll("'", "");
+        return _normalizeKey(questionText);
     }
   }
 
@@ -242,5 +342,15 @@ class OnboardingProvider extends ChangeNotifier {
     _responses.clear();
     _selectedOptionForCurrentQuestion = null;
     notifyListeners();
+  }
+
+  // Normalize a question/key string into the canonical response key used in _responses
+  String _normalizeKey(String s) {
+    return s
+        .toLowerCase()
+        .replaceAll(RegExp(r"[’'`\u2019]"), '')
+        .replaceAll(RegExp(r"[^a-z0-9]"), '_')
+        .replaceAll(RegExp(r"_+"), '_')
+        .replaceAll(RegExp(r"^_|_"), '');
   }
 }

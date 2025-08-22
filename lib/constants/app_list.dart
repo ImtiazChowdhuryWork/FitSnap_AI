@@ -269,7 +269,7 @@ class AppList {
         options: [],
       ),
       QuestionModel(
-        questionText: "",
+        questionText: "Do you wanna lose weight?",
         questionType: QuestionType.yesNo,
         questionImage: Assets.images.flooseWeight.path,
         options: [
@@ -278,7 +278,7 @@ class AppList {
         ],
       ),
       QuestionModel(
-        questionText: "",
+        questionText: "Do you want to get an attractive body?",
         questionType: QuestionType.yesNo,
         questionImage: Assets.images.fattractiveBody.path,
         options: [
@@ -478,7 +478,7 @@ class AppList {
         options: [],
       ),
       QuestionModel(
-        questionText: "",
+        questionText: "Do you wanna lose weight?",
         questionType: QuestionType.yesNo,
         questionImage: Assets.images.mlooseWeight.path,
         options: [
@@ -487,7 +487,7 @@ class AppList {
         ],
       ),
       QuestionModel(
-        questionText: "",
+        questionText: "Do you want to get an attractive body?",
         questionType: QuestionType.yesNo,
         questionImage: Assets.images.mattractiveBody.path,
         options: [
