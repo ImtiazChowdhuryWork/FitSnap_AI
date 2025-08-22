@@ -37,8 +37,6 @@ final class DioSingleton {
       responseType: ResponseType.json,
       headers: {
         NetworkConstants.ACCEPT: NetworkConstants.ACCEPT_TYPE,
-        // NetworkConstants.ACCEPT_LANGUAGE: appData.read(kKeyLanguage) ?? "pt",
-        // NetworkConstants.APP_KEY: NetworkConstants.APP_KEY_VALUE,
         NetworkConstants.AUTHORIZATION: "Bearer $auth",
       },
       connectTimeout: const Duration(milliseconds: 100000),
@@ -46,6 +44,44 @@ final class DioSingleton {
     );
     dio = Dio(options)..interceptors.add(Logger());
   }
+
+  void updateForAuth() {
+    if (kDebugMode) {
+      print("Dio update");
+    }
+    BaseOptions options = BaseOptions(
+      baseUrl: url,
+      responseType: ResponseType.json,
+      headers: {
+        NetworkConstants.ACCEPT: NetworkConstants.ACCEPT_TYPE,
+      },
+      connectTimeout: const Duration(milliseconds: 100000),
+      receiveTimeout: const Duration(milliseconds: 100000),
+    );
+    dio = Dio(options)..interceptors.add(Logger());
+  }
+
+  // void update(String auth) {
+  //   if (kDebugMode) {
+  //     print("Dio update");
+  //   }
+  //   BaseOptions options = BaseOptions(
+  //     baseUrl: url,
+  //     responseType: ResponseType.json,
+  //     headers: {
+  //       NetworkConstants.ACCEPT: NetworkConstants.ACCEPT_TYPE,
+  //       // NetworkConstants.ACCEPT_LANGUAGE: appData.read(kKeyLanguage) ?? "pt",
+  //       // NetworkConstants.APP_KEY: NetworkConstants.APP_KEY_VALUE,
+  //       NetworkConstants.AUTHORIZATION: "Bearer $auth",
+  //     },
+  //     connectTimeout: const Duration(milliseconds: 100000),
+  //     receiveTimeout: const Duration(milliseconds: 100000),
+  //   );
+  //   dio = Dio(options)..interceptors.add(Logger());
+  // }
+
+
+  
 }
 
 Future<Response> postHttp(String path, [dynamic data]) =>
