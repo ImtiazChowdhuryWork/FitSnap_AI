@@ -104,9 +104,21 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/145_lbs_by_Oct_17.png
+  AssetGenImage get a145LbsByOct17 =>
+      const AssetGenImage('assets/images/145_lbs_by_Oct_17.png');
+
   /// File path: assets/images/add_payment_method_screen_image.png
   AssetGenImage get addPaymentMethodScreenImage =>
       const AssetGenImage('assets/images/add_payment_method_screen_image.png');
+
+  /// File path: assets/images/advanced.png
+  AssetGenImage get advanced =>
+      const AssetGenImage('assets/images/advanced.png');
+
+  /// File path: assets/images/beginner.png
+  AssetGenImage get beginner =>
+      const AssetGenImage('assets/images/beginner.png');
 
   /// File path: assets/images/camera_icon.png
   AssetGenImage get cameraIcon =>
@@ -128,6 +140,26 @@ class $AssetsImagesGen {
   AssetGenImage get errorImage =>
       const AssetGenImage('assets/images/error_image.png');
 
+  /// File path: assets/images/fEctomorph_mane_athletics.png
+  AssetGenImage get fEctomorphManeAthletics =>
+      const AssetGenImage('assets/images/fEctomorph_mane_athletics.png');
+
+  /// File path: assets/images/fEndomorph_mane_norom_body.png
+  AssetGenImage get fEndomorphManeNoromBody =>
+      const AssetGenImage('assets/images/fEndomorph_mane_norom_body.png');
+
+  /// File path: assets/images/fMesomorph_mane_muti.png
+  AssetGenImage get fMesomorphManeMuti =>
+      const AssetGenImage('assets/images/fMesomorph_mane_muti.png');
+
+  /// File path: assets/images/fadvanced.png
+  AssetGenImage get fadvanced =>
+      const AssetGenImage('assets/images/fadvanced.png');
+
+  /// File path: assets/images/fattractive_body.png
+  AssetGenImage get fattractiveBody =>
+      const AssetGenImage('assets/images/fattractive_body.png');
+
   /// File path: assets/images/fbodytransform.png
   AssetGenImage get fbodytransform =>
       const AssetGenImage('assets/images/fbodytransform.png');
@@ -135,6 +167,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/fbuildmuscle.png
   AssetGenImage get fbuildmuscle =>
       const AssetGenImage('assets/images/fbuildmuscle.png');
+
+  /// File path: assets/images/fdo_you_relate.png
+  AssetGenImage get fdoYouRelate =>
+      const AssetGenImage('assets/images/fdo_you_relate.png');
 
   /// File path: assets/images/fimproveflexibility.png
   AssetGenImage get fimproveflexibility =>
@@ -144,17 +180,65 @@ class $AssetsImagesGen {
   AssetGenImage get firstDayImage =>
       const AssetGenImage('assets/images/first_day_image.png');
 
+  /// File path: assets/images/fjust_like_you.png
+  AssetGenImage get fjustLikeYou =>
+      const AssetGenImage('assets/images/fjust_like_you.png');
+
   /// File path: assets/images/fkeepfit.png
   AssetGenImage get fkeepfit =>
       const AssetGenImage('assets/images/fkeepfit.png');
+
+  /// File path: assets/images/flightly_active.png
+  AssetGenImage get flightlyActive =>
+      const AssetGenImage('assets/images/flightly_active.png');
+
+  /// File path: assets/images/floose_weight.png
+  AssetGenImage get flooseWeight =>
+      const AssetGenImage('assets/images/floose_weight.png');
 
   /// File path: assets/images/flooseweight.png
   AssetGenImage get flooseweight =>
       const AssetGenImage('assets/images/flooseweight.png');
 
+  /// File path: assets/images/fmoderately_active.png
+  AssetGenImage get fmoderatelyActive =>
+      const AssetGenImage('assets/images/fmoderately_active.png');
+
+  /// File path: assets/images/fnot_active.png
+  AssetGenImage get fnotActive =>
+      const AssetGenImage('assets/images/fnot_active.png');
+
+  /// File path: assets/images/fvery_active.png
+  AssetGenImage get fveryActive =>
+      const AssetGenImage('assets/images/fvery_active.png');
+
   /// File path: assets/images/fwhatisyourfocusarea.png
   AssetGenImage get fwhatisyourfocusarea =>
       const AssetGenImage('assets/images/fwhatisyourfocusarea.png');
+
+  /// File path: assets/images/intermediate.png
+  AssetGenImage get intermediate =>
+      const AssetGenImage('assets/images/intermediate.png');
+
+  /// File path: assets/images/mEctomorph_mane_athletics.png
+  AssetGenImage get mEctomorphManeAthletics =>
+      const AssetGenImage('assets/images/mEctomorph_mane_athletics.png');
+
+  /// File path: assets/images/mEndomorph_mane_norom_body.png
+  AssetGenImage get mEndomorphManeNoromBody =>
+      const AssetGenImage('assets/images/mEndomorph_mane_norom_body.png');
+
+  /// File path: assets/images/mMesomorph_mane_muti.png
+  AssetGenImage get mMesomorphManeMuti =>
+      const AssetGenImage('assets/images/mMesomorph_mane_muti.png');
+
+  /// File path: assets/images/madvanced.png
+  AssetGenImage get madvanced =>
+      const AssetGenImage('assets/images/madvanced.png');
+
+  /// File path: assets/images/mattractive_body.png
+  AssetGenImage get mattractiveBody =>
+      const AssetGenImage('assets/images/mattractive_body.png');
 
   /// File path: assets/images/mbodytransform.png
   AssetGenImage get mbodytransform =>
@@ -168,6 +252,14 @@ class $AssetsImagesGen {
   AssetGenImage get mburnfat =>
       const AssetGenImage('assets/images/mburnfat.png');
 
+  /// File path: assets/images/mdo_you_relate copy.png
+  AssetGenImage get mdoYouRelateCopy =>
+      const AssetGenImage('assets/images/mdo_you_relate copy.png');
+
+  /// File path: assets/images/mdo_you_relate.png
+  AssetGenImage get mdoYouRelate =>
+      const AssetGenImage('assets/images/mdo_you_relate.png');
+
   /// File path: assets/images/meal_image_breakfast.png
   AssetGenImage get mealImageBreakfast =>
       const AssetGenImage('assets/images/meal_image_breakfast.png');
@@ -180,6 +272,26 @@ class $AssetsImagesGen {
   AssetGenImage get mealImageLunch =>
       const AssetGenImage('assets/images/meal_image_lunch.png');
 
+  /// File path: assets/images/mjust_like_you.png
+  AssetGenImage get mjustLikeYou =>
+      const AssetGenImage('assets/images/mjust_like_you.png');
+
+  /// File path: assets/images/mlightly_active.png
+  AssetGenImage get mlightlyActive =>
+      const AssetGenImage('assets/images/mlightly_active.png');
+
+  /// File path: assets/images/mloose_weight.png
+  AssetGenImage get mlooseWeight =>
+      const AssetGenImage('assets/images/mloose_weight.png');
+
+  /// File path: assets/images/mmoderately_active.png
+  AssetGenImage get mmoderatelyActive =>
+      const AssetGenImage('assets/images/mmoderately_active.png');
+
+  /// File path: assets/images/mnot_active.png
+  AssetGenImage get mnotActive =>
+      const AssetGenImage('assets/images/mnot_active.png');
+
   /// File path: assets/images/mstayactive.png
   AssetGenImage get mstayactive =>
       const AssetGenImage('assets/images/mstayactive.png');
@@ -187,6 +299,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/mtonearmsabs.png
   AssetGenImage get mtonearmsabs =>
       const AssetGenImage('assets/images/mtonearmsabs.png');
+
+  /// File path: assets/images/mvery_active.png
+  AssetGenImage get mveryActive =>
+      const AssetGenImage('assets/images/mvery_active.png');
 
   /// File path: assets/images/mwhatisyourfocusarea.png
   AssetGenImage get mwhatisyourfocusarea =>
@@ -210,27 +326,56 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
+        a145LbsByOct17,
         addPaymentMethodScreenImage,
+        advanced,
+        beginner,
         cameraIcon,
         cardIcon,
         checkoutBoyImage,
         checkoutGirlImage,
         errorImage,
+        fEctomorphManeAthletics,
+        fEndomorphManeNoromBody,
+        fMesomorphManeMuti,
+        fadvanced,
+        fattractiveBody,
         fbodytransform,
         fbuildmuscle,
+        fdoYouRelate,
         fimproveflexibility,
         firstDayImage,
+        fjustLikeYou,
         fkeepfit,
+        flightlyActive,
+        flooseWeight,
         flooseweight,
+        fmoderatelyActive,
+        fnotActive,
+        fveryActive,
         fwhatisyourfocusarea,
+        intermediate,
+        mEctomorphManeAthletics,
+        mEndomorphManeNoromBody,
+        mMesomorphManeMuti,
+        madvanced,
+        mattractiveBody,
         mbodytransform,
         mbuildmuscle,
         mburnfat,
+        mdoYouRelateCopy,
+        mdoYouRelate,
         mealImageBreakfast,
         mealImageDesart,
         mealImageLunch,
+        mjustLikeYou,
+        mlightlyActive,
+        mlooseWeight,
+        mmoderatelyActive,
+        mnotActive,
         mstayactive,
         mtonearmsabs,
+        mveryActive,
         mwhatisyourfocusarea,
         rainboxCircleIcon,
         tropyImage,
