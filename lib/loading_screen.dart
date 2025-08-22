@@ -49,10 +49,10 @@ class _LoadingState extends State<Loading> {
       return appData.read(kKeyIsLoggedIn)
           ? const WelcomeScreen()
           : appData.read(kKeyfirstTime)
-              ? const PlanIntroScreen()
-              // ? const TermsConditionsAcceptScreen()
-              // : const WelcomeScreen();
-              : const PlanIntroScreen();
+              
+              ? const TermsConditionsAcceptScreen()
+              : const WelcomeScreen();
+              
     }
   }
 }
