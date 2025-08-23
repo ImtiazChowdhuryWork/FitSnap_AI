@@ -79,6 +79,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             }
           },
           child: Scaffold(
+            resizeToAvoidBottomInset: false,
+
             ///AppBar
             appBar: AppBar(
               backgroundColor: onboardingProvider.currentQuestionIndex == 4
