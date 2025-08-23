@@ -11,14 +11,40 @@ import 'package:provider/provider.dart';
 
 import '../../../provider/impage_picker_provider_fitsnap.dart';
 import '../../common_widgets/custom_text_form_field.dart';
+import '../plan_intro/presentation/plan_intro_screen.dart';
 import 'models/onboarding_model.dart';
 import 'providers/onboarding_provider.dart';
 
-class OnboardingScreen extends StatelessWidget {
-  OnboardingScreen({super.key});
+class OnboardingScreen extends StatefulWidget {
+  const OnboardingScreen({super.key});
 
+  @override
+  State<OnboardingScreen> createState() => _OnboardingScreenState();
+}
+
+class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
+
+  // Text controllers for different input types
+  final Map<String, TextEditingController> _controllers = {};
+
   DateTime? _lastBackPressed;
+
+  @override
+  void dispose() {
+    // Dispose all controllers
+    for (var controller in _controllers.values) {
+      controller.dispose();
+    }
+    super.dispose();
+  }
+
+  TextEditingController _getController(String key, String initialValue) {
+    if (!_controllers.containsKey(key)) {
+      _controllers[key] = TextEditingController(text: initialValue);
+    }
+    return _controllers[key]!;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,8 +116,8 @@ class OnboardingScreen extends StatelessWidget {
             ///Body
             body: PageView.builder(
               controller: _pageController,
-              // physics: NeverScrollableScrollPhysics(), // Disable manual swiping
-              // pageSnapping: false,
+              physics: NeverScrollableScrollPhysics(), // Disable manual swiping
+              pageSnapping: false,
               itemCount: onboardingProvider.currentQuestions.length,
               onPageChanged: (index) {
                 onboardingProvider.setCurrentQuestionIndex(index);
@@ -173,10 +199,13 @@ class OnboardingScreen extends StatelessWidget {
                                                           "attractive body")
                                               ? .85.sw
                                               : null,
-                                  height: question.questionText
-                                          .contains("3,676,490")
-                                      ? 0.5.sh
-                                      : 0.55.sh,
+                                  height: question.questionType ==
+                                          QuestionType.yesNo
+                                      ? 0.45.sh
+                                      : question.questionText
+                                              .contains("3,676,490")
+                                          ? 0.5.sh
+                                          : 0.55.sh,
                                   fit: question.questionImage ==
                                           Assets.images.a145LbsByOct17.path
                                       ? BoxFit.cover
@@ -310,28 +339,24 @@ class OnboardingScreen extends StatelessWidget {
                               child: Column(
                                 spacing: 20.h,
                                 children: [
-                                  Builder(
-                                    builder: (context) {
-                                      final controller = TextEditingController(
-                                        text: onboardingProvider
-                                                .responses[questionKey] ??
-                                            '',
-                                      );
-                                      return CustomFormField(
-                                        controller: controller,
-                                        onChanged: (value) {
-                                          onboardingProvider.setTextInput(
-                                              value, questionKey);
-                                        },
-                                        style: TextStyle(
-                                          color: AppColors.c000000,
-                                          fontFamily: "Inter",
-                                          fontSize: 18.sp,
-                                        ),
-                                        fillColor: AppColors.c0000ff
-                                            .withValues(alpha: 0.11),
-                                      );
+                                  CustomFormField(
+                                    controller: _getController(
+                                      questionKey,
+                                      onboardingProvider
+                                              .responses[questionKey] ??
+                                          '',
+                                    ),
+                                    onChanged: (value) {
+                                      onboardingProvider.setTextInput(
+                                          value, questionKey);
                                     },
+                                    style: TextStyle(
+                                      color: AppColors.c000000,
+                                      fontFamily: "Inter",
+                                      fontSize: 18.sp,
+                                    ),
+                                    fillColor: AppColors.c0000ff
+                                        .withValues(alpha: 0.11),
                                   ),
                                 ],
                               ),
@@ -364,9 +389,16 @@ class OnboardingScreen extends StatelessWidget {
                                               horizontal: 8.w),
                                           child: CustomCard(
                                             onTap: () {
-                                              onboardingProvider.selectOption(
-                                                  option.optionText,
-                                                  questionKey);
+                                              if (question.questionText
+                                                  .contains('weight')) {
+                                                onboardingProvider.updateUnit(
+                                                    option.optionText,
+                                                    questionKey);
+                                              } else {
+                                                onboardingProvider.selectOption(
+                                                    option.optionText,
+                                                    questionKey);
+                                              }
                                             },
                                             width: 80.w,
                                             height: 40.h,
@@ -396,24 +428,6 @@ class OnboardingScreen extends StatelessWidget {
                                         final selectedUnit = onboardingProvider
                                                 .selectedOptionForCurrentQuestion ??
                                             'ft';
-                                        final ftController =
-                                            TextEditingController(
-                                          text: onboardingProvider.responses[
-                                                  "${questionKey}_ft"] ??
-                                              '',
-                                        );
-                                        final inController =
-                                            TextEditingController(
-                                          text: onboardingProvider.responses[
-                                                  "${questionKey}_in"] ??
-                                              '',
-                                        );
-                                        final cmController =
-                                            TextEditingController(
-                                          text: onboardingProvider.responses[
-                                                  "${questionKey}_cm"] ??
-                                              '',
-                                        );
                                         if (selectedUnit == 'ft') {
                                           return Row(
                                             mainAxisAlignment:
@@ -424,7 +438,14 @@ class OnboardingScreen extends StatelessWidget {
                                                 child: Column(
                                                   children: [
                                                     CustomFormField(
-                                                      controller: ftController,
+                                                      controller:
+                                                          _getController(
+                                                        "${questionKey}_ft",
+                                                        onboardingProvider
+                                                                    .responses[
+                                                                "${questionKey}_ft"] ??
+                                                            '',
+                                                      ),
                                                       inputType:
                                                           TextInputType.number,
                                                       onChanged: (value) {
@@ -460,7 +481,14 @@ class OnboardingScreen extends StatelessWidget {
                                                 child: Column(
                                                   children: [
                                                     CustomFormField(
-                                                      controller: inController,
+                                                      controller:
+                                                          _getController(
+                                                        "${questionKey}_in",
+                                                        onboardingProvider
+                                                                    .responses[
+                                                                "${questionKey}_in"] ??
+                                                            '',
+                                                      ),
                                                       inputType:
                                                           TextInputType.number,
                                                       onChanged: (value) {
@@ -496,7 +524,12 @@ class OnboardingScreen extends StatelessWidget {
                                           );
                                         } else {
                                           return CustomFormField(
-                                            controller: cmController,
+                                            controller: _getController(
+                                              "${questionKey}_cm",
+                                              onboardingProvider.responses[
+                                                      "${questionKey}_cm"] ??
+                                                  '',
+                                            ),
                                             inputType: TextInputType.number,
                                             onChanged: (value) {
                                               onboardingProvider.setTextInput(
@@ -520,58 +553,55 @@ class OnboardingScreen extends StatelessWidget {
                                   if (!question.questionText
                                           .contains("height") &&
                                       question.questionText.contains("weight"))
-                                    Builder(
-                                      builder: (context) {
-                                        final controller =
-                                            TextEditingController(
-                                          text: onboardingProvider
-                                                  .responses[questionKey] ??
-                                              '',
+                                    CustomFormField(
+                                      controller: () {
+                                        final storedValue = onboardingProvider
+                                                .responses[questionKey] ??
+                                            '';
+                                        // Extract just the numeric part if it has a unit suffix
+                                        final numericValue =
+                                            storedValue.replaceAll(
+                                                RegExp(r'[^0-9\.]'), '');
+                                        return _getController(
+                                          "${questionKey}_weight",
+                                          numericValue,
                                         );
-                                        return CustomFormField(
-                                          controller: controller,
-                                          inputType: TextInputType.number,
-                                          onChanged: (value) {
-                                            onboardingProvider.updateWeight(
-                                                questionKey, value);
-                                          },
-                                          style: TextStyle(
-                                            color: AppColors.c000000,
-                                            fontFamily: "Inter",
-                                            fontSize: 18.sp,
-                                          ),
-                                          fillColor: AppColors.c0000ff
-                                              .withValues(alpha: 0.11),
-                                        );
+                                      }(),
+                                      inputType: TextInputType.number,
+                                      onChanged: (value) {
+                                        onboardingProvider.updateWeight(
+                                            questionKey, value);
                                       },
+                                      style: TextStyle(
+                                        color: AppColors.c000000,
+                                        fontFamily: "Inter",
+                                        fontSize: 18.sp,
+                                      ),
+                                      fillColor: AppColors.c0000ff
+                                          .withValues(alpha: 0.11),
                                     ),
                                   if (!question.questionText
                                           .contains("height") &&
                                       !question.questionText.contains("weight"))
-                                    Builder(
-                                      builder: (context) {
-                                        final controller =
-                                            TextEditingController(
-                                          text: onboardingProvider
-                                                  .responses[questionKey] ??
-                                              '',
-                                        );
-                                        return CustomFormField(
-                                          controller: controller,
-                                          inputType: TextInputType.number,
-                                          onChanged: (value) {
-                                            onboardingProvider.setTextInput(
-                                                value, questionKey);
-                                          },
-                                          style: TextStyle(
-                                            color: AppColors.c000000,
-                                            fontFamily: "Inter",
-                                            fontSize: 18.sp,
-                                          ),
-                                          fillColor: AppColors.c0000ff
-                                              .withValues(alpha: 0.11),
-                                        );
+                                    CustomFormField(
+                                      controller: _getController(
+                                        "${questionKey}_number",
+                                        onboardingProvider
+                                                .responses[questionKey] ??
+                                            '',
+                                      ),
+                                      inputType: TextInputType.number,
+                                      onChanged: (value) {
+                                        onboardingProvider.setTextInput(
+                                            value, questionKey);
                                       },
+                                      style: TextStyle(
+                                        color: AppColors.c000000,
+                                        fontFamily: "Inter",
+                                        fontSize: 18.sp,
+                                      ),
+                                      fillColor: AppColors.c0000ff
+                                          .withValues(alpha: 0.11),
                                     ),
                                 ],
                               ),
@@ -790,6 +820,7 @@ class OnboardingScreen extends StatelessWidget {
                             ),
                           ],
                         ),
+                      // BMI Card for current weight questions
                       if (onboardingProvider.bmi != null &&
                           question.questionText.contains("current weight")) ...[
                         UIHelper.verticalSpaceExtraLarge,
@@ -827,6 +858,37 @@ class OnboardingScreen extends StatelessWidget {
                           ),
                         ),
                       ],
+                      // Reasonable Goal Card for target weight questions
+                      if (question.questionText.contains("target weight") &&
+                          onboardingProvider
+                                  .responses[questionKey]?.isNotEmpty ==
+                              true) ...[
+                        UIHelper.verticalSpaceExtraLarge,
+                        UIHelper.verticalSpaceLarge,
+                        CustomContainer(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Reasonable goal',
+                                  style: TextStyle(
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16.sp,
+                                    color: Colors.redAccent,
+                                  )),
+                              SizedBox(height: 8.h),
+                              Text(
+                                _getReasonableGoalText(),
+                                style: TextStyle(
+                                  fontFamily: 'Inter',
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 12.sp,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                       if (question.questionType != QuestionType.yesNo) Spacer(),
                       // UIHelper.verticalSpaceExtraLarge,
                       // Show continue button only when an option is selected
@@ -848,9 +910,27 @@ class OnboardingScreen extends StatelessWidget {
                         CustomElevatedButton(
                           buttonTitle: "Continue",
                           onTap: () {
-                            onboardingProvider.goToNextQuestion();
-                            if (onboardingProvider.currentQuestionIndex <
-                                onboardingProvider.currentQuestions.length) {
+                            // Check if this is the last question
+                            if (onboardingProvider.currentQuestionIndex ==
+                                onboardingProvider.currentQuestions.length -
+                                    1) {
+                              // Complete onboarding and navigate to plan intro screen
+                              onboardingProvider.completeOnboarding();
+
+                              // Extract user name from responses
+                              final userName = onboardingProvider
+                                      .responses['what_is_your_name'] ??
+                                  '';
+
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      PlanIntroScreen(userName: userName),
+                                ),
+                              );
+                            } else {
+                              // Continue to next question
+                              onboardingProvider.goToNextQuestion();
                               _pageController.nextPage(
                                 duration: Duration(milliseconds: 300),
                                 curve: Curves.easeInOut,
@@ -883,5 +963,9 @@ class OnboardingScreen extends StatelessWidget {
       default:
         return '';
     }
+  }
+
+  String _getReasonableGoalText() {
+    return "You will lose 15% of your weight there is scientific evidence that some obesity related conditions improved with 5% or higher weight loss.";
   }
 }

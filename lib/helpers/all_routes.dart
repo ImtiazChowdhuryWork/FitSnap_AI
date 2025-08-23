@@ -1,20 +1,21 @@
 import 'dart:io';
 
 import 'package:fitsnap_ai/features/add_payment_method/presentation/add_payment_method_screen.dart';
+import 'package:fitsnap_ai/features/auth/presentation/reset_password/reset_pasword_screen.dart';
+import 'package:fitsnap_ai/features/auth/presentation/send_verification_code/send_verificatin_code_screen.dart';
+import 'package:fitsnap_ai/features/auth/presentation/sign_in/sign_in_screen.dart';
+import 'package:fitsnap_ai/features/auth/presentation/sign_up/presentation/sign_up_screen.dart';
+import 'package:fitsnap_ai/features/auth/presentation/verify_code/verify_code_screen.dart';
 import 'package:fitsnap_ai/features/ceckout/presentation/checkout_screen.dart';
 import 'package:fitsnap_ai/features/create_customize_plan/presentation/create_customize_plan_screen.dart';
 import 'package:fitsnap_ai/features/first_day/presentation/first_day_screen.dart';
 import 'package:fitsnap_ai/features/my_plan/presentation/my_plan_screen.dart';
+import 'package:fitsnap_ai/features/plan_intro/presentation/plan_intro_screen.dart';
 import 'package:fitsnap_ai/features/profile/presentation/profile_screen.dart';
 import 'package:fitsnap_ai/features/profile/presentation/update_profile_info_screen.dart';
 import 'package:fitsnap_ai/features/profile/presentation/view_profile_info_screen.dart';
-import 'package:fitsnap_ai/features/auth/presentation/sign_in/sign_in_screen.dart';
 import 'package:fitsnap_ai/features/registration_successful/presentation/registration_successful_screen.dart';
-import 'package:fitsnap_ai/features/auth/presentation/reset_password/reset_pasword_screen.dart';
-import 'package:fitsnap_ai/features/auth/presentation/send_verification_code/send_verificatin_code_screen.dart';
-import 'package:fitsnap_ai/features/auth/presentation/sign_up/presentation/sign_up_screen.dart';
 import 'package:fitsnap_ai/features/subscription_billing/presentation/subscription_billing_screen.dart';
-import 'package:fitsnap_ai/features/auth/presentation/verify_code/verify_code_screen.dart';
 import 'package:fitsnap_ai/features/well_done/presentation/well_done_screen.dart';
 import 'package:fitsnap_ai/navigation_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -63,6 +64,8 @@ final class Routes {
   // Onboarding Screen
   static const String onboardingScreen = '/onboardingScreen';
 
+  static const String planIntroScreen = '/planIntroScreen';
+
   ///Instat App routes Ends
 }
 
@@ -93,6 +96,18 @@ final class RouteGenerator {
               )
             : CupertinoPageRoute(
                 builder: (context) => OnboardingScreen(),
+              );
+
+      ///Plan Intro Screen
+      case Routes.planIntroScreen:
+        final userName = settings.arguments as String? ?? 'User';
+        return Platform.isAndroid
+            ? _FadedTransitionRoute(
+                widget: PlanIntroScreen(userName: userName),
+                settings: settings,
+              )
+            : CupertinoPageRoute(
+                builder: (context) => PlanIntroScreen(userName: userName),
               );
 
       ///Sign up Screen

@@ -175,6 +175,14 @@ class AppList {
         ],
       ),
       QuestionModel(
+        questionText: "What's your target weight?",
+        questionType: QuestionType.numberInput,
+        options: [
+          OptionModel(optionText: "lbs"),
+          OptionModel(optionText: "kg"),
+        ],
+      ),
+      QuestionModel(
         questionText: "What’s your current body type?",
         options: [
           OptionModel(
@@ -378,6 +386,14 @@ class AppList {
       ),
       QuestionModel(
         questionText: "What's your current weight?",
+        questionType: QuestionType.numberInput,
+        options: [
+          OptionModel(optionText: "lbs"),
+          OptionModel(optionText: "kg"),
+        ],
+      ),
+      QuestionModel(
+        questionText: "What's your target weight?",
         questionType: QuestionType.numberInput,
         options: [
           OptionModel(optionText: "lbs"),

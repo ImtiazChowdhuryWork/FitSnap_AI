@@ -57,6 +57,12 @@ class OnboardingProvider extends ChangeNotifier {
     }
     // Debug: log text writes
     debugPrint('setTextInput -> [$questionKey] = $inputText');
+
+    // Trigger BMI calculation if height or weight related
+    if (questionKey.contains('height') || questionKey.contains('weight')) {
+      _computeBMI();
+    }
+
     notifyListeners();
   }
 
@@ -84,16 +90,10 @@ class OnboardingProvider extends ChangeNotifier {
 
   void _computeBMI() {
     // Compute BMI from stored height and weight if possible.
-    try {
-      updateCombinedHeight('whats_your_height');
-    } catch (_) {}
-
-    final heightStr = _responses['whats_your_height'] ??
-        _responses['what_is_your_height'] ??
-        '';
-    final weightStr = _responses['whats_your_current_weight'] ??
-        _responses['whats_is_your_current_weight'] ??
-        _responses['what_is_your_current_weight'] ??
+    final heightStr =
+        _find('whats_your_height') ?? _find('what_is_your_height') ?? '';
+    final weightStr = _find('whats_your_current_weight') ??
+        _find('what_is_your_current_weight') ??
         '';
 
     double? meters;
@@ -209,15 +209,26 @@ class OnboardingProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void updateUnit(String newUnit, String questionKey) {
+    _selectedOptionForCurrentQuestion = newUnit;
+
+    final numericValue =
+        _responses[questionKey]?.replaceAll(RegExp(r'[^0-9\.]'), '') ?? '';
+
+    if (numericValue.isNotEmpty) {
+      _responses[questionKey] = numericValue + newUnit;
+    }
+    _computeBMI();
+    notifyListeners();
+  }
+
   void goToNextQuestion() {
     if (_currentQuestionIndex < currentQuestions.length - 1) {
       _currentQuestionIndex++;
       _selectedOptionForCurrentQuestion = null;
       notifyListeners();
-    } else {
-      // All questions completed
-      completeOnboarding();
     }
+    // Note: completion logic is now handled in the UI
   }
 
   void goToPreviousQuestion() {

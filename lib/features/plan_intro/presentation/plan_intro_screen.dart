@@ -11,7 +11,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../helpers/ui_helpers.dart';
 
 class PlanIntroScreen extends StatelessWidget {
-  const PlanIntroScreen({super.key});
+  final String userName;
+
+  const PlanIntroScreen({
+    super.key,
+    required this.userName,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +43,7 @@ class PlanIntroScreen extends StatelessWidget {
               children: [
                 ///Wellcome User Name
                 Text(
-                  "Welcome Eshi",
+                  "Welcome ${userName.isNotEmpty ? userName : 'User'}",
                   style: TextFontStyle.headline25BoldcFFFFFFStyleInter.copyWith(
                     fontSize: 36.sp,
                     color: AppColors.c0000ff,
@@ -60,7 +65,7 @@ class PlanIntroScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.center,
                   child: Text(
-                    "Hello Eshi",
+                    "Hello ${userName.isNotEmpty ? userName : 'User'}",
                     textAlign: TextAlign.center,
                     style:
                         TextFontStyle.headline25BoldcFFFFFFStyleInter.copyWith(
