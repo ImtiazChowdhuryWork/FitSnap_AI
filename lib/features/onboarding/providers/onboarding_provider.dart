@@ -186,8 +186,12 @@ class OnboardingProvider extends ChangeNotifier {
     if (keywords.isEmpty) return null;
     final wantList = keywords.map((k) => k.toLowerCase()).toList();
     for (final entry in _responses.entries) {
-      final nk = entry.key.toLowerCase().replaceAll(RegExp(r"[’'`\u2019]"), '').replaceAll(RegExp(r"[^a-z0-9]"), '_');
-      final condensed = nk.replaceAll(RegExp(r"_+"), '_').replaceAll(RegExp(r"^_|_"), '');
+      final nk = entry.key
+          .toLowerCase()
+          .replaceAll(RegExp(r"[’'`\u2019]"), '')
+          .replaceAll(RegExp(r"[^a-z0-9]"), '_');
+      final condensed =
+          nk.replaceAll(RegExp(r"_+"), '_').replaceAll(RegExp(r"^_|_"), '');
       final matched = wantList.every((kw) => condensed.contains(kw));
       if (matched) return entry.value;
     }
@@ -274,14 +278,14 @@ class OnboardingProvider extends ChangeNotifier {
     final relate = _find('do_you_relate_to_the_statement_below') ??
         _find('do_you_relate_to_the__statement_below');
 
-  // The two boolean questions sometimes were written with empty keys in logs.
-  // Use keyword-based search and blankKeyValues as fallbacks if missing.
-  final wannaLose = _find('do_you_wanna_lose_weight') ??
-    _findByKeywords(['lose', 'weight']) ??
-    popBlank();
-  final wannaAttractive = _find('do_you_wanna_get_an_attractive_body') ??
-    _findByKeywords(['attractive', 'body']) ??
-    popBlank();
+    // The two boolean questions sometimes were written with empty keys in logs.
+    // Use keyword-based search and blankKeyValues as fallbacks if missing.
+    final wannaLose = _find('do_you_wanna_lose_weight') ??
+        _findByKeywords(['lose', 'weight']) ??
+        popBlank();
+    final wannaAttractive = _find('do_you_wanna_get_an_attractive_body') ??
+        _findByKeywords(['attractive', 'body']) ??
+        popBlank();
 
     final onboardingData = OnboardingData(
       whoAreYou: who,

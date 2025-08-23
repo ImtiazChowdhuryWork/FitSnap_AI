@@ -66,7 +66,6 @@ import 'constants/app_constants.dart';
 import 'helpers/di.dart';
 import 'helpers/helper_methods.dart';
 import 'helpers/post_login.dart';
-import 'networks/api_acess.dart';
 import 'networks/dio/dio.dart';
 import 'welcome_screen.dart';
 
