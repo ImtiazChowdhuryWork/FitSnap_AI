@@ -1,11 +1,18 @@
+import 'dart:developer';
+
 import 'package:fitsnap_ai/common_widgets/custom_container.dart';
 import 'package:fitsnap_ai/common_widgets/custom_list_tile.dart';
+import 'package:fitsnap_ai/common_widgets/custom_toast.dart';
+import 'package:fitsnap_ai/helpers/loading_helper.dart';
 import 'package:fitsnap_ai/helpers/ui_helpers.dart';
+import 'package:fitsnap_ai/networks/api_acess.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../constants/app_constants.dart';
 import '../gen/colors.gen.dart';
 import '../helpers/all_routes.dart';
+import '../helpers/di.dart';
 import '../helpers/navigation_service.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -118,6 +125,29 @@ class CustomDrawer extends StatelessWidget {
                       alignment: Alignment.centerRight,
                       child: CustomListTile(
                         onTap: () {
+                          // await postLogOutRX
+                          //     .logOut()
+                          //     .waitingForFutureWithoutBg()
+                          //     .then((value) {
+                          //   if (value) {
+                          //     NavigationService.navigateToUntilReplacement(
+                          //         Routes.signinScreen);
+                          //     appData.write(kKeyfirstTime, false);
+                          //     appData.write(kKeyIsLoggedIn, false);
+                          //     log("User First Time after logingout : ${appData.read(kKeyfirstTime)}");
+                          //     log("User Logged In after logingout: ${appData.read(kKeyIsLoggedIn)}");
+                          //   } else {
+                          //     // Show some error message
+                          //     CustomToastMessage(
+                          //         title: value ? "Success" : "Error",
+                          //         description:
+                          //             "Logout failed. Please try again.");
+                          //     log("Logout failed. Please try again.");
+                          //     log("User First Time : ${appData.read(kKeyfirstTime)}");
+                          //     log("User Logged In : ${appData.read(kKeyIsLoggedIn)}");
+                          //   }
+                          //   ;
+                          // });
                           NavigationService.navigateTo(Routes.checkoutScreen);
                         },
                         title: "Privacy Policy",
@@ -133,8 +163,31 @@ class CustomDrawer extends StatelessWidget {
                       padding: EdgeInsets.zero,
                       alignment: Alignment.centerRight,
                       child: CustomListTile(
-                        onTap: () {
-                          NavigationService.navigateTo(Routes.checkoutScreen);
+                        onTap: () async {
+                          await postLogOutRX
+                              .logOut()
+                              .waitingForFutureWithoutBg()
+                              .then((value) {
+                            if (value) {
+                              NavigationService.navigateToUntilReplacement(
+                                  Routes.signinScreen);
+                              appData.write(kKeyfirstTime, false);
+                              appData.write(kKeyIsLoggedIn, false);
+                              log("User First Time after logingout : ${appData.read(kKeyfirstTime)}");
+                              log("User Logged In after logingout: ${appData.read(kKeyIsLoggedIn)}");
+                            } else {
+                              // Show some error message
+                              CustomToastMessage(
+                                  title: value ? "Success" : "Error",
+                                  description:
+                                      "Logout failed. Please try again.");
+                              log("Logout failed. Please try again.");
+                              log("User First Time : ${appData.read(kKeyfirstTime)}");
+                              log("User Logged In : ${appData.read(kKeyIsLoggedIn)}");
+                            }
+                            ;
+                          });
+                          // NavigationService.navigateTo(Routes.checkoutScreen);
                         },
                         title: "Sign Out",
                         titleColor: AppColors.cdc2626,
