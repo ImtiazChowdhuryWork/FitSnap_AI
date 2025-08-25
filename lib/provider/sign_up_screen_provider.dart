@@ -11,8 +11,8 @@ class SignUpScreenProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  // TextEditingController lastNameController = TextEditingController();
   TextEditingController eamilController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 }

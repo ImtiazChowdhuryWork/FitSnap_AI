@@ -58,12 +58,12 @@ class SignUpScreen extends StatelessWidget {
                       children: [
                         ///First Name Field
                         CustomFormField(
-                          controller: controller.firstNameController,
+                          controller: controller.nameController,
                           hintText: "Enter first name",
                           borderColor: AppColors.c000000,
                           borderRadius: 8.h,
                           validator: (value) {
-                            if (controller.firstNameController.text.isEmpty) {
+                            if (controller.nameController.text.isEmpty) {
                               return 'Enter your first name';
                             } else {
                               return null;
@@ -73,20 +73,20 @@ class SignUpScreen extends StatelessWidget {
                         UIHelper.verticalSpace(20.h),
 
                         ///Last Name Field
-                        CustomFormField(
-                          controller: controller.lastNameController,
-                          hintText: "Enter last name",
-                          borderColor: AppColors.c000000,
-                          borderRadius: 8.h,
-                          validator: (value) {
-                            if (controller.lastNameController.text.isEmpty) {
-                              return 'Enter your last name';
-                            } else {
-                              return null;
-                            }
-                          },
-                        ),
-                        UIHelper.verticalSpace(20.h),
+                        // CustomFormField(
+                        //   controller: controller.lastNameController,
+                        //   hintText: "Enter last name",
+                        //   borderColor: AppColors.c000000,
+                        //   borderRadius: 8.h,
+                        //   validator: (value) {
+                        //     if (controller.lastNameController.text.isEmpty) {
+                        //       return 'Enter your last name';
+                        //     } else {
+                        //       return null;
+                        //     }
+                        //   },
+                        // ),
+                        // UIHelper.verticalSpace(20.h),
 
                         ///Email Field
                         CustomFormField(
@@ -139,29 +139,33 @@ class SignUpScreen extends StatelessWidget {
                       try {
                         if (_formKey.currentState!.validate()) {
                           bool isSuccess = await postSignUpRx.signUp(
-                            firstName:
-                                controller.firstNameController.text.toString(),
-                            lastName:
-                                controller.lastNameController.text.toString(),
-                            email: controller.eamilController.text.toString(),
+                            fullName: controller.nameController.text,
+                            // lastName:
+                            //     controller.lastNameController.text.toString(),
+                            email: controller.eamilController.text.trim(),
                             password:
                                 controller.passwordController.text.toString(),
                           );
 
                           if (isSuccess) {
-                            NavigationService.navigateToUntilReplacement(
-                                Routes.signinScreen);
-                            CustomToastMessage('Success',
-                                'Signup succeded. Welcome to FitSnapAI');
+                            NavigationService.navigateTo(Routes.signinScreen);
+                            CustomToastMessage(
+                                title: 'Success',
+                                description:
+                                    'Signup succeded. Welcome to FitSnapAI');
                           } else {
                             CustomToastMessage(
-                                'Error', 'Signup failed. Please try again.');
+                                title: 'Error',
+                                description:
+                                    'Signup failed. Please try again.');
                           }
                         }
                       } catch (error) {
                         // ⚠️ Catch unexpected errors
                         CustomToastMessage(
-                            'Error', 'Something went wrong. Please try again.');
+                            title: 'Error',
+                            description:
+                                'Something went wrong. Please try again.');
                         // Optional: log the error for debugging
                         print('Signup Error: $error');
                       }

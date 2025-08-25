@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:fitsnap_ai/constants/app_constants.dart';
+import 'package:fitsnap_ai/helpers/di.dart';
 
 import '../../../../networks/dio/dio.dart';
 import '../../../../networks/endpoints.dart';
@@ -14,6 +16,10 @@ final class LogOutApi {
     try {
       Response response = await postHttp(
         Endpoints.logout(),
+        {
+          "refresh_token":
+              appData.read(kKeyRefreshToken), // ✅ required by backend
+        },
       );
       if (response.statusCode == 200) {
         Map data = json.decode(json.encode(response.data));
