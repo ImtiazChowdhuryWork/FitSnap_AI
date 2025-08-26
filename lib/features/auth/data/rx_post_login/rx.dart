@@ -36,26 +36,41 @@ final class PostLoginRx extends RxResponseInt {
 
   @override
   handleSuccessWithReturn(data) async {
-    await appData.write(kKeyIsLoggedIn, true);
-    String? accesstoken = data['data']['access'];
-    // int id = data['data']['id'];
+    ///Access Token Section
+    String? accesstoken = data['data']['access_token'];
     DioSingleton.instance.update(accesstoken!);
-    performPostLoginActions();
+
+    ///Refresh Token Section
+    String? refreshtoken = data['data']['refresh_token'];
+
+    ///User Id Section
+    int id = data['data']['id'];
+
+    ///User Status Section
     await appData.write(kKeyIsLoggedIn, true);
+    log("User Logged In Successfully : ${appData.read(kKeyIsLoggedIn)}");
+
     await appData.write(kKeyIsExploring, false);
-    // await appData.write(kKeyUserID, id);
+    log("User is Exploring : ${appData.read(kKeyIsExploring)}");
+
     await appData.write(kKeyAccessToken, accesstoken);
-    
+    log("Access Token : ${appData.read(kKeyAccessToken)}");
+
+    await appData.write(kKeyRefreshToken, refreshtoken);
+    log("Refresh Token : ${appData.read(kKeyRefreshToken)}");
+
+    await appData.write(kKeyUserID, id);
+    log("User ID : ${appData.read(kKeyUserID)}");
 
     dataFetcher.sink.add(data);
-
+    // performPostLoginActions();
     // message = data["message"];
     // if (data["success"] == false) throw Exception();
     return true;
   }
 
   @override
-  handleErrorWithReturn(error) {
+  handleErrorWithReturn(error) async {
     String message = 'Something went wrong';
     log(error.toString());
     if (error is DioException) {
@@ -66,7 +81,7 @@ final class PostLoginRx extends RxResponseInt {
       }
     }
 
-    CustomToastMessage('Error', message);
+    CustomToastMessage(title: 'Error', description: message);
     return false;
     //return super.handleErrorWithReturn(message);
   }

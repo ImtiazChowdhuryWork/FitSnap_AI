@@ -28,7 +28,7 @@ final class Endpoints {
   static String logIn() => "/signin/";
 
   ///FitSnapAI End
-  
+
   static String resendEmailVarificationOtp() =>
       "/api/resend-email-verification-otp";
   static String verifyCode() => "/api/verify-email";

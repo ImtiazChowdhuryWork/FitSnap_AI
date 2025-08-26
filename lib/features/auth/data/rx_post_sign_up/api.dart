@@ -12,16 +12,16 @@ final class SignUpApi {
   static SignUpApi get instance => _singletone;
 
   Future<SignUpModel> signUp({
-    required String firstName,
-    required String lastName,
+    required String fullName,
+    // required String lastName,
     required String email,
     required String password,
     String? gender,
   }) async {
     try {
       Map data = {
-        'first_name': firstName,
-        'last_name': lastName,
+        'full_name': fullName,
+        // 'last_name': lastName,
         'email': email,
         'password': password,
         'gender': "male",

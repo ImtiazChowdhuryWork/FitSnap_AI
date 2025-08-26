@@ -16,15 +16,15 @@ final class PostSignUpRx extends RxResponseInt<SignUpModel> {
   ValueStream<SignUpModel> get getFileData => dataFetcher.stream;
 
   Future<bool> signUp({
-    required String firstName,
-    required String lastName,
+    required String fullName,
+    // required String lastName,
     required String email,
     required String password,
   }) async {
     try {
       SignUpModel data = await api.signUp(
-        firstName: firstName,
-        lastName: lastName,
+        fullName: fullName,
+        // lastName: lastName,
         email: email,
         password: password,
       );
@@ -38,10 +38,10 @@ final class PostSignUpRx extends RxResponseInt<SignUpModel> {
   ///Success
   @override
   handleSuccessWithReturn(SignUpModel data) async {
-    await appData.write(kKeyIsLoggedIn, true);
-    await appData.write(kKeyFirstName, data.data!.firstName);
-    await appData.write(kKeyLastName, data.data!.lastName);
-    await appData.write(kEmail, data.data!.email);
+    await appData.write(kKeyIsLoggedIn, false);
+    // await appData.write(kKeyFirstName, data.data!.firstName);
+    // await appData.write(kKeyLastName, data.data!.lastName);
+    // await appData.write(kEmail, data.data!.email);
     return true;
   }
 
@@ -57,7 +57,7 @@ final class PostSignUpRx extends RxResponseInt<SignUpModel> {
       }
     }
 
-    CustomToastMessage("Error", message);
+    CustomToastMessage(title: "Error", description: message);
     return false;
   }
 }

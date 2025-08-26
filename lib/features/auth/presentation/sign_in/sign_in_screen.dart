@@ -30,7 +30,6 @@ class _SigninScreenState extends State<SigninScreen> {
   /// Form Key
   final _formKey = GlobalKey<FormState>();
 
-
   @override
   void initState() {
     super.initState();
@@ -142,7 +141,8 @@ class _SigninScreenState extends State<SigninScreen> {
                           controller.emailController.clear();
                           controller.passwordController.text = '';
                           // ✅ only navigate if validation passes
-                          NavigationService.navigateTo(Routes.navBarScreen);
+                          NavigationService.navigateToUntilReplacement(
+                              Routes.navBarScreen);
                           log("Cheaking email ===== 2 ${controller.emailController.text}");
                         }
                       }
