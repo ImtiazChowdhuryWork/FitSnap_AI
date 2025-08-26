@@ -51,7 +51,7 @@ final class PostLogOutRX extends RxResponseInt {
   // }
 
   @override
-  handleSuccessWithReturn(data) async {
+  Future<bool> handleSuccessWithReturn(data) async {
     dataFetcher.sink.add(data);
 
     bool success = data["success"] ?? false;
@@ -59,7 +59,7 @@ final class PostLogOutRX extends RxResponseInt {
 
     if (success) {
       await appData.remove(kKeyAccessToken);
-      await appData.remove(kKeyRefreshToken);
+      // await appData.remove(kKeyRefreshToken);
       await appData.write(kKeyIsLoggedIn, false);
       await appData.write(kKeyfirstTime, false);
       return true;
@@ -69,7 +69,7 @@ final class PostLogOutRX extends RxResponseInt {
   }
 
   @override
-  handleErrorWithReturn(error) async {
+  Future<bool> handleErrorWithReturn(error) async {
     String errorMessage = 'Something went wrong';
     log(error.toString());
 
