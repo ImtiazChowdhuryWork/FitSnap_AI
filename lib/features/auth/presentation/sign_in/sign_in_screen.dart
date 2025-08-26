@@ -13,6 +13,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../common_widgets/custom_back_button.dart';
+import '../../../../common_widgets/custom_toast.dart';
 import '../../../../constants/app_constants.dart';
 import '../../../../helpers/di.dart';
 import '../../../../helpers/ui_helpers.dart';
@@ -143,7 +144,15 @@ class _SigninScreenState extends State<SigninScreen> {
                           // ✅ only navigate if validation passes
                           NavigationService.navigateToUntilReplacement(
                               Routes.navBarScreen);
+                          CustomToastMessage(
+                              title: 'Success',
+                              description:
+                                  'Signin succeded. Welcome to FitSnapAI');
                           log("Cheaking email ===== 2 ${controller.emailController.text}");
+                        } else {
+                          CustomToastMessage(
+                              title: 'Error',
+                              description: postLoginRxObj.message);
                         }
                       }
                     },

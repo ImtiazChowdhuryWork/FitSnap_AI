@@ -1,4 +1,5 @@
 import 'package:fitsnap_ai/constants/validator.dart';
+import 'package:fitsnap_ai/helpers/loading_helper.dart';
 import 'package:fitsnap_ai/networks/api_acess.dart';
 import 'package:fitsnap_ai/provider/sign_up_screen_provider.dart';
 import 'package:flutter/material.dart';
@@ -59,12 +60,12 @@ class SignUpScreen extends StatelessWidget {
                         ///First Name Field
                         CustomFormField(
                           controller: controller.nameController,
-                          hintText: "Enter first name",
+                          hintText: "Enter full name",
                           borderColor: AppColors.c000000,
                           borderRadius: 8.h,
                           validator: (value) {
                             if (controller.nameController.text.isEmpty) {
-                              return 'Enter your first name';
+                              return 'Enter your full name';
                             } else {
                               return null;
                             }
@@ -138,14 +139,16 @@ class SignUpScreen extends StatelessWidget {
                     onTap: () async {
                       try {
                         if (_formKey.currentState!.validate()) {
-                          bool isSuccess = await postSignUpRx.signUp(
-                            fullName: controller.nameController.text,
-                            // lastName:
-                            //     controller.lastNameController.text.toString(),
-                            email: controller.eamilController.text.trim(),
-                            password:
-                                controller.passwordController.text.toString(),
-                          );
+                          bool isSuccess = await postSignUpRx
+                              .signUp(
+                                fullName: controller.nameController.text,
+                                // lastName:
+                                //     controller.lastNameController.text.toString(),
+                                email: controller.eamilController.text.trim(),
+                                password: controller.passwordController.text
+                                    .toString(),
+                              )
+                              .waitingRemoveFromCart();
 
                           if (isSuccess) {
                             NavigationService.navigateTo(Routes.signinScreen);
