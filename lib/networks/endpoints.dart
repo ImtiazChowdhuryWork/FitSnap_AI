@@ -1,6 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
-const String url = "https://f7308f72e4b4.ngrok-free.app/api";
+const String url = "https://focus-lab-ai-fitness-app-1.onrender.com/api";
 
 final class NetworkConstants {
   NetworkConstants._();
