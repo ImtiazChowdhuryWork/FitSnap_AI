@@ -1,14 +1,14 @@
-import 'package:fitsnap_ai/features/subscription_billing/widgets/show_date.dart';
-import 'package:fitsnap_ai/features/subscription_billing/widgets/subcription_package_type.dart';
-import 'package:fitsnap_ai/features/subscription_billing/widgets/upgrade_plan_button.dart';
+import 'package:fitsnap_ai/features/well_done/subscription_billing/widgets/show_date.dart';
+import 'package:fitsnap_ai/features/well_done/subscription_billing/widgets/subcription_package_type.dart';
+import 'package:fitsnap_ai/features/well_done/subscription_billing/widgets/upgrade_plan_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../constants/text_font_style.dart';
-import '../../../gen/colors.gen.dart';
-import '../../../helpers/all_routes.dart';
-import '../../../helpers/navigation_service.dart';
-import '../../../helpers/ui_helpers.dart';
+import '../../../../constants/text_font_style.dart';
+import '../../../../gen/colors.gen.dart';
+import '../../../../helpers/all_routes.dart';
+import '../../../../helpers/navigation_service.dart';
+import '../../../../helpers/ui_helpers.dart';
 
 class SubscriptionBillingScreen extends StatelessWidget {
   const SubscriptionBillingScreen({super.key});

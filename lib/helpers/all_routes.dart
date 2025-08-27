@@ -15,13 +15,13 @@ import 'package:fitsnap_ai/features/profile/presentation/profile_screen.dart';
 import 'package:fitsnap_ai/features/profile/presentation/update_profile_info_screen.dart';
 import 'package:fitsnap_ai/features/profile/presentation/view_profile_info_screen.dart';
 import 'package:fitsnap_ai/features/registration_successful/presentation/registration_successful_screen.dart';
-import 'package:fitsnap_ai/features/subscription_billing/presentation/subscription_billing_screen.dart';
+import 'package:fitsnap_ai/features/well_done/subscription_billing/presentation/subscription_billing_screen.dart';
 import 'package:fitsnap_ai/features/well_done/presentation/well_done_screen.dart';
 import 'package:fitsnap_ai/navigation_screen.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../customer/job_posts/presentation/job_posts_screen.dart';
-import '../features/onboarding/onboarding_screen.dart';
+import '../features/onboarding/presentation/onboarding_screen.dart';
 import '../features/terms_condition/presentation/terms_conditions_accept_screen.dart';
 
 final class Routes {

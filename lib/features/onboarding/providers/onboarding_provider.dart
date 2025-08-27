@@ -1,3 +1,5 @@
+import 'package:fitsnap_ai/networks/dio/dio.dart';
+import 'package:fitsnap_ai/networks/endpoints.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../../constants/app_list.dart';
@@ -368,4 +370,5 @@ class OnboardingProvider extends ChangeNotifier {
         .replaceAll(RegExp(r"_+"), '_')
         .replaceAll(RegExp(r"^_|_"), '');
   }
+  
 }

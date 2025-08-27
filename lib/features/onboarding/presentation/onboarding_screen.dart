@@ -9,11 +9,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-import '../../../provider/impage_picker_provider_fitsnap.dart';
-import '../../common_widgets/custom_text_form_field.dart';
-import '../plan_intro/presentation/plan_intro_screen.dart';
-import 'models/onboarding_model.dart';
-import 'providers/onboarding_provider.dart';
+import '../../../../provider/impage_picker_provider_fitsnap.dart';
+import '../../../common_widgets/custom_text_form_field.dart';
+import '../../plan_intro/presentation/plan_intro_screen.dart';
+import '../models/onboarding_model.dart';
+import '../providers/onboarding_provider.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
