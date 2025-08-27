@@ -3,6 +3,7 @@ import 'package:fitsnap_ai/networks/endpoints.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../../constants/app_list.dart';
+import '../../../networks/api_acess.dart';
 import '../models/onboarding_model.dart';
 
 class OnboardingProvider extends ChangeNotifier {
@@ -247,7 +248,7 @@ class OnboardingProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void completeOnboarding() {
+  void completeOnboarding() async {
     // Ensure combined height stored from parts before packaging
     try {
       updateCombinedHeight('whats_your_height');
@@ -330,6 +331,25 @@ class OnboardingProvider extends ChangeNotifier {
 
     // Navigate to next screen or handle completion
     // You can add navigation logic here
+
+    bool isLogedin = await postLoginRxObj
+        .postLogin(
+            email: controller.emailController.text,
+            password: controller.passwordController.text)
+        .waitingForFutureWithoutBg();
+    if (isLogedin) {
+      log("Cheaking email ===== 1 ${controller.emailController.text}");
+      controller.emailController.clear();
+      controller.passwordController.text = '';
+      // ✅ only navigate if validation passes
+      NavigationService.navigateToUntilReplacement(Routes.navBarScreen);
+      CustomToastMessage(
+          title: 'Success',
+          description: 'Signin succeded. Welcome to FitSnapAI');
+      log("Cheaking email ===== 2 ${controller.emailController.text}");
+    } else {
+      CustomToastMessage(title: 'Error', description: postLoginRxObj.message);
+    }
   }
 
   String getQuestionKey(String questionText) {
@@ -370,5 +390,4 @@ class OnboardingProvider extends ChangeNotifier {
         .replaceAll(RegExp(r"_+"), '_')
         .replaceAll(RegExp(r"^_|_"), '');
   }
-  
 }
