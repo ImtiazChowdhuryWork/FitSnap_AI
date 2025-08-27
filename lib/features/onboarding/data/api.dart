@@ -19,8 +19,8 @@ final class PostOnboardingApi {
         data,
       );
       if (response.statusCode == 200) {
-        Map data = json.decode(json.encode(response.data));
-        return data;
+        Map<String, dynamic> data = json.decode(json.encode(response.data));
+        return PlanIntroResponseResulModel.fromJson(data);
 
         ///Somthig
       } else {

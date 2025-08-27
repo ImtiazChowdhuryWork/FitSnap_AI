@@ -4,7 +4,6 @@ import 'package:rxdart/rxdart.dart';
 import '../../../../common_widgets/custom_toast.dart';
 import '../../../../constants/app_constants.dart';
 import '../../../../helpers/di.dart';
-import '../../../../helpers/post_login.dart';
 import '../../../../networks/dio/dio.dart';
 import '../../../../networks/rx_base.dart';
 import 'api.dart';

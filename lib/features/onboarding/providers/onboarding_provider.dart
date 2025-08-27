@@ -1,5 +1,9 @@
-import 'package:fitsnap_ai/networks/dio/dio.dart';
-import 'package:fitsnap_ai/networks/endpoints.dart';
+import 'dart:developer';
+
+import 'package:fitsnap_ai/common_widgets/custom_toast.dart';
+import 'package:fitsnap_ai/constants/app_constants.dart';
+import 'package:fitsnap_ai/helpers/di.dart';
+import 'package:fitsnap_ai/helpers/loading_helper.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../../constants/app_list.dart';
@@ -13,6 +17,7 @@ class OnboardingProvider extends ChangeNotifier {
   String? _selectedOptionForCurrentQuestion;
   double? _bmi;
   String? _bmiCategory;
+  String _gptResponse = '';
 
   // Getters
   int get currentQuestionIndex => _currentQuestionIndex;
@@ -22,6 +27,7 @@ class OnboardingProvider extends ChangeNotifier {
       _selectedOptionForCurrentQuestion;
   double? get bmi => _bmi;
   String? get bmiCategory => _bmiCategory;
+  String get gptResponse => _gptResponse;
 
   List<QuestionModel> get currentQuestions {
     if (_selectedGender == null) {
@@ -248,7 +254,7 @@ class OnboardingProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void completeOnboarding() async {
+  Future<bool> completeOnboarding() async {
     // Ensure combined height stored from parts before packaging
     try {
       updateCombinedHeight('whats_your_height');
@@ -332,23 +338,27 @@ class OnboardingProvider extends ChangeNotifier {
     // Navigate to next screen or handle completion
     // You can add navigation logic here
 
-    bool isLogedin = await postLoginRxObj
-        .postLogin(
-            email: controller.emailController.text,
-            password: controller.passwordController.text)
+    _gptResponse = await postOnboardingRx.PostOnboarding(
+            onboardingResponse: onboardingResponse)
         .waitingForFutureWithoutBg();
-    if (isLogedin) {
-      log("Cheaking email ===== 1 ${controller.emailController.text}");
-      controller.emailController.clear();
-      controller.passwordController.text = '';
+    if (_gptResponse.isNotEmpty) {
+      log("Cheaking gpt Response ===== 1 $_gptResponse");
+      appData.write(kKeygptResponse, _gptResponse);
       // ✅ only navigate if validation passes
-      NavigationService.navigateToUntilReplacement(Routes.navBarScreen);
+      // Navigator.of(context).pushReplacement(
+      //   MaterialPageRoute(
+      //     builder: (context) =>
+      //         PlanIntroScreen(userName: userName),
+      //   ),
+      // );
+
       CustomToastMessage(
           title: 'Success',
           description: 'Signin succeded. Welcome to FitSnapAI');
-      log("Cheaking email ===== 2 ${controller.emailController.text}");
+      return true;
     } else {
       CustomToastMessage(title: 'Error', description: postLoginRxObj.message);
+      return false;
     }
   }
 

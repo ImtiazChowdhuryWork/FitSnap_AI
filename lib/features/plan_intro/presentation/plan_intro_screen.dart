@@ -1,12 +1,14 @@
 import 'package:fitsnap_ai/common_widgets/custom_elevated_button.dart';
-import 'package:fitsnap_ai/constants/app_list.dart';
+import 'package:fitsnap_ai/constants/app_constants.dart';
 import 'package:fitsnap_ai/constants/text_font_style.dart';
 import 'package:fitsnap_ai/gen/assets.gen.dart';
 import 'package:fitsnap_ai/gen/colors.gen.dart';
 import 'package:fitsnap_ai/helpers/all_routes.dart';
+import 'package:fitsnap_ai/helpers/di.dart';
 import 'package:fitsnap_ai/helpers/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gpt_markdown/gpt_markdown.dart';
 
 import '../../../helpers/ui_helpers.dart';
 
@@ -93,26 +95,29 @@ class PlanIntroScreen extends StatelessWidget {
                 ),
                 UIHelper.verticalSpace(40.h),
 
+                // Text(md.markdownToHtml(appData.read(kKeygptResponse)))
+                GptMarkdown(appData.read(kKeygptResponse)),
+
                 ///AI Generated Plan Suggestions
-                ListView.separated(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: AppList.planSuggestionList.length,
-                  separatorBuilder: (context, index) =>
-                      UIHelper.verticalSpace(20.h),
-                  itemBuilder: (context, index) {
-                    var data = AppList.planSuggestionList[index];
-                    return Text(
-                      data,
-                      style: TextFontStyle.headline25BoldcFFFFFFStyleInter
-                          .copyWith(
-                        fontSize: 20.sp,
-                        color: AppColors.c000000,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    );
-                  },
-                )
+                // ListView.separated(
+                //   shrinkWrap: true,
+                //   physics: const NeverScrollableScrollPhysics(),
+                //   itemCount: AppList.planSuggestionList.length,
+                //   separatorBuilder: (context, index) =>
+                //       UIHelper.verticalSpace(20.h),
+                //   itemBuilder: (context, index) {
+                //     var data = AppList.planSuggestionList[index];
+                //     return Text(
+                //       data,
+                //       style: TextFontStyle.headline25BoldcFFFFFFStyleInter
+                //           .copyWith(
+                //         fontSize: 20.sp,
+                //         color: AppColors.c000000,
+                //         fontWeight: FontWeight.w500,
+                //       ),
+                //     );
+                //   },
+                // )
               ],
             ),
           ),

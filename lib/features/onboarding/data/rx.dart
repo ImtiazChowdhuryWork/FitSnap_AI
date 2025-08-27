@@ -1,6 +1,7 @@
 
 import 'package:fitsnap_ai/features/onboarding/data/api.dart';
 import 'package:fitsnap_ai/features/onboarding/models/onboarding_model.dart';
+import 'package:fitsnap_ai/features/onboarding/models/plan_intro_response_result.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../../networks/rx_base.dart';
@@ -23,7 +24,7 @@ final class PostOnboardingRx extends RxResponseInt {
       //   'email': email,
       //   'password': password,
       // };
-      Map resdata = await api.postLogIn(onboardingResponse.toJson());
+      PlanIntroResponseResulModel resdata = await api.postOnboarding(onboardingResponse.toJson());
       return await handleSuccessWithReturn(resdata);
     } catch (error) {
       return await handleErrorWithReturn(error);
@@ -32,14 +33,14 @@ final class PostOnboardingRx extends RxResponseInt {
 
   @override
   handleSuccessWithReturn(data) async {
-
-    data = data[]
-    
-    return true;
+    if (data is PlanIntroResponseResulModel) {
+      // Handle successful response
+      return data.data?.gptResponse ?? "";
+    }
   }
 
   @override
   handleErrorWithReturn(error) async {
-    
+    return error.toString();
   }
 }

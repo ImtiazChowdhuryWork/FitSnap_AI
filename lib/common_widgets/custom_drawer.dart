@@ -185,7 +185,6 @@ class CustomDrawer extends StatelessWidget {
                               log("User First Time : ${appData.read(kKeyfirstTime)}");
                               log("User Logged In : ${appData.read(kKeyIsLoggedIn)}");
                             }
-                            ;
                           });
                           // NavigationService.navigateTo(Routes.checkoutScreen);
                         },
