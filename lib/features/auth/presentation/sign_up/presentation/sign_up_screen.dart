@@ -148,7 +148,7 @@ class SignUpScreen extends StatelessWidget {
                                 password: controller.passwordController.text
                                     .toString(),
                               )
-                              .waitingRemoveFromCart();
+                              .waitingForFutureWithoutBg();
 
                           if (isSuccess) {
                             NavigationService.navigateTo(Routes.signinScreen);

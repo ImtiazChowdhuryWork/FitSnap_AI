@@ -59,7 +59,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:fitsnap_ai/features/auth/presentation/sign_in/sign_in_screen.dart';
-import 'package:fitsnap_ai/features/onboarding/onboarding_screen.dart';
+import 'package:fitsnap_ai/features/onboarding/presentation/onboarding_screen.dart';
 import 'package:fitsnap_ai/navigation_screen.dart';
 import 'package:flutter/material.dart';
 import 'constants/app_constants.dart';
