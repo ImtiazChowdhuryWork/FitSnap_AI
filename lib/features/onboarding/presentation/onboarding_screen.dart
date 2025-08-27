@@ -924,12 +924,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                       .responses['what_is_your_name'] ??
                                   '';
 
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      PlanIntroScreen(userName: userName),
-                                ),
-                              );
+                              // Navigator.of(context).pushReplacement(
+                              //   MaterialPageRoute(
+                              //     builder: (context) =>
+                              //         PlanIntroScreen(userName: userName),
+                              //   ),
+                              // );
                             } else {
                               // Continue to next question
                               onboardingProvider.goToNextQuestion();
