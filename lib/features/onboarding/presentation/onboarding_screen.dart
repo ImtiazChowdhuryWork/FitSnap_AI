@@ -922,12 +922,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   .completeOnboarding()
                                   .then(((value) {
                                 if (value) {
-                                  NavigationService.navigateToWithArgs(
-                                      Routes.planIntroScreen, {
-                                    'userName': onboardingProvider
-                                            .responses['what_is_your_name'] ??
-                                        'User',
-                                  });
+                                  NavigationService.navigateTo(
+                                      Routes.planIntroScreen,);
                                 }
                               }));
 
