@@ -15,8 +15,8 @@ import 'package:fitsnap_ai/features/profile/presentation/profile_screen.dart';
 import 'package:fitsnap_ai/features/profile/presentation/update_profile_info_screen.dart';
 import 'package:fitsnap_ai/features/profile/presentation/view_profile_info_screen.dart';
 import 'package:fitsnap_ai/features/registration_successful/presentation/registration_successful_screen.dart';
-import 'package:fitsnap_ai/features/well_done/subscription_billing/presentation/subscription_billing_screen.dart';
 import 'package:fitsnap_ai/features/well_done/presentation/well_done_screen.dart';
+import 'package:fitsnap_ai/features/well_done/subscription_billing/presentation/subscription_billing_screen.dart';
 import 'package:fitsnap_ai/navigation_screen.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -100,7 +100,11 @@ final class RouteGenerator {
 
       ///Plan Intro Screen
       case Routes.planIntroScreen:
-        final userName = settings.arguments as String? ?? 'User';
+        String userName = 'User';
+        final args = settings.arguments;
+        if (args is String) {
+          userName = args;
+        }
         return Platform.isAndroid
             ? _FadedTransitionRoute(
                 widget: PlanIntroScreen(userName: userName),

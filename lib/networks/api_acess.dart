@@ -104,6 +104,8 @@
 
 import 'package:fitsnap_ai/features/auth/data/rx_post_sign_up/rx.dart';
 import 'package:fitsnap_ai/features/auth/presentation/sign_up/model/sign_up_model.dart';
+import 'package:fitsnap_ai/features/onboarding/data/rx.dart';
+import 'package:fitsnap_ai/features/onboarding/models/plan_intro_response_result.dart';
 import 'package:rxdart/subjects.dart';
 
 import '../features/auth/data/rx_post_login/rx.dart';
@@ -116,5 +118,9 @@ PostLoginRx postLoginRxObj =
     PostLoginRx(empty: {}, dataFetcher: BehaviorSubject<Map>());
 PostLogOutRX postLogOutRX =
     PostLogOutRX(empty: {}, dataFetcher: BehaviorSubject<Map>());
+
+PostOnboardingRx postOnboardingRx = PostOnboardingRx(
+    empty: PlanIntroResponseResulModel(),
+    dataFetcher: BehaviorSubject<PlanIntroResponseResulModel>());
 
 ///FitSnapAI End

@@ -119,6 +119,8 @@ const String kKeyproductID = 'productId';
 const String kKeyShopSlug = 'shop_slug';
 const String kKeyRestaurantID = 'productId';
 const String kKeyIsExploring = 'exploring';
+const String kKeygptResponse = 'gpt_response';
+const String kKeyUserName = 'user_name';
 //order statuses
 
 const List<String> kLanguagesKey = [
