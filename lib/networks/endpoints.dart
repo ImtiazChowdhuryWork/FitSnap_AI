@@ -27,6 +27,7 @@ final class Endpoints {
   static String logout() => "/signout/";
   static String logIn() => "/signin/";
   static String onboarding() => "/onboarding/";
+  static String tersAndServices() => "/pages/?type=terms_and_conditions";
 
   ///FitSnapAI End
 

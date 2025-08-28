@@ -111,7 +111,8 @@ class CustomDrawer extends StatelessWidget {
                       alignment: Alignment.centerRight,
                       child: CustomListTile(
                         onTap: () {
-                          NavigationService.navigateTo(Routes.checkoutScreen);
+                          NavigationService.navigateTo(
+                              Routes.termsOfServicesScreen);
                         },
                         title: "Terms of Services",
                         leadingIcon: Icons.description,
