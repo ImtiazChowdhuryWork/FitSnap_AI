@@ -12,9 +12,10 @@ import 'package:fitsnap_ai/features/first_day/presentation/first_day_screen.dart
 import 'package:fitsnap_ai/features/my_plan/presentation/my_plan_screen.dart';
 import 'package:fitsnap_ai/features/plan_intro/presentation/plan_intro_screen.dart';
 import 'package:fitsnap_ai/features/profile/presentation/profile_screen.dart';
-import 'package:fitsnap_ai/features/profile/presentation/update_profile_info_screen.dart';
-import 'package:fitsnap_ai/features/profile/presentation/view_profile_info_screen.dart';
+import 'package:fitsnap_ai/features/profile/sub_screens/update_profile_info/presentation/update_profile_info_screen.dart';
+import 'package:fitsnap_ai/features/profile/sub_screens/view_profile_info/presentation/view_profile_info_screen.dart';
 import 'package:fitsnap_ai/features/registration_successful/presentation/registration_successful_screen.dart';
+import 'package:fitsnap_ai/features/terms_and_services/presentation/terms_and_services_screen.dart';
 import 'package:fitsnap_ai/features/well_done/presentation/well_done_screen.dart';
 import 'package:fitsnap_ai/features/well_done/subscription_billing/presentation/subscription_billing_screen.dart';
 import 'package:fitsnap_ai/navigation_screen.dart';
@@ -47,6 +48,7 @@ final class Routes {
   static const String firstDayScreen = '/firstDayScreen';
   static const String myPlanScreen = '/myPlanScreen';
   static const String profileScreen = '/profileScreen';
+  static const String termsOfServicesScreen = '/termsOfServicesScreen';
   static const String updateProfileScreen = '/updateProfileScreen';
   static const String viewProfileInfoScreen = '/viewProfileInfoScreen';
   static const String subscriptionAndBillingScreen =
@@ -310,6 +312,17 @@ final class RouteGenerator {
               )
             : CupertinoPageRoute(
                 builder: (context) => UpdateProfileInfoScreen(),
+              );
+
+      ///termsOfServicesScreen
+      case Routes.termsOfServicesScreen:
+        return Platform.isAndroid
+            ? _FadedTransitionRoute(
+                widget: TermsAndServicesScreen(),
+                settings: settings,
+              )
+            : CupertinoPageRoute(
+                builder: (context) => TermsAndServicesScreen(),
               );
 
       default:

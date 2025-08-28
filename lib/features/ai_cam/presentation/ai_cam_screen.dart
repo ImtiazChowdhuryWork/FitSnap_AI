@@ -56,21 +56,27 @@ class AiCamScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       ///Option : Take a new photo from Camera
-                      CamOptionButton(
-                        onTap: () {
-                          imagePickerController.pickImageFromCamera();
-                        },
-                        image: Assets.images.cameraIcon.path,
-                        title: "Take a New Photo",
+                      Expanded(
+                        child: CamOptionButton(
+                          onTap: () {
+                            imagePickerController.pickImageFromCamera();
+                          },
+                          image: Assets.images.cameraIcon.path,
+                          title: "Take a New Photo",
+                        ),
                       ),
 
+                      UIHelper.horizontalSpace(10.w),
+
                       ///Option : Upload from Gallery
-                      CamOptionButton(
-                        onTap: () {
-                          imagePickerController.pickImageFromGallery();
-                        },
-                        image: Assets.images.uploadFromGalleryIcon.path,
-                        title: "Upload from Gallery",
+                      Expanded(
+                        child: CamOptionButton(
+                          onTap: () {
+                            imagePickerController.pickImageFromGallery();
+                          },
+                          image: Assets.images.uploadFromGalleryIcon.path,
+                          title: "Upload from Gallery",
+                        ),
                       ),
                     ],
                   ),

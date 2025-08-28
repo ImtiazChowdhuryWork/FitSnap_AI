@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../common_widgets/cam_option_button.dart';
-import '../../../gen/assets.gen.dart';
-import '../../../gen/colors.gen.dart';
+import '../../../../common_widgets/cam_option_button.dart';
+import '../../../../gen/assets.gen.dart';
+import '../../../../gen/colors.gen.dart';
 
 class PickProfileImageBottomSheet extends StatelessWidget {
   final void Function()? onTapCamera;
