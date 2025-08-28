@@ -143,6 +143,19 @@ class TextFontStyle {
     fontSize: 14.sp,
     fontWeight: FontWeight.w400,
   );
+  static final headline20w500c000000StyleInter = TextStyle(
+    fontFamily: 'Inter',
+    fontFamilyFallback: const [
+      'Roboto',
+      'Satoshi Variable',
+      'Ubuntu',
+      'DMSans',
+      'Inter'
+    ],
+    color: AppColors.c000000,
+    fontSize: 20.sp,
+    fontWeight: FontWeight.w500,
+  );
 
   ///============================>>Project Setup FontStyles End<<================================
 }

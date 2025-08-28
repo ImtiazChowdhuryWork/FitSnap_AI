@@ -96,7 +96,10 @@ class PlanIntroScreen extends StatelessWidget {
                 UIHelper.verticalSpace(40.h),
 
                 // Text(md.markdownToHtml(appData.read(kKeygptResponse)))
-                GptMarkdown(appData.read(kKeygptResponse)),
+                GptMarkdown(
+                  appData.read(kKeygptResponse),
+                  style: TextFontStyle.headline20w500c000000StyleInter,
+                ),
 
                 ///AI Generated Plan Suggestions
                 // ListView.separated(
