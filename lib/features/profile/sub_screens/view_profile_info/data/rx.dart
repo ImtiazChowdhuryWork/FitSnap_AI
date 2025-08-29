@@ -17,4 +17,11 @@ final class GetProfileInfoRx extends RxResponseInt {
       handleErrorWithReturn(error);
     }
   }
+
+
+
+  // @override
+  // handleSuccessWithReturn(data) {
+  //   var profileImage = data.
+  // }
 }

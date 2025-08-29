@@ -344,6 +344,8 @@ class OnboardingProvider extends ChangeNotifier {
     if (_gptResponse.isNotEmpty) {
       log("Cheaking gpt Response ===== 1 $_gptResponse");
       appData.write(kKeyUserName, responses['what_is_your_name'] ?? 'User');
+      appData.write(kKeyGenderType, responses['who_are_you'] ?? '');
+
       appData.write(kKeygptResponse, _gptResponse);
       // ✅ only navigate if validation passes
       // Navigator.of(context).pushReplacement(
