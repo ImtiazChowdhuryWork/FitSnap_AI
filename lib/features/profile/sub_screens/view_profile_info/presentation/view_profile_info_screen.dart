@@ -3,7 +3,9 @@ import 'dart:developer';
 import 'package:fitsnap_ai/common_widgets/custom_container.dart';
 import 'package:fitsnap_ai/common_widgets/custom_list_tile.dart';
 import 'package:fitsnap_ai/common_widgets/waiting_widget.dart';
+import 'package:fitsnap_ai/constants/app_constants.dart';
 import 'package:fitsnap_ai/gen/colors.gen.dart';
+import 'package:fitsnap_ai/helpers/di.dart';
 import 'package:fitsnap_ai/helpers/ui_helpers.dart';
 import 'package:fitsnap_ai/networks/api_acess.dart';
 import 'package:flutter/material.dart';
@@ -13,8 +15,19 @@ import '../../../../../common_widgets/not_found_widget.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../mdoel/view_profile_info_model.dart';
 
-class ViewProfileInfoScreen extends StatelessWidget {
+class ViewProfileInfoScreen extends StatefulWidget {
   const ViewProfileInfoScreen({super.key});
+
+  @override
+  State<ViewProfileInfoScreen> createState() => _ViewProfileInfoScreenState();
+}
+
+class _ViewProfileInfoScreenState extends State<ViewProfileInfoScreen> {
+  @override
+  void initState() {
+    getProfileInfoRx.fetchProInfoData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +44,7 @@ class ViewProfileInfoScreen extends StatelessWidget {
                     return const WaitingWidget();
                   } else if (snapshot.hasData && snapshot.data != null) {
                     log("data availableeeeeeeeeeeeeeeee------------------------------");
+                    log("Gender :__________${appData.read(kKeyGenderType)}");
                     ViewProfileInfoModel profile =
                         ViewProfileInfoModel.fromJson(snapshot.data);
 
@@ -56,7 +70,9 @@ class ViewProfileInfoScreen extends StatelessWidget {
                           child: CircleAvatar(
                             radius: 60.sp,
                             backgroundImage: AssetImage(
-                              Assets.images.addPaymentMethodScreenImage.path,
+                              appData.read(kKeyGenderType) == "Male"
+                                  ? Assets.images.genderMale.path
+                                  : Assets.images.genderFemale.path,
                             ),
                           ),
                         ),
@@ -87,7 +103,8 @@ class ViewProfileInfoScreen extends StatelessWidget {
                               CustomListTile(
                                 isLeadingUsed: true,
                                 leadingIcon: Icons.male,
-                                title: "Gender : Male",
+                                title:
+                                    "Gender : ${appData.read(kKeyGenderType)}",
                               ),
                             ],
                           ),

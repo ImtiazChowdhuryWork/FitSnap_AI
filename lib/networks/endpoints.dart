@@ -28,6 +28,8 @@ final class Endpoints {
   static String logIn() => "/signin/";
   static String onboarding() => "/onboarding/";
   static String tersAndServices() => "/pages/?type=terms_and_conditions";
+  static String getProfileData() => "/profile-get/";
+  static String getProfileData() => "/pages/?type=terms_and_conditions/";
 
   ///FitSnapAI End
 

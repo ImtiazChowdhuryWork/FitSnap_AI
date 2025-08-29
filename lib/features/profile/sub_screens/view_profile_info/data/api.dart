@@ -14,7 +14,7 @@ final class GetProfileInfoApi {
   Future<Map> fetchProfileInfo() async {
     try {
       Response response = await getHttp(
-        Endpoints.addMultipleAddon(),
+        Endpoints.getProfileData(),
       );
 
       if (response.statusCode == 200) {
