@@ -15,7 +15,7 @@ import 'package:fitsnap_ai/features/profile/presentation/profile_screen.dart';
 import 'package:fitsnap_ai/features/profile/sub_screens/update_profile_info/presentation/update_profile_info_screen.dart';
 import 'package:fitsnap_ai/features/profile/sub_screens/view_profile_info/presentation/view_profile_info_screen.dart';
 import 'package:fitsnap_ai/features/registration_successful/presentation/registration_successful_screen.dart';
-import 'package:fitsnap_ai/features/terms_and_services/presentation/terms_and_services_screen.dart';
+import 'package:fitsnap_ai/features/terms_of_services/presentation/terms_of_services_screen.dart';
 import 'package:fitsnap_ai/features/well_done/presentation/well_done_screen.dart';
 import 'package:fitsnap_ai/features/well_done/subscription_billing/presentation/subscription_billing_screen.dart';
 import 'package:fitsnap_ai/navigation_screen.dart';

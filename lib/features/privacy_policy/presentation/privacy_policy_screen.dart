@@ -1,26 +1,27 @@
-import 'dart:developer';
+import 'dart:nativewrappers/_internal/vm/lib/developer.dart';
 
-import 'package:fitsnap_ai/common_widgets/not_found_widget.dart';
-import 'package:fitsnap_ai/common_widgets/waiting_widget.dart';
-import 'package:fitsnap_ai/constants/text_font_style.dart';
-import 'package:fitsnap_ai/gen/colors.gen.dart';
-import 'package:fitsnap_ai/helpers/navigation_service.dart';
 import 'package:fitsnap_ai/helpers/ui_helpers.dart';
 import 'package:fitsnap_ai/networks/api_acess.dart';
 import 'package:flutter/material.dart';
 
-class TermsAndServicesScreen extends StatefulWidget {
-  const TermsAndServicesScreen({super.key});
+import '../../../common_widgets/not_found_widget.dart';
+import '../../../common_widgets/waiting_widget.dart';
+import '../../../constants/text_font_style.dart';
+import '../../../gen/colors.gen.dart';
+import '../../../helpers/navigation_service.dart';
+
+class PrivacyPolicyScreen extends StatefulWidget {
+  const PrivacyPolicyScreen({super.key});
 
   @override
-  State<TermsAndServicesScreen> createState() => _TermsAndServicesScreenState();
+  State<PrivacyPolicyScreen> createState() => _PrivacyPolicyScreenState();
 }
 
-class _TermsAndServicesScreenState extends State<TermsAndServicesScreen> {
+class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
   @override
   void initState() {
     super.initState();
-    getTermsOfServicesRx.getTermsOfServiceData;
+    getPrivacyPolicyRx.fetchPrivacyPolicyData();
   }
 
   @override
@@ -38,7 +39,7 @@ class _TermsAndServicesScreenState extends State<TermsAndServicesScreen> {
           ),
         ),
         title: Text(
-          "Terms & conditions",
+          "Privacy Policy",
           style: TextFontStyle.headline20w500c000000StyleInter,
         ),
       ),
@@ -47,10 +48,10 @@ class _TermsAndServicesScreenState extends State<TermsAndServicesScreen> {
           padding: EdgeInsets.all(UIHelper.kDefaulutPadding()),
           child: SingleChildScrollView(
             child: StreamBuilder(
-              stream: (getTermsOfServicesRx.getTermsOfServiceData),
+              stream: (getPrivacyPolicyRx.getPrivacyPolicyData),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  log("Waitttttttttttttttttttttingggggggggg_________Terms of Services");
+                  log("Waitttttttttttttttttttttingggggggggg_________Privacy Policyyyyy");
                   return const WaitingWidget();
                 } else if (snapshot.hasData && snapshot.data != null) {
                   return Column(

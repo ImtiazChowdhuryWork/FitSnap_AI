@@ -1,10 +1,19 @@
+import 'dart:developer';
+
+import 'package:fitsnap_ai/helpers/loading_helper.dart';
+import 'package:fitsnap_ai/helpers/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../common_widgets/custom_elevated_button.dart';
+import '../../../../common_widgets/custom_toast.dart';
+import '../../../../constants/app_constants.dart';
 import '../../../../constants/text_font_style.dart';
 import '../../../../gen/colors.gen.dart';
+import '../../../../helpers/all_routes.dart';
+import '../../../../helpers/di.dart';
 import '../../../../helpers/ui_helpers.dart';
+import '../../../../networks/api_acess.dart';
 
 class SignOutBottomSheet extends StatelessWidget {
   const SignOutBottomSheet({super.key});
@@ -13,7 +22,7 @@ class SignOutBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 1.sw,
-      height: 0.3.sh,
+      height: 0.35.sh,
       padding: EdgeInsets.only(
         top: 40.h,
         left: 20.w,
@@ -63,7 +72,9 @@ class SignOutBottomSheet extends StatelessWidget {
               ///Button : Cancel Button
               Expanded(
                 child: CustomElevatedButton(
-                  onTap: () {},
+                  onTap: () {
+                    NavigationService.goBack;
+                  },
                   buttonTitle: "Cancel",
                   textStyle:
                       TextFontStyle.headline25BoldcFFFFFFStyleInter.copyWith(
@@ -80,7 +91,30 @@ class SignOutBottomSheet extends StatelessWidget {
               ///Button : Sign Out
               Expanded(
                 child: CustomElevatedButton(
-                  onTap: () {},
+                  onTap: () async {
+                    await postLogOutRX
+                        .logOut()
+                        .waitingForFutureWithoutBg()
+                        .then((value) {
+                      if (value) {
+                        NavigationService.navigateToUntilReplacement(
+                            Routes.signinScreen);
+                        appData.write(kKeyfirstTime, false);
+                        appData.write(kKeyIsLoggedIn, false);
+                        log("User First Time after logingout : ${appData.read(kKeyfirstTime)}");
+                        log("User Logged In after logingout: ${appData.read(kKeyIsLoggedIn)}");
+                      } else {
+                        // Show some error message
+                        CustomToastMessage(
+                            title: value ? "Success" : "Error",
+                            description: "Logout failed. Please try again.");
+                        log("Logout failed. Please try again.");
+                        log("User First Time : ${appData.read(kKeyfirstTime)}");
+                        log("User Logged In : ${appData.read(kKeyIsLoggedIn)}");
+                      }
+                    });
+                    // NavigationService.navigateTo(Routes.checkoutScreen);
+                  },
                   buttonTitle: "Sign Out",
                   textStyle:
                       TextFontStyle.headline25BoldcFFFFFFStyleInter.copyWith(

@@ -110,13 +110,20 @@ import 'package:rxdart/subjects.dart';
 
 import '../features/auth/data/rx_post_login/rx.dart';
 import '../features/auth/data/rx_post_logout/rx.dart';
-import '../features/profile/sub_screens/view_profile_info/data/rx.dart';
+import '../features/privacy_policy/data/rx.dart';
+import '../features/profile/data/rx.dart';
+import '../features/terms_of_services/data/rx.dart';
 
 ///FitSnapAI Start
 PostSignUpRx postSignUpRx = PostSignUpRx(
     empty: SignUpModel(), dataFetcher: BehaviorSubject<SignUpModel>());
 PostLoginRx postLoginRxObj =
     PostLoginRx(empty: {}, dataFetcher: BehaviorSubject<Map>());
+
+GetTermsOfServicesRx getTermsOfServicesRx =
+    GetTermsOfServicesRx(empty: {}, dataFetcher: BehaviorSubject<Map>());
+GetPrivacyPolicyRx getPrivacyPolicyRx =
+    GetPrivacyPolicyRx(empty: {}, dataFetcher: BehaviorSubject<Map>());
 PostLogOutRX postLogOutRX =
     PostLogOutRX(empty: {}, dataFetcher: BehaviorSubject<Map>());
 GetProfileInfoRx getProfileInfoRx =
