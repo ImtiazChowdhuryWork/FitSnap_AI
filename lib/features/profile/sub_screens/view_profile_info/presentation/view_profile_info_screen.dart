@@ -13,7 +13,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../common_widgets/not_found_widget.dart';
 import '../../../../../gen/assets.gen.dart';
-import '../mdoel/view_profile_info_model.dart';
+import '../../../mdoel/view_profile_info_model.dart';
 
 class ViewProfileInfoScreen extends StatefulWidget {
   const ViewProfileInfoScreen({super.key});
@@ -87,7 +87,7 @@ class _ViewProfileInfoScreenState extends State<ViewProfileInfoScreen> {
                               CustomListTile(
                                 isLeadingUsed: true,
                                 leadingIcon: Icons.person,
-                                title: data!.fullName ?? "",
+                                title: data.fullName ?? "",
                               ),
                               UIHelper.verticalSpace(10.h),
 

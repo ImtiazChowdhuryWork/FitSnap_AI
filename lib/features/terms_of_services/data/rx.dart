@@ -10,9 +10,9 @@ final class GetTermsOfServicesRx extends RxResponseInt {
 
   ValueStream get getTermsOfServiceData => dataFetcher.stream;
 
-  Future<void> fetchProfileInfoData() async {
+  Future<void> fetchTermsOfServicesData() async {
     try {
-      Map data = await api.fetchTermsOfServicesInfo();
+      Map data = await api.fetchTermsOfServicesApi();
 
       handleSuccessWithReturn(data);
     } catch (error) {

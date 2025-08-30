@@ -5,19 +5,19 @@ import 'package:fitsnap_ai/networks/dio/dio.dart';
 import 'package:fitsnap_ai/networks/endpoints.dart';
 import 'package:fitsnap_ai/networks/exception_handler/data_source.dart';
 
-final class GetTermsOfServicesApi {
-  GetTermsOfServicesApi._internal();
+final class GetPrivacyPolicyApi {
+  GetPrivacyPolicyApi._internal();
 
-  static final GetTermsOfServicesApi _singleton =
-      GetTermsOfServicesApi._internal();
-  static GetTermsOfServicesApi get instance => _singleton;
+  static final GetPrivacyPolicyApi _singltone = GetPrivacyPolicyApi._internal();
+  static GetPrivacyPolicyApi get instance => _singltone;
 
-  Future<Map> fetchTermsOfServicesApi() async {
+  Future<Map> fetchPrivacyPolicyApi() async {
     try {
-      Response response = await getHttp(Endpoints.termsOfServices());
+      Response response = await postHttp(Endpoints.getAllRemainders());
 
       if (response.statusCode == 200) {
         Map data = jsonDecode(jsonEncode(response.data));
+
         return data;
       } else {
         throw DataSource.DEFAULT.getFailure();

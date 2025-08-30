@@ -45,7 +45,7 @@ class PlanIntroScreen extends StatelessWidget {
               children: [
                 ///Wellcome User Name
                 Text(
-                  "Welcome ${userName.isNotEmpty ? userName : 'User'}",
+                  "Welcome",
                   style: TextFontStyle.headline25BoldcFFFFFFStyleInter.copyWith(
                     fontSize: 36.sp,
                     color: AppColors.c0000ff,

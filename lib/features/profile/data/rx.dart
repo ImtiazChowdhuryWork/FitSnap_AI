@@ -1,4 +1,4 @@
-import 'package:fitsnap_ai/features/profile/sub_screens/view_profile_info/data/api.dart';
+import 'package:fitsnap_ai/features/profile/data/api.dart';
 import 'package:fitsnap_ai/networks/rx_base.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -17,8 +17,6 @@ final class GetProfileInfoRx extends RxResponseInt {
       handleErrorWithReturn(error);
     }
   }
-
-
 
   // @override
   // handleSuccessWithReturn(data) {
