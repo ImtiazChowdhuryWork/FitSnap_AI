@@ -34,11 +34,11 @@ class CustomDrawer extends StatelessWidget {
                 color: AppColors.c0000ff.withAlpha(200),
               ),
               accountName: Text(
-                "John Doe",
+                appData.read(kKeyNickName) ?? "",
                 style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
               ),
               accountEmail: Text(
-                "john.doe@example.com",
+                appData.read(kEmail) ?? '',
                 style: TextStyle(fontSize: 14.sp),
               ),
               currentAccountPicture: CircleAvatar(

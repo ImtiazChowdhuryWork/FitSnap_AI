@@ -1,6 +1,7 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:fitsnap_ai/features/ai_cam/presentation/ai_cam_screen.dart';
 import 'package:fitsnap_ai/features/ceckout/presentation/checkout_screen.dart';
+import 'package:fitsnap_ai/features/explore/presentation/explore_screen.dart';
 import 'package:fitsnap_ai/features/meal/presentation/meal_screen.dart';
 import 'package:fitsnap_ai/features/my_plan/presentation/my_plan_screen.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ class NavigationScreen extends StatelessWidget {
           const BookingsScreen(),
           const AiCamScreen(),
           const MealScreen(),
-          const CheckoutScreen(),
+          const ExploreScreen(),
         ];
 
         return Scaffold(

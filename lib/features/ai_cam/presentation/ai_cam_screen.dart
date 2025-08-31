@@ -1,4 +1,5 @@
 import 'package:fitsnap_ai/common_widgets/cam_option_button.dart';
+import 'package:fitsnap_ai/common_widgets/custom_elevated_button.dart';
 import 'package:fitsnap_ai/features/ai_cam/widgets/remove_image_widget.dart';
 import 'package:fitsnap_ai/gen/assets.gen.dart';
 import 'package:fitsnap_ai/helpers/ui_helpers.dart';
@@ -52,34 +53,43 @@ class AiCamScreen extends StatelessWidget {
                       ? UIHelper.verticalSpace(10.h)
                       : SizedBox.shrink(),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ///Option : Take a new photo from Camera
-                      Expanded(
-                        child: CamOptionButton(
-                          onTap: () {
-                            imagePickerController.pickImageFromCamera();
-                          },
-                          image: Assets.images.cameraIcon.path,
-                          title: "Take a New Photo",
-                        ),
-                      ),
+                  UIHelper.verticalSpace(20.h),
 
-                      UIHelper.horizontalSpace(10.w),
+                  ///Section : Take a new photo -> Camera
+                  ///Section : Upload from Gallery
+                  imagePickerController.selectedImage != null
+                      ? CustomElevatedButton(
+                          buttonTitle: "Submit Image",
+                          onTap: () {},
+                        )
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ///Option : Take a new photo from Camera
+                            Expanded(
+                              child: CamOptionButton(
+                                onTap: () {
+                                  imagePickerController.pickImageFromCamera();
+                                },
+                                image: Assets.images.cameraIcon.path,
+                                title: "Take a New Photo",
+                              ),
+                            ),
 
-                      ///Option : Upload from Gallery
-                      Expanded(
-                        child: CamOptionButton(
-                          onTap: () {
-                            imagePickerController.pickImageFromGallery();
-                          },
-                          image: Assets.images.uploadFromGalleryIcon.path,
-                          title: "Upload from Gallery",
+                            UIHelper.horizontalSpace(10.w),
+
+                            ///Option : Upload from Gallery
+                            Expanded(
+                              child: CamOptionButton(
+                                onTap: () {
+                                  imagePickerController.pickImageFromGallery();
+                                },
+                                image: Assets.images.uploadFromGalleryIcon.path,
+                                title: "Upload from Gallery",
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
                   UIHelper.verticalSpace(20.h),
                 ],
               ),

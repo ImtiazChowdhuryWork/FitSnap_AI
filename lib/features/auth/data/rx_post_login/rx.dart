@@ -61,6 +61,9 @@ final class PostLoginRx extends RxResponseInt {
     await appData.write(kKeyUserID, id);
     log("User ID : ${appData.read(kKeyUserID)}");
 
+    await appData.write(kEmail, data['data']['email']);
+    log("User Email : ${appData.read(kEmail)}");
+
     dataFetcher.sink.add(data);
     // performPostLoginActions();
     // message = data["message"];

@@ -31,20 +31,16 @@ class ViewProfileInfoModel {
 }
 
 class Data {
-  int? id;
-  String? email;
+  User? user;
   String? fullName;
-  bool? acceptedTerms;
-  dynamic avatarUrl;
+  dynamic avatar;
   DateTime? createdAt;
   DateTime? updatedAt;
 
   Data({
-    this.id,
-    this.email,
+    this.user,
     this.fullName,
-    this.acceptedTerms,
-    this.avatarUrl,
+    this.avatar,
     this.createdAt,
     this.updatedAt,
   });
@@ -54,11 +50,9 @@ class Data {
   String toRawJson() => json.encode(toJson());
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-        id: json["id"],
-        email: json["email"],
+        user: json["user"] == null ? null : User.fromJson(json["user"]),
         fullName: json["full_name"],
-        acceptedTerms: json["accepted_terms"],
-        avatarUrl: json["avatar_url"],
+        avatar: json["avatar"],
         createdAt: json["created_at"] == null
             ? null
             : DateTime.parse(json["created_at"]),
@@ -68,12 +62,52 @@ class Data {
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "email": email,
+        "user": user?.toJson(),
         "full_name": fullName,
-        "accepted_terms": acceptedTerms,
-        "avatar_url": avatarUrl,
+        "avatar": avatar,
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
+      };
+}
+
+class User {
+  int? id;
+  String? email;
+  bool? isStaff;
+  bool? isActive;
+  DateTime? dateJoined;
+  int? profile;
+
+  User({
+    this.id,
+    this.email,
+    this.isStaff,
+    this.isActive,
+    this.dateJoined,
+    this.profile,
+  });
+
+  factory User.fromRawJson(String str) => User.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory User.fromJson(Map<String, dynamic> json) => User(
+        id: json["id"],
+        email: json["email"],
+        isStaff: json["is_staff"],
+        isActive: json["is_active"],
+        dateJoined: json["date_joined"] == null
+            ? null
+            : DateTime.parse(json["date_joined"]),
+        profile: json["profile"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "email": email,
+        "is_staff": isStaff,
+        "is_active": isActive,
+        "date_joined": dateJoined?.toIso8601String(),
+        "profile": profile,
       };
 }

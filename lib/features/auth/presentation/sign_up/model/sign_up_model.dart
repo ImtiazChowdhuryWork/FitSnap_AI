@@ -1,48 +1,58 @@
+import 'dart:convert';
+
 class SignUpModel {
   bool? success;
   String? message;
   Data? data;
 
-  SignUpModel({this.success, this.message, this.data});
+  SignUpModel({
+    this.success,
+    this.message,
+    this.data,
+  });
 
-  SignUpModel.fromJson(Map<String, dynamic> json) {
-    success = json['success'];
-    message = json['message'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
-  }
+  factory SignUpModel.fromRawJson(String str) =>
+      SignUpModel.fromJson(json.decode(str));
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['success'] = success;
-    data['message'] = message;
-    if (this.data != null) {
-      data['data'] = this.data!.toJson();
-    }
-    return data;
-  }
+  String toRawJson() => json.encode(toJson());
+
+  factory SignUpModel.fromJson(Map<String, dynamic> json) => SignUpModel(
+        success: json["success"],
+        message: json["message"],
+        data: json["data"] == null ? null : Data.fromJson(json["data"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "success": success,
+        "message": message,
+        "data": data?.toJson(),
+      };
 }
 
 class Data {
   int? id;
-  String? firstName;
-  String? lastName;
+  String? fullName;
   String? email;
 
-  Data({this.id, this.firstName, this.lastName, this.email});
+  Data({
+    this.id,
+    this.fullName,
+    this.email,
+  });
 
-  Data.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    firstName = json['first_name'];
-    lastName = json['last_name'];
-    email = json['email'];
-  }
+  factory Data.fromRawJson(String str) => Data.fromJson(json.decode(str));
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['first_name'] = firstName;
-    data['last_name'] = lastName;
-    data['email'] = email;
-    return data;
-  }
+  String toRawJson() => json.encode(toJson());
+
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
+        id: json["id"],
+        fullName: json["full_name"],
+        email: json["email"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "full_name": fullName,
+        "email": email,
+      };
 }

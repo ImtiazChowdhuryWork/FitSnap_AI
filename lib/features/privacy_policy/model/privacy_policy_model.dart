@@ -1,23 +1,23 @@
 import 'dart:convert';
 
-class TermsOfServicesModel {
+class PrivacyPolicyModel {
   bool? success;
   String? message;
   Data? data;
 
-  TermsOfServicesModel({
+  PrivacyPolicyModel({
     this.success,
     this.message,
     this.data,
   });
 
-  factory TermsOfServicesModel.fromRawJson(String str) =>
-      TermsOfServicesModel.fromJson(json.decode(str));
+  factory PrivacyPolicyModel.fromRawJson(String str) =>
+      PrivacyPolicyModel.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory TermsOfServicesModel.fromJson(Map<String, dynamic> json) =>
-      TermsOfServicesModel(
+  factory PrivacyPolicyModel.fromJson(Map<String, dynamic> json) =>
+      PrivacyPolicyModel(
         success: json["success"],
         message: json["message"],
         data: json["data"] == null ? null : Data.fromJson(json["data"]),
