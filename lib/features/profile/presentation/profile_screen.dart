@@ -54,12 +54,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ///Image
                     ///User Name
                     UserImageAndNameWidget(
-                      userImage: data!.avatarUrl == null
-                          ? appData.read(kKeyGenderType) == "Male"
-                              ? Assets.images.genderMale.path
-                              : Assets.images.genderFemale.path
-                          : data.avatarUrl,
-                      userName: data.fullName ?? "",
+                      userImage: data!.avatarUrl,
+                      userName: appData.read(kKeyUserName) ?? "",
                     ),
                     UIHelper.verticalSpace(20.h),
 

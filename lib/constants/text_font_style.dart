@@ -21,6 +21,34 @@ class TextFontStyle {
     fontWeight: FontWeight.w700,
   );
 
+  static final textStyle28cffffffRobotoBold = TextStyle(
+    fontFamily: 'Roboto',
+    fontFamilyFallback: const [
+      'OpenSans',
+      'Roboto',
+      'Satoshi Variable',
+      'Ubuntu',
+      'DMSans',
+    ],
+    color: AppColors.cFFFFFF,
+    fontSize: 28.sp,
+    fontWeight: FontWeight.bold,
+  );
+
+  static final headline25BoldcFFFFFFStyleInter = TextStyle(
+    fontFamily: 'Inter',
+    fontFamilyFallback: const [
+      'OpenSans',
+      'Roboto',
+      'Satoshi Variable',
+      'Ubuntu',
+      'DMSans',
+    ],
+    color: AppColors.cFFFFFF,
+    fontSize: 25.sp,
+    fontWeight: FontWeight.bold,
+  );
+
   static final textStyle16cffffffRoboto500 = TextStyle(
     fontFamily: 'Roboto',
     fontFamilyFallback: const [
@@ -34,7 +62,8 @@ class TextFontStyle {
     fontSize: 16.sp,
     fontWeight: FontWeight.w500,
   );
-  static final textStyle28cffffffRobotoBold = TextStyle(
+
+  static final textStyle14cB0BABFRoboto400 = TextStyle(
     fontFamily: 'Roboto',
     fontFamilyFallback: const [
       'OpenSans',
@@ -43,9 +72,37 @@ class TextFontStyle {
       'Ubuntu',
       'DMSans',
     ],
-    color: AppColors.cFFFFFF,
-    fontSize: 28.sp,
-    fontWeight: FontWeight.bold,
+    color: AppColors.cB0BABF,
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w400,
+  );
+
+  static final headline20w500c000000StyleInter = TextStyle(
+    fontFamily: 'Inter',
+    fontFamilyFallback: const [
+      'Roboto',
+      'Satoshi Variable',
+      'Ubuntu',
+      'DMSans',
+      'Inter'
+    ],
+    color: AppColors.c000000,
+    fontSize: 20.sp,
+    fontWeight: FontWeight.w500,
+  );
+
+  static final headline18w700c292E34StyledmSans = TextStyle(
+    fontFamily: 'DMSans',
+    fontFamilyFallback: const [
+      'OpenSans',
+      'Roboto',
+      'Satoshi Variable',
+      'Ubuntu',
+      'DMSans',
+    ],
+    color: AppColors.c292E34,
+    fontSize: 18.sp,
+    fontWeight: FontWeight.w700,
   );
 
   static final textStyle16c252c32Satoshi500 = TextStyle(
@@ -62,8 +119,8 @@ class TextFontStyle {
     fontWeight: FontWeight.w500,
   );
 
-  static final textStyle14cB0BABFRoboto400 = TextStyle(
-    fontFamily: 'Roboto',
+  static final headline14w400c000000StyledmSans = TextStyle(
+    fontFamily: 'DMSans',
     fontFamilyFallback: const [
       'OpenSans',
       'Roboto',
@@ -71,7 +128,7 @@ class TextFontStyle {
       'Ubuntu',
       'DMSans',
     ],
-    color: AppColors.cB0BABF,
+    color: AppColors.c000000,
     fontSize: 14.sp,
     fontWeight: FontWeight.w400,
   );
@@ -102,8 +159,7 @@ class TextFontStyle {
     fontSize: 14.sp,
     fontWeight: FontWeight.w400,
   );
-
-  static final headline18w700c292E34StyledmSans = TextStyle(
+  static final textStyle10cFFFFD700DmSans400 = TextStyle(
     fontFamily: 'DMSans',
     fontFamilyFallback: const [
       'OpenSans',
@@ -112,49 +168,9 @@ class TextFontStyle {
       'Ubuntu',
       'DMSans',
     ],
-    color: AppColors.c292E34,
-    fontSize: 18.sp,
-    fontWeight: FontWeight.w700,
-  );
-  static final headline25BoldcFFFFFFStyleInter = TextStyle(
-    fontFamily: 'Inter',
-    fontFamilyFallback: const [
-      'OpenSans',
-      'Roboto',
-      'Satoshi Variable',
-      'Ubuntu',
-      'DMSans',
-    ],
-    color: AppColors.cFFFFFF,
-    fontSize: 25.sp,
-    fontWeight: FontWeight.bold,
-  );
-
-  static final headline14w400c000000StyledmSans = TextStyle(
-    fontFamily: 'DMSans',
-    fontFamilyFallback: const [
-      'OpenSans',
-      'Roboto',
-      'Satoshi Variable',
-      'Ubuntu',
-      'DMSans',
-    ],
-    color: AppColors.c000000,
-    fontSize: 14.sp,
+    color: AppColors.cFF00FFFF,
+    fontSize: 10.sp,
     fontWeight: FontWeight.w400,
-  );
-  static final headline20w500c000000StyleInter = TextStyle(
-    fontFamily: 'Inter',
-    fontFamilyFallback: const [
-      'Roboto',
-      'Satoshi Variable',
-      'Ubuntu',
-      'DMSans',
-      'Inter'
-    ],
-    color: AppColors.c000000,
-    fontSize: 20.sp,
-    fontWeight: FontWeight.w500,
   );
 
   ///============================>>Project Setup FontStyles End<<================================
