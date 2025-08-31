@@ -67,7 +67,7 @@ class PlanIntroScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.center,
                   child: Text(
-                    "Hello ${appData.read(kKeyUserName) ?? 'User'}",
+                    "Hello ${appData.read(kKeyNickName) ?? 'User'}",
                     textAlign: TextAlign.center,
                     style:
                         TextFontStyle.headline25BoldcFFFFFFStyleInter.copyWith(
