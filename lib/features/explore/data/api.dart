@@ -5,15 +5,16 @@ import 'package:fitsnap_ai/networks/dio/dio.dart';
 import 'package:fitsnap_ai/networks/endpoints.dart';
 import 'package:fitsnap_ai/networks/exception_handler/data_source.dart';
 
-final class GetPrivacyPolicyApi {
-  GetPrivacyPolicyApi._internal();
+final class ExploreCategoriesApi {
+  ExploreCategoriesApi._internal();
 
-  static final GetPrivacyPolicyApi _singltone = GetPrivacyPolicyApi._internal();
-  static GetPrivacyPolicyApi get instance => _singltone;
+  static final ExploreCategoriesApi _singleton =
+      ExploreCategoriesApi._internal();
+  static ExploreCategoriesApi get instance => _singleton;
 
-  Future<Map> fetchPrivacyPolicyApi() async {
+  Future<Map> exploreCategories() async {
     try {
-      Response response = await getHttp(Endpoints.privacyPolicy());
+      Response response = await getHttp(Endpoints.addMultipleAddon());
 
       if (response.statusCode == 200) {
         Map data = jsonDecode(jsonEncode(response.data));
@@ -23,7 +24,7 @@ final class GetPrivacyPolicyApi {
         throw DataSource.DEFAULT.getFailure();
       }
     } catch (error) {
-      throw ErrorHandler.handle(error).failure;
+      rethrow;
     }
   }
 }

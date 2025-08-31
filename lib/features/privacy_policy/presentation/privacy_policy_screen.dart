@@ -1,14 +1,14 @@
-import 'dart:nativewrappers/_internal/vm/lib/developer.dart';
-
+import 'dart:developer';
+import 'package:flutter/material.dart';
 import 'package:fitsnap_ai/helpers/ui_helpers.dart';
 import 'package:fitsnap_ai/networks/api_acess.dart';
-import 'package:flutter/material.dart';
 
 import '../../../common_widgets/not_found_widget.dart';
 import '../../../common_widgets/waiting_widget.dart';
 import '../../../constants/text_font_style.dart';
 import '../../../gen/colors.gen.dart';
 import '../../../helpers/navigation_service.dart';
+import '../model/privacy_policy_model.dart';
 
 class PrivacyPolicyScreen extends StatefulWidget {
   const PrivacyPolicyScreen({super.key});
@@ -21,6 +21,7 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
   @override
   void initState() {
     super.initState();
+    // Fetch privacy policy data from the API
     getPrivacyPolicyRx.fetchPrivacyPolicyData();
   }
 
@@ -31,7 +32,7 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
         centerTitle: true,
         leading: InkWell(
           onTap: () {
-            NavigationService.goBack;
+            NavigationService.goBack();
           },
           child: Icon(
             Icons.arrow_back_ios,
@@ -48,16 +49,46 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
           padding: EdgeInsets.all(UIHelper.kDefaulutPadding()),
           child: SingleChildScrollView(
             child: StreamBuilder(
-              stream: (getPrivacyPolicyRx.getPrivacyPolicyData),
+              stream: getPrivacyPolicyRx.getPrivacyPolicyData,
               builder: (context, snapshot) {
+                // Show loading indicator while waiting
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  log("Waitttttttttttttttttttttingggggggggg_________Privacy Policyyyyy");
+                  log("Loading Privacy Policy...");
                   return const WaitingWidget();
-                } else if (snapshot.hasData && snapshot.data != null) {
+                }
+
+                // Handle null or empty snapshot
+                if (!snapshot.hasData || snapshot.data == null) {
+                  log("Privacy Policy data is null");
+                  return const NotFoundWidget();
+                }
+
+                try {
+                  // Parse JSON safely
+                  final privacyPolicy = PrivacyPolicyModel.fromJson(
+                      snapshot.data as Map<String, dynamic>);
+                  final data = privacyPolicy.data;
+
+                  // If content is null or empty, show NotFoundWidget
+                  if (data == null ||
+                      data.content == null ||
+                      data.content!.isEmpty) {
+                    log("Privacy Policy content is empty");
+                    return const NotFoundWidget();
+                  }
+
+                  // Display the privacy policy content
                   return Column(
-                    children: [Text("Api Data Found")],
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        data.content!,
+                        style: TextFontStyle.headline14w400c000000StyledmSans,
+                      ),
+                    ],
                   );
-                } else {
+                } catch (e) {
+                  log("Error parsing PrivacyPolicyModel: $e");
                   return const NotFoundWidget();
                 }
               },

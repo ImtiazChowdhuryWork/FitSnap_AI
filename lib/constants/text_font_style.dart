@@ -90,6 +90,19 @@ class TextFontStyle {
     fontSize: 20.sp,
     fontWeight: FontWeight.w500,
   );
+  static final headline25w500c000000StyleInter = TextStyle(
+    fontFamily: 'Inter',
+    fontFamilyFallback: const [
+      'Roboto',
+      'Satoshi Variable',
+      'Ubuntu',
+      'DMSans',
+      'Inter'
+    ],
+    color: AppColors.c000000,
+    fontSize: 25.sp,
+    fontWeight: FontWeight.w500,
+  );
 
   static final headline18w700c292E34StyledmSans = TextStyle(
     fontFamily: 'DMSans',
@@ -159,6 +172,22 @@ class TextFontStyle {
     fontSize: 14.sp,
     fontWeight: FontWeight.w400,
   );
+
+  static final textStyle10c000000DmSans400 = TextStyle(
+    letterSpacing: 2.sp,
+    fontFamily: 'DMSans',
+    fontFamilyFallback: const [
+      'OpenSans',
+      'Roboto',
+      'Satoshi Variable',
+      'Ubuntu',
+      'DMSans',
+    ],
+    color: AppColors.c000000,
+    fontSize: 10.sp,
+    fontWeight: FontWeight.w600,
+  );
+
   static final textStyle10cFFFFD700DmSans400 = TextStyle(
     fontFamily: 'DMSans',
     fontFamilyFallback: const [

@@ -54,8 +54,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ///Image
                     ///User Name
                     UserImageAndNameWidget(
-                      userImage: data!.avatarUrl,
-                      userName: appData.read(kKeyUserName) ?? "",
+                      userImage: data!.avatar,
+                      userName: appData.read(kKeyNickName) ?? "",
                     ),
                     UIHelper.verticalSpace(20.h),
 
@@ -99,7 +99,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           CustomListTile(
                             onTap: () {
                               NavigationService.navigateTo(
-                                  Routes.termsOfServicesScreen);
+                                  Routes.privacyPolicyScreen);
                             },
                             title: "Privacy Policy",
                             leadingIcon: Icons.privacy_tip_outlined,

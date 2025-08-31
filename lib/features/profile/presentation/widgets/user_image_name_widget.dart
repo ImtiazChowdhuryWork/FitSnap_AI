@@ -1,3 +1,5 @@
+import 'package:fitsnap_ai/helpers/all_routes.dart';
+import 'package:fitsnap_ai/helpers/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -35,6 +37,26 @@ class UserImageAndNameWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          ///Section : Text -> Profile
+          InkWell(
+            onTap: () {
+              NavigationService.navigateTo(Routes.viewProfileInfoScreen);
+            },
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Card(
+                color: AppColors.cFF00FFFF,
+                child: Padding(
+                  padding: EdgeInsets.all(4.sp),
+                  child: Text(
+                    "Profile",
+                    style: TextFontStyle.textStyle10c000000DmSans400,
+                  ),
+                ),
+              ),
+            ),
+          ),
+
           /// Profile Image
           CircleAvatar(
             radius: 60.sp,
@@ -52,21 +74,10 @@ class UserImageAndNameWidget extends StatelessWidget {
           UIHelper.verticalSpace(10.h),
 
           /// User Name + Nickname
-          RichText(
+          Text(
+            userName,
             textAlign: TextAlign.center,
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: userName,
-                  style: TextFontStyle.headline25BoldcFFFFFFStyleInter,
-                ),
-                TextSpan(
-                  text: " nickname", // always present
-                  style: TextFontStyle.textStyle10cFFFFD700DmSans400
-                      .copyWith(fontSize: 16.sp),
-                ),
-              ],
-            ),
+            style: TextFontStyle.headline25BoldcFFFFFFStyleInter,
           ),
         ],
       ),

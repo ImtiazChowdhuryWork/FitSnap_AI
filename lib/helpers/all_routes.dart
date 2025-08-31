@@ -8,6 +8,7 @@ import 'package:fitsnap_ai/features/auth/presentation/sign_up/presentation/sign_
 import 'package:fitsnap_ai/features/auth/presentation/verify_code/verify_code_screen.dart';
 import 'package:fitsnap_ai/features/ceckout/presentation/checkout_screen.dart';
 import 'package:fitsnap_ai/features/create_customize_plan/presentation/create_customize_plan_screen.dart';
+import 'package:fitsnap_ai/features/explore/presentation/explore_screen.dart';
 import 'package:fitsnap_ai/features/first_day/presentation/first_day_screen.dart';
 import 'package:fitsnap_ai/features/my_plan/presentation/my_plan_screen.dart';
 import 'package:fitsnap_ai/features/plan_intro/presentation/plan_intro_screen.dart';
@@ -23,6 +24,7 @@ import 'package:flutter/cupertino.dart';
 
 import '../customer/job_posts/presentation/job_posts_screen.dart';
 import '../features/onboarding/presentation/onboarding_screen.dart';
+import '../features/privacy_policy/presentation/privacy_policy_screen.dart';
 import '../features/terms_condition/presentation/terms_conditions_accept_screen.dart';
 
 final class Routes {
@@ -48,7 +50,9 @@ final class Routes {
   static const String firstDayScreen = '/firstDayScreen';
   static const String myPlanScreen = '/myPlanScreen';
   static const String profileScreen = '/profileScreen';
+  static const String exploreScreen = '/exploreScreen';
   static const String termsOfServicesScreen = '/termsOfServicesScreen';
+  static const String privacyPolicyScreen = '/privacyPolicyScreen';
   static const String updateProfileScreen = '/updateProfileScreen';
   static const String viewProfileInfoScreen = '/viewProfileInfoScreen';
   static const String subscriptionAndBillingScreen =
@@ -323,6 +327,28 @@ final class RouteGenerator {
               )
             : CupertinoPageRoute(
                 builder: (context) => TermsAndServicesScreen(),
+              );
+
+      ///exploreScreen
+      case Routes.exploreScreen:
+        return Platform.isAndroid
+            ? _FadedTransitionRoute(
+                widget: ExploreScreen(),
+                settings: settings,
+              )
+            : CupertinoPageRoute(
+                builder: (context) => ExploreScreen(),
+              );
+
+      ///privacyPolicyScreen
+      case Routes.privacyPolicyScreen:
+        return Platform.isAndroid
+            ? _FadedTransitionRoute(
+                widget: PrivacyPolicyScreen(),
+                settings: settings,
+              )
+            : CupertinoPageRoute(
+                builder: (context) => PrivacyPolicyScreen(),
               );
 
       default:

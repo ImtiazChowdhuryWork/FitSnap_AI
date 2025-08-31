@@ -9,6 +9,8 @@ import 'package:fitsnap_ai/helpers/ui_helpers.dart';
 import 'package:fitsnap_ai/networks/api_acess.dart';
 import 'package:flutter/material.dart';
 
+import '../model/terms_of_services_model.dart';
+
 class TermsAndServicesScreen extends StatefulWidget {
   const TermsAndServicesScreen({super.key});
 
@@ -20,7 +22,7 @@ class _TermsAndServicesScreenState extends State<TermsAndServicesScreen> {
   @override
   void initState() {
     super.initState();
-    getTermsOfServicesRx.getTermsOfServiceData;
+    getTermsOfServicesRx.fetchTermsOfServicesData();
   }
 
   @override
@@ -30,7 +32,7 @@ class _TermsAndServicesScreenState extends State<TermsAndServicesScreen> {
         centerTitle: true,
         leading: InkWell(
           onTap: () {
-            NavigationService.goBack;
+            NavigationService.goBack();
           },
           child: Icon(
             Icons.arrow_back_ios,
@@ -47,16 +49,46 @@ class _TermsAndServicesScreenState extends State<TermsAndServicesScreen> {
           padding: EdgeInsets.all(UIHelper.kDefaulutPadding()),
           child: SingleChildScrollView(
             child: StreamBuilder(
-              stream: (getTermsOfServicesRx.getTermsOfServiceData),
+              stream: getTermsOfServicesRx.getTermsOfServiceData,
               builder: (context, snapshot) {
+                // Show loading indicator while waiting
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  log("Waitttttttttttttttttttttingggggggggg_________Terms of Services");
+                  log("Loading Terms & Conditions...");
                   return const WaitingWidget();
-                } else if (snapshot.hasData && snapshot.data != null) {
+                }
+
+                // Handle null or empty snapshot
+                if (!snapshot.hasData || snapshot.data == null) {
+                  log("Terms & Conditions data is null");
+                  return const NotFoundWidget();
+                }
+
+                try {
+                  // Parse JSON safely
+                  final privacyPolicy = TermsOfServicesModel.fromJson(
+                      snapshot.data as Map<String, dynamic>);
+                  final data = privacyPolicy.data;
+
+                  // If content is null or empty, show NotFoundWidget
+                  if (data == null ||
+                      data.content == null ||
+                      data.content!.isEmpty) {
+                    log("Terms & Conditions content is empty");
+                    return const NotFoundWidget();
+                  }
+
+                  // Display the privacy policy content
                   return Column(
-                    children: [Text("Api Data Found")],
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        data.content!,
+                        style: TextFontStyle.headline14w400c000000StyledmSans,
+                      ),
+                    ],
                   );
-                } else {
+                } catch (e) {
+                  log("Error parsing Terms&ConditionsModel: $e");
                   return const NotFoundWidget();
                 }
               },

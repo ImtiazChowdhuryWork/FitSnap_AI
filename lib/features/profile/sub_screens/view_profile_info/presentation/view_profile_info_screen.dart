@@ -50,7 +50,7 @@ class _ViewProfileInfoScreenState extends State<ViewProfileInfoScreen> {
 
                     Data? data = profile.data;
                     log("Full Name_____________ : ${data!.fullName}");
-                    log("Full Name_____________ : ${data.email}");
+                    log("Full Name_____________ : ${data.user!.email}");
 
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,7 +95,7 @@ class _ViewProfileInfoScreenState extends State<ViewProfileInfoScreen> {
                               CustomListTile(
                                 isLeadingUsed: true,
                                 leadingIcon: Icons.email,
-                                title: data.email ?? "",
+                                title: data.user!.email ?? "",
                               ),
                               UIHelper.verticalSpace(10.h),
 
