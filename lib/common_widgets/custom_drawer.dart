@@ -149,7 +149,8 @@ class CustomDrawer extends StatelessWidget {
                           //   }
                           //   ;
                           // });
-                          NavigationService.navigateTo(Routes.checkoutScreen);
+                          NavigationService.navigateTo(
+                              Routes.privacyPolicyScreen);
                         },
                         title: "Privacy Policy",
                         leadingIcon: Icons.privacy_tip,
