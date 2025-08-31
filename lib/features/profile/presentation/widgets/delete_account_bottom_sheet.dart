@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../common_widgets/custom_elevated_button.dart';
-import '../../../constants/text_font_style.dart';
-import '../../../gen/colors.gen.dart';
-import '../../../helpers/ui_helpers.dart';
+import '../../../../common_widgets/custom_elevated_button.dart';
+import '../../../../constants/text_font_style.dart';
+import '../../../../gen/colors.gen.dart';
+import '../../../../helpers/navigation_service.dart';
+import '../../../../helpers/ui_helpers.dart';
 
 class DeleteAccountBottomSheet extends StatelessWidget {
   const DeleteAccountBottomSheet({super.key});
@@ -13,7 +14,7 @@ class DeleteAccountBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 1.sw,
-      height: 0.3.sh,
+      height: 0.35.sh,
       padding: EdgeInsets.only(
         top: 40.h,
         left: 20.w,
@@ -63,7 +64,9 @@ class DeleteAccountBottomSheet extends StatelessWidget {
               ///Button : Cancel Button
               Expanded(
                 child: CustomElevatedButton(
-                  onTap: () {},
+                  onTap: () {
+                    NavigationService.goBack;
+                  },
                   buttonTitle: "Cancel",
                   textStyle:
                       TextFontStyle.headline25BoldcFFFFFFStyleInter.copyWith(

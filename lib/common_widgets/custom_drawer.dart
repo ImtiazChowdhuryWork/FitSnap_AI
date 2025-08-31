@@ -34,11 +34,11 @@ class CustomDrawer extends StatelessWidget {
                 color: AppColors.c0000ff.withAlpha(200),
               ),
               accountName: Text(
-                "John Doe",
+                appData.read(kKeyNickName) ?? "",
                 style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
               ),
               accountEmail: Text(
-                "john.doe@example.com",
+                appData.read(kEmail) ?? '',
                 style: TextStyle(fontSize: 14.sp),
               ),
               currentAccountPicture: CircleAvatar(
@@ -111,7 +111,8 @@ class CustomDrawer extends StatelessWidget {
                       alignment: Alignment.centerRight,
                       child: CustomListTile(
                         onTap: () {
-                          NavigationService.navigateTo(Routes.checkoutScreen);
+                          NavigationService.navigateTo(
+                              Routes.termsOfServicesScreen);
                         },
                         title: "Terms of Services",
                         leadingIcon: Icons.description,
@@ -148,7 +149,8 @@ class CustomDrawer extends StatelessWidget {
                           //   }
                           //   ;
                           // });
-                          NavigationService.navigateTo(Routes.checkoutScreen);
+                          NavigationService.navigateTo(
+                              Routes.privacyPolicyScreen);
                         },
                         title: "Privacy Policy",
                         leadingIcon: Icons.privacy_tip,
@@ -185,7 +187,6 @@ class CustomDrawer extends StatelessWidget {
                               log("User First Time : ${appData.read(kKeyfirstTime)}");
                               log("User Logged In : ${appData.read(kKeyIsLoggedIn)}");
                             }
-                            ;
                           });
                           // NavigationService.navigateTo(Routes.checkoutScreen);
                         },

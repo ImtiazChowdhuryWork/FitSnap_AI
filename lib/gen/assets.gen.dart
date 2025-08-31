@@ -216,6 +216,14 @@ class $AssetsImagesGen {
   AssetGenImage get fwhatisyourfocusarea =>
       const AssetGenImage('assets/images/fwhatisyourfocusarea.png');
 
+  /// File path: assets/images/genderFemale.jpg
+  AssetGenImage get genderFemale =>
+      const AssetGenImage('assets/images/genderFemale.jpg');
+
+  /// File path: assets/images/genderMale.png
+  AssetGenImage get genderMale =>
+      const AssetGenImage('assets/images/genderMale.png');
+
   /// File path: assets/images/intermediate.png
   AssetGenImage get intermediate =>
       const AssetGenImage('assets/images/intermediate.png');
@@ -251,10 +259,6 @@ class $AssetsImagesGen {
   /// File path: assets/images/mburnfat.png
   AssetGenImage get mburnfat =>
       const AssetGenImage('assets/images/mburnfat.png');
-
-  /// File path: assets/images/mdo_you_relate copy.png
-  AssetGenImage get mdoYouRelateCopy =>
-      const AssetGenImage('assets/images/mdo_you_relate copy.png');
 
   /// File path: assets/images/mdo_you_relate.png
   AssetGenImage get mdoYouRelate =>
@@ -358,6 +362,8 @@ class $AssetsImagesGen {
         fnotActive,
         fveryActive,
         fwhatisyourfocusarea,
+        genderFemale,
+        genderMale,
         intermediate,
         mEctomorphManeAthletics,
         mEndomorphManeNoromBody,
@@ -367,7 +373,6 @@ class $AssetsImagesGen {
         mbodytransform,
         mbuildmuscle,
         mburnfat,
-        mdoYouRelateCopy,
         mdoYouRelate,
         mealImageBreakfast,
         mealImageDesart,

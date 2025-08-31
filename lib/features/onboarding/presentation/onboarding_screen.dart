@@ -3,17 +3,18 @@ import 'package:fitsnap_ai/common_widgets/custom_container.dart';
 import 'package:fitsnap_ai/common_widgets/custom_elevated_button.dart';
 import 'package:fitsnap_ai/gen/assets.gen.dart';
 import 'package:fitsnap_ai/gen/colors.gen.dart';
+import 'package:fitsnap_ai/helpers/all_routes.dart';
+import 'package:fitsnap_ai/helpers/navigation_service.dart';
 import 'package:fitsnap_ai/helpers/ui_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-import '../../../provider/impage_picker_provider_fitsnap.dart';
-import '../../common_widgets/custom_text_form_field.dart';
-import '../plan_intro/presentation/plan_intro_screen.dart';
-import 'models/onboarding_model.dart';
-import 'providers/onboarding_provider.dart';
+import '../../../../provider/impage_picker_provider_fitsnap.dart';
+import '../../../common_widgets/custom_text_form_field.dart';
+import '../models/onboarding_model.dart';
+import '../providers/onboarding_provider.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -917,19 +918,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 onboardingProvider.currentQuestions.length -
                                     1) {
                               // Complete onboarding and navigate to plan intro screen
-                              onboardingProvider.completeOnboarding();
+                              onboardingProvider
+                                  .completeOnboarding()
+                                  .then(((value) {
+                                if (value) {
+                                  NavigationService.navigateTo(
+                                      Routes.planIntroScreen,);
+                                }
+                              }));
 
                               // Extract user name from responses
-                              final userName = onboardingProvider
-                                      .responses['what_is_your_name'] ??
-                                  '';
-
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      PlanIntroScreen(userName: userName),
-                                ),
-                              );
+                              // final userName = onboardingProvider
+                              //         .responses['what_is_your_name'] ??
+                              //     '';
                             } else {
                               // Continue to next question
                               onboardingProvider.goToNextQuestion();

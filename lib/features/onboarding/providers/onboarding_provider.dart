@@ -1,6 +1,13 @@
+import 'dart:developer';
+
+import 'package:fitsnap_ai/common_widgets/custom_toast.dart';
+import 'package:fitsnap_ai/constants/app_constants.dart';
+import 'package:fitsnap_ai/helpers/di.dart';
+import 'package:fitsnap_ai/helpers/loading_helper.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../../constants/app_list.dart';
+import '../../../networks/api_acess.dart';
 import '../models/onboarding_model.dart';
 
 class OnboardingProvider extends ChangeNotifier {
@@ -10,6 +17,7 @@ class OnboardingProvider extends ChangeNotifier {
   String? _selectedOptionForCurrentQuestion;
   double? _bmi;
   String? _bmiCategory;
+  String _gptResponse = '';
 
   // Getters
   int get currentQuestionIndex => _currentQuestionIndex;
@@ -19,6 +27,7 @@ class OnboardingProvider extends ChangeNotifier {
       _selectedOptionForCurrentQuestion;
   double? get bmi => _bmi;
   String? get bmiCategory => _bmiCategory;
+  String get gptResponse => _gptResponse;
 
   List<QuestionModel> get currentQuestions {
     if (_selectedGender == null) {
@@ -245,7 +254,7 @@ class OnboardingProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void completeOnboarding() {
+  Future<bool> completeOnboarding() async {
     // Ensure combined height stored from parts before packaging
     try {
       updateCombinedHeight('whats_your_height');
@@ -328,6 +337,32 @@ class OnboardingProvider extends ChangeNotifier {
 
     // Navigate to next screen or handle completion
     // You can add navigation logic here
+
+    _gptResponse = await postOnboardingRx.PostOnboarding(
+            onboardingResponse: onboardingResponse)
+        .waitingForFutureWithoutBg();
+    if (_gptResponse.isNotEmpty) {
+      log("Cheaking gpt Response ===== 1 $_gptResponse");
+      appData.write(kKeyNickName, responses['what_is_your_name'] ?? 'User');
+      appData.write(kKeyGenderType, responses['who_are_you'] ?? '');
+
+      appData.write(kKeygptResponse, _gptResponse);
+      // ✅ only navigate if validation passes
+      // Navigator.of(context).pushReplacement(
+      //   MaterialPageRoute(
+      //     builder: (context) =>
+      //         PlanIntroScreen(userName: userName),
+      //   ),
+      // );
+
+      CustomToastMessage(
+          title: 'Success',
+          description: 'Signin succeded. Welcome to FitSnapAI');
+      return true;
+    } else {
+      CustomToastMessage(title: 'Error', description: postLoginRxObj.message);
+      return false;
+    }
   }
 
   String getQuestionKey(String questionText) {

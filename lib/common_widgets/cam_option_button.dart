@@ -47,6 +47,7 @@ class CamOptionButton extends StatelessWidget {
           ///Text : Option Title
           Text(
             title,
+            textAlign: TextAlign.center,
             style: TextFontStyle.headline25BoldcFFFFFFStyleInter.copyWith(
               color: AppColors.c000000,
               fontSize: 20.sp,

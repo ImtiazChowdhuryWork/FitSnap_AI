@@ -4,7 +4,6 @@ import 'package:rxdart/rxdart.dart';
 import '../../../../common_widgets/custom_toast.dart';
 import '../../../../constants/app_constants.dart';
 import '../../../../helpers/di.dart';
-import '../../../../helpers/post_login.dart';
 import '../../../../networks/dio/dio.dart';
 import '../../../../networks/rx_base.dart';
 import 'api.dart';
@@ -61,6 +60,9 @@ final class PostLoginRx extends RxResponseInt {
 
     await appData.write(kKeyUserID, id);
     log("User ID : ${appData.read(kKeyUserID)}");
+
+    await appData.write(kEmail, data['data']['email']);
+    log("User Email : ${appData.read(kEmail)}");
 
     dataFetcher.sink.add(data);
     // performPostLoginActions();
