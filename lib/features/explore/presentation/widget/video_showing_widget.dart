@@ -1,51 +1,64 @@
-import 'package:fitsnap_ai/helpers/ui_helpers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:video_player/video_player.dart';
 
-class VideoShowingWidget extends StatelessWidget {
-  final String videoTitle;
-  final String videoLink;
-  final String userGender;
-  final String videoId;
-  final String videoCategoryId;
-  const VideoShowingWidget({
-    super.key,
-    required this.videoTitle,
-    required this.videoLink,
-    required this.userGender,
-    required this.videoId,
-    required this.videoCategoryId,
-  });
+class VideoPlayerWidget extends StatefulWidget {
+  final String url;
+  const VideoPlayerWidget({super.key, required this.url});
+
+  @override
+  State<VideoPlayerWidget> createState() => _VideoPlayerWidgetState();
+}
+
+class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
+  late VideoPlayerController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = VideoPlayerController.networkUrl(Uri.parse(widget.url))
+      ..initialize().then((_) {
+        setState(() {});
+      });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Padding(
-        padding: EdgeInsets.all(10.sp),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ///Section : Video Title
-            Text("Video Title : $videoTitle"),
-            UIHelper.verticalSpace(5.h),
-
-            ///Section : Video Link
-            Text("Video Link : $videoLink"),
-            UIHelper.verticalSpace(5.h),
-
-            ///Section : Gender
-            Text("User Gender : $userGender"),
-            UIHelper.verticalSpace(5.h),
-
-            ///Section : Video Id
-            Text("Video ID : $videoId"),
-            UIHelper.verticalSpace(5.h),
-
-            ///Section : Video Category Id
-            Text("Video Category ID : $videoCategoryId"),
-            UIHelper.verticalSpace(5.h),
-          ],
-        ),
+      margin: const EdgeInsets.all(8),
+      child: Column(
+        children: [
+          _controller.value.isInitialized
+              ? AspectRatio(
+                  aspectRatio: _controller.value.aspectRatio,
+                  child: VideoPlayer(_controller),
+                )
+              : const SizedBox(
+                  height: 200,
+                  child: Center(child: CircularProgressIndicator())),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                icon: Icon(_controller.value.isPlaying
+                    ? Icons.pause
+                    : Icons.play_arrow),
+                onPressed: () {
+                  setState(() {
+                    _controller.value.isPlaying
+                        ? _controller.pause()
+                        : _controller.play();
+                  });
+                },
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

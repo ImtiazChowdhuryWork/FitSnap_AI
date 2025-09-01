@@ -1,9 +1,8 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
-import 'package:fitsnap_ai/networks/dio/dio.dart';
-import 'package:fitsnap_ai/networks/endpoints.dart';
-import 'package:fitsnap_ai/networks/exception_handler/data_source.dart';
+
+import '../../../../networks/dio/dio.dart';
+import '../../../../networks/endpoints.dart';
 
 final class GetSelectedCategoryVideoApi {
   GetSelectedCategoryVideoApi._internal();
@@ -11,16 +10,19 @@ final class GetSelectedCategoryVideoApi {
       GetSelectedCategoryVideoApi._internal();
   static GetSelectedCategoryVideoApi get instance => _singleton;
 
-  Future<Map> selectedCategoryVideoApi() async {
+  Future<Map> selectedCategoryVideoApi({int? categoryId}) async {
     try {
-      Response response = await getHttp(Endpoints.videoAsSelectedCategory());
+      String url = Endpoints.videoAsSelectedCategory();
+      if (categoryId != null) {
+        url += "?category_id=$categoryId";
+      }
+      Response response = await getHttp(url);
 
       if (response.statusCode == 200) {
         Map data = jsonDecode(jsonEncode(response.data));
-
         return data;
       } else {
-        throw DataSource.DEFAULT.getFailure();
+        throw Exception("Failed to fetch videos");
       }
     } catch (error) {
       rethrow;
