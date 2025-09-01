@@ -1,4 +1,6 @@
-import 'package:fitsnap_ai/features/explore/data/api.dart';
+import 'dart:developer';
+
+import 'package:fitsnap_ai/features/explore/data/show_categories/api.dart';
 import 'package:fitsnap_ai/networks/rx_base.dart';
 import 'package:rxdart/streams.dart';
 
@@ -17,5 +19,16 @@ final class GetExploreCategoriesRx extends RxResponseInt {
     } catch (error) {
       handleErrorWithReturn(error);
     }
+  }
+
+  @override
+  handleSuccessWithReturn(data) {
+    log("Handle Success Log Data : $data");
+    dataFetcher.sink.add(data);
+  }
+
+  @override
+  handleErrorWithReturn(error) {
+    log("Handle Error Log data : $error");
   }
 }

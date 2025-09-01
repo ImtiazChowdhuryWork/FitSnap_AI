@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../features/onboarding/providers/onboarding_provider.dart';
 import '../provider/ai_cam_impage_picker_provider.dart';
 import '../provider/custom_radius_button_controller.dart';
+import '../provider/explore_workout_categories.dart';
 import '../provider/navigation_provider.dart';
 import '../provider/sign_in_screen_controller.dart';
 import '../provider/sign_up_screen_provider.dart';
@@ -26,4 +27,6 @@ var providers = [
       create: ((context) => SignInScreenController())),
   ChangeNotifierProvider<AiCamImagePickerProvider>(
       create: ((context) => AiCamImagePickerProvider())),
+  ChangeNotifierProvider<ExploreWorkoutCategoriesProvider>(
+      create: ((context) => ExploreWorkoutCategoriesProvider())),
 ];

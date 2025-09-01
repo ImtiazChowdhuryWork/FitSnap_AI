@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import 'customer/bookings/presentation/bookings_screen.dart';
+import 'features/workouts/presentation/workouts_screen.dart';
 import 'gen/assets.gen.dart';
 import 'gen/colors.gen.dart';
 import 'provider/navigation_provider.dart';
@@ -28,7 +29,7 @@ class NavigationScreen extends StatelessWidget {
 
         final List<Widget> screens = [
           const MyPlanScreen(),
-          const BookingsScreen(),
+          const WorkoutsScreen(),
           const AiCamScreen(),
           const MealScreen(),
           const ExploreScreen(),
