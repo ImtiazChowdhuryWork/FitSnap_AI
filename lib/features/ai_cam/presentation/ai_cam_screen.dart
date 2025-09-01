@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
+import '../../../common_widgets/custom_drawer.dart';
+import '../../../gen/colors.gen.dart';
 import '../../../provider/ai_cam_impage_picker_provider.dart';
 
 class AiCamScreen extends StatelessWidget {
@@ -17,6 +19,17 @@ class AiCamScreen extends StatelessWidget {
     return Consumer<AiCamImagePickerProvider>(
         builder: (context, imagePickerController, child) {
       return Scaffold(
+        drawer: CustomDrawer(),
+        appBar: AppBar(
+          leading: Builder(
+            builder: (context) => IconButton(
+              icon: Icon(Icons.menu, color: Colors.white),
+              onPressed: () => Scaffold.of(context).openDrawer(),
+            ),
+          ),
+          backgroundColor: AppColors.c0000ff,
+          title: Text("Workouts Plan Screen"),
+        ),
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.all(UIHelper.kDefaulutPadding()),

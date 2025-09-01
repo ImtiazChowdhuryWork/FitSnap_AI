@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../common_widgets/custom_drawer.dart';
 import '../../../gen/colors.gen.dart';
 
-class MyPlanScreen extends StatelessWidget {
-  const MyPlanScreen({super.key});
+class WorkoutsScreen extends StatelessWidget {
+  const WorkoutsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class MyPlanScreen extends StatelessWidget {
           ),
         ),
         backgroundColor: AppColors.c0000ff,
-        title: Text("My Plan Screen"),
+        title: Text("Workouts Plan Screen"),
       ),
     );
   }

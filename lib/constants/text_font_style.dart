@@ -77,7 +77,7 @@ class TextFontStyle {
     fontWeight: FontWeight.w400,
   );
 
-  static final headline20w500c000000StyleInter = TextStyle(
+  static final headline32w500c000000StyleInter = TextStyle(
     fontFamily: 'Inter',
     fontFamilyFallback: const [
       'Roboto',
@@ -87,9 +87,10 @@ class TextFontStyle {
       'Inter'
     ],
     color: AppColors.c000000,
-    fontSize: 20.sp,
+    fontSize: 32.sp,
     fontWeight: FontWeight.w500,
   );
+
   static final headline25w500c000000StyleInter = TextStyle(
     fontFamily: 'Inter',
     fontFamilyFallback: const [
@@ -101,6 +102,20 @@ class TextFontStyle {
     ],
     color: AppColors.c000000,
     fontSize: 25.sp,
+    fontWeight: FontWeight.w500,
+  );
+
+  static final headline20w500c000000StyleInter = TextStyle(
+    fontFamily: 'Inter',
+    fontFamilyFallback: const [
+      'Roboto',
+      'Satoshi Variable',
+      'Ubuntu',
+      'DMSans',
+      'Inter'
+    ],
+    color: AppColors.c000000,
+    fontSize: 20.sp,
     fontWeight: FontWeight.w500,
   );
 
@@ -174,7 +189,6 @@ class TextFontStyle {
   );
 
   static final textStyle10c000000DmSans400 = TextStyle(
-    letterSpacing: 2.sp,
     fontFamily: 'DMSans',
     fontFamilyFallback: const [
       'OpenSans',

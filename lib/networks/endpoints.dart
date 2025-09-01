@@ -31,6 +31,8 @@ final class Endpoints {
   static String getProfileData() => "/profile-get/";
   static String termsOfServices() => "/pages/?type=terms_and_conditions";
   static String privacyPolicy() => "/pages/?type=privacy_policy";
+  static String exploreCategories() => "/categories/";
+  static String videoAsSelectedCategory() => "/workouts/";
 
   ///FitSnapAI End
 
