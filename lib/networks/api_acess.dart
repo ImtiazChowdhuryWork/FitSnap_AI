@@ -112,6 +112,7 @@ import '../features/auth/data/rx_post_login/rx.dart';
 import '../features/auth/data/rx_post_logout/rx.dart';
 import '../features/explore/data/show_categories/rx.dart';
 import '../features/explore/data/show_videos_according_selected_category/rx.dart';
+import '../features/explore/model/show_selected_category_video_model/show_selected_category_video_model.dart';
 import '../features/privacy_policy/data/rx.dart';
 import '../features/profile/data/rx.dart';
 import '../features/terms_of_services/data/rx.dart';
@@ -142,7 +143,11 @@ GetProfileInfoRx getProfileInfoRx =
 GetExploreCategoriesRx getExploreCategoriesRx =
     GetExploreCategoriesRx(empty: {}, dataFetcher: BehaviorSubject<Map>());
 
+// GetSelectedCategoryVideoRx getSelectedCategoryVideoRx =
+//     GetSelectedCategoryVideoRx(empty: {}, dataFetcher: BehaviorSubject<Map>());
 GetSelectedCategoryVideoRx getSelectedCategoryVideoRx =
-    GetSelectedCategoryVideoRx(empty: {}, dataFetcher: BehaviorSubject<Map>());
+    GetSelectedCategoryVideoRx(
+        empty: ShowSelectedCategoryVideoModel(),
+        dataFetcher: BehaviorSubject<ShowSelectedCategoryVideoModel?>());
 
 ///FitSnapAI End
