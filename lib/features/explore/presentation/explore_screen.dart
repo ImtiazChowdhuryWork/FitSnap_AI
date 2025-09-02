@@ -312,8 +312,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '../../../common_widgets/custom_drawer.dart';
 import '../../../common_widgets/not_found_widget.dart';
 import '../../../common_widgets/waiting_widget.dart';
+import '../../../gen/colors.gen.dart';
 import '../../../networks/api_acess.dart';
 import '../../../provider/explore_workout_categories.dart';
 import '../data/show_videos_according_selected_category/rx.dart';
@@ -330,18 +332,18 @@ class ExploreScreen extends StatefulWidget {
 }
 
 class _ExploreScreenState extends State<ExploreScreen> {
-  late GetSelectedCategoryVideoRx getSelectedCategoryVideoRx;
-
   @override
   void initState() {
     super.initState();
 
+    ///Get Category
+    getExploreCategoriesRx.fetchExploreCategoriesResponse();
+
     // Initialize Rx for videos
-    getSelectedCategoryVideoRx =
-        GetSelectedCategoryVideoRx(empty: [], dataFetcher: BehaviorSubject());
+    getSelectedCategoryVideoRx.fetchSelectedCategoryVideoResponse();
 
     // Fetch all videos by default
-    getSelectedCategoryVideoRx.fetchSelectedCategoryVideoResponse();
+    // getSelectedCategoryVideoRx.fetchSelectedCategoryVideoResponse();
   }
 
   // Call this when a category is selected
@@ -355,7 +357,17 @@ class _ExploreScreenState extends State<ExploreScreen> {
     return Consumer<ExploreWorkoutCategoriesProvider>(
       builder: (context, controller, _) {
         return Scaffold(
-          appBar: AppBar(title: const Text("Explore Workouts")),
+          drawer: CustomDrawer(),
+          appBar: AppBar(
+            leading: Builder(
+              builder: (context) => IconButton(
+                icon: Icon(Icons.menu, color: Colors.white),
+                onPressed: () => Scaffold.of(context).openDrawer(),
+              ),
+            ),
+            backgroundColor: AppColors.c0000ff,
+            title: Text("Explore Workouts Screen"),
+          ),
           body: Padding(
             padding: EdgeInsets.all(16.sp),
             child: Column(
@@ -371,9 +383,11 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const WaitingWidget();
                       } else if (snapshot.hasData && snapshot.data != null) {
+                        // ExploreCategoriesModel exploreCategories =
+                        //     ExploreCategoriesModel.fromJson(
+                        //         snapshot.data as Map<String, dynamic>);
                         ExploreCategoriesModel exploreCategories =
-                            ExploreCategoriesModel.fromJson(
-                                snapshot.data as Map<String, dynamic>);
+                            ExploreCategoriesModel.fromJson(snapshot.data);
                         final data = exploreCategories.data;
 
                         if (data == null || data.isEmpty) {
@@ -418,9 +432,12 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       } else if (!snapshot.hasData) {
                         return const Center(child: Text("No videos found"));
                       } else {
+                        // final ShowSelectedCategoryVideoModel showVideos =
+                        //     ShowSelectedCategoryVideoModel.fromJson(
+                        //         snapshot.data as Map<String, dynamic>);
                         final ShowSelectedCategoryVideoModel showVideos =
                             ShowSelectedCategoryVideoModel.fromJson(
-                                snapshot.data as Map<String, dynamic>);
+                                snapshot.data);
 
                         if (showVideos.data == null ||
                             showVideos.data!.isEmpty) {
@@ -436,10 +453,10 @@ class _ExploreScreenState extends State<ExploreScreen> {
                             // Construct full URL and encode spaces
                             final videoUrl =
                                 "https://focus-lab-ai-fitness-app-1.onrender.com${video.video}";
-                            final encodedUrl = Uri.encodeFull(videoUrl);
+                            // final encodedUrl = Uri.encodeFull(videoUrl);
 
                             log("Video title: ${video.title}");
-                            log("Video URL: $encodedUrl");
+                            log("Video URL: $videoUrl");
 
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -449,7 +466,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold)),
                                 SizedBox(height: 8.h),
-                                VideoPlayerWidget(url: encodedUrl),
+                                VideoPlayerWidget(url: videoUrl),
                               ],
                             );
                           },
