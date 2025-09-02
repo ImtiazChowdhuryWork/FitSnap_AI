@@ -1,12 +1,14 @@
-import 'package:fitsnap_ai/constants/text_font_style.dart';
-import 'package:fitsnap_ai/gen/colors.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../constants/text_font_style.dart';
+import '../../../../gen/colors.gen.dart';
 
 class ExploreCategoryCard extends StatelessWidget {
   final String categoryName;
   final bool isSelected;
   final void Function()? onTap;
+
   const ExploreCategoryCard({
     super.key,
     required this.categoryName,
