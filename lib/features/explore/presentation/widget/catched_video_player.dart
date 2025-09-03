@@ -1,11 +1,12 @@
 ///Working version : v.0.0.1
-///currently late initilializer shows at the begining then goes await
 // import 'dart:io';
+// import 'dart:async';
 // import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
 // import 'package:flutter_screenutil/flutter_screenutil.dart';
+// import 'package:path_provider/path_provider.dart';
 // import 'package:video_player/video_player.dart';
-// import 'video_cache_manager.dart';
+// import 'package:flutter/services.dart';
+// import 'package:http/http.dart' as http;
 
 // class CachedVideoPlayerWidget extends StatefulWidget {
 //   final String url;
@@ -17,70 +18,72 @@
 // }
 
 // class _CachedVideoPlayerWidgetState extends State<CachedVideoPlayerWidget> {
-//   late VideoPlayerController _controller;
+//   VideoPlayerController? _controller;
 //   bool _isInitialized = false;
 //   bool _showControls = false;
 //   bool _isFullScreen = false;
 //   Duration _currentPosition = Duration.zero;
 //   Duration _totalDuration = Duration.zero;
+//   File? _cachedFile;
 
 //   @override
 //   void initState() {
 //     super.initState();
-//     _loadVideo(widget.url);
+//     _prepareVideo(widget.url);
 //   }
 
 //   @override
 //   void didUpdateWidget(CachedVideoPlayerWidget oldWidget) {
 //     super.didUpdateWidget(oldWidget);
 //     if (oldWidget.url != widget.url) {
-//       _controller.removeListener(_updatePosition);
-//       _controller.dispose();
-//       _loadVideo(widget.url);
+//       _controller?.dispose();
+//       _prepareVideo(widget.url);
 //     }
 //   }
 
-//   Future<void> _loadVideo(String url) async {
-//     try {
-//       final fileInfo = await VideoCacheManager.instance.getFileFromCache(url);
-//       File file;
+//   Future<void> _prepareVideo(String url) async {
+//     _cachedFile = await _getCachedVideo(url);
+//     _controller = VideoPlayerController.file(_cachedFile!)
+//       ..initialize().then((_) {
+//         if (mounted) {
+//           setState(() {
+//             _isInitialized = true;
+//             _totalDuration = _controller!.value.duration;
+//           });
+//         }
+//       });
+//     _controller!.addListener(_updatePosition);
+//     _controller!.setLooping(false);
+//   }
 
-//       if (fileInfo != null) {
-//         file = fileInfo.file; // ✅ Cached file
-//       } else {
-//         file = await VideoCacheManager.instance
-//             .getSingleFile(url); // ⬇️ Download & cache
-//       }
+//   Future<File> _getCachedVideo(String url) async {
+//     final cacheDir = await getTemporaryDirectory();
+//     final fileName = Uri.parse(url).pathSegments.join("_").replaceAll(" ", "_");
+//     final file = File("${cacheDir.path}/$fileName");
 
-//       _controller = VideoPlayerController.file(file)
-//         ..initialize().then((_) {
-//           if (mounted) {
-//             setState(() {
-//               _isInitialized = true;
-//               _totalDuration = _controller.value.duration;
-//             });
-//           }
-//         });
+//     // If file exists, use cached file
+//     if (await file.exists()) return file;
 
-//       _controller.addListener(_updatePosition);
-//     } catch (e) {
-//       debugPrint("❌ Error loading video: $e");
-//     }
+//     // Download & cache video
+//     // final response = await http.get(Uri.parse(url));
+//     final response = await http.get(Uri.parse(url));
+//     await file.writeAsBytes(response.bodyBytes);
+//     return file;
 //   }
 
 //   void _updatePosition() {
-//     if (mounted && _controller.value.isInitialized) {
+//     if (mounted && _controller!.value.isInitialized) {
 //       setState(() {
-//         _currentPosition = _controller.value.position;
-//         _totalDuration = _controller.value.duration;
+//         _currentPosition = _controller!.value.position;
+//         _totalDuration = _controller!.value.duration;
 //       });
 //     }
 //   }
 
 //   @override
 //   void dispose() {
-//     _controller.removeListener(_updatePosition);
-//     _controller.dispose();
+//     _controller?.removeListener(_updatePosition);
+//     _controller?.dispose();
 //     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 //     super.dispose();
 //   }
@@ -94,53 +97,49 @@
 
 //   void _seekForward() {
 //     final newPosition = _currentPosition + const Duration(seconds: 10);
-//     _controller
+//     _controller!
 //         .seekTo(newPosition > _totalDuration ? _totalDuration : newPosition);
 //   }
 
 //   void _seekBackward() {
 //     final newPosition = _currentPosition - const Duration(seconds: 10);
-//     _controller
+//     _controller!
 //         .seekTo(newPosition < Duration.zero ? Duration.zero : newPosition);
 //   }
 
 //   void _toggleMute() {
-//     setState(() {
-//       _controller.setVolume(_controller.value.volume == 0 ? 1 : 0);
-//     });
+//     _controller!.setVolume(_controller!.value.volume == 0 ? 1 : 0);
+//     setState(() {});
 //   }
 
 //   void _setPlaybackSpeed(double speed) {
-//     setState(() {
-//       _controller.setPlaybackSpeed(speed);
-//     });
+//     _controller!.setPlaybackSpeed(speed);
+//     setState(() {});
 //   }
 
 //   void _togglePlayPause() {
-//     setState(() {
-//       if (_controller.value.isPlaying) {
-//         _controller.pause();
-//         _showControls = true;
-//       } else {
-//         _controller.play();
-//         Future.delayed(const Duration(seconds: 3), () {
-//           if (mounted && _controller.value.isPlaying) {
+//     if (_controller!.value.isPlaying) {
+//       _controller!.pause();
+//       setState(() => _showControls = true);
+//     } else {
+//       _controller!.play();
+//       Future.delayed(const Duration(seconds: 3), () {
+//         if (mounted && _controller!.value.isPlaying)
+//           {
 //             setState(() => _showControls = false);
 //           }
-//         });
-//       }
-//     });
+//       });
+//     }
 //   }
 
 //   void _toggleFullScreen() {
-//     setState(() {
-//       _isFullScreen = !_isFullScreen;
-//     });
+//     _isFullScreen = !_isFullScreen;
 //     if (_isFullScreen) {
 //       SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 //     } else {
 //       SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 //     }
+//     setState(() {});
 //   }
 
 //   @override
@@ -150,7 +149,7 @@
 //         setState(() => _showControls = !_showControls);
 //         if (_showControls) {
 //           Future.delayed(const Duration(seconds: 3), () {
-//             if (mounted && _showControls && _controller.value.isPlaying) {
+//             if (mounted && _showControls && _controller!.value.isPlaying) {
 //               setState(() => _showControls = false);
 //             }
 //           });
@@ -177,175 +176,188 @@
 //                 if (_isInitialized)
 //                   Center(
 //                     child: AspectRatio(
-//                       aspectRatio: _controller.value.aspectRatio,
-//                       child: VideoPlayer(_controller),
+//                       aspectRatio: _controller!.value.aspectRatio,
+//                       child: VideoPlayer(_controller!),
 //                     ),
 //                   )
 //                 else
 //                   const Center(
 //                       child: CircularProgressIndicator(color: Colors.white)),
-//                 if (_showControls || !_controller.value.isPlaying)
-//                   _buildOverlayControls(),
-//                 if (!_showControls &&
-//                     _isInitialized &&
-//                     !_controller.value.isPlaying)
-//                   _buildCenterPlayButton(),
-//               ],
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
 
-//   Widget _buildOverlayControls() {
-//     return Positioned.fill(
-//       child: Container(
-//         color: Colors.black38,
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//           children: [
-//             // Top bar
-//             Padding(
-//               padding: EdgeInsets.all(8.w),
-//               child: Row(
-//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                 children: [
-//                   IconButton(
-//                     icon: Icon(Icons.arrow_back,
-//                         color: Colors.white, size: 24.sp),
-//                     onPressed: _toggleFullScreen,
-//                   ),
-//                   Expanded(
-//                     child: Text(
-//                       'Workout Video',
-//                       style: TextStyle(color: Colors.white, fontSize: 14.sp),
-//                       textAlign: TextAlign.center,
-//                     ),
-//                   ),
-//                   IconButton(
-//                     icon: Icon(
-//                       _isFullScreen ? Icons.fullscreen_exit : Icons.fullscreen,
-//                       color: Colors.white,
-//                       size: 24.sp,
-//                     ),
-//                     onPressed: _toggleFullScreen,
-//                   ),
-//                 ],
-//               ),
-//             ),
-
-//             // Center controls
-//             if (_showControls)
-//               Expanded(
-//                 child: Center(
-//                   child: Row(
-//                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                     children: [
-//                       IconButton(
-//                         icon: Icon(Icons.replay_10,
-//                             color: Colors.white, size: 32.sp),
-//                         onPressed: _seekBackward,
-//                       ),
-//                       IconButton(
-//                         icon: Icon(
-//                           _controller.value.isPlaying
-//                               ? Icons.pause_circle
-//                               : Icons.play_circle,
-//                           color: Colors.white,
-//                           size: 60.sp,
-//                         ),
-//                         onPressed: _togglePlayPause,
-//                       ),
-//                       IconButton(
-//                         icon: Icon(Icons.forward_10,
-//                             color: Colors.white, size: 32.sp),
-//                         onPressed: _seekForward,
-//                       ),
-//                     ],
-//                   ),
-//                 ),
-//               ),
-
-//             // Bottom controls
-//             Padding(
-//               padding: EdgeInsets.all(8.w),
-//               child: Column(
-//                 children: [
-//                   VideoProgressIndicator(
-//                     _controller,
-//                     allowScrubbing: true,
-//                     padding: EdgeInsets.symmetric(vertical: 4.h),
-//                     colors: const VideoProgressColors(
-//                       playedColor: Colors.red,
-//                       bufferedColor: Colors.white38,
-//                       backgroundColor: Colors.white24,
-//                     ),
-//                   ),
-//                   SizedBox(height: 4.h),
-//                   Row(
-//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                     children: [
-//                       Text(
-//                         "${_formatDuration(_currentPosition)} / ${_formatDuration(_totalDuration)}",
-//                         style: TextStyle(color: Colors.white, fontSize: 12.sp),
-//                       ),
-//                       Row(
+//                 // Controls Overlay
+//                 if (_showControls ||
+//                     (_isInitialized && !_controller!.value.isPlaying))
+//                   Positioned.fill(
+//                     child: Container(
+//                       color: Colors.black38,
+//                       child: Column(
+//                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //                         children: [
-//                           PopupMenuButton<double>(
-//                             icon: Icon(Icons.speed,
-//                                 color: Colors.white, size: 20.sp),
-//                             itemBuilder: (context) => const [
-//                               PopupMenuItem(value: 0.5, child: Text('0.5x')),
-//                               PopupMenuItem(value: 0.75, child: Text('0.75x')),
-//                               PopupMenuItem(value: 1.0, child: Text('Normal')),
-//                               PopupMenuItem(value: 1.25, child: Text('1.25x')),
-//                               PopupMenuItem(value: 1.5, child: Text('1.5x')),
-//                               PopupMenuItem(value: 2.0, child: Text('2x')),
-//                             ],
-//                             onSelected: _setPlaybackSpeed,
-//                           ),
-//                           IconButton(
-//                             icon: Icon(
-//                               _controller.value.volume == 0
-//                                   ? Icons.volume_off
-//                                   : Icons.volume_up,
-//                               color: Colors.white,
-//                               size: 20.sp,
+//                           // Top bar
+//                           Padding(
+//                             padding: EdgeInsets.all(8.w),
+//                             child: Row(
+//                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                               children: [
+//                                 IconButton(
+//                                   icon: Icon(Icons.arrow_back,
+//                                       color: Colors.white, size: 24.sp),
+//                                   onPressed: _toggleFullScreen,
+//                                 ),
+//                                 Expanded(
+//                                   child: Text(
+//                                     'Workout Video',
+//                                     style: TextStyle(
+//                                         color: Colors.white, fontSize: 14.sp),
+//                                     textAlign: TextAlign.center,
+//                                   ),
+//                                 ),
+//                                 IconButton(
+//                                   icon: Icon(
+//                                     _isFullScreen
+//                                         ? Icons.fullscreen_exit
+//                                         : Icons.fullscreen,
+//                                     color: Colors.white,
+//                                     size: 24.sp,
+//                                   ),
+//                                   onPressed: _toggleFullScreen,
+//                                 ),
+//                               ],
 //                             ),
-//                             onPressed: _toggleMute,
+//                           ),
+
+//                           // Center controls
+//                           if (_showControls)
+//                             Expanded(
+//                               child: Center(
+//                                 child: Row(
+//                                   mainAxisAlignment:
+//                                       MainAxisAlignment.spaceEvenly,
+//                                   children: [
+//                                     IconButton(
+//                                       icon: Icon(Icons.replay_10,
+//                                           color: Colors.white, size: 32.sp),
+//                                       onPressed: _seekBackward,
+//                                     ),
+//                                     IconButton(
+//                                       icon: Icon(
+//                                         _controller!.value.isPlaying
+//                                             ? Icons.pause_circle
+//                                             : Icons.play_circle,
+//                                         color: Colors.white,
+//                                         size: 60.sp,
+//                                       ),
+//                                       onPressed: _togglePlayPause,
+//                                     ),
+//                                     IconButton(
+//                                       icon: Icon(Icons.forward_10,
+//                                           color: Colors.white, size: 32.sp),
+//                                       onPressed: _seekForward,
+//                                     ),
+//                                   ],
+//                                 ),
+//                               ),
+//                             ),
+
+//                           // Bottom controls
+//                           Padding(
+//                             padding: EdgeInsets.all(8.w),
+//                             child: Column(
+//                               children: [
+//                                 VideoProgressIndicator(
+//                                   _controller!,
+//                                   allowScrubbing: true,
+//                                   padding: EdgeInsets.symmetric(vertical: 4.h),
+//                                   colors: const VideoProgressColors(
+//                                     playedColor: Colors.red,
+//                                     bufferedColor: Colors.white38,
+//                                     backgroundColor: Colors.white24,
+//                                   ),
+//                                 ),
+//                                 SizedBox(height: 4.h),
+//                                 Row(
+//                                   mainAxisAlignment:
+//                                       MainAxisAlignment.spaceBetween,
+//                                   children: [
+//                                     Text(
+//                                       "${_formatDuration(_currentPosition)} / ${_formatDuration(_totalDuration)}",
+//                                       style: TextStyle(
+//                                           color: Colors.white, fontSize: 12.sp),
+//                                     ),
+//                                     Row(
+//                                       children: [
+//                                         PopupMenuButton<double>(
+//                                           icon: Icon(Icons.speed,
+//                                               color: Colors.white, size: 20.sp),
+//                                           itemBuilder: (context) => const [
+//                                             PopupMenuItem(
+//                                                 value: 0.5,
+//                                                 child: Text('0.5x')),
+//                                             PopupMenuItem(
+//                                                 value: 0.75,
+//                                                 child: Text('0.75x')),
+//                                             PopupMenuItem(
+//                                                 value: 1.0,
+//                                                 child: Text('Normal')),
+//                                             PopupMenuItem(
+//                                                 value: 1.25,
+//                                                 child: Text('1.25x')),
+//                                             PopupMenuItem(
+//                                                 value: 1.5,
+//                                                 child: Text('1.5x')),
+//                                             PopupMenuItem(
+//                                                 value: 2.0, child: Text('2x')),
+//                                           ],
+//                                           onSelected: _setPlaybackSpeed,
+//                                         ),
+//                                         IconButton(
+//                                           icon: Icon(
+//                                             _controller!.value.volume == 0
+//                                                 ? Icons.volume_off
+//                                                 : Icons.volume_up,
+//                                             color: Colors.white,
+//                                             size: 20.sp,
+//                                           ),
+//                                           onPressed: _toggleMute,
+//                                         ),
+//                                       ],
+//                                     ),
+//                                   ],
+//                                 ),
+//                               ],
+//                             ),
 //                           ),
 //                         ],
 //                       ),
-//                     ],
+//                     ),
 //                   ),
-//                 ],
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
 
-//   Widget _buildCenterPlayButton() {
-//     return Positioned.fill(
-//       child: Center(
-//         child: Container(
-//           width: 40.w,
-//           height: 40.w,
-//           decoration: const BoxDecoration(
-//             color: Colors.black45,
-//             shape: BoxShape.circle,
-//           ),
-//           child: Material(
-//             color: Colors.transparent,
-//             child: InkWell(
-//               borderRadius: BorderRadius.circular(20.r),
-//               onTap: _togglePlayPause,
-//               child: Center(
-//                 child: Icon(Icons.play_arrow, color: Colors.white, size: 36.sp),
-//               ),
+//                 // Central play button
+//                 if (!_showControls &&
+//                     _isInitialized &&
+//                     !_controller!.value.isPlaying)
+//                   Positioned.fill(
+//                     child: Center(
+//                       child: Container(
+//                         width: 40.w,
+//                         height: 40.w,
+//                         decoration: const BoxDecoration(
+//                             color: Colors.black45, shape: BoxShape.circle),
+//                         child: Material(
+//                           color: Colors.transparent,
+//                           child: InkWell(
+//                             borderRadius: BorderRadius.circular(20.r),
+//                             onTap: _togglePlayPause,
+//                             child: Center(
+//                               child: Icon(Icons.play_arrow,
+//                                   color: Colors.white, size: 36.sp),
+//                             ),
+//                           ),
+//                         ),
+//                       ),
+//                     ),
+//                   ),
+//               ],
 //             ),
 //           ),
 //         ),
@@ -362,7 +374,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flutter/services.dart';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
+
+import '../../../../networks/dio/dio.dart';
 
 class CachedVideoPlayerWidget extends StatefulWidget {
   final String url;
@@ -381,6 +395,8 @@ class _CachedVideoPlayerWidgetState extends State<CachedVideoPlayerWidget> {
   Duration _currentPosition = Duration.zero;
   Duration _totalDuration = Duration.zero;
   File? _cachedFile;
+  bool _isDownloading = false;
+  double _downloadProgress = 0;
 
   @override
   void initState() {
@@ -417,12 +433,31 @@ class _CachedVideoPlayerWidgetState extends State<CachedVideoPlayerWidget> {
     final fileName = Uri.parse(url).pathSegments.join("_").replaceAll(" ", "_");
     final file = File("${cacheDir.path}/$fileName");
 
-    // If file exists, use cached file
     if (await file.exists()) return file;
 
-    // Download & cache video
-    final response = await http.get(Uri.parse(url));
-    await file.writeAsBytes(response.bodyBytes);
+    setState(() {
+      _isDownloading = true;
+      _downloadProgress = 0;
+    });
+
+    final dio = DioSingleton.instance.dio;
+    await dio.download(
+      url,
+      file.path,
+      onReceiveProgress: (received, total) {
+        if (total != -1) {
+          setState(() {
+            _downloadProgress = received / total;
+          });
+        }
+      },
+      cancelToken: DioSingleton.cancelToken,
+    );
+
+    setState(() {
+      _isDownloading = false;
+    });
+
     return file;
   }
 
@@ -497,6 +532,25 @@ class _CachedVideoPlayerWidgetState extends State<CachedVideoPlayerWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (_isDownloading) {
+      return SizedBox(
+        height: MediaQuery.of(context).size.width * 9 / 16,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(value: _downloadProgress),
+              SizedBox(height: 8.h),
+              Text(
+                'Downloading video... ${(_downloadProgress * 100).toStringAsFixed(0)}%',
+                style: TextStyle(color: Colors.white, fontSize: 14.sp),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
     return GestureDetector(
       onTap: () {
         setState(() => _showControls = !_showControls);
@@ -536,8 +590,7 @@ class _CachedVideoPlayerWidgetState extends State<CachedVideoPlayerWidget> {
                 else
                   const Center(
                       child: CircularProgressIndicator(color: Colors.white)),
-
-                // Controls Overlay
+                // Controls overlay
                 if (_showControls ||
                     (_isInitialized && !_controller!.value.isPlaying))
                   Positioned.fill(
@@ -578,7 +631,6 @@ class _CachedVideoPlayerWidgetState extends State<CachedVideoPlayerWidget> {
                               ],
                             ),
                           ),
-
                           // Center controls
                           if (_showControls)
                             Expanded(
@@ -611,7 +663,6 @@ class _CachedVideoPlayerWidgetState extends State<CachedVideoPlayerWidget> {
                                 ),
                               ),
                             ),
-
                           // Bottom controls
                           Padding(
                             padding: EdgeInsets.all(8.w),
@@ -684,7 +735,6 @@ class _CachedVideoPlayerWidgetState extends State<CachedVideoPlayerWidget> {
                       ),
                     ),
                   ),
-
                 // Central play button
                 if (!_showControls &&
                     _isInitialized &&
