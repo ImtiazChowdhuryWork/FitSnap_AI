@@ -110,6 +110,9 @@ import 'package:rxdart/subjects.dart';
 
 import '../features/auth/data/rx_post_login/rx.dart';
 import '../features/auth/data/rx_post_logout/rx.dart';
+import '../features/explore/data/show_categories/rx.dart';
+import '../features/explore/data/show_videos_according_selected_category/rx.dart';
+import '../features/explore/model/show_selected_category_video_model/show_selected_category_video_model.dart';
 import '../features/privacy_policy/data/rx.dart';
 import '../features/profile/data/rx.dart';
 import '../features/terms_of_services/data/rx.dart';
@@ -117,20 +120,34 @@ import '../features/terms_of_services/data/rx.dart';
 ///FitSnapAI Start
 PostSignUpRx postSignUpRx = PostSignUpRx(
     empty: SignUpModel(), dataFetcher: BehaviorSubject<SignUpModel>());
+
+PostOnboardingRx postOnboardingRx = PostOnboardingRx(
+    empty: PlanIntroResponseResulModel(),
+    dataFetcher: BehaviorSubject<PlanIntroResponseResulModel>());
+
 PostLoginRx postLoginRxObj =
     PostLoginRx(empty: {}, dataFetcher: BehaviorSubject<Map>());
 
 GetTermsOfServicesRx getTermsOfServicesRx =
     GetTermsOfServicesRx(empty: {}, dataFetcher: BehaviorSubject<Map>());
+
 GetPrivacyPolicyRx getPrivacyPolicyRx =
     GetPrivacyPolicyRx(empty: {}, dataFetcher: BehaviorSubject<Map>());
+
 PostLogOutRX postLogOutRX =
     PostLogOutRX(empty: {}, dataFetcher: BehaviorSubject<Map>());
+
 GetProfileInfoRx getProfileInfoRx =
     GetProfileInfoRx(empty: {}, dataFetcher: BehaviorSubject<Map>());
 
-PostOnboardingRx postOnboardingRx = PostOnboardingRx(
-    empty: PlanIntroResponseResulModel(),
-    dataFetcher: BehaviorSubject<PlanIntroResponseResulModel>());
+GetExploreCategoriesRx getExploreCategoriesRx =
+    GetExploreCategoriesRx(empty: {}, dataFetcher: BehaviorSubject<Map>());
+
+// GetSelectedCategoryVideoRx getSelectedCategoryVideoRx =
+//     GetSelectedCategoryVideoRx(empty: {}, dataFetcher: BehaviorSubject<Map>());
+GetSelectedCategoryVideoRx getSelectedCategoryVideoRx =
+    GetSelectedCategoryVideoRx(
+        empty: ShowSelectedCategoryVideoModel(),
+        dataFetcher: BehaviorSubject<ShowSelectedCategoryVideoModel?>());
 
 ///FitSnapAI End

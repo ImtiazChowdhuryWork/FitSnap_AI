@@ -923,14 +923,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   .then(((value) {
                                 if (value) {
                                   NavigationService.navigateTo(
-                                      Routes.planIntroScreen,);
+                                    Routes.planIntroScreen,
+                                  );
                                 }
                               }));
-
-                              // Extract user name from responses
-                              // final userName = onboardingProvider
-                              //         .responses['what_is_your_name'] ??
-                              //     '';
                             } else {
                               // Continue to next question
                               onboardingProvider.goToNextQuestion();

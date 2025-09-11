@@ -14,7 +14,7 @@ final class ExploreCategoriesApi {
 
   Future<Map> exploreCategories() async {
     try {
-      Response response = await getHttp(Endpoints.addMultipleAddon());
+      Response response = await getHttp(Endpoints.exploreCategories());
 
       if (response.statusCode == 200) {
         Map data = jsonDecode(jsonEncode(response.data));

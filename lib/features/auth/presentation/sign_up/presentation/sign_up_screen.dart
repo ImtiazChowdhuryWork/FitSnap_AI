@@ -92,6 +92,7 @@ class SignUpScreen extends StatelessWidget {
                         ///Email Field
                         CustomFormField(
                           controller: controller.eamilController,
+                          inputType: TextInputType.emailAddress,
                           hintText: "Enter email address",
                           borderColor: AppColors.c000000,
                           borderRadius: 8.h,
