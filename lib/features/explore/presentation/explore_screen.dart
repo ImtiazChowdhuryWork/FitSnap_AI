@@ -171,8 +171,17 @@ class _ExploreScreenState extends State<ExploreScreen> {
                             padding: EdgeInsets.zero,
                             itemBuilder: (context, index) {
                               final video = videosList[index];
-                              final videoUrl =
-                                  "https://focus-lab-ai-fitness-app-1.onrender.com${video.video ?? ""}";
+                              // Fix URL construction - video.video should contain the full path or relative path
+                              String videoUrl;
+                              if (video.video != null &&
+                                  video.video!.startsWith('http')) {
+                                // If video.video already contains a full URL, use it as is
+                                videoUrl = video.video!;
+                              } else {
+                                // If it's a relative path, construct the full URL
+                                videoUrl =
+                                    "https://focus-lab-ai-fitness-app-1.onrender.com${video.video ?? ""}";
+                              }
                               final videoTitle =
                                   video.title ?? "Untitled Video";
 

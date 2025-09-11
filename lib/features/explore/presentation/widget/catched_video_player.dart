@@ -366,15 +366,15 @@
 //   }
 // }
 
-///Working version : v.0.0.2
+///Working version : v.0.0.3 - Fixed URL construction and error handling
 import 'dart:io';
 import 'dart:async';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flutter/services.dart';
-import 'package:dio/dio.dart';
 
 import '../../../../networks/dio/dio.dart';
 
@@ -394,14 +394,14 @@ class _CachedVideoPlayerWidgetState extends State<CachedVideoPlayerWidget> {
   bool _isFullScreen = false;
   Duration _currentPosition = Duration.zero;
   Duration _totalDuration = Duration.zero;
-  File? _cachedFile;
   bool _isDownloading = false;
   double _downloadProgress = 0;
+  String? _errorMessage;
 
   @override
   void initState() {
     super.initState();
-    _prepareVideo(widget.url);
+    _initializeVideo();
   }
 
   @override
@@ -409,56 +409,149 @@ class _CachedVideoPlayerWidgetState extends State<CachedVideoPlayerWidget> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.url != widget.url) {
       _controller?.dispose();
-      _prepareVideo(widget.url);
+      _initializeVideo();
     }
   }
 
-  Future<void> _prepareVideo(String url) async {
-    _cachedFile = await _getCachedVideo(url);
-    _controller = VideoPlayerController.file(_cachedFile!)
-      ..initialize().then((_) {
+  Future<void> _initializeVideo() async {
+    setState(() {
+      _isDownloading = false;
+      _downloadProgress = 0;
+      _isInitialized = false;
+      _errorMessage = null;
+    });
+
+    try {
+      // Validate URL first
+      if (!_isValidUrl(widget.url)) {
+        setState(() {
+          _errorMessage = 'Invalid video URL: ${widget.url}';
+        });
+        return;
+      }
+
+      print('Attempting to load video: ${widget.url}');
+
+      // First try direct network URL
+      await _initializeFromNetwork(widget.url);
+    } catch (e) {
+      print('Error initializing video: $e');
+      setState(() {
+        _errorMessage = 'Failed to load video: ${e.toString()}';
+      });
+    }
+  }
+
+  bool _isValidUrl(String url) {
+    try {
+      final uri = Uri.parse(url);
+      return uri.hasScheme && (uri.scheme == 'http' || uri.scheme == 'https');
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<void> _initializeFromNetwork(String url) async {
+    try {
+      _controller = VideoPlayerController.networkUrl(Uri.parse(url));
+      await _controller!.initialize();
+
+      if (mounted) {
+        _controller!.addListener(_updatePosition);
+        _controller!.setLooping(false);
+
+        setState(() {
+          _isInitialized = true;
+          _totalDuration = _controller!.value.duration;
+        });
+
+        print(
+            'Video initialized successfully from network. Duration: ${_totalDuration.inSeconds}s');
+      }
+    } catch (e) {
+      print('Network initialization failed, trying cached version: $e');
+      // If network fails, try to get cached version or download
+      await _initializeFromCache(url);
+    }
+  }
+
+  Future<void> _initializeFromCache(String url) async {
+    try {
+      final cachedFile = await _getCachedVideo(url);
+      if (cachedFile != null && await cachedFile.exists()) {
+        _controller = VideoPlayerController.file(cachedFile);
+        await _controller!.initialize();
+
         if (mounted) {
+          _controller!.addListener(_updatePosition);
+          _controller!.setLooping(false);
+
           setState(() {
             _isInitialized = true;
             _totalDuration = _controller!.value.duration;
           });
+
+          print(
+              'Video initialized successfully from cache. Duration: ${_totalDuration.inSeconds}s');
         }
-      });
-    _controller!.addListener(_updatePosition);
-    _controller!.setLooping(false);
+      } else {
+        throw Exception('Failed to cache video');
+      }
+    } catch (e) {
+      print('Cache initialization also failed: $e');
+      rethrow;
+    }
   }
 
-  Future<File> _getCachedVideo(String url) async {
-    final cacheDir = await getTemporaryDirectory();
-    final fileName = Uri.parse(url).pathSegments.join("_").replaceAll(" ", "_");
-    final file = File("${cacheDir.path}/$fileName");
+  Future<File?> _getCachedVideo(String url) async {
+    try {
+      final cacheDir = await getTemporaryDirectory();
+      final fileName =
+          Uri.parse(url).pathSegments.join("_").replaceAll(" ", "_");
+      final file = File("${cacheDir.path}/$fileName");
 
-    if (await file.exists()) return file;
+      if (await file.exists()) {
+        print('Using cached file: ${file.path}');
+        return file;
+      }
 
-    setState(() {
-      _isDownloading = true;
-      _downloadProgress = 0;
-    });
+      print('Downloading video for caching...');
+      setState(() {
+        _isDownloading = true;
+        _downloadProgress = 0;
+      });
 
-    final dio = DioSingleton.instance.dio;
-    await dio.download(
-      url,
-      file.path,
-      onReceiveProgress: (received, total) {
-        if (total != -1) {
-          setState(() {
-            _downloadProgress = received / total;
-          });
-        }
-      },
-      cancelToken: DioSingleton.cancelToken,
-    );
+      final dio = Dio();
+      await dio.download(
+        url,
+        file.path,
+        onReceiveProgress: (received, total) {
+          if (total != -1 && mounted) {
+            setState(() {
+              _downloadProgress = received / total;
+            });
+          }
+        },
+        cancelToken: DioSingleton.cancelToken,
+      );
 
-    setState(() {
-      _isDownloading = false;
-    });
+      if (mounted) {
+        setState(() {
+          _isDownloading = false;
+        });
+      }
 
-    return file;
+      print('Video downloaded and cached successfully');
+      return file;
+    } catch (e) {
+      print('Caching failed: $e');
+      if (mounted) {
+        setState(() {
+          _isDownloading = false;
+        });
+      }
+      return null;
+    }
   }
 
   void _updatePosition() {
@@ -532,20 +625,85 @@ class _CachedVideoPlayerWidgetState extends State<CachedVideoPlayerWidget> {
 
   @override
   Widget build(BuildContext context) {
+    // Show downloading progress
     if (_isDownloading) {
       return SizedBox(
         height: MediaQuery.of(context).size.width * 9 / 16,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CircularProgressIndicator(value: _downloadProgress),
-              SizedBox(height: 8.h),
-              Text(
-                'Downloading video... ${(_downloadProgress * 100).toStringAsFixed(0)}%',
-                style: TextStyle(color: Colors.white, fontSize: 14.sp),
+        child: Card(
+          margin: EdgeInsets.all(8.w),
+          elevation: 4,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12.r),
+              color: Colors.black,
+            ),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(
+                    value: _downloadProgress,
+                    color: Colors.white,
+                  ),
+                  SizedBox(height: 8.h),
+                  Text(
+                    'Downloading video... ${(_downloadProgress * 100).toStringAsFixed(0)}%',
+                    style: TextStyle(color: Colors.white, fontSize: 14.sp),
+                  ),
+                ],
               ),
-            ],
+            ),
+          ),
+        ),
+      );
+    }
+
+    // Show error state
+    if (_errorMessage != null) {
+      return SizedBox(
+        height: MediaQuery.of(context).size.width * 9 / 16,
+        child: Card(
+          margin: EdgeInsets.all(8.w),
+          elevation: 4,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12.r),
+              color: Colors.black,
+            ),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.error_outline, color: Colors.red, size: 48.sp),
+                  SizedBox(height: 8.h),
+                  Text(
+                    'Video Error',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 4.h),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: Text(
+                      _errorMessage!,
+                      style: TextStyle(color: Colors.grey, fontSize: 12.sp),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  SizedBox(height: 16.h),
+                  ElevatedButton(
+                    onPressed: _initializeVideo,
+                    child: const Text('Retry'),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       );
