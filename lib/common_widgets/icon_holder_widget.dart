@@ -26,7 +26,8 @@ final class IconHolder extends StatelessWidget {
     return Container(
       height: height!.sp,
       width: width!.sp,
-      decoration: BoxDecoration(color: bgColor, borderRadius: BorderRadius.all(Radius.circular(8.r))),
+      decoration: BoxDecoration(
+          color: bgColor, borderRadius: BorderRadius.all(Radius.circular(8.r))),
       child: Icon(
         icon,
         size: size,

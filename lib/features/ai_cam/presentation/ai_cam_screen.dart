@@ -2,7 +2,9 @@ import 'package:fitsnap_ai/common_widgets/cam_option_button.dart';
 import 'package:fitsnap_ai/common_widgets/custom_elevated_button.dart';
 import 'package:fitsnap_ai/features/ai_cam/widgets/remove_image_widget.dart';
 import 'package:fitsnap_ai/gen/assets.gen.dart';
+import 'package:fitsnap_ai/helpers/loading_helper.dart';
 import 'package:fitsnap_ai/helpers/ui_helpers.dart';
+import 'package:fitsnap_ai/networks/api_acess.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -73,7 +75,35 @@ class AiCamScreen extends StatelessWidget {
                   imagePickerController.selectedImage != null
                       ? CustomElevatedButton(
                           buttonTitle: "Submit Image",
-                          onTap: () {},
+                          onTap: () async {
+                            if (imagePickerController.selectedImage != null) {
+                              try {
+                                // Upload the image with loading helper
+                                bool isSuccess = await aiCamUploadImageRx
+                                    .uploadImage(
+                                        imageFile: imagePickerController
+                                            .selectedImage!)
+                                    .waitingForFutureWithoutBg();
+
+                                if (isSuccess) {
+                                  // Handle success - maybe navigate to results screen or show success message
+                                  print("Image uploaded successfully!");
+
+                                  // Get the upload result if needed
+                                  Map<String, dynamic> result =
+                                      aiCamUploadImageRx.getUploadResult();
+                                  print("Upload result: $result");
+
+                                  // Optional: Clear the image after successful upload
+                                  // imagePickerController.removeImage();
+                                } else {
+                                  print("Image upload failed");
+                                }
+                              } catch (e) {
+                                print("Error uploading image: $e");
+                              }
+                            }
+                          },
                         )
                       : Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

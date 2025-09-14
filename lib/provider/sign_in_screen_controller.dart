@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class SignInScreenController with ChangeNotifier {
-
   ///Email & Password Controllers
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();

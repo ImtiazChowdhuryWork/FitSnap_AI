@@ -166,13 +166,14 @@ class CustomDrawer extends StatelessWidget {
                       alignment: Alignment.centerRight,
                       child: CustomListTile(
                         onTap: () async {
+                           NavigationService.navigateToUntilReplacement(
+                                  Routes.signinScreen);
                           await postLogOutRX
                               .logOut()
                               .waitingForFutureWithoutBg()
                               .then((value) {
                             if (value) {
-                              NavigationService.navigateToUntilReplacement(
-                                  Routes.signinScreen);
+                             
                               appData.write(kKeyfirstTime, false);
                               appData.write(kKeyIsLoggedIn, false);
                               log("User First Time after logingout : ${appData.read(kKeyfirstTime)}");

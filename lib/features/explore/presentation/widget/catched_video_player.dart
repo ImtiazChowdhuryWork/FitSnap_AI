@@ -367,6 +367,7 @@
 // }
 
 ///Working version : v.0.0.3 - Fixed URL construction and error handling
+library;
 import 'dart:io';
 import 'dart:async';
 import 'package:dio/dio.dart';
@@ -607,8 +608,9 @@ class _CachedVideoPlayerWidgetState extends State<CachedVideoPlayerWidget> {
     } else {
       _controller!.play();
       Future.delayed(const Duration(seconds: 3), () {
-        if (mounted && _controller!.value.isPlaying)
+        if (mounted && _controller!.value.isPlaying) {
           setState(() => _showControls = false);
+        }
       });
     }
   }
