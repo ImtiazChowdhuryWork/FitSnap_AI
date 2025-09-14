@@ -2,6 +2,7 @@
 library;
 
 import 'dart:developer';
+import 'package:fitsnap_ai/networks/endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -182,7 +183,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                               } else {
                                 // If it's a relative path, construct the full URL
                                 videoUrl =
-                                    "https://focus-lab-ai-fitness-app-1.onrender.com${video.video ?? ""}";
+                                    "$baseUrl${video.video ?? ""}";
                               }
                               final videoTitle =
                                   video.title ?? "Untitled Video";

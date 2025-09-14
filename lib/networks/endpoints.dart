@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
-const String url = "https://focus-lab-ai-fitness-app-1.onrender.com/api";
+const String url = "https://fitness.servifocus.com/api";
+const String baseUrl = "https://fitness.servifocus.com";
 
 final class NetworkConstants {
   NetworkConstants._();
@@ -142,4 +143,9 @@ final class Endpoints {
   static String successfulPaymentUrlPrefix() => "";
   static String failedPaymentUrlPrefix() => "";
   static String paymentUrlProcessing() => "";
+
+  static String uploadBodyImage() => "/upload-body-image/";
+  static String progressHistory() => "/progress-history/";
+  static String suggestedWorkouts() => "/suggested-workouts/";
+  static String mealPlan() => "/meal-plan/";
 }

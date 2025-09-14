@@ -2,7 +2,7 @@ import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:fitsnap_ai/features/ai_cam/presentation/ai_cam_screen.dart';
 import 'package:fitsnap_ai/features/explore/presentation/explore_screen.dart';
 import 'package:fitsnap_ai/features/meal/presentation/meal_screen.dart';
-import 'package:fitsnap_ai/features/my_plan/presentation/my_plan_screen.dart';
+import 'package:fitsnap_ai/features/my_plan/presentation/progress_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +26,7 @@ class NavigationScreen extends StatelessWidget {
         final int currentIndex = navigationProvider.currentIndex;
 
         final List<Widget> screens = [
-          const MyPlanScreen(),
+          const ProgressScreen(),
           const WorkoutsScreen(),
           const AiCamScreen(),
           const MealScreen(),
@@ -76,7 +76,7 @@ class NavigationScreen extends StatelessWidget {
                       ],
                     ),
                     title: Text(
-                      "My Plan",
+                      "Progress",
                       style: TextStyle(
                           color: currentIndex == 0
                               ? AppColors.c012d4d

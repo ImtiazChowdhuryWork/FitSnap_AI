@@ -104,8 +104,12 @@
 
 import 'package:fitsnap_ai/features/auth/data/rx_post_sign_up/rx.dart';
 import 'package:fitsnap_ai/features/auth/presentation/sign_up/model/sign_up_model.dart';
+import 'package:fitsnap_ai/features/ai_cam/data/rx.dart';
 import 'package:fitsnap_ai/features/onboarding/data/rx.dart';
 import 'package:fitsnap_ai/features/onboarding/models/plan_intro_response_result.dart';
+import 'package:fitsnap_ai/features/my_plan/data/progress_history_rx.dart';
+import 'package:fitsnap_ai/features/workouts/data/suggested_workouts_rx.dart';
+import 'package:fitsnap_ai/features/meal/data/meal_plan_rx.dart';
 import 'package:rxdart/subjects.dart';
 
 import '../features/auth/data/rx_post_login/rx.dart';
@@ -149,5 +153,17 @@ GetSelectedCategoryVideoRx getSelectedCategoryVideoRx =
     GetSelectedCategoryVideoRx(
         empty: ShowSelectedCategoryVideoModel(),
         dataFetcher: BehaviorSubject<ShowSelectedCategoryVideoModel?>());
+
+AiCamUploadImageRx aiCamUploadImageRx =
+    AiCamUploadImageRx(empty: {}, dataFetcher: BehaviorSubject<Map>());
+
+GetProgressHistoryRx getProgressHistoryRx =
+    GetProgressHistoryRx(empty: {}, dataFetcher: BehaviorSubject<Map>());
+
+GetSuggestedWorkoutsRx getSuggestedWorkoutsRx =
+    GetSuggestedWorkoutsRx(empty: {}, dataFetcher: BehaviorSubject<Map>());
+
+GetMealPlanRx getMealPlanRx =
+    GetMealPlanRx(empty: {}, dataFetcher: BehaviorSubject<Map>());
 
 ///FitSnapAI End

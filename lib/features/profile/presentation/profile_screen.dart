@@ -11,7 +11,6 @@ import 'package:fitsnap_ai/features/profile/mdoel/view_profile_info_model.dart';
 import 'package:fitsnap_ai/features/profile/presentation/widgets/delete_account_bottom_sheet.dart';
 import 'package:fitsnap_ai/features/profile/presentation/widgets/sign_out_bottom_sheet.dart';
 import 'package:fitsnap_ai/features/profile/presentation/widgets/user_image_name_widget.dart';
-import 'package:fitsnap_ai/gen/assets.gen.dart';
 import 'package:fitsnap_ai/gen/colors.gen.dart';
 import 'package:fitsnap_ai/helpers/all_routes.dart';
 import 'package:fitsnap_ai/helpers/di.dart';
