@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../common_widgets/custom_drawer.dart';
-import '../../../common_widgets/custom_elevated_button.dart';
 import '../../../gen/colors.gen.dart';
 import '../../../helpers/ui_helpers.dart';
 import '../../../networks/api_acess.dart';
 import '../models/progress_history_model.dart';
+import 'package:provider/provider.dart';
+import '../../../provider/navigation_provider.dart';
 
 class ProgressScreen extends StatefulWidget {
   const ProgressScreen({super.key});
@@ -101,48 +102,132 @@ class _ProgressScreenState extends State<ProgressScreen> {
 
   Widget _buildErrorState() {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            padding: EdgeInsets.all(20.sp),
-            decoration: BoxDecoration(
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 48.h),
+        margin: EdgeInsets.symmetric(horizontal: 24.w),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              AppColors.c0000ff.withOpacity(0.1),
+              AppColors.c0000ff.withOpacity(0.05),
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+          borderRadius: BorderRadius.circular(24.r),
+          border: Border.all(
+            color: AppColors.c0000ff.withOpacity(0.2),
+            width: 2,
+          ),
+          boxShadow: [
+            BoxShadow(
               color: AppColors.c0000ff.withOpacity(0.1),
-              shape: BoxShape.circle,
+              blurRadius: 20,
+              offset: const Offset(0, 10),
             ),
-            child: Icon(
-              Icons.error_outline,
-              size: 60.sp,
-              color: AppColors.c0000ff,
+          ],
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Icon
+            Container(
+              padding: EdgeInsets.all(20.sp),
+              decoration: BoxDecoration(
+                color: AppColors.c0000ff.withOpacity(0.1),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Icons.show_chart_rounded,
+                size: 48.sp,
+                color: AppColors.c0000ff,
+              ),
             ),
-          ),
-          UIHelper.verticalSpace(24.h),
-          Text(
-            "Oops! Something went wrong",
-            style: TextStyle(
-              fontSize: 20.sp,
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
+            SizedBox(height: 24.h),
+
+            // Title
+            Text(
+              "Track Your Progress",
+              style: TextStyle(
+                fontSize: 20.sp,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+              textAlign: TextAlign.center,
             ),
-          ),
-          UIHelper.verticalSpace(12.h),
-          Text(
-            _errorMessage,
-            style: TextStyle(
-              fontSize: 16.sp,
-              color: Colors.grey[600],
+            SizedBox(height: 12.h),
+
+            // Message
+            Text(
+              "You need to take your body image using AI cam to track your fitness progress over time",
+              style: TextStyle(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w400,
+                color: Colors.black54,
+                height: 1.5,
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
-          ),
-          UIHelper.verticalSpace(32.h),
-          SizedBox(
-            width: 200.w,
-            child: CustomElevatedButton(
-              buttonTitle: "Try Again",
-              onTap: _loadProgressData,
+            SizedBox(height: 32.h),
+
+            // Button
+            Container(
+              width: double.infinity,
+              height: 56.h,
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [AppColors.c0000ff, Color(0xFF2563EB)],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                ),
+                borderRadius: BorderRadius.circular(16.r),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.c0000ff.withOpacity(0.3),
+                    blurRadius: 12,
+                    offset: const Offset(0, 6),
+                  ),
+                ],
+              ),
+              child: ElevatedButton(
+                onPressed: () {
+                  // Navigate to AI cam screen using navigation provider
+                  final navigationProvider =
+                      Provider.of<NavigationProvider>(context,
+                          listen: false);
+                  navigationProvider
+                      .setIndex(2); // AI cam is at index 2
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16.r),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.camera_alt,
+                      color: Colors.white,
+                      size: 20.sp,
+                    ),
+                    SizedBox(width: 8.w),
+                    Text(
+                      "Take Body Image",
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

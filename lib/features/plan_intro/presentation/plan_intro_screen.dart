@@ -1,6 +1,5 @@
 import 'package:fitsnap_ai/common_widgets/custom_elevated_button.dart';
 import 'package:fitsnap_ai/constants/app_constants.dart';
-import 'package:fitsnap_ai/constants/text_font_style.dart';
 import 'package:fitsnap_ai/gen/assets.gen.dart';
 import 'package:fitsnap_ai/gen/colors.gen.dart';
 import 'package:fitsnap_ai/helpers/all_routes.dart';
