@@ -79,9 +79,6 @@ final class DioSingleton {
   //   );
   //   dio = Dio(options)..interceptors.add(Logger());
   // }
-
-
-  
 }
 
 Future<Response> postHttp(String path, [dynamic data]) =>

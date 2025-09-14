@@ -1,6 +1,5 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:fitsnap_ai/features/ai_cam/presentation/ai_cam_screen.dart';
-import 'package:fitsnap_ai/features/ceckout/presentation/checkout_screen.dart';
 import 'package:fitsnap_ai/features/explore/presentation/explore_screen.dart';
 import 'package:fitsnap_ai/features/meal/presentation/meal_screen.dart';
 import 'package:fitsnap_ai/features/my_plan/presentation/my_plan_screen.dart';
@@ -8,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-import 'customer/bookings/presentation/bookings_screen.dart';
 import 'features/workouts/presentation/workouts_screen.dart';
 import 'gen/assets.gen.dart';
 import 'gen/colors.gen.dart';

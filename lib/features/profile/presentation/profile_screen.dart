@@ -1,5 +1,6 @@
 /// Working Version : v.0.0.1
 /// Currently If I tap on categories it does not change videos accourding to categories
+library;
 
 import 'package:fitsnap_ai/common_widgets/custom_container.dart';
 import 'package:fitsnap_ai/common_widgets/custom_list_tile.dart';

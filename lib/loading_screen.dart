@@ -100,7 +100,7 @@ class _LoadingState extends State<Loading> {
     if (appData.read(kKeyIsLoggedIn)) {
       String? token = appData.read(kKeyAccessToken);
       log('Token:============== $token==========');
-      DioSingleton.instance.update(token!);
+      DioSingleton.instance.update(token ?? '');
       // await getProfileRx.fetchProfileData();
       performPostLoginActions();
     }

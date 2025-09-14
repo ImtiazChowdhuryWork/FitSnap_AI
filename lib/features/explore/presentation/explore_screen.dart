@@ -1,4 +1,6 @@
 ///working version : v.0.0.1
+library;
+
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
