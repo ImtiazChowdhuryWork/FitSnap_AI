@@ -53,10 +53,11 @@ final class PostSignUpRx extends RxResponseInt<SignUpModel> {
 
     if (error is DioException) {
       if (error.type == DioExceptionType.connectionError) {
+
         message = "Check Your Network Connection";
       }
     }
-
+message =  error.response?.data ["message"] ?? message;
     CustomToastMessage(title: "Error", description: message);
     return false;
   }

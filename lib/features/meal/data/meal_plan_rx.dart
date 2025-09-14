@@ -40,18 +40,15 @@ final class GetMealPlanRx extends RxResponseInt {
         log("Meal plan retrieved successfully: ${mealPlanData?.totalMeals} meals");
         return true;
       } else {
-        CustomToastMessage(
-          title: 'Error',
-          description: 'No meal plan data found',
-        );
+        
         log("No meal plan data found in response");
         return false;
       }
     } else {
-      CustomToastMessage(
-        title: 'Error',
-        description: message,
-      );
+      // CustomToastMessage(
+      //   title: 'Error',
+      //   description: message,
+      // );
       log("Failed to retrieve meal plan: $message");
       return false;
     }
@@ -67,10 +64,10 @@ final class GetMealPlanRx extends RxResponseInt {
       log("Error fetching meal plan: ${error.toString()}");
     }
 
-    CustomToastMessage(
-      title: 'Error',
-      description: message,
-    );
+    // CustomToastMessage(
+    //   title: 'Error',
+    //   description: message,
+    // );
 
     return false;
   }

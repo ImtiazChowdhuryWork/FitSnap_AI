@@ -158,18 +158,18 @@ class SignUpScreen extends StatelessWidget {
                                 description:
                                     'Signup succeded. Welcome to FitSnapAI');
                           } else {
-                            CustomToastMessage(
-                                title: 'Error',
-                                description:
-                                    'Signup failed. Please try again.');
+                            // CustomToastMessage(
+                            //     title: 'Error',
+                            //     description:
+                            //         'Signup failed. Please try again.');
                           }
                         }
                       } catch (error) {
                         // ⚠️ Catch unexpected errors
-                        CustomToastMessage(
-                            title: 'Error',
-                            description:
-                                'Something went wrong. Please try again.');
+                        // CustomToastMessage(
+                        //     title: 'Error',
+                        //     description:
+                        //         'Something went wrong. Please try again.');
                         // Optional: log the error for debugging
                         print('Signup Error: $error');
                       }
