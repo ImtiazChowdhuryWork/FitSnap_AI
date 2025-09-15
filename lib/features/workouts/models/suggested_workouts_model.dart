@@ -30,47 +30,70 @@ class SuggestedWorkoutsModel {
       };
 }
 
+class WorkoutCategory {
+  int? id;
+  String? name;
+
+  WorkoutCategory({
+    this.id,
+    this.name,
+  });
+
+  factory WorkoutCategory.fromJson(Map<String, dynamic> json) =>
+      WorkoutCategory(
+        id: json["id"],
+        name: json["name"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+      };
+}
+
 class SuggestedWorkoutItem {
   int? id;
+  WorkoutCategory? category;
   String? title;
   String? gender;
   String? video;
-  int? category;
 
   SuggestedWorkoutItem({
     this.id,
+    this.category,
     this.title,
     this.gender,
     this.video,
-    this.category,
   });
 
   factory SuggestedWorkoutItem.fromJson(Map<String, dynamic> json) =>
       SuggestedWorkoutItem(
         id: json["id"],
+        category: json["category"] == null
+            ? null
+            : WorkoutCategory.fromJson(json["category"]),
         title: json["title"],
         gender: json["gender"],
         video: json["video"],
-        category: json["category"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "category": category?.toJson(),
         "title": title,
         "gender": gender,
         "video": video,
-        "category": category,
       };
 
   /// Get the full video URL for playback
   String get fullVideoUrl {
     if (video == null) return "";
-    
+
     // If video URL already contains http, return as is
     if (video!.startsWith('http')) {
       return video!;
     }
-    
+
     // Otherwise, construct the full URL with base URL
     return "$baseUrl$video";
   }
@@ -81,8 +104,11 @@ class SuggestedWorkoutItem {
   /// Get formatted gender for display
   String get displayGender {
     if (gender == null) return "All";
-    return gender!.toLowerCase() == "male" ? "Male" : 
-           gender!.toLowerCase() == "female" ? "Female" : "All";
+    return gender!.toLowerCase() == "male"
+        ? "Male"
+        : gender!.toLowerCase() == "female"
+            ? "Female"
+            : "All";
   }
 
   /// Check if this workout is for a specific gender
@@ -93,6 +119,6 @@ class SuggestedWorkoutItem {
 
   /// Check if this workout belongs to a specific category
   bool isInCategory(int targetCategory) {
-    return category == targetCategory;
+    return category?.id == targetCategory;
   }
 }

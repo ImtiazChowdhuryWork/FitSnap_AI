@@ -336,7 +336,7 @@ class _MealScreenState extends State<MealScreen> {
                         Icon(Icons.fitness_center, size: 16.sp, color: Colors.blue),
                         UIHelper.horizontalSpace(4.w),
                         Text(
-                          meal.formattedProtein + " protein",
+                          "${meal.formattedProtein} protein",
                           style: TextStyle(
                             fontSize: 12.sp,
                             color: Colors.blue,
