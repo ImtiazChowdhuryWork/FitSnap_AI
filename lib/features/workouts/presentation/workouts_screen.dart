@@ -37,7 +37,8 @@ class _WorkoutsScreenState extends State<WorkoutsScreen> {
           ),
         ),
         backgroundColor: AppColors.c0000ff,
-        title: const Text("Suggested Workouts", style: TextStyle(color: Colors.white)),
+        title: const Text("Suggested Workouts",
+            style: TextStyle(color: Colors.white)),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh, color: Colors.white),
@@ -100,7 +101,7 @@ class _WorkoutsScreenState extends State<WorkoutsScreen> {
                             color: Colors.black87,
                           ),
                         ),
-                        
+
                         // Gender and Category Info
                         if (workout.gender != null || workout.category != null)
                           Padding(
@@ -128,7 +129,8 @@ class _WorkoutsScreenState extends State<WorkoutsScreen> {
                                       ),
                                     ),
                                   ),
-                                if (workout.gender != null && workout.category != null)
+                                if (workout.gender != null &&
+                                    workout.category != null)
                                   SizedBox(width: 8.w),
                                 if (workout.category != null)
                                   Container(
@@ -143,7 +145,7 @@ class _WorkoutsScreenState extends State<WorkoutsScreen> {
                                       ),
                                     ),
                                     child: Text(
-                                      "Category ${workout.category}",
+                                      workout.category?.name ?? 'Unknown',
                                       style: TextStyle(
                                         fontSize: 12.sp,
                                         fontWeight: FontWeight.w500,

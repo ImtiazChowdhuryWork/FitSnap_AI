@@ -162,7 +162,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                         borderRadius: BorderRadius.circular(16.r),
                         child: _currentProgress?.previousImage != null
                             ? Image.network(
-                                "${baseUrl}${_currentProgress!.previousImage!}",
+                                "$baseUrl${_currentProgress!.previousImage!}",
                                 fit: BoxFit.cover,
                                 errorBuilder: (context, error, stackTrace) {
                                   return _buildPlaceholderImage();
@@ -198,7 +198,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                         borderRadius: BorderRadius.circular(16.r),
                         child: _currentProgress?.currentImage != null
                             ? Image.network(
-                                "${baseUrl}${_currentProgress!.currentImage!}",
+                                "$baseUrl${_currentProgress!.currentImage!}",
                                 fit: BoxFit.cover,
                                 errorBuilder: (context, error, stackTrace) {
                                   return _buildPlaceholderImage();
