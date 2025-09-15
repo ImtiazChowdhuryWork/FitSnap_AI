@@ -12,7 +12,7 @@ class MealPlanModel {
   factory MealPlanModel.fromJson(Map<String, dynamic> json) => MealPlanModel(
         success: json["success"],
         message: json["message"],
-        data: json["data"] == null ? null : MealPlanData.fromJson(json["data"]),
+        data: json["data"] == null ? null : MealPlanData.fromJson((json["data"].runtimeType == Map<String, dynamic>) ? json["data"] : {}),
       );
 
   Map<String, dynamic> toJson() => {

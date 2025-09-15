@@ -1,6 +1,3 @@
-import 'package:fitsnap_ai/common_widgets/custom_card.dart';
-import 'package:fitsnap_ai/common_widgets/custom_container.dart';
-import 'package:fitsnap_ai/common_widgets/custom_elevated_button.dart';
 import 'package:fitsnap_ai/gen/assets.gen.dart';
 import 'package:fitsnap_ai/gen/colors.gen.dart';
 import 'package:fitsnap_ai/helpers/all_routes.dart';
