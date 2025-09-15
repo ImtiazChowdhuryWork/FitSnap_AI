@@ -1,16 +1,13 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:fitsnap_ai/features/ai_cam/presentation/ai_cam_screen.dart';
-import 'package:fitsnap_ai/features/ceckout/presentation/checkout_screen.dart';
 import 'package:fitsnap_ai/features/explore/presentation/explore_screen.dart';
 import 'package:fitsnap_ai/features/meal/presentation/meal_screen.dart';
-import 'package:fitsnap_ai/features/my_plan/presentation/my_plan_screen.dart';
+import 'package:fitsnap_ai/features/my_plan/presentation/progress_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-import 'customer/bookings/presentation/bookings_screen.dart';
 import 'features/workouts/presentation/workouts_screen.dart';
-import 'gen/assets.gen.dart';
 import 'gen/colors.gen.dart';
 import 'provider/navigation_provider.dart';
 
@@ -28,7 +25,7 @@ class NavigationScreen extends StatelessWidget {
         final int currentIndex = navigationProvider.currentIndex;
 
         final List<Widget> screens = [
-          const MyPlanScreen(),
+          const ProgressScreen(),
           const WorkoutsScreen(),
           const AiCamScreen(),
           const MealScreen(),
@@ -50,156 +47,84 @@ class NavigationScreen extends StatelessWidget {
               padding: EdgeInsets.all(0.sp),
               child: CustomNavigationBar(
                 iconSize: 28.r,
-                selectedColor: Colors.red,
-                strokeColor: AppColors.c012d4d,
-                unSelectedColor: AppColors.c6b7280,
+                selectedColor: AppColors.c0000ff,
+                strokeColor: Colors.transparent,
+                unSelectedColor: Colors.black54,
                 borderRadius: Radius.zero,
                 items: [
                   CustomNavigationBarItem(
-                    icon: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        currentIndex == 0
-                            ? Container(
-                                height: 60.h,
-                                width: 60.w,
-                                alignment: Alignment.center,
-                                padding: EdgeInsets.all(6.sp),
-                                child: Image.asset(
-                                  Assets.icons.bottomNavMyPlanIcon.path,
-                                  color: AppColors.c012d4d,
-                                ),
-                              )
-                            : Center(
-                                child: Image.asset(
-                                    Assets.icons.bottomNavMyPlanIcon.path,
-                                    color: AppColors.c6b7280),
-                              ),
-                      ],
+                    icon: Icon(
+                      Icons.show_chart,
+                      color: currentIndex == 0
+                          ? AppColors.c0000ff
+                          : Colors.black54,
                     ),
                     title: Text(
-                      "My Plan",
+                      "Progress",
                       style: TextStyle(
                           color: currentIndex == 0
-                              ? AppColors.c012d4d
-                              : AppColors.c6b7280),
+                              ? AppColors.c0000ff
+                              : Colors.black54),
                     ),
                   ),
                   CustomNavigationBarItem(
-                    icon: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        currentIndex == 1
-                            ? Container(
-                                height: 50.h,
-                                width: 50.w,
-                                padding: EdgeInsets.all(6.sp),
-                                child: Image.asset(
-                                  Assets.icons.bottomNavExerciseIcon.path,
-                                  color: AppColors.c012d4d,
-                                ),
-                              )
-                            : Center(
-                                child: Image.asset(
-                                    Assets.icons.bottomNavExerciseIcon.path,
-                                    height: 25.h,
-                                    color: AppColors.c6b7280),
-                              ),
-                      ],
+                    icon: Icon(
+                      Icons.fitness_center,
+                      color: currentIndex == 1
+                          ? AppColors.c0000ff
+                          : Colors.black54,
                     ),
                     title: Text(
                       "Workouts",
                       style: TextStyle(
                           color: currentIndex == 1
-                              ? AppColors.c012d4d
-                              : AppColors.c6b7280),
+                              ? AppColors.c0000ff
+                              : Colors.black54),
                     ),
                   ),
                   CustomNavigationBarItem(
-                    icon: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        currentIndex == 2
-                            ? Container(
-                                height: 50.h,
-                                width: 50.w,
-                                padding: EdgeInsets.all(4.sp),
-                                child: Image.asset(
-                                  Assets.icons.bottomNavAiCamIcon.path,
-                                  color: AppColors.c012d4d,
-                                ),
-                              )
-                            : Center(
-                                child: Image.asset(
-                                    Assets.icons.bottomNavAiCamIcon.path,
-                                    color: AppColors.c6b7280),
-                              ),
-                      ],
+                    icon: Icon(
+                      Icons.camera_alt,
+                      color: currentIndex == 2
+                          ? AppColors.c0000ff
+                          : Colors.black54,
                     ),
                     title: Text(
                       "AI Cam",
                       style: TextStyle(
                           color: currentIndex == 2
-                              ? AppColors.c012d4d
-                              : AppColors.c6b7280),
+                              ? AppColors.c0000ff
+                              : Colors.black54),
                     ),
                   ),
                   CustomNavigationBarItem(
-                    icon: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        currentIndex == 3
-                            ? Container(
-                                height: 50.h,
-                                width: 50.w,
-                                padding: EdgeInsets.all(4.sp),
-                                child: Image.asset(
-                                  Assets.icons.bottomNavMealIcon.path,
-                                  color: AppColors.c012d4d,
-                                ),
-                              )
-                            : Center(
-                                child: Image.asset(
-                                    Assets.icons.bottomNavMealIcon.path,
-                                    color: AppColors.c6b7280),
-                              ),
-                      ],
+                    icon: Icon(
+                      Icons.restaurant,
+                      color: currentIndex == 3
+                          ? AppColors.c0000ff
+                          : Colors.black54,
                     ),
                     title: Text(
                       "Meal",
                       style: TextStyle(
                           color: currentIndex == 3
-                              ? AppColors.c012d4d
-                              : AppColors.c6b7280),
+                              ? AppColors.c0000ff
+                              : Colors.black54),
                     ),
                   ),
                   CustomNavigationBarItem(
-                    icon: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        currentIndex == 4
-                            ? Container(
-                                height: 50.h,
-                                width: 50.w,
-                                padding: EdgeInsets.all(4.sp),
-                                child: Image.asset(
-                                  Assets.icons.bottomNavExploreIcon.path,
-                                  color: AppColors.c012d4d,
-                                ),
-                              )
-                            : Center(
-                                child: Image.asset(
-                                    Assets.icons.bottomNavExploreIcon.path,
-                                    color: AppColors.c6b7280),
-                              ),
-                      ],
+                    icon: Icon(
+                      Icons.explore,
+                      color: currentIndex == 4
+                          ? AppColors.c0000ff
+                          : Colors.black54,
                     ),
                     title: Text(
                       "Explore",
                       style: TextStyle(
                           color: currentIndex == 4
-                              ? AppColors.c012d4d
-                              : AppColors.c6b7280),
+                              ? AppColors.c0000ff
+                              : Colors.black54),
                     ),
                   ),
                 ],

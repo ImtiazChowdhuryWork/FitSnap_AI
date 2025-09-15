@@ -1,66 +1,516 @@
-import 'package:fitsnap_ai/constants/app_list.dart';
-import 'package:fitsnap_ai/constants/text_font_style.dart';
-import 'package:fitsnap_ai/features/meal/widgets/custom_meal_card.dart';
+import 'dart:developer';
+import 'package:fitsnap_ai/features/meal/models/meal_plan_model.dart';
 import 'package:fitsnap_ai/gen/colors.gen.dart';
 import 'package:fitsnap_ai/helpers/ui_helpers.dart';
+import 'package:fitsnap_ai/networks/api_acess.dart';
+import 'package:fitsnap_ai/common_widgets/waiting_widget.dart';
+import 'package:fitsnap_ai/common_widgets/not_found_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../common_widgets/custom_drawer.dart';
 
-class MealScreen extends StatelessWidget {
+class MealScreen extends StatefulWidget {
   const MealScreen({super.key});
+
+  @override
+  State<MealScreen> createState() => _MealScreenState();
+}
+
+class _MealScreenState extends State<MealScreen> {
+  @override
+  void initState() {
+    super.initState();
+    getMealPlanRx.getMealPlan();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: CustomDrawer(),
+      drawer: const CustomDrawer(),
       appBar: AppBar(
         leading: Builder(
           builder: (context) => IconButton(
-            icon: Icon(Icons.menu, color: Colors.white),
+            icon: const Icon(Icons.menu, color: Colors.white),
             onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),
         backgroundColor: AppColors.c0000ff,
-        title: Text("Workouts Plan Screen"),
+        title: const Text("Meal Plan", style: TextStyle(color: Colors.white)),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh, color: Colors.white),
+            onPressed: () {
+              getMealPlanRx.getMealPlan();
+            },
+          ),
+        ],
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(UIHelper.kDefaulutPadding()),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              ///Text : Healthy Meal Plan
-              Text(
-                "Healthy Meal Plan",
-                style: TextFontStyle.headline25BoldcFFFFFFStyleInter.copyWith(
-                  fontSize: 40.sp,
-                  color: AppColors.c000000,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              UIHelper.verticalSpace(20.h),
+      body: StreamBuilder(
+        stream: getMealPlanRx.getMealPlanData,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: WaitingWidget());
+          } else if (snapshot.hasData && snapshot.data != null) {
+            MealPlanModel mealPlan = MealPlanModel.fromJson(snapshot.data);
+            final planData = mealPlan.data;
 
-              ///Show Meal
-              Expanded(
-                child: ListView.separated(
-                  itemCount: AppList.mealLit.length,
-                  separatorBuilder: (context, index) =>
-                      UIHelper.verticalSpace(10.h),
-                  itemBuilder: (context, index) {
-                    var data = AppList.mealLit[index];
-                    return CustomMealCard(
-                      mealType: data.mealType,
-                      mealDescription: data.mealDescription,
-                      mealImage: data.mealImage,
-                    );
-                  },
+            if (planData == null) {
+              return const Center(child: NotFoundWidget());
+            }
+
+            log("Meal plan loaded: ${planData.totalMeals} meals");
+
+            return SingleChildScrollView(
+              padding: EdgeInsets.all(16.sp),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Header Card with Goal & Calories
+                  _buildHeaderCard(planData),
+                  UIHelper.verticalSpace(16.h),
+
+                  // Macros Card
+                  if (planData.macrosInfo != null)
+                    _buildMacrosCard(planData.macrosInfo!),
+                  UIHelper.verticalSpace(16.h),
+
+                  // Meals Section
+                  Text(
+                    "Daily Meals",
+                    style: TextStyle(
+                      fontSize: 24.sp,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.c000000,
+                    ),
+                  ),
+                  UIHelper.verticalSpace(12.h),
+
+                  // Meals List
+                  if (planData.meals != null && planData.meals!.isNotEmpty)
+                    ...planData.meals!.map((meal) => _buildMealCard(meal)),
+
+                  UIHelper.verticalSpace(16.h),
+
+                  // Hydration Info Card
+                  if (planData.hydrationInfo != null)
+                    _buildHydrationCard(planData.hydrationInfo!),
+                  UIHelper.verticalSpace(16.h),
+
+                  // Swap Options Card
+                  if (planData.swapsInfo != null)
+                    _buildSwapsCard(planData.swapsInfo!),
+                  UIHelper.verticalSpace(16.h),
+
+                  // Notes Card
+                  if (planData.notes != null)
+                    _buildNotesCard(planData.cleanNotes),
+
+                  UIHelper.verticalSpace(32.h),
+                ],
+              ),
+            );
+          } else {
+            return const Center(child: NotFoundWidget());
+          }
+        },
+      ),
+    );
+  }
+
+  Widget _buildHeaderCard(MealPlanData planData) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(20.sp),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [AppColors.c0000ff, AppColors.c0000ff.withOpacity(0.8)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(16.r),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.c0000ff.withOpacity(0.3),
+            blurRadius: 10,
+            offset: const Offset(0, 5),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.flag, color: Colors.white, size: 24.sp),
+              UIHelper.horizontalSpace(8.w),
+              Text(
+                "Your Goal",
+                style: TextStyle(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
               ),
             ],
           ),
-        ),
+          UIHelper.verticalSpace(8.h),
+          Text(
+            planData.cleanGoal,
+            style: TextStyle(
+              fontSize: 14.sp,
+              color: Colors.white.withOpacity(0.9),
+              height: 1.4,
+            ),
+          ),
+          UIHelper.verticalSpace(16.h),
+          Row(
+            children: [
+              Icon(Icons.local_fire_department, color: Colors.orange, size: 24.sp),
+              UIHelper.horizontalSpace(8.w),
+              Text(
+                "Daily Target",
+                style: TextStyle(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
+          UIHelper.verticalSpace(8.h),
+          Text(
+            planData.cleanCalories,
+            style: TextStyle(
+              fontSize: 14.sp,
+              color: Colors.white.withOpacity(0.9),
+              height: 1.4,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMacrosCard(MacrosInfo macros) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(20.sp),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16.r),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            blurRadius: 10,
+            offset: const Offset(0, 5),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.analytics, color: AppColors.c0000ff, size: 24.sp),
+              UIHelper.horizontalSpace(8.w),
+              Text(
+                "Daily Macros",
+                style: TextStyle(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.c000000,
+                ),
+              ),
+            ],
+          ),
+          UIHelper.verticalSpace(16.h),
+          Row(
+            children: [
+              Expanded(child: _buildMacroItem("Protein", macros.cleanProtein, Colors.red)),
+              Expanded(child: _buildMacroItem("Carbs", macros.cleanCarbs, Colors.blue)),
+            ],
+          ),
+          UIHelper.verticalSpace(12.h),
+          Row(
+            children: [
+              Expanded(child: _buildMacroItem("Fat", macros.cleanFat, Colors.green)),
+              Expanded(child: _buildMacroItem("Fiber", macros.cleanFiber, Colors.orange)),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMacroItem(String title, String value, Color color) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 4.w),
+      padding: EdgeInsets.all(12.sp),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(12.r),
+        border: Border.all(color: color.withOpacity(0.3)),
+      ),
+      child: Column(
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w500,
+              color: color,
+            ),
+          ),
+          UIHelper.verticalSpace(4.h),
+          Text(
+            value,
+            style: TextStyle(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.bold,
+              color: color,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMealCard(MealItem meal) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 16.h),
+      padding: EdgeInsets.all(16.sp),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16.r),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            blurRadius: 8,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: EdgeInsets.all(8.sp),
+                decoration: BoxDecoration(
+                  color: AppColors.c0000ff.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+                child: Text(
+                  meal.mealEmoji,
+                  style: TextStyle(fontSize: 20.sp),
+                ),
+              ),
+              UIHelper.horizontalSpace(12.w),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      meal.mealType,
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.c000000,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Icon(Icons.local_fire_department, size: 16.sp, color: Colors.orange),
+                        UIHelper.horizontalSpace(4.w),
+                        Text(
+                          meal.formattedCalories,
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            color: Colors.orange,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        UIHelper.horizontalSpace(12.w),
+                        Icon(Icons.fitness_center, size: 16.sp, color: Colors.blue),
+                        UIHelper.horizontalSpace(4.w),
+                        Text(
+                          "${meal.formattedProtein} protein",
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            color: Colors.blue,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          UIHelper.verticalSpace(12.h),
+          Text(
+            meal.cleanDescription,
+            style: TextStyle(
+              fontSize: 14.sp,
+              color: AppColors.c000000.withOpacity(0.7),
+              height: 1.4,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildHydrationCard(HydrationInfo hydration) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(20.sp),
+      decoration: BoxDecoration(
+        color: Colors.blue.withOpacity(0.05),
+        borderRadius: BorderRadius.circular(16.r),
+        border: Border.all(color: Colors.blue.withOpacity(0.2)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.water_drop, color: Colors.blue, size: 24.sp),
+              UIHelper.horizontalSpace(8.w),
+              Text(
+                "Hydration Guide",
+                style: TextStyle(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue,
+                ),
+              ),
+            ],
+          ),
+          UIHelper.verticalSpace(12.h),
+          Text(
+            hydration.cleanHydration,
+            style: TextStyle(
+              fontSize: 14.sp,
+              color: Colors.blue.withOpacity(0.8),
+              height: 1.4,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSwapsCard(SwapsInfo swaps) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(20.sp),
+      decoration: BoxDecoration(
+        color: Colors.green.withOpacity(0.05),
+        borderRadius: BorderRadius.circular(16.r),
+        border: Border.all(color: Colors.green.withOpacity(0.2)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.swap_horiz, color: Colors.green, size: 24.sp),
+              UIHelper.horizontalSpace(8.w),
+              Text(
+                "Alternative Options",
+                style: TextStyle(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green,
+                ),
+              ),
+            ],
+          ),
+          UIHelper.verticalSpace(12.h),
+          if (swaps.vegetarian != null) ...[
+            Text(
+              "Vegetarian Options:",
+              style: TextStyle(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w600,
+                color: Colors.green,
+              ),
+            ),
+            UIHelper.verticalSpace(4.h),
+            Text(
+              swaps.cleanVegetarian,
+              style: TextStyle(
+                fontSize: 14.sp,
+                color: Colors.green.withOpacity(0.8),
+                height: 1.4,
+              ),
+            ),
+            UIHelper.verticalSpace(12.h),
+          ],
+          if (swaps.easyOptions != null) ...[
+            Text(
+              "Quick & Easy Options:",
+              style: TextStyle(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w600,
+                color: Colors.green,
+              ),
+            ),
+            UIHelper.verticalSpace(4.h),
+            Text(
+              swaps.cleanEasyOptions,
+              style: TextStyle(
+                fontSize: 14.sp,
+                color: Colors.green.withOpacity(0.8),
+                height: 1.4,
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNotesCard(String notes) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(20.sp),
+      decoration: BoxDecoration(
+        color: Colors.orange.withOpacity(0.05),
+        borderRadius: BorderRadius.circular(16.r),
+        border: Border.all(color: Colors.orange.withOpacity(0.2)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.lightbulb, color: Colors.orange, size: 24.sp),
+              UIHelper.horizontalSpace(8.w),
+              Text(
+                "Important Notes",
+                style: TextStyle(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.orange,
+                ),
+              ),
+            ],
+          ),
+          UIHelper.verticalSpace(12.h),
+          Text(
+            notes,
+            style: TextStyle(
+              fontSize: 14.sp,
+              color: Colors.orange.withOpacity(0.8),
+              height: 1.4,
+            ),
+          ),
+        ],
       ),
     );
   }

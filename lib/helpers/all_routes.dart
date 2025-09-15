@@ -10,7 +10,7 @@ import 'package:fitsnap_ai/features/ceckout/presentation/checkout_screen.dart';
 import 'package:fitsnap_ai/features/create_customize_plan/presentation/create_customize_plan_screen.dart';
 import 'package:fitsnap_ai/features/explore/presentation/explore_screen.dart';
 import 'package:fitsnap_ai/features/first_day/presentation/first_day_screen.dart';
-import 'package:fitsnap_ai/features/my_plan/presentation/my_plan_screen.dart';
+import 'package:fitsnap_ai/features/my_plan/presentation/progress_screen.dart';
 import 'package:fitsnap_ai/features/plan_intro/presentation/plan_intro_screen.dart';
 import 'package:fitsnap_ai/features/profile/presentation/profile_screen.dart';
 import 'package:fitsnap_ai/features/profile/sub_screens/update_profile_info/presentation/update_profile_info_screen.dart';
@@ -267,11 +267,11 @@ final class RouteGenerator {
       case Routes.myPlanScreen:
         return Platform.isAndroid
             ? _FadedTransitionRoute(
-                widget: MyPlanScreen(),
+                widget: ProgressScreen(),
                 settings: settings,
               )
             : CupertinoPageRoute(
-                builder: (context) => MyPlanScreen(),
+                builder: (context) => ProgressScreen(),
               );
 
       ///profileScreen

@@ -8,7 +8,7 @@ final class LocalString extends Translations {
         //ENGLISH LANGUAGE
         'en_US': {
           "Delivery Man Info": "Delivery Man Info",
-          "Do you want to exit the app?": "Do you want to exit the app?", 
+          "Do you want to exit the app?": "Do you want to exit the app?",
           "No": "No",
           "Yes": "Yes",
           "You need to log in first": "You need to log in first",
@@ -55,21 +55,26 @@ final class LocalString extends Translations {
           "phone number can't empty": "Phone number can't be empty",
           "Email Can't be empty": "Email Can't be empty",
           "Enter Password": "Enter Password",
-          "Password must be  at least 6 characters": "Password must be  at least 6 characters",
+          "Password must be  at least 6 characters":
+              "Password must be  at least 6 characters",
           "Confim Password": "Confim Password",
           "Password Missmatch": "Password Missmatch",
           "Terms and Conditions": "Terms and Conditions",
           "I agree with terms and conditions and privacy policy":
               "I agree with terms and conditions and privacy policy",
-          "Please accept the terms & condition!": "Please accept the terms & condition!",
-          "Please check your internet connection": "Please check your internet connection",
-          "Please login to perform this operation": "Please login to perform this operation",
+          "Please accept the terms & condition!":
+              "Please accept the terms & condition!",
+          "Please check your internet connection":
+              "Please check your internet connection",
+          "Please login to perform this operation":
+              "Please login to perform this operation",
           "Verify Otp": "Verify Otp",
           "verify provided otp": "verify provided otp",
           "Aplicar códido": "Aply code",
           "Aplicar": "Apply",
           "Enter Voucher": "Enter Voucher",
-          "Voucher must be  at least 6 characters": "Voucher must be  at least 6 characters",
+          "Voucher must be  at least 6 characters":
+              "Voucher must be  at least 6 characters",
           "Adicionar código promocional": "Add promotional code",
           "Carrinho": "Cart",
           "O Teu Pedido": "Your request",
@@ -91,14 +96,16 @@ final class LocalString extends Translations {
           "Cancelar": "Cancel",
           "Extras": "Extras",
           "Not Available": "Not Available",
-          "Can't add more then 5 extra item": "Can't add more then 5 extra item",
+          "Can't add more then 5 extra item":
+              "Can't add more then 5 extra item",
           "Categories": "Categories",
           "Em destaque": "Highlighted",
           "Os seu favoritos": "Your favorits",
           "Opções": "Options",
           "Special Request": "Special Request",
           "Adicionar": "Add",
-          "Add address To contiinue browsing": "Add address To contiinue browsing",
+          "Add address To contiinue browsing":
+              "Add address To contiinue browsing",
           "Entregar em": "Delivery in ",
           "Pesquisa": "Search",
           "Closed": "Closed",
@@ -129,14 +136,16 @@ final class LocalString extends Translations {
           "Ajuda": "Help",
           "Enviar mensagem": "Send Message",
           "Conta": "Account",
-          "You won't be able to revert this!": "You won't be able to revert this!",
+          "You won't be able to revert this!":
+              "You won't be able to revert this!",
           "Delete My Account": "Delete My Account",
           "You are about to Logout!": "You are about to Logout!",
           "Terminar sessão": "Log out",
           "Send Message": "Send Message",
           "Enter subject": "Enter subject",
           "Enter message": "Enter message",
-          "message must be  at least 15 characters": "message must be  at least 15 characters",
+          "message must be  at least 15 characters":
+              "message must be  at least 15 characters",
           "No file selected": "No file selected",
           "Enter Value": "Enter Value",
           "Pesquisar": "Search",
@@ -167,12 +176,15 @@ final class LocalString extends Translations {
           "password not matched": "password not matched",
           "Andar": "To Walk",
           "Enter email": "Enter email",
-          "email must be  at least 6 characters": "email must be  at least 6 characters",
+          "email must be  at least 6 characters":
+              "email must be  at least 6 characters",
           "NIF": "NIF",
           "Enter nif": "Enter nif",
-          "nif must be  at least 6 characters": "nif must be  at least 6 characters",
+          "nif must be  at least 6 characters":
+              "nif must be  at least 6 characters",
           "Enter phone": "Enter phone",
-          "phone must be  at least 6 characters": "phone must be  at least 6 characters",
+          "phone must be  at least 6 characters":
+              "phone must be  at least 6 characters",
           "Email": "Email",
           "Hoje": "Today",
           "Amanha": "Tomorrow",
@@ -194,15 +206,19 @@ final class LocalString extends Translations {
           "Success": "Success",
           "Success with no content": "Success with no content",
           "Bad request. Try again later": "Bad request. Try again later",
-          "User unauthorized. Try again later": "User unauthorized. Try again later",
-          "Forbidden request. Try again later": "Forbidden request. Try again later",
-          "Something went wrong. Try again later": "Something went wrong. Try again later",
+          "User unauthorized. Try again later":
+              "User unauthorized. Try again later",
+          "Forbidden request. Try again later":
+              "Forbidden request. Try again later",
+          "Something went wrong. Try again later":
+              "Something went wrong. Try again later",
           "URL not found. Try again later": "URL not found. Try again later",
           "Timeout. Try again later": "Timeout. Try again later",
           "Request canceled": "Request canceled",
           "Timeout. Try again later": "Timeout. Try again later",
           "Cache error. Try again later": "Cache error. Try again later",
-          "Please check your internet connection": "Please check your internet connection",
+          "Please check your internet connection":
+              "Please check your internet connection",
           "Something went wrong": "Something went wrong",
         },
 
@@ -255,24 +271,30 @@ final class LocalString extends Translations {
           "Last Name": "O teu ultimo nome",
           "Last Name Can't be empty": "O teu ultimo nome não pode estar vazio",
           "Phone": "Telemovel",
-          "phone number can't empty": "O teu numero de telemovel não pode estar vazio",
+          "phone number can't empty":
+              "O teu numero de telemovel não pode estar vazio",
           "Email Can't be empty": "o teu email não pode estar vazio",
           "Enter Password": "Digita a palavrapasse",
-          "Password must be  at least 6 characters": " A palavrapasse tem de ter pelo menos 6 carcteres",
+          "Password must be  at least 6 characters":
+              " A palavrapasse tem de ter pelo menos 6 carcteres",
           "Confim Password": "a a palavrapasse",
           "Password Missmatch": "A palavrapasse não corresponde",
           "Terms and Conditions": "Termos e Condições",
           "I agree with terms and conditions and privacy policy":
               "Eu aceito os termos e condições da politica e privacidade",
-          "Please accept the terms & condition!": "Por favor aceite os termos e condições!",
-          "Please check your internet connection": "Por favor vê a tua conecção com a internet",
-          "Please login to perform this operation": "Por favor entra para completar a ação",
+          "Please accept the terms & condition!":
+              "Por favor aceite os termos e condições!",
+          "Please check your internet connection":
+              "Por favor vê a tua conecção com a internet",
+          "Please login to perform this operation":
+              "Por favor entra para completar a ação",
           "Verify Otp": "Verificar Otp",
           "verify provided otp": "Verificação e dada pelo otp",
           "Aplicar códido": "Aplicar códido",
           "Aplicar": "Aplicar",
           "Enter Voucher": "Entredus o Voucher",
-          "Voucher must be  at least 6 characters": "O voucher tem de ter pelo menos 6 caracteres",
+          "Voucher must be  at least 6 characters":
+              "O voucher tem de ter pelo menos 6 caracteres",
           "Adicionar código promocional": "Adicionar código promocional",
           "Carrinho": "Carrinho",
           "O Teu Pedido": "O Teu Pedido",
@@ -294,13 +316,15 @@ final class LocalString extends Translations {
           "Cancelar": "Cancelar",
           "Extras": "Extra",
           "Not Available": "Não está disponivel",
-          "Can't add more then 5 extra item": "Não pode adicionar mais 5 itens extra",
+          "Can't add more then 5 extra item":
+              "Não pode adicionar mais 5 itens extra",
           "Em destaque": "Em destaque",
           "Os seu favoritos": "Os seu favoritos",
           "Opções": "Opções",
           "Special Request": "Pedido especial",
           "Adicionar": "Adicionar",
-          "Add address To contiinue browsing": "Adiciona a tua morada para continuares a navegar",
+          "Add address To contiinue browsing":
+              "Adiciona a tua morada para continuares a navegar",
           "Entregar em": "Entregar em",
           "Pesquisa": "Pesquisa",
           "Closed": "Fechado",
@@ -331,14 +355,16 @@ final class LocalString extends Translations {
           "Ajuda": "Ajuda",
           "Enviar mensagem": "Enviar mensagem",
           "Conta": "Conta",
-          "You won't be able to revert this!": "Não serás capaz de reverter estow!",
+          "You won't be able to revert this!":
+              "Não serás capaz de reverter estow!",
           "Delete My Account": "Apaga a minha conta",
           "You are about to Logout!": "Tu estás prestes a sair!",
           "Terminar sessão": "Terminar sessão",
           "Send Message": "Mandar menssagem",
           "Enter subject": "Digite assunto",
           "Enter message": "Digite menssagem",
-          "message must be  at least 15 characters": "A menssagem tem de ter pelo menos 15 caracteres",
+          "message must be  at least 15 characters":
+              "A menssagem tem de ter pelo menos 15 caracteres",
           "Nenhum arquivo selecionado": "Nenhum arquivo selecionado",
           "Enter Value": "Digite Valor",
           "Pesquisar": "Pesquisar",
@@ -370,12 +396,15 @@ final class LocalString extends Translations {
           "password not matched": "Senhas não correspondem",
           "Andar": "Andar",
           "Enter email": "Inserir email",
-          "email must be at least 6 characters": "O email deve ter pelo menos 6 caracteres",
+          "email must be at least 6 characters":
+              "O email deve ter pelo menos 6 caracteres",
           "NIF": "NIF",
           "Enter nif": "Inserir NIF",
-          "nif must be at least 6 characters": "O NIF deve ter pelo menos 6 caracteres",
+          "nif must be at least 6 characters":
+              "O NIF deve ter pelo menos 6 caracteres",
           "Enter phone": "Inserir número de telefone",
-          "phone must be at least 6 characters": "O número de telefone deve ter pelo menos 6 caracteres",
+          "phone must be at least 6 characters":
+              "O número de telefone deve ter pelo menos 6 caracteres",
           "Email": "Email",
           "Hoje": "Hoje",
           "Amanha": "Amanhã",
@@ -396,15 +425,23 @@ final class LocalString extends Translations {
           "Items": "Itens", //pt
           "Success": "Sucesso",
           "Success with no content": "Sucesso sem conteúdo",
-          "Bad request. Try again later": "Pedido inválido. Tente novamente mais tarde",
-          "User unauthorized. Try again later": "Usuário não autorizado. Tente novamente mais tarde",
-          "Forbidden request. Try again later": "Pedido proibido. Tente novamente mais tarde",
-          "Something went wrong. Try again later": "Algo deu errado. Tente novamente mais tarde",
-          "URL not found. Try again later": "URL não encontrada. Tente novamente mais tarde",
-          "Timeout. Try again later": "Tempo limite excedido. Tente novamente mais tarde",
+          "Bad request. Try again later":
+              "Pedido inválido. Tente novamente mais tarde",
+          "User unauthorized. Try again later":
+              "Usuário não autorizado. Tente novamente mais tarde",
+          "Forbidden request. Try again later":
+              "Pedido proibido. Tente novamente mais tarde",
+          "Something went wrong. Try again later":
+              "Algo deu errado. Tente novamente mais tarde",
+          "URL not found. Try again later":
+              "URL não encontrada. Tente novamente mais tarde",
+          "Timeout. Try again later":
+              "Tempo limite excedido. Tente novamente mais tarde",
           "Request canceled": "Pedido cancelado",
-          "Cache error. Try again later": "Erro de cache. Tente novamente mais tarde",
-          "Please check your internet connection": "Por favor, verifique sua conexão com a internet",
+          "Cache error. Try again later":
+              "Erro de cache. Tente novamente mais tarde",
+          "Please check your internet connection":
+              "Por favor, verifique sua conexão com a internet",
           "Something went wrong": "Algo deu errado",
         },
 
@@ -456,24 +493,30 @@ final class LocalString extends Translations {
           "Last Name": "Apellido",
           "Last Name Can't be empty": "El apellido no puede estar vacío",
           "Phone": "Teléfono",
-          "phone number can't empty": "El número de teléfono no puede estar vacío",
+          "phone number can't empty":
+              "El número de teléfono no puede estar vacío",
           "Email Can't be empty": "El correo electrónico no puede estar vacío",
           "Enter Password": "Ingresa una contraseña",
-          "Password must be at least 6 characters": "La contraseña debe tener al menos 6 caracteres",
+          "Password must be at least 6 characters":
+              "La contraseña debe tener al menos 6 caracteres",
           " Password": "ar contraseña",
           "Password Mismatch": "Las contraseñas no coinciden",
           "Terms and Conditions": "Términos y condiciones",
           "I agree with terms and conditions and privacy policy":
               "Acepto los términos y condiciones y la política de privacidad",
-          "Please accept the terms & condition!": "¡Por favor, acepta los términos y condiciones!",
-          "Please check your internet connection": "Por favor, verifica tu conexión a internet",
-          "Please login to perform this operation": "Por favor, inicia sesión para realizar esta operación",
+          "Please accept the terms & condition!":
+              "¡Por favor, acepta los términos y condiciones!",
+          "Please check your internet connection":
+              "Por favor, verifica tu conexión a internet",
+          "Please login to perform this operation":
+              "Por favor, inicia sesión para realizar esta operación",
           "Verify Otp": "Verificar OTP",
           "Verify provided otp": "Verificar OTP proporcionado",
           "Aplicar código": "Aplicar código",
           "Aplicar": "Aplicar",
           "Enter Voucher": "Ingresa el cupón",
-          "Voucher must be at least 6 characters": "El cupón debe tener al menos 6 caracteres",
+          "Voucher must be at least 6 characters":
+              "El cupón debe tener al menos 6 caracteres",
           "Adicionar código promocional": "Agregar código promocional",
           "Carrinho": "Carrito",
           "O Teu Pedido": "Tu pedido",
@@ -495,13 +538,15 @@ final class LocalString extends Translations {
           "Cancelar": "Cancelar",
           "Extras": "Extras",
           "Not Available": "No disponible",
-          "Can't add more than 5 extra items": "No se pueden agregar más de 5 elementos extra",
+          "Can't add more than 5 extra items":
+              "No se pueden agregar más de 5 elementos extra",
           "Em destaque": "Destacados",
           "Os seu favoritos": "Tus favoritos",
           "Opções": "Opciones",
           "Special Request": "Solicitud especial",
           "Adicionar": "Agregar",
-          "Add address To continue browsing": "Agregar dirección para seguir navegando",
+          "Add address To continue browsing":
+              "Agregar dirección para seguir navegando",
           "Entregar em": "Entregar en",
           "Pesquisa": "Búsqueda",
           "Closed": "Cerrado",
@@ -539,7 +584,8 @@ final class LocalString extends Translations {
           "Send Message": "Enviar mensaje",
           "Enter subject": "Ingresa el asunto",
           "Enter message": "Ingresa el mensaje",
-          "Message must be at least 15 characters": "El mensaje debe tener al menos 15 caracteres",
+          "Message must be at least 15 characters":
+              "El mensaje debe tener al menos 15 caracteres",
           "Nenhum arquivo selecionado": "Ningún archivo seleccionado",
           "Enter Value": "Ingresa el valor",
           "Pesquisar": "Buscar",
@@ -547,7 +593,8 @@ final class LocalString extends Translations {
           "Principais categorias": "Categorías principales",
           "Todas as categorias": "Todas las categorías",
           "Categories": "Categorías",
-          "Please select address from map": "Por favor, selecciona una dirección del mapa",
+          "Please select address from map":
+              "Por favor, selecciona una dirección del mapa",
           "Delivery Status": "Estado de entrega",
           "Enter Address name": "Ingresa el nombre de la dirección",
           "Enter Address": "Ingresa la dirección",
@@ -564,22 +611,27 @@ final class LocalString extends Translations {
           "Miss match old password": "Contraseña anterior incorrecta",
           "New Password": "Nueva contraseña",
           "Enter new Password": "Ingresa la nueva contraseña",
-          "Password must be 5 characters": "La contraseña debe tener 5 caracteres",
+          "Password must be 5 characters":
+              "La contraseña debe tener 5 caracteres",
           " Password": "ar contraseña",
           "Enter  Password": "Ingresa la ación de contraseña",
           "Password not matched": "Las contraseñas no coinciden",
           "Andar": "Piso",
           "Enter email": "Ingresa el correo electrónico",
-          "Email must be at least 6 characters": "El correo electrónico debe tener al menos 6 caracteres",
+          "Email must be at least 6 characters":
+              "El correo electrónico debe tener al menos 6 caracteres",
           "NIF": "NIF",
           "Enter NIF": "Ingresa el NIF",
-          "NIF must be at least 6 characters": "El NIF debe tener al menos 6 caracteres",
+          "NIF must be at least 6 characters":
+              "El NIF debe tener al menos 6 caracteres",
           "Enter phone": "Ingresa el teléfono",
-          "Phone must be at least 6 characters": "El teléfono debe tener al menos 6 caracteres",
+          "Phone must be at least 6 characters":
+              "El teléfono debe tener al menos 6 caracteres",
           "Email": "Correo electrónico",
           "Hoje": "Hoy",
           "Amanha": "Mañana",
-          "Data connection is available.": "La conexión de datos está disponible",
+          "Data connection is available.":
+              "La conexión de datos está disponible",
           "You are not logged in": "No has iniciado sesión",
           " minutes": " minutos",
           " unidades": " unidades",
@@ -592,19 +644,28 @@ final class LocalString extends Translations {
           "On Transit": "En Tránsito",
           "ORDER FOR LATER": "PEDIR PARA DESPUÉS",
           "OPEN NOW": "ABIERTO AHORA",
-          "This shop is closed now!": "¡Esta tienda está cerrada ahora!", //spanish
+          "This shop is closed now!":
+              "¡Esta tienda está cerrada ahora!", //spanish
           "Items": "Artículos", //sp
           "Success": "Éxito",
           "Success with no content": "Éxito sin contenido",
-          "Bad request. Try again later": "Solicitud incorrecta. Inténtalo de nuevo más tarde",
-          "User unauthorized. Try again later": "Usuario no autorizado. Inténtalo de nuevo más tarde",
-          "Forbidden request. Try again later": "Solicitud prohibida. Inténtalo de nuevo más tarde",
-          "Something went wrong. Try again later": "Algo salió mal. Inténtalo de nuevo más tarde",
-          "URL not found. Try again later": "URL no encontrada. Inténtalo de nuevo más tarde",
-          "Timeout. Try again later": "Tiempo de espera agotado. Inténtalo de nuevo más tarde",
+          "Bad request. Try again later":
+              "Solicitud incorrecta. Inténtalo de nuevo más tarde",
+          "User unauthorized. Try again later":
+              "Usuario no autorizado. Inténtalo de nuevo más tarde",
+          "Forbidden request. Try again later":
+              "Solicitud prohibida. Inténtalo de nuevo más tarde",
+          "Something went wrong. Try again later":
+              "Algo salió mal. Inténtalo de nuevo más tarde",
+          "URL not found. Try again later":
+              "URL no encontrada. Inténtalo de nuevo más tarde",
+          "Timeout. Try again later":
+              "Tiempo de espera agotado. Inténtalo de nuevo más tarde",
           "Request canceled": "Solicitud cancelada",
-          "Cache error. Try again later": "Error de caché. Inténtalo de nuevo más tarde",
-          "Please check your internet connection": "Por favor, verifica tu conexión a internet",
+          "Cache error. Try again later":
+              "Error de caché. Inténtalo de nuevo más tarde",
+          "Please check your internet connection":
+              "Por favor, verifica tu conexión a internet",
           "Something went wrong": "Algo salió mal",
         },
 
@@ -659,21 +720,26 @@ final class LocalString extends Translations {
           "phone number can't empty": "Номер телефона не может быть пустым",
           "Email Can't be empty": "Электронная почта не может быть пустой",
           "Enter Password": "Введите пароль",
-          "Password must be at least 6 characters": "Пароль должен содержать не менее 6 символов",
+          "Password must be at least 6 characters":
+              "Пароль должен содержать не менее 6 символов",
           " Password": "Подтвердите пароль",
           "Password Mismatch": "Пароли не совпадают",
           "Terms and Conditions": "Условия и положения",
           "I agree with terms and conditions and privacy policy":
               "Я соглашаюсь с условиями и политикой конфиденциальности",
-          "Please accept the terms & condition!": "Пожалуйста, примите условия и положения!",
-          "Please check your internet connection": "Пожалуйста, проверьте подключение к интернету",
-          "Please login to perform this operation": "Пожалуйста, войдите в систему, чтобы выполнить это действие",
+          "Please accept the terms & condition!":
+              "Пожалуйста, примите условия и положения!",
+          "Please check your internet connection":
+              "Пожалуйста, проверьте подключение к интернету",
+          "Please login to perform this operation":
+              "Пожалуйста, войдите в систему, чтобы выполнить это действие",
           "Verify Otp": "Подтвердите OTP",
           "Verify provided otp": "Подтвердите предоставленный OTP",
           "Aplicar código": "Применить код",
           "Aplicar": "Применить",
           "Enter Voucher": "Введите купон",
-          "Voucher must be at least 6 characters": "Купон должен содержать не менее 6 символов",
+          "Voucher must be at least 6 characters":
+              "Купон должен содержать не менее 6 символов",
           "Adicionar código promocional": "Добавить промокод",
           "Carrinho": "Корзина",
           "O Teu Pedido": "Ваш заказ",
@@ -695,13 +761,15 @@ final class LocalString extends Translations {
           "Cancelar": "Отменить",
           "Extras": "Дополнительно",
           "Not Available": "Недоступно",
-          "Can't add more than 5 extra items": "Нельзя добавить более 5 дополнительных позиций",
+          "Can't add more than 5 extra items":
+              "Нельзя добавить более 5 дополнительных позиций",
           "Em destaque": "В тренде",
           "Os seu favoritos": "Ваши избранные",
           "Opções": "Опции",
           "Special Request": "Особая просьба",
           "Adicionar": "Добавить",
-          "Add address To continue browsing": "Добавьте адрес, чтобы продолжить просмотр",
+          "Add address To continue browsing":
+              "Добавьте адрес, чтобы продолжить просмотр",
           "Entregar em": "Доставить в",
           "Pesquisa": "Поиск",
           "Closed": "Закрыто",
@@ -739,7 +807,8 @@ final class LocalString extends Translations {
           "Send Message": "Отправить сообщение",
           "Enter subject": "Введите тему",
           "Enter message": "Введите сообщение",
-          "Message must be at least 15 characters": "Сообщение должно содержать не менее 15 символов",
+          "Message must be at least 15 characters":
+              "Сообщение должно содержать не менее 15 символов",
           "Nenhum arquivo selecionado": "Файл не выбран",
           "Enter Value": "Введите значение",
           "Pesquisar": "Поиск",
@@ -764,22 +833,27 @@ final class LocalString extends Translations {
           "Miss match old password": "Неверный старый пароль",
           "New Password": "Новый пароль",
           "Enter new Password": "Введите новый пароль",
-          "Password must be 5 characters": "Пароль должен состоять из 5 символов",
+          "Password must be 5 characters":
+              "Пароль должен состоять из 5 символов",
           " Password": "Подтвердите пароль",
           "Enter  Password": "Введите подтверждение пароля",
           "Password not matched": "Пароли не совпадают",
           "Andar": "Этаж",
           "Enter email": "Введите адрес электронной почты",
-          "Email must be at least 6 characters": "Адрес электронной почты должен содержать не менее 6 символов",
+          "Email must be at least 6 characters":
+              "Адрес электронной почты должен содержать не менее 6 символов",
           "NIF": "НИФ",
           "Enter NIF": "Введите НИФ",
-          "NIF must be at least 6 characters": "НИФ должен содержать не менее 6 символов",
+          "NIF must be at least 6 characters":
+              "НИФ должен содержать не менее 6 символов",
           "Enter phone": "Введите телефон",
-          "Phone must be at least 6 characters": "Телефон должен содержать не менее 6 символов",
+          "Phone must be at least 6 characters":
+              "Телефон должен содержать не менее 6 символов",
           "Email": "Адрес электронной почты",
           "Hoje": "Сегодня",
           "Amanha": "Завтра",
-          "Data connection is available.": "Доступно подключение к сети данных.",
+          "Data connection is available.":
+              "Доступно подключение к сети данных.",
           "You are not logged in": "Вы не вошли в систему",
           " minutes": " минуты",
           " unidades": " единицы",
@@ -796,16 +870,25 @@ final class LocalString extends Translations {
           "Items": "Товары", //ru
           "Success": "Успех",
           "Success with no content": "Успех без содержания",
-          "Bad request. Try again later": "Неверный запрос. Попробуйте еще раз позже",
-          "User unauthorized. Try again later": "Пользователь не авторизован. Попробуйте еще раз позже",
-          "Forbidden request. Try again later": "Запрещенный запрос. Попробуйте еще раз позже",
-          "Something went wrong. Try again later": "Что-то пошло не так. Попробуйте еще раз позже",
-          "URL not found. Try again later": "URL не найден. Попробуйте еще раз позже",
-          "Timeout. Try again later": "Время ожидания истекло. Попробуйте еще раз позже",
+          "Bad request. Try again later":
+              "Неверный запрос. Попробуйте еще раз позже",
+          "User unauthorized. Try again later":
+              "Пользователь не авторизован. Попробуйте еще раз позже",
+          "Forbidden request. Try again later":
+              "Запрещенный запрос. Попробуйте еще раз позже",
+          "Something went wrong. Try again later":
+              "Что-то пошло не так. Попробуйте еще раз позже",
+          "URL not found. Try again later":
+              "URL не найден. Попробуйте еще раз позже",
+          "Timeout. Try again later":
+              "Время ожидания истекло. Попробуйте еще раз позже",
           "Request canceled": "Запрос отменен",
-          "Timeout. Try again later": "Время ожидания истекло. Попробуйте еще раз позже",
-          "Cache error. Try again later": "Ошибка кэша. Попробуйте еще раз позже",
-          "Please check your internet connection": "Пожалуйста, проверьте ваше интернет-соединение",
+          "Timeout. Try again later":
+              "Время ожидания истекло. Попробуйте еще раз позже",
+          "Cache error. Try again later":
+              "Ошибка кэша. Попробуйте еще раз позже",
+          "Please check your internet connection":
+              "Пожалуйста, проверьте ваше интернет-соединение",
           "Something went wrong": "Что-то пошло не так",
         },
 
@@ -859,21 +942,25 @@ final class LocalString extends Translations {
           "phone number can't empty": "Telefoonnummer mag niet leeg zijn",
           "Email Can't be empty": "Email mag niet leeg zijn",
           "Enter Password": "Voer wachtwoord in",
-          "Password must be at least 6 characters": "Wachtwoord moet minimaal 6 tekens bevatten",
+          "Password must be at least 6 characters":
+              "Wachtwoord moet minimaal 6 tekens bevatten",
           "Confirm Password": "Bevestig wachtwoord",
           "Password Missmatch": "Wachtwoorden komen niet overeen",
           "Terms and Conditions": "Algemene voorwaarden",
           "I agree with terms and conditions and privacy policy":
               "Ik ga akkoord met de algemene voorwaarden en het privacybeleid",
           "Please accept the terms & condition!": "Accepteer de voorwaarden!",
-          "Please check your internet connection": "Controleer uw internetverbinding",
-          "Please login to perform this operation": "Log in om deze actie uit te voeren",
+          "Please check your internet connection":
+              "Controleer uw internetverbinding",
+          "Please login to perform this operation":
+              "Log in om deze actie uit te voeren",
           "Verify Otp": "Otp verifiëren",
           "verify provided otp": "Verifieer de verstrekte otp",
           "Aplicar códido": "Code toepassen",
           "Aplicar": "Toepassen",
           "Enter Voucher": "Voer voucher in",
-          "Voucher must be at least 6 characters": "Voucher moet minimaal 6 tekens bevatten",
+          "Voucher must be at least 6 characters":
+              "Voucher moet minimaal 6 tekens bevatten",
           "Adicionar código promocional": "Promotiecode toevoegen",
           "Carrinho": "Winkelwagen",
           "O Teu Pedido": "Jouw bestelling",
@@ -895,13 +982,15 @@ final class LocalString extends Translations {
           "Cancelar": "Annuleren",
           "Extras": "Extra's",
           "Not Available": "Niet beschikbaar",
-          "Can't add more than 5 extra item": "Kan niet meer dan 5 extra items toevoegen",
+          "Can't add more than 5 extra item":
+              "Kan niet meer dan 5 extra items toevoegen",
           "Em destaque": "Uitgelicht",
           "Os seu favoritos": "Uw favorieten",
           "Opções": "Opties",
           "Special Request": "Speciaal verzoek",
           "Adicionar": "Toevoegen",
-          "Add address To continue browsing": "Voeg een adres toe om door te gaan met browsen",
+          "Add address To continue browsing":
+              "Voeg een adres toe om door te gaan met browsen",
           "Entregar em": "Bezorgen op",
           "Pesquisa": "Zoeken",
           "Closed": "Gesloten",
@@ -932,14 +1021,16 @@ final class LocalString extends Translations {
           "Ajuda": "Help",
           "Enviar mensagem": "Bericht verzenden",
           "Conta": "Account",
-          "You won't be able to revert this!": "Dit kun je niet ongedaan maken!",
+          "You won't be able to revert this!":
+              "Dit kun je niet ongedaan maken!",
           "Delete My Account": "Mijn account verwijderen",
           "You are about to Logout!": "U staat op het punt uit te loggen!",
           "Terminar sessão": "Afmelden",
           "Send Message": "Bericht verzenden",
           "Enter subject": "Onderwerp invoeren",
           "Enter message": "Bericht invoeren",
-          "message must be at least 15 characters": "Bericht moet minimaal 15 tekens bevatten",
+          "message must be at least 15 characters":
+              "Bericht moet minimaal 15 tekens bevatten",
           "Nenhum arquivo selecionado": "Geen bestand geselecteerd",
           "Enter Value": "Waarde invoeren",
           "Pesquisar": "Zoeken",
@@ -969,12 +1060,15 @@ final class LocalString extends Translations {
           "Password not matched": "Wachtwoorden komen niet overeen",
           "Andar": "Verdieping",
           "Enter email": "Voer emailadres in",
-          "Email must be at least 6 characters": "Emailadres moet minimaal 6 tekens bevatten",
+          "Email must be at least 6 characters":
+              "Emailadres moet minimaal 6 tekens bevatten",
           "NIF": "BTWnummer",
           "Enter NIF": "Voer BTWnummer in",
-          "NIF must be at least 6 characters": "BTWnummer moet minimaal 6 tekens bevatten",
+          "NIF must be at least 6 characters":
+              "BTWnummer moet minimaal 6 tekens bevatten",
           "Enter phone": "Voer telefoonnummer in",
-          "Phone must be at least 6 characters": "Telefoonnummer moet minimaal 6 tekens bevatten",
+          "Phone must be at least 6 characters":
+              "Telefoonnummer moet minimaal 6 tekens bevatten",
           "Hoje": "Vandaag",
           "Amanha": "Morgen",
           "Data connection is available.": "Dataconnectie is beschikbaar",
@@ -993,15 +1087,22 @@ final class LocalString extends Translations {
           "Items": "Items", //du
           "Success": "Succes",
           "Success with no content": "Succes zonder inhoud",
-          "Bad request. Try again later": "Foutief verzoek. Probeer het later opnieuw",
-          "User unauthorized. Try again later": "Gebruiker niet geautoriseerd. Probeer het later opnieuw",
-          "Forbidden request. Try again later": "Verzoek verboden. Probeer het later opnieuw",
-          "Something went wrong. Try again later": "Er is iets misgegaan. Probeer het later opnieuw",
-          "URL not found. Try again later": "URL niet gevonden. Probeer het later opnieuw",
+          "Bad request. Try again later":
+              "Foutief verzoek. Probeer het later opnieuw",
+          "User unauthorized. Try again later":
+              "Gebruiker niet geautoriseerd. Probeer het later opnieuw",
+          "Forbidden request. Try again later":
+              "Verzoek verboden. Probeer het later opnieuw",
+          "Something went wrong. Try again later":
+              "Er is iets misgegaan. Probeer het later opnieuw",
+          "URL not found. Try again later":
+              "URL niet gevonden. Probeer het later opnieuw",
           "Timeout. Try again later": "Time-out. Probeer het later opnieuw",
           "Request canceled": "Verzoek geannuleerd",
-          "Cache error. Try again later": "Cachefout. Probeer het later opnieuw",
-          "Please check your internet connection": "Controleer uw internetverbinding alstublieft",
+          "Cache error. Try again later":
+              "Cachefout. Probeer het later opnieuw",
+          "Please check your internet connection":
+              "Controleer uw internetverbinding alstublieft",
           "Something went wrong": "Er is iets misgegaan",
         },
 
@@ -1052,24 +1153,30 @@ final class LocalString extends Translations {
           "Last Name": "Nom de famille",
           "Last Name Can't be empty": "Le nom de famille ne peut pas être vide",
           "Phone": "Téléphone",
-          "phone number can't empty": "Le numéro de téléphone ne peut pas être vide",
+          "phone number can't empty":
+              "Le numéro de téléphone ne peut pas être vide",
           "Email Can't be empty": "L'email ne peut pas être vide",
           "Enter Password": "Entrer le mot de passe",
-          "Password must be at least 6 characters": "Le mot de passe doit contenir au moins 6 caractères",
+          "Password must be at least 6 characters":
+              "Le mot de passe doit contenir au moins 6 caractères",
           "Confirm Password": "Confirmer le mot de passe",
           "Password Missmatch": "Les mots de passe ne correspondent pas",
           "Terms and Conditions": "Termes et conditions",
           "I agree with terms and conditions and privacy policy":
               "J'accepte les termes et conditions et la politique de confidentialité",
-          "Please accept the terms & condition!": "Veuillez accepter les termes et conditions!",
-          "Please check your internet connection": "Veuillez vérifier votre connexion Internet",
-          "Please login to perform this operation": "Veuillez vous connecter pour effectuer cette opération",
+          "Please accept the terms & condition!":
+              "Veuillez accepter les termes et conditions!",
+          "Please check your internet connection":
+              "Veuillez vérifier votre connexion Internet",
+          "Please login to perform this operation":
+              "Veuillez vous connecter pour effectuer cette opération",
           "Verify Otp": "Vérifier OTP",
           "verify provided otp": "Vérifier l'OTP fourni",
           "Aplicar códido": "Appliquer le code",
           "Aplicar": "Appliquer",
           "Enter Voucher": "Entrer le bon",
-          "Voucher must be at least 6 characters": "Le bon doit contenir au moins 6 caractères",
+          "Voucher must be at least 6 characters":
+              "Le bon doit contenir au moins 6 caractères",
           "Adicionar código promocional": "Ajouter un code promotionnel",
           "Carrinho": "Panier",
           "O Teu Pedido": "Votre commande",
@@ -1091,13 +1198,15 @@ final class LocalString extends Translations {
           "Cancelar": "Annuler",
           "Extras": "Suppléments",
           "Not Available": "Non disponible",
-          "Can't add more than 5 extra items": "Impossible d'ajouter plus de 5 articles supplémentaires",
+          "Can't add more than 5 extra items":
+              "Impossible d'ajouter plus de 5 articles supplémentaires",
           "Em destaque": "En vedette",
           "Os seu favoritos": "Vos favoris",
           "Opções": "Options",
           "Special Request": "Demande spéciale",
           "Adicionar": "Ajouter",
-          "Add address To continue browsing": "Ajoutez une adresse pour continuer à naviguer",
+          "Add address To continue browsing":
+              "Ajoutez une adresse pour continuer à naviguer",
           "Entregar em": "Livrer à",
           "Pesquisa": "Recherche",
           "Closed": "Fermé",
@@ -1128,14 +1237,17 @@ final class LocalString extends Translations {
           "Ajuda": "Aide",
           "Enviar mensagem": "Envoyer un message",
           "Conta": "Compte",
-          "You won't be able to revert this!": "Vous ne pourrez pas revenir en arrière !",
+          "You won't be able to revert this!":
+              "Vous ne pourrez pas revenir en arrière !",
           "Delete My Account": "Supprimer mon compte",
-          "You are about to Logout!": "Vous êtes sur le point de vous déconnecter !",
+          "You are about to Logout!":
+              "Vous êtes sur le point de vous déconnecter !",
           "Terminar sessão": "Se déconnecter",
           "Send Message": "Envoyer un message",
           "Enter subject": "Saisissez le sujet",
           "Enter message": "Saisissez le message",
-          "message must be at least 15 characters": "le message doit contenir au moins 15 caractères",
+          "message must be at least 15 characters":
+              "le message doit contenir au moins 15 caractères",
           "Nenhum arquivo selecionado": "Aucun fichier sélectionné",
           "Enter Value": "Saisissez la valeur",
           "Pesquisar": "Rechercher",
@@ -1143,7 +1255,8 @@ final class LocalString extends Translations {
           "Principais categorias": "Catégories principales",
           "Todas as categorias": "Toutes les catégories",
           "Categories": "Catégories",
-          "Please select address from map": "Veuillez sélectionner une adresse sur la carte",
+          "Please select address from map":
+              "Veuillez sélectionner une adresse sur la carte",
           "Delivery Status": "Statut de la livraison",
           "Enter Address name": "Saisissez le nom de l'adresse",
           "Enter Address": "Saisissez l'adresse",
@@ -1160,22 +1273,27 @@ final class LocalString extends Translations {
           "Miss match old password": "Ancien mot de passe incorrect",
           "New Password": "Nouveau mot de passe",
           "Enter new Password": "Saisissez le nouveau mot de passe",
-          "Password must be 5 characters": "Le mot de passe doit contenir 5 caractères",
+          "Password must be 5 characters":
+              "Le mot de passe doit contenir 5 caractères",
           "Confirm Password": "Confirmez le mot de passe",
           "Enter confirm Password": "Confirmez le mot de passe",
           "Password not matched": "Les mots de passe ne correspondent pas",
           "Andar": "Étage",
           "Enter email": "Saisissez l'adresse email",
-          "Email must be at least 6 characters": "L'adresse email doit contenir au moins 6 caractères",
+          "Email must be at least 6 characters":
+              "L'adresse email doit contenir au moins 6 caractères",
           "NIF": "NIF",
           "Enter NIF": "Saisissez le NIF",
-          "NIF must be at least 6 characters": "Le NIF doit contenir au moins 6 caractères",
+          "NIF must be at least 6 characters":
+              "Le NIF doit contenir au moins 6 caractères",
           "Enter phone": "Saisissez le numéro de téléphone",
-          "Phone must be at least 6 characters": "Le numéro de téléphone doit contenir au moins 6 caractères",
+          "Phone must be at least 6 characters":
+              "Le numéro de téléphone doit contenir au moins 6 caractères",
           "Email": "Email",
           "Hoje": "Aujourd'hui",
           "Amanha": "Demain",
-          "Data connection is available.": "La connexion de données est disponible.",
+          "Data connection is available.":
+              "La connexion de données est disponible.",
           "You are not logged in": "Vous n'êtes pas connecté",
           " minutes": " minutes",
           " unidades": " unités",
@@ -1191,15 +1309,22 @@ final class LocalString extends Translations {
           "Items": "Articles", //fr
           "Success": "Succès",
           "Success with no content": "Succès sans contenu",
-          "Bad request. Try again later": "Requête incorrecte. Réessayez plus tard",
-          "User unauthorized. Try again later": "Utilisateur non autorisé. Réessayez plus tard",
-          "Forbidden request. Try again later": "Requête interdite. Réessayez plus tard",
-          "Something went wrong. Try again later": "Quelque chose s'est mal passé. Réessayez plus tard",
-          "URL not found. Try again later": "URL non trouvée. Réessayez plus tard",
+          "Bad request. Try again later":
+              "Requête incorrecte. Réessayez plus tard",
+          "User unauthorized. Try again later":
+              "Utilisateur non autorisé. Réessayez plus tard",
+          "Forbidden request. Try again later":
+              "Requête interdite. Réessayez plus tard",
+          "Something went wrong. Try again later":
+              "Quelque chose s'est mal passé. Réessayez plus tard",
+          "URL not found. Try again later":
+              "URL non trouvée. Réessayez plus tard",
           "Timeout. Try again later": "Délai dépassé. Réessayez plus tard",
           "Request canceled": "Requête annulée",
-          "Cache error. Try again later": "Erreur de cache. Réessayez plus tard",
-          "Please check your internet connection": "Veuillez vérifier votre connexion Internet",
+          "Cache error. Try again later":
+              "Erreur de cache. Réessayez plus tard",
+          "Please check your internet connection":
+              "Veuillez vérifier votre connexion Internet",
           "Something went wrong": "Quelque chose s'est mal passé",
         }
       };

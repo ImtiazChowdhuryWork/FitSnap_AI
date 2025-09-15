@@ -5,7 +5,10 @@ import '../gen/colors.gen.dart';
 
 class CustomSeparator extends StatelessWidget {
   const CustomSeparator(
-      {super.key, this.height = 1, this.color = AppColors.cC4C4C4, this.padding});
+      {super.key,
+      this.height = 1,
+      this.color = AppColors.cC4C4C4,
+      this.padding});
   final double height;
   final Color color;
   final double? padding;
