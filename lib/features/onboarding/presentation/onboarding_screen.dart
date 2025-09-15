@@ -1,6 +1,3 @@
-import 'package:fitsnap_ai/common_widgets/custom_card.dart';
-import 'package:fitsnap_ai/common_widgets/custom_container.dart';
-import 'package:fitsnap_ai/common_widgets/custom_elevated_button.dart';
 import 'package:fitsnap_ai/gen/assets.gen.dart';
 import 'package:fitsnap_ai/gen/colors.gen.dart';
 import 'package:fitsnap_ai/helpers/all_routes.dart';
@@ -10,11 +7,226 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-
-import '../../../../provider/impage_picker_provider_fitsnap.dart';
-import '../../../common_widgets/custom_text_form_field.dart';
+import 'package:fitsnap_ai/common_widgets/custom_text_form_field.dart';
 import '../models/onboarding_model.dart';
 import '../providers/onboarding_provider.dart';
+import '../../../../provider/impage_picker_provider_fitsnap.dart';
+
+// Custom Progress Bar Widget
+class CustomProgressBar extends StatelessWidget {
+  final int currentStep;
+  final int totalSteps;
+  final double height;
+  final Color backgroundColor;
+  final List<Color> gradientColors;
+
+  const CustomProgressBar({
+    super.key,
+    required this.currentStep,
+    required this.totalSteps,
+    this.height = 14.0,
+    this.backgroundColor = AppColors.cE6E8ED,
+    this.gradientColors = const [
+      AppColors.c3B13CA,
+      AppColors.c0000ff,
+      AppColors.c5454FF,
+    ],
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    // Calculate progress: 0% for first step, 100% for last step
+    final progress = totalSteps > 1 ? (currentStep) / (totalSteps - 1) : 0.0;
+
+    return Column(
+      children: [
+        Container(
+          height: height.h,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: backgroundColor,
+            borderRadius: BorderRadius.circular(20.r),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.15),
+                blurRadius: 8,
+                offset: Offset(0, 3),
+              ),
+            ],
+          ),
+          child: Stack(
+            children: [
+              FractionallySizedBox(
+                widthFactor: progress.clamp(0.0, 1.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: gradientColors,
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                    ),
+                    borderRadius: BorderRadius.circular(20.r),
+                  ),
+                ),
+              ),
+              Center(
+                child: Text(
+                  "${(progress * 100).toInt()}%",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 10.sp,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 8.h),
+        Text(
+          "Step $currentStep of $totalSteps",
+          style: TextStyle(
+            color: AppColors.c000000,
+            fontFamily: 'Inter',
+            fontWeight: FontWeight.w500,
+            fontSize: 12.sp,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+// Updated CustomElevatedButton for a professional look
+class CustomElevatedButton extends StatelessWidget {
+  final String buttonTitle;
+  final double? buttonWidth;
+  final Color? buttonColor;
+  final VoidCallback? onTap;
+
+  const CustomElevatedButton({
+    super.key,
+    required this.buttonTitle,
+    this.buttonWidth,
+    this.buttonColor,
+    this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: buttonWidth ?? double.infinity,
+        height: 50.h,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: buttonColor != null
+                ? [buttonColor!, buttonColor!.withOpacity(0.8)]
+                : [AppColors.c0000ff, AppColors.c5454FF],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+          borderRadius: BorderRadius.circular(12.r),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 6,
+              offset: Offset(0, 3),
+            ),
+          ],
+        ),
+        child: Center(
+          child: Text(
+            buttonTitle,
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'Inter',
+              fontWeight: FontWeight.w600,
+              fontSize: 18.sp,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// Updated CustomCard for a professional look
+class CustomCard extends StatelessWidget {
+  final VoidCallback? onTap;
+  final double? width;
+  final double? height;
+  final Color? color;
+  final Widget? child;
+
+  const CustomCard({
+    super.key,
+    this.onTap,
+    this.width,
+    this.height,
+    this.color,
+    this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          color: color ?? AppColors.cE6E8ED,
+          borderRadius: BorderRadius.circular(10.r),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 4,
+              offset: Offset(0, 2),
+            ),
+          ],
+        ),
+        child: child,
+      ),
+    );
+  }
+}
+
+// Updated CustomContainer for a professional look
+class CustomContainer extends StatelessWidget {
+  final double? width;
+  final double? height;
+  final Widget? child;
+
+  const CustomContainer({
+    super.key,
+    this.width,
+    this.height,
+    this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: width,
+      height: height,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10.r),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 4,
+            offset: Offset(0, 2),
+          ),
+        ],
+      ),
+      child: child,
+    );
+  }
+}
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -87,8 +299,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               backgroundColor: onboardingProvider.currentQuestionIndex == 4
                   ? AppColors.c0000ff
                   : Color(0xFFFFFFFF),
+              elevation: 0,
               leading: IconButton(
-                icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+                icon: Icon(Icons.arrow_back_ios, color: Colors.black, size: 24.sp),
                 onPressed: () {
                   if (onboardingProvider.currentQuestionIndex == 0) {
                     final now = DateTime.now();
@@ -149,13 +362,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   child: Column(
                     spacing: 20.h,
                     children: [
-                      LinearProgressIndicator(
-                        value: (index + 1) /
-                            onboardingProvider.currentQuestions.length,
-                        minHeight: 14.h,
+                      CustomProgressBar(
+                        currentStep: index + 1,
+                        totalSteps: onboardingProvider.currentQuestions.length,
+                        height: 14.h,
                         backgroundColor: AppColors.cE6E8ED,
-                        valueColor:
-                            AlwaysStoppedAnimation<Color>(AppColors.c3B13CA),
+                        gradientColors: [
+                          AppColors.c3B13CA,
+                          AppColors.c0000ff,
+                          AppColors.c5454FF,
+                        ],
                       ),
                       question.questionText
                                   .contains("Do you wanna lose weight") ||
@@ -167,8 +383,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               style: TextStyle(
                                 color: AppColors.c000000,
                                 fontFamily: "Inter",
-                                fontWeight: FontWeight.w500,
-                                fontSize: 30.sp,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 28.sp,
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -262,10 +478,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                         EdgeInsets.symmetric(horizontal: 15.w),
                                     decoration: BoxDecoration(
                                       color: AppColors.c0000ff
-                                          .withValues(alpha: 0.11),
+                                          .withValues(alpha: 0.05),
+                                      borderRadius: BorderRadius.circular(8.r),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Colors.black12,
+                                          color: Colors.black.withOpacity(0.1),
                                           blurRadius: 4,
                                           offset: Offset(0, 2),
                                         ),
@@ -317,6 +534,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                             fontSize: 14.sp,
                                             color: AppColors.c000000,
                                             fontFamily: "Inter",
+                                            fontWeight: FontWeight.w500,
                                           ),
                                         ),
                                         Text(
@@ -327,6 +545,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                             fontSize: 14.sp,
                                             color: AppColors.c000000,
                                             fontFamily: "Inter",
+                                            fontWeight: FontWeight.w500,
                                           ),
                                         ),
                                       ],
@@ -357,9 +576,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                       color: AppColors.c000000,
                                       fontFamily: "Inter",
                                       fontSize: 18.sp,
+                                      fontWeight: FontWeight.w400,
                                     ),
                                     fillColor: AppColors.c0000ff
-                                        .withValues(alpha: 0.11),
+                                        .withValues(alpha: 0.05),
+                                    borderRadius: 10.r,
                                   ),
                                 ],
                               ),
@@ -417,7 +638,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                                       : AppColors.c000000,
                                                   fontFamily: "Inter",
                                                   fontWeight: FontWeight.w500,
-                                                  fontSize: 20.sp,
+                                                  fontSize: 18.sp,
                                                 ),
                                               ),
                                             ),
@@ -471,11 +692,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                                             AppColors.c000000,
                                                         fontFamily: "Inter",
                                                         fontSize: 22.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400,
                                                       ),
                                                       fillColor: AppColors
                                                           .c0000ff
                                                           .withValues(
-                                                              alpha: 0.11),
+                                                              alpha: 0.05),
+                                                      borderRadius: 10.r,
                                                     ),
                                                   ],
                                                 ),
@@ -514,11 +738,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                                             AppColors.c000000,
                                                         fontFamily: "Inter",
                                                         fontSize: 22.sp,
+                                                        fontWeight:
+                                                            FontWeight.w400,
                                                       ),
                                                       fillColor: AppColors
                                                           .c0000ff
                                                           .withValues(
-                                                              alpha: 0.11),
+                                                              alpha: 0.05),
+                                                      borderRadius: 10.r,
                                                     ),
                                                   ],
                                                 ),
@@ -546,9 +773,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                               color: AppColors.c000000,
                                               fontFamily: "Inter",
                                               fontSize: 22.sp,
+                                              fontWeight: FontWeight.w400,
                                             ),
                                             fillColor: AppColors.c0000ff
-                                                .withValues(alpha: 0.11),
+                                                .withValues(alpha: 0.05),
+                                            borderRadius: 10.r,
                                           );
                                         }
                                       },
@@ -579,9 +808,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                         color: AppColors.c000000,
                                         fontFamily: "Inter",
                                         fontSize: 18.sp,
+                                        fontWeight: FontWeight.w400,
                                       ),
                                       fillColor: AppColors.c0000ff
-                                          .withValues(alpha: 0.11),
+                                          .withValues(alpha: 0.05),
+                                      borderRadius: 10.r,
                                     ),
                                   if (!question.questionText
                                           .contains("height") &&
@@ -602,9 +833,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                         color: AppColors.c000000,
                                         fontFamily: "Inter",
                                         fontSize: 18.sp,
+                                        fontWeight: FontWeight.w400,
                                       ),
                                       fillColor: AppColors.c0000ff
-                                          .withValues(alpha: 0.11),
+                                          .withValues(alpha: 0.05),
+                                      borderRadius: 10.r,
                                     ),
                                 ],
                               ),
@@ -632,22 +865,25 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                       },
                                       height: 70.h,
                                       color: AppColors.c0000ff.withValues(
-                                        alpha: isSelected ? 1.0 : 0.11,
+                                        alpha: isSelected ? 1.0 : 0.05,
                                       ),
                                       child: Row(
                                         children: [
                                           Expanded(
                                             flex: 3,
-                                            child: Text(
-                                              option.optionText,
-                                              maxLines: 2,
-                                              style: TextStyle(
-                                                color: isSelected
-                                                    ? Colors.white
-                                                    : AppColors.c000000,
-                                                fontFamily: "Inter",
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 25.sp,
+                                            child: Padding(
+                                              padding: EdgeInsets.symmetric(horizontal: 12.w),
+                                              child: Text(
+                                                option.optionText,
+                                                maxLines: 2,
+                                                style: TextStyle(
+                                                  color: isSelected
+                                                      ? Colors.white
+                                                      : AppColors.c000000,
+                                                  fontFamily: "Inter",
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 22.sp,
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -713,7 +949,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   "Take a New Photo",
                                   style: TextStyle(
                                     fontSize: 15.sp,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColors.c000000,
                                   ),
                                 ),
                               ],
@@ -754,7 +991,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   "Upload from Gallery",
                                   style: TextStyle(
                                     fontSize: 15.sp,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColors.c000000,
                                   ),
                                 ),
                               ],
@@ -767,26 +1005,26 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             text: TextSpan(
                                 style: TextStyle(
                                   fontSize: 15.sp,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w600,
                                   color: AppColors.c000000,
                                 ),
                                 children: [
                                   TextSpan(
-                                    text: "1000000",
+                                    text: "1,000,000",
                                     style: TextStyle(
                                       fontSize: 15.sp,
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.w700,
                                       color: AppColors.c0000ff,
                                     ),
                                   ),
                                   TextSpan(
-                                    text: "+FitSnap AI users\n\n\n",
+                                    text: "+ FitSnap AI users\n\n",
                                   ),
                                   TextSpan(
                                       text: "87% of FitSnap AI users",
                                       style: TextStyle(
                                         fontSize: 20.sp,
-                                        fontWeight: FontWeight.bold,
+                                        fontWeight: FontWeight.w700,
                                       ))
                                 ]))
                       ],
@@ -797,12 +1035,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           children: [
                             CustomElevatedButton(
                               buttonTitle: "Yes",
-                              buttonWidth: 100.w,
+                              buttonWidth: 120.w,
                               buttonColor: onboardingProvider
                                           .responses[questionKey] ==
                                       "Yes"
                                   ? AppColors.c0000ff
-                                  : AppColors.c0000ff.withValues(alpha: 0.11),
+                                  : AppColors.c0000ff.withValues(alpha: 0.05),
                               onTap: () {
                                 onboardingProvider.setTextInput(
                                     "Yes", questionKey);
@@ -810,12 +1048,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ),
                             CustomElevatedButton(
                               buttonTitle: "No",
-                              buttonWidth: 100.w,
+                              buttonWidth: 120.w,
                               buttonColor: onboardingProvider
                                           .responses[questionKey] ==
                                       "No"
                                   ? AppColors.c0000ff
-                                  : AppColors.c0000ff.withValues(alpha: 0.11),
+                                  : AppColors.c0000ff.withValues(alpha: 0.05),
                               onTap: () {
                                 onboardingProvider.setTextInput(
                                     "No", questionKey);
@@ -837,6 +1075,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                     fontFamily: 'Inter',
                                     fontWeight: FontWeight.w600,
                                     fontSize: 16.sp,
+                                    color: AppColors.c000000,
                                   )),
                               SizedBox(height: 4.h),
                               Text(
@@ -855,6 +1094,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   fontFamily: 'Inter',
                                   fontWeight: FontWeight.w400,
                                   fontSize: 12.sp,
+                                  color: AppColors.c000000,
                                 ),
                               ),
                             ],
@@ -872,7 +1112,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Reasonable goal',
+                              Text('Reasonable Goal',
                                   style: TextStyle(
                                     fontFamily: 'Inter',
                                     fontWeight: FontWeight.w600,
@@ -886,6 +1126,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   fontFamily: 'Inter',
                                   fontWeight: FontWeight.w400,
                                   fontSize: 12.sp,
+                                  color: AppColors.c000000,
                                 ),
                               ),
                             ],
@@ -893,7 +1134,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         ),
                       ],
                       if (question.questionType != QuestionType.yesNo) Spacer(),
-                      // UIHelper.verticalSpaceExtraLarge,
                       // Show continue button only when an option is selected
                       if (onboardingProvider.hasSelectedOption ||
                           onboardingProvider.currentQuestionIndex == 4 ||
@@ -965,6 +1205,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   String _getReasonableGoalText() {
-    return "You will lose 15% of your weight there is scientific evidence that some obesity related conditions improved with 5% or higher weight loss.";
+    return "You will lose 15% of your weight; there is scientific evidence that some obesity-related conditions improve with 5% or higher weight loss.";
   }
 }

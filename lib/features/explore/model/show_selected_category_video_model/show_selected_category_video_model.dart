@@ -34,12 +34,32 @@ class ShowSelectedCategoryVideoModel {
       };
 }
 
+class Category {
+  int? id;
+  String? name;
+
+  Category({
+    this.id,
+    this.name,
+  });
+
+  factory Category.fromJson(Map<String, dynamic> json) => Category(
+        id: json["id"],
+        name: json["name"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+      };
+}
+
 class Datum {
   int? id;
   String? title;
   Gender? gender;
   String? video;
-  int? category;
+  Category? category;
 
   Datum({
     this.id,
@@ -58,7 +78,9 @@ class Datum {
         title: json["title"],
         gender: genderValues.map[json["gender"]]!,
         video: json["video"],
-        category: json["category"],
+        category: json["category"] == null
+            ? null
+            : Category.fromJson(json["category"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -66,7 +88,7 @@ class Datum {
         "title": title,
         "gender": genderValues.reverse[gender],
         "video": video,
-        "category": category,
+        "category": category?.toJson(),
       };
 }
 

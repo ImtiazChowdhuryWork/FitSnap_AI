@@ -34,7 +34,7 @@ final class GetMealPlanRx extends RxResponseInt {
     bool success = data["success"] ?? false;
 
     if (success) {
-      Map<String, dynamic>? planData = data["data"];
+      Map<String, dynamic>? planData = (data["data"].runtimeType == Map<String, dynamic>) ? data["data"] : null;
       if (planData != null) {
         mealPlanData = MealPlanData.fromJson(planData);
         log("Meal plan retrieved successfully: ${mealPlanData?.totalMeals} meals");

@@ -124,4 +124,5 @@ class AppColors {
 
   /// Color: #FFFFB75A
   static const Color secondaryColor = Color(0xFFFFB75A);
+  static const Color cF5F5F5 = Color(0xFFF5F5F5);
 }
