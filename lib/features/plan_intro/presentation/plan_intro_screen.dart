@@ -4,6 +4,7 @@ import 'package:fitsnap_ai/constants/text_font_style.dart';
 import 'package:fitsnap_ai/gen/assets.gen.dart';
 import 'package:fitsnap_ai/gen/colors.gen.dart';
 import 'package:fitsnap_ai/helpers/all_routes.dart';
+import 'package:fitsnap_ai/constants/app_list.dart';
 import 'package:fitsnap_ai/helpers/di.dart';
 import 'package:fitsnap_ai/helpers/navigation_service.dart';
 import 'package:flutter/material.dart';
@@ -23,17 +24,20 @@ class PlanIntroScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      ///Button : Subscribe Button
+      backgroundColor: AppColors.cF5F5F5, // Light background for better contrast
       bottomNavigationBar: Container(
         width: 1.sw,
-        height: 100.h,
-        color: Colors.transparent,
-        padding: EdgeInsets.all(UIHelper.kDefaulutPadding()),
+        height: 80.h,
+        padding: EdgeInsets.symmetric(
+          horizontal: UIHelper.kDefaulutPadding(),
+          vertical: 12.h,
+        ),
         child: CustomElevatedButton(
           onTap: () {
             NavigationService.navigateTo(Routes.signUpScreen);
           },
-          buttonTitle: "Subscribe",
+            buttonTitle: "Subscribe Now",
+            // buttonStyle removed as it was invalid
         ),
       ),
       body: SafeArea(
@@ -41,86 +45,158 @@ class PlanIntroScreen extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.all(UIHelper.kDefaulutPadding()),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ///Wellcome User Name
+                // Welcome Header
                 Text(
-                  "Welcome",
-                  style: TextFontStyle.headline25BoldcFFFFFFStyleInter.copyWith(
-                    fontSize: 36.sp,
+                  "Welcome to FitSnap AI",
+                  style: TextStyle(
+                    fontFamily: 'Satoshi',
+                    fontSize: 32.sp,
                     color: AppColors.c0000ff,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: -0.5,
+                    shadows: [
+                      Shadow(
+                        color: AppColors.c0000ff.withOpacity(0.08),
+                        blurRadius: 8,
+                        offset: Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                UIHelper.verticalSpace(12.h),
+
+                // Personalized Greeting
+                Text(
+                  "Hello, ${appData.read(kKeyNickName) ?? userName}!",
+                  style: TextStyle(
+                    fontFamily: 'Satoshi',
+                    fontSize: 28.sp,
+                    color: AppColors.c000000,
+                    fontWeight: FontWeight.w700,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                UIHelper.verticalSpace(20.h),
+
+                // Welcome Image
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(16.r),
+                  child: Image.asset(
+                    Assets.images.twoMenWomenHoldingWelcomeSign.path,
+                    height: 280.h,
+                    width: 0.9.sw,
+                    fit: BoxFit.cover,
                   ),
                 ),
-                UIHelper.verticalSpace(10.h),
+                UIHelper.verticalSpace(24.h),
 
-                ///Image : Welcom Sign
-                Image.asset(
-                  height: 330.h,
-                  width: 1.sw,
-                  fit: BoxFit.cover,
-                  Assets.images.twoMenWomenHoldingWelcomeSign.path,
-                ),
-                UIHelper.verticalSpace(5.h),
-
-                ///Text : Hellow, User Name
-                Align(
-                  alignment: Alignment.center,
+                // AI Insights Header
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+                  decoration: BoxDecoration(
+                    color: AppColors.c0000ff.withOpacity(0.08),
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
                   child: Text(
-                    "Hello ${appData.read(kKeyNickName) ?? 'User'}",
-                    textAlign: TextAlign.center,
-                    style:
-                        TextFontStyle.headline25BoldcFFFFFFStyleInter.copyWith(
-                      fontSize: 30.sp,
-                      color: AppColors.c0000ff,
-                      fontWeight: FontWeight.bold,
+                    "Your Personalized AI Insights",
+                    style: TextStyle(
+                      fontFamily: 'Satoshi',
+                      fontSize: 24.sp,
+                      color: AppColors.c3B13CA,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 0.1,
                     ),
+                    textAlign: TextAlign.center,
                   ),
                 ),
-                UIHelper.verticalSpace(10.h),
+                UIHelper.verticalSpace(16.h),
 
-                ///Text : What can be understood from the information you provided
-                Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    "What can be understood from the information you provided:",
-                    textAlign: TextAlign.center,
-                    style:
-                        TextFontStyle.headline25BoldcFFFFFFStyleInter.copyWith(
-                      fontSize: 25.sp,
+                // AI Response Markdown
+                Container(
+                  padding: EdgeInsets.all(16.w),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(14.r),
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.c0000ff.withOpacity(0.07),
+                        blurRadius: 12.r,
+                        offset: Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: GptMarkdown(
+                    appData.read(kKeygptResponse) ?? 'No AI response available.',
+                    style: TextStyle(
+                      fontFamily: 'Inter',
+                      fontSize: 17.sp,
                       color: AppColors.c000000,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w500,
+                      height: 1.7,
+                      letterSpacing: 0.1,
                     ),
                   ),
                 ),
-                UIHelper.verticalSpace(40.h),
+                UIHelper.verticalSpace(24.h),
 
-                // Text(md.markdownToHtml(appData.read(kKeygptResponse)))
-                GptMarkdown(
-                  appData.read(kKeygptResponse),
-                  style: TextFontStyle.headline20w500c000000StyleInter,
+                // Plan Suggestions Header
+                Text(
+                  "Recommended Plans for You",
+                  style: TextStyle(
+                    fontFamily: 'Satoshi',
+                    fontSize: 22.sp,
+                    color: AppColors.c000000,
+                    fontWeight: FontWeight.w700,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
+                UIHelper.verticalSpace(16.h),
 
-                ///AI Generated Plan Suggestions
-                // ListView.separated(
-                //   shrinkWrap: true,
-                //   physics: const NeverScrollableScrollPhysics(),
-                //   itemCount: AppList.planSuggestionList.length,
-                //   separatorBuilder: (context, index) =>
-                //       UIHelper.verticalSpace(20.h),
-                //   itemBuilder: (context, index) {
-                //     var data = AppList.planSuggestionList[index];
-                //     return Text(
-                //       data,
-                //       style: TextFontStyle.headline25BoldcFFFFFFStyleInter
-                //           .copyWith(
-                //         fontSize: 20.sp,
-                //         color: AppColors.c000000,
-                //         fontWeight: FontWeight.w500,
-                //       ),
-                //     );
-                //   },
-                // )
+                // Plan Suggestions List
+                ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: AppList.planSuggestionList.length,
+                  separatorBuilder: (context, index) => UIHelper.verticalSpace(12.h),
+                  itemBuilder: (context, index) {
+                    var data = AppList.planSuggestionList[index];
+                    return Container(
+                      padding: EdgeInsets.all(12.w),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10.r),
+                        border: Border.all(color: AppColors.c0000ff.withOpacity(0.2)),
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(
+                            Icons.check_circle,
+                            color: AppColors.c0000ff,
+                            size: 24.sp,
+                          ),
+                          SizedBox(width: 12.w),
+                          Expanded(
+                            child: Text(
+                              data,
+                              style: TextStyle(
+                                fontFamily: 'Inter',
+                                fontSize: 16.sp,
+                                color: AppColors.c000000,
+                                fontWeight: FontWeight.w500,
+                                height: 1.5,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+                UIHelper.verticalSpace(20.h),
               ],
             ),
           ),
