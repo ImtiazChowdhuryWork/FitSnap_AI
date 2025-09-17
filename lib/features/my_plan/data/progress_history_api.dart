@@ -10,11 +10,14 @@ final class ProgressHistoryApi {
   static final ProgressHistoryApi _singleton = ProgressHistoryApi._internal();
   static ProgressHistoryApi get instance => _singleton;
 
-  Future<Map> getProgressHistory() async {
+  Future<Map> getProgressHistory({String? date}) async {
     try {
-      Response response = await getHttp(
-        Endpoints.progressHistory(),
-      );
+      String endpoint = Endpoints.progressHistory();
+      if (date != null) {
+        endpoint += "?date=$date";
+      }
+      
+      Response response = await getHttp(endpoint);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         Map data = json.decode(json.encode(response.data));
