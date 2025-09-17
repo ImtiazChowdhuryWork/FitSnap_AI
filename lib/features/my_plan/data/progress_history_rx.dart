@@ -17,9 +17,9 @@ final class GetProgressHistoryRx extends RxResponseInt {
 
   ValueStream get getProgressHistoryData => dataFetcher.stream;
 
-  Future<bool> getProgressHistory() async {
+  Future<bool> getProgressHistory({String? date}) async {
     try {
-      Map data = await api.getProgressHistory();
+      Map data = await api.getProgressHistory(date: date);
       return await handleSuccessWithReturn(data);
     } catch (error) {
       return await handleErrorWithReturn(error);

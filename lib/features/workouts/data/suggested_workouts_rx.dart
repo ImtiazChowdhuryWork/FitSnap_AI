@@ -17,9 +17,9 @@ final class GetSuggestedWorkoutsRx extends RxResponseInt {
 
   ValueStream get getSuggestedWorkoutsData => dataFetcher.stream;
 
-  Future<bool> getSuggestedWorkouts() async {
+  Future<bool> getSuggestedWorkouts({String? date}) async {
     try {
-      Map data = await api.getSuggestedWorkouts();
+      Map data = await api.getSuggestedWorkouts(date: date);
       return await handleSuccessWithReturn(data);
     } catch (error) {
       return await handleErrorWithReturn(error);

@@ -1,7 +1,7 @@
 class MealPlanModel {
   bool? success;
   String? message;
-  MealPlanData? data;
+  List<MealPlanData>? data;
 
   MealPlanModel({
     this.success,
@@ -12,38 +12,65 @@ class MealPlanModel {
   factory MealPlanModel.fromJson(Map<String, dynamic> json) => MealPlanModel(
         success: json["success"],
         message: json["message"],
-        data: json["data"] == null ? null : MealPlanData.fromJson((json["data"].runtimeType == Map<String, dynamic>) ? json["data"] : {}),
+        data: json["data"] == null 
+            ? [] 
+            : List<MealPlanData>.from(
+                json["data"]!.map((x) => MealPlanData.fromJson(x))
+              ),
       );
 
   Map<String, dynamic> toJson() => {
         "success": success,
         "message": message,
-        "data": data?.toJson(),
+        "data": data == null
+            ? []
+            : List<dynamic>.from(data!.map((x) => x.toJson())),
       };
+
+  /// Get the latest/most recent meal plan
+  MealPlanData? get latestMealPlan {
+    if (data == null || data!.isEmpty) return null;
+    return data!.first;
+  }
+
+  /// Get total number of meal plans
+  int get totalMealPlans => data?.length ?? 0;
 }
 
 class MealPlanData {
+  int? id;
+  int? user;
   String? goal;
   String? calories;
+  String? hydration;
+  String? notes;
   MacrosInfo? macrosInfo;
   List<MealItem>? meals;
-  HydrationInfo? hydrationInfo;
   SwapsInfo? swapsInfo;
-  String? notes;
+  HydrationInfo? hydrationInfo;
+  String? date;
 
   MealPlanData({
+    this.id,
+    this.user,
     this.goal,
     this.calories,
+    this.hydration,
+    this.notes,
     this.macrosInfo,
     this.meals,
-    this.hydrationInfo,
     this.swapsInfo,
-    this.notes,
+    this.hydrationInfo,
+    this.date,
   });
 
   factory MealPlanData.fromJson(Map<String, dynamic> json) => MealPlanData(
+        id: json["id"],
+        user: json["user"],
         goal: json["goal"],
         calories: json["calories"],
+        hydration: json["hydration"],
+        notes: json["notes"],
         macrosInfo: json["macros_info"] == null
             ? null
             : MacrosInfo.fromJson(json["macros_info"]),
@@ -51,25 +78,29 @@ class MealPlanData {
             ? []
             : List<MealItem>.from(
                 json["meals"]!.map((x) => MealItem.fromJson(x))),
-        hydrationInfo: json["hydration_info"] == null
-            ? null
-            : HydrationInfo.fromJson(json["hydration_info"]),
         swapsInfo: json["swaps_info"] == null
             ? null
             : SwapsInfo.fromJson(json["swaps_info"]),
-        notes: json["notes"],
+        hydrationInfo: json["hydration_info"] == null
+            ? null
+            : HydrationInfo.fromJson(json["hydration_info"]),
+        date: json["date"],
       );
 
   Map<String, dynamic> toJson() => {
+        "id": id,
+        "user": user,
         "goal": goal,
         "calories": calories,
+        "hydration": hydration,
+        "notes": notes,
         "macros_info": macrosInfo?.toJson(),
         "meals": meals == null
             ? []
             : List<dynamic>.from(meals!.map((x) => x.toJson())),
-        "hydration_info": hydrationInfo?.toJson(),
         "swaps_info": swapsInfo?.toJson(),
-        "notes": notes,
+        "hydration_info": hydrationInfo?.toJson(),
+        "date": date,
       };
 
   /// Get formatted goal without emoji for display - with comprehensive emoji removal
@@ -86,11 +117,37 @@ class MealPlanData {
         .replaceAll(RegExp(r'Calories:\s*', caseSensitive: false), '');
   }
 
+  /// Get formatted hydration without emoji for display - with comprehensive emoji removal
+  String get cleanHydration {
+    if (hydration == null) return "";
+    return _cleanTextSafely(hydration!)
+        .replaceAll(RegExp(r'Hydration:\s*', caseSensitive: false), '');
+  }
+
   /// Get formatted notes without emoji for display - with comprehensive emoji removal
   String get cleanNotes {
     if (notes == null) return "";
     return _cleanTextSafely(notes!)
         .replaceAll(RegExp(r'Notes:\s*', caseSensitive: false), '');
+  }
+
+  /// Get formatted date for display
+  String get formattedDate {
+    if (date == null) return "";
+    try {
+      DateTime dateTime = DateTime.parse(date!);
+      return "${_getMonthName(dateTime.month)} ${dateTime.day}, ${dateTime.year}";
+    } catch (e) {
+      return date ?? "";
+    }
+  }
+
+  String _getMonthName(int month) {
+    const monthNames = [
+      "", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+    return monthNames[month];
   }
 
   /// Get total meals count
