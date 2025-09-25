@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:fitsnap_ai/networks/endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 import '../../../common_widgets/custom_drawer.dart';
 import '../../../gen/colors.gen.dart';
@@ -19,8 +22,10 @@ class ProgressScreen extends StatefulWidget {
 
 class _ProgressScreenState extends State<ProgressScreen> {
   bool _isLoading = true;
-  ProgressHistoryItem? _currentProgress;
+  List<ProgressHistoryItem> _progressList = [];
   String _errorMessage = '';
+  bool _showListView = false;
+  DateTime? _selectedDate;
 
   @override
   void initState() {
@@ -28,17 +33,17 @@ class _ProgressScreenState extends State<ProgressScreen> {
     _loadProgressData();
   }
 
-  Future<void> _loadProgressData() async {
+  Future<void> _loadProgressData({String? date}) async {
     setState(() {
       _isLoading = true;
       _errorMessage = '';
     });
 
     try {
-      bool success = await getProgressHistoryRx.getProgressHistory();
+      bool success = await getProgressHistoryRx.getProgressHistory(date: date);
       if (success && getProgressHistoryRx.progressHistory.isNotEmpty) {
         setState(() {
-          _currentProgress = getProgressHistoryRx.progressHistory.first;
+          _progressList = getProgressHistoryRx.progressHistory;
           _isLoading = false;
         });
       } else {
@@ -53,6 +58,43 @@ class _ProgressScreenState extends State<ProgressScreen> {
         _isLoading = false;
       });
     }
+  }
+
+  Future<void> _selectDate() async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _selectedDate ?? DateTime.now(),
+      firstDate: DateTime(2020),
+      lastDate: DateTime.now(),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: AppColors.c0000ff,
+              onPrimary: Colors.white,
+              surface: Colors.white,
+              onSurface: Colors.black,
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    if (picked != null) {
+      setState(() {
+        _selectedDate = picked;
+      });
+      String formattedDate = DateFormat('yyyy-MM-dd').format(picked);
+      _loadProgressData(date: formattedDate);
+    }
+  }
+
+  void _clearDateFilter() {
+    setState(() {
+      _selectedDate = null;
+    });
+    _loadProgressData();
   }
 
   @override
@@ -74,167 +116,106 @@ class _ProgressScreenState extends State<ProgressScreen> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.refresh, color: Colors.white),
-            onPressed: _loadProgressData,
+            icon: Icon(
+              _showListView ? Icons.view_agenda : Icons.list,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              setState(() {
+                _showListView = !_showListView;
+              });
+            },
           ),
           IconButton(
-            icon: const Icon(Icons.favorite_border, color: Colors.white),
-            onPressed: () {},
+            icon: const Icon(Icons.calendar_today, color: Colors.white),
+            onPressed: _selectDate,
+          ),
+          if (_selectedDate != null)
+            IconButton(
+              icon: const Icon(Icons.clear, color: Colors.white),
+              onPressed: _clearDateFilter,
+            ),
+          IconButton(
+            icon: const Icon(Icons.refresh, color: Colors.white),
+            onPressed: () => _loadProgressData(),
           ),
         ],
       ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(UIHelper.kDefaulutPadding()),
-          child: _isLoading
-              ? Center(
-                  child: CircularProgressIndicator(
-                    color: AppColors.c0000ff,
+          child: Column(
+            children: [
+              // Date Filter Info
+              if (_selectedDate != null)
+                Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.all(12.sp),
+                  margin: EdgeInsets.only(bottom: 16.h),
+                  decoration: BoxDecoration(
+                    color: AppColors.c0000ff.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(8.r),
+                    border: Border.all(color: AppColors.c0000ff.withOpacity(0.3)),
                   ),
-                )
-              : _errorMessage.isNotEmpty
-                  ? _buildErrorState()
-                  : _buildProgressContent(),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildErrorState() {
-    return Center(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 48.h),
-        margin: EdgeInsets.symmetric(horizontal: 24.w),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              AppColors.c0000ff.withOpacity(0.1),
-              AppColors.c0000ff.withOpacity(0.05),
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-          borderRadius: BorderRadius.circular(24.r),
-          border: Border.all(
-            color: AppColors.c0000ff.withOpacity(0.2),
-            width: 2,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.c0000ff.withOpacity(0.1),
-              blurRadius: 20,
-              offset: const Offset(0, 10),
-            ),
-          ],
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Icon
-            Container(
-              padding: EdgeInsets.all(20.sp),
-              decoration: BoxDecoration(
-                color: AppColors.c0000ff.withOpacity(0.1),
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                Icons.show_chart_rounded,
-                size: 48.sp,
-                color: AppColors.c0000ff,
-              ),
-            ),
-            SizedBox(height: 24.h),
-
-            // Title
-            Text(
-              "Track Your Progress",
-              style: TextStyle(
-                fontSize: 20.sp,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 12.h),
-
-            // Message
-            Text(
-              "You need to take your body image using AI cam to track your fitness progress over time",
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w400,
-                color: Colors.black54,
-                height: 1.5,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 32.h),
-
-            // Button
-            Container(
-              width: double.infinity,
-              height: 56.h,
-              decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [AppColors.c0000ff, Color(0xFF2563EB)],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                ),
-                borderRadius: BorderRadius.circular(16.r),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.c0000ff.withOpacity(0.3),
-                    blurRadius: 12,
-                    offset: const Offset(0, 6),
-                  ),
-                ],
-              ),
-              child: ElevatedButton(
-                onPressed: () {
-                  // Navigate to AI cam screen using navigation provider
-                  final navigationProvider =
-                      Provider.of<NavigationProvider>(context,
-                          listen: false);
-                  navigationProvider
-                      .setIndex(2); // AI cam is at index 2
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.transparent,
-                  shadowColor: Colors.transparent,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16.r),
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.camera_alt,
-                      color: Colors.white,
-                      size: 20.sp,
-                    ),
-                    SizedBox(width: 8.w),
-                    Text(
-                      "Take Body Image",
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.filter_list,
+                        color: AppColors.c0000ff,
+                        size: 20.sp,
                       ),
-                    ),
-                  ],
+                      SizedBox(width: 8.w),
+                      Text(
+                        "Filtered by: ${DateFormat('MMM dd, yyyy').format(_selectedDate!)}",
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.c0000ff,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
+
+              // Content
+              Expanded(
+                child: _isLoading
+                    ? Center(
+                        child: CircularProgressIndicator(
+                          color: AppColors.c0000ff,
+                        ),
+                      )
+                    : _errorMessage.isNotEmpty
+                        ? _buildErrorState()
+                        : _buildListView()
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildProgressContent() {
-    return SingleChildScrollView(
-      child: Column(
+  Widget _buildListView() {
+    log("_progressList.length: ${_progressList.length}");
+    if (_progressList.isEmpty) {
+      return _buildErrorState();
+    }
+
+    return ListView.builder(
+   
+      itemCount: _progressList.length,
+      itemBuilder: (context, index) {
+        final progress = _progressList[index];
+        return _buildProgressCard(progress, index);
+      },
+    );
+  }
+
+  Widget _buildProgressCard(ProgressHistoryItem progress, int index) {
+    final currentProgress = _progressList[index];
+    return 
+      Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Progress Photos Section
@@ -279,9 +260,9 @@ class _ProgressScreenState extends State<ProgressScreen> {
                             ),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(16.r),
-                              child: _currentProgress?.previousImage != null
+                              child: currentProgress.previousImage != null
                                   ? Image.network(
-                                      "$baseUrl${_currentProgress!.previousImage!}",
+                                      "$baseUrl${currentProgress.previousImage!}",
                                       fit: BoxFit.fill,
                                       errorBuilder:
                                           (context, error, stackTrace) {
@@ -324,9 +305,9 @@ class _ProgressScreenState extends State<ProgressScreen> {
                             ),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(16.r),
-                              child: _currentProgress?.currentImage != null
+                              child: currentProgress.currentImage != null
                                   ? Image.network(
-                                      "$baseUrl${_currentProgress!.currentImage!}",
+                                      "$baseUrl${currentProgress.currentImage!}",
                                       fit: BoxFit.fill,
                                       errorBuilder:
                                           (context, error, stackTrace) {
@@ -386,18 +367,18 @@ class _ProgressScreenState extends State<ProgressScreen> {
 
                 // Date Section
                 _buildInfoRow("Date",
-                    _currentProgress?.formattedDate ?? "No date available"),
+                    currentProgress.formattedDate.isNotEmpty ? currentProgress.formattedDate : "No date available"),
 
                 UIHelper.verticalSpace(16.h),
 
                 // Status Section
                 _buildInfoRow(
-                    "Status", _currentProgress?.status ?? "No status"),
+                    "Status", currentProgress.status ?? "No status"),
 
                 UIHelper.verticalSpace(16.h),
 
                 // Difference Section
-                if (_currentProgress?.differentiateFromPrevious != null) ...[
+                if (currentProgress.differentiateFromPrevious != null) ...[
                   Text(
                     "Difference",
                     style: TextStyle(
@@ -414,7 +395,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                       borderRadius: BorderRadius.circular(8.r),
                     ),
                     child: Text(
-                      _currentProgress!.differentiateFromPrevious!,
+                      currentProgress.differentiateFromPrevious!,
                       style: TextStyle(
                         fontSize: 14.sp,
                         color: Colors.black87,
@@ -426,7 +407,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                 ],
 
                 // Current Analysis Section
-                if (_currentProgress?.currentAnalysis != null) ...[
+                if (currentProgress.currentAnalysis != null) ...[
                   Text(
                     "Current Analysis",
                     style: TextStyle(
@@ -443,7 +424,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                       borderRadius: BorderRadius.circular(8.r),
                     ),
                     child: Text(
-                      _currentProgress!.currentAnalysis!,
+                      currentProgress.currentAnalysis!,
                       style: TextStyle(
                         fontSize: 14.sp,
                         color: Colors.black87,
@@ -455,7 +436,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                 ],
 
                 // Tips Section
-                if (_currentProgress?.tips != null) ...[
+                if (currentProgress.tips != null) ...[
                   Text(
                     "Tips",
                     style: TextStyle(
@@ -472,7 +453,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                       borderRadius: BorderRadius.circular(8.r),
                     ),
                     child: Text(
-                      _currentProgress!.tips!,
+                      currentProgress.tips!,
                       style: TextStyle(
                         fontSize: 14.sp,
                         color: Colors.black87,
@@ -487,8 +468,157 @@ class _ProgressScreenState extends State<ProgressScreen> {
 
           UIHelper.verticalSpace(40.h),
         ],
+      );
+  }
+
+  Widget _buildErrorState() {
+    // Check if we have a selected date and it's not today
+    bool isDateFiltered = _selectedDate != null;
+    bool isNotToday = _selectedDate != null && 
+        !_isSameDay(_selectedDate!, DateTime.now());
+    
+    return Center(
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 48.h),
+        margin: EdgeInsets.symmetric(horizontal: 24.w),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              AppColors.c0000ff.withOpacity(0.1),
+              AppColors.c0000ff.withOpacity(0.05),
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+          borderRadius: BorderRadius.circular(24.r),
+          border: Border.all(
+            color: AppColors.c0000ff.withOpacity(0.2),
+            width: 2,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.c0000ff.withOpacity(0.1),
+              blurRadius: 20,
+              offset: const Offset(0, 10),
+            ),
+          ],
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Icon
+            Container(
+              padding: EdgeInsets.all(20.sp),
+              decoration: BoxDecoration(
+                color: AppColors.c0000ff.withOpacity(0.1),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                isDateFiltered && isNotToday 
+                    ? Icons.calendar_today_outlined 
+                    : Icons.show_chart_rounded,
+                size: 48.sp,
+                color: AppColors.c0000ff,
+              ),
+            ),
+            SizedBox(height: 24.h),
+
+            // Title
+            Text(
+              isDateFiltered && isNotToday 
+                  ? "No Image Uploaded"
+                  : "Track Your Progress",
+              style: TextStyle(
+                fontSize: 20.sp,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 12.h),
+
+            // Message
+            Text(
+              isDateFiltered && isNotToday
+                  ? "No body image was uploaded on ${DateFormat('MMM dd, yyyy').format(_selectedDate!)}. Images can only be taken on the current day."
+                  : "You need to take your body image using AI cam to track your fitness progress over time",
+              style: TextStyle(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w400,
+                color: Colors.black54,
+                height: 1.5,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 32.h),
+
+            // Button - only show if it's today or no date filter
+            if (!isDateFiltered || !isNotToday)
+              Container(
+                width: double.infinity,
+                height: 56.h,
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [AppColors.c0000ff, Color(0xFF2563EB)],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ),
+                  borderRadius: BorderRadius.circular(16.r),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.c0000ff.withOpacity(0.3),
+                      blurRadius: 12,
+                      offset: const Offset(0, 6),
+                    ),
+                  ],
+                ),
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Navigate to AI cam screen using navigation provider
+                    final navigationProvider =
+                        Provider.of<NavigationProvider>(context,
+                            listen: false);
+                    navigationProvider
+                        .setIndex(2); // AI cam is at index 2
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.transparent,
+                    shadowColor: Colors.transparent,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16.r),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.camera_alt,
+                        color: Colors.white,
+                        size: 20.sp,
+                      ),
+                      SizedBox(width: 8.w),
+                      Text(
+                        "Take Body Image",
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+          ],
+        ),
       ),
     );
+  }
+
+  bool _isSameDay(DateTime date1, DateTime date2) {
+    return date1.year == date2.year &&
+           date1.month == date2.month &&
+           date1.day == date2.day;
   }
 
   Widget _buildPlaceholderImage() {
@@ -507,6 +637,29 @@ class _ProgressScreenState extends State<ProgressScreen> {
             "No image",
             style: TextStyle(
               fontSize: 14.sp,
+              color: Colors.grey[600],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSmallPlaceholderImage() {
+    return Container(
+      color: Colors.grey[300],
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.person,
+            size: 30.sp,
+            color: Colors.grey[600],
+          ),
+          Text(
+            "No image",
+            style: TextStyle(
+              fontSize: 10.sp,
               color: Colors.grey[600],
             ),
           ),
@@ -546,5 +699,17 @@ class _ProgressScreenState extends State<ProgressScreen> {
         ],
       ),
     );
+  }
+
+  Color _getStatusColor(String status) {
+    if (status.contains('Fire') || status.contains('Crushing')) {
+      return Colors.red;
+    } else if (status.contains('Rise') || status.contains('Track')) {
+      return Colors.green;
+    } else if (status.contains('Improving')) {
+      return Colors.orange;
+    } else {
+      return AppColors.c0000ff;
+    }
   }
 }

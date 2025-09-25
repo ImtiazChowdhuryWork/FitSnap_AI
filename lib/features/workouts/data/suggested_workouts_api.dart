@@ -10,11 +10,14 @@ final class SuggestedWorkoutsApi {
   static final SuggestedWorkoutsApi _singleton = SuggestedWorkoutsApi._internal();
   static SuggestedWorkoutsApi get instance => _singleton;
 
-  Future<Map> getSuggestedWorkouts() async {
+  Future<Map> getSuggestedWorkouts({String? date}) async {
     try {
-      Response response = await getHttp(
-        Endpoints.suggestedWorkouts(),
-      );
+      String endpoint = Endpoints.suggestedWorkouts();
+      if (date != null) {
+        endpoint += "?date=$date";
+      }
+      
+      Response response = await getHttp(endpoint);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         Map data = json.decode(json.encode(response.data));
