@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:fitsnap_ai/common_widgets/custom_toast.dart';
 import 'package:fitsnap_ai/features/meal/data/meal_plan_api.dart';
@@ -40,13 +39,15 @@ final class GetMealPlanRx extends RxResponseInt {
         log("Meal plan retrieved successfully: ${mealPlanData?.totalMeals} meals");
         return true;
       } else {
-      ;
+        log("No meal plan data found in response");
+        return false;
       }
     } else {
-      CustomToastMessage(
-        title: 'Error',
-        description: message,
-      );
+      // Uncomment the lines below to display a toast message in case of failure
+      // CustomToastMessage(
+      //   title: 'Error',
+      //   description: message,
+      // );
       log("Failed to retrieve meal plan: $message");
       return false;
     }
@@ -62,6 +63,7 @@ final class GetMealPlanRx extends RxResponseInt {
       log("Error fetching meal plan: ${error.toString()}");
     }
 
+    // Uncomment the lines below to display a toast message in case of error
     // CustomToastMessage(
     //   title: 'Error',
     //   description: message,
