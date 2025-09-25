@@ -115,36 +115,40 @@ class CustomElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: buttonWidth ?? double.infinity,
-        height: 50.h,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: buttonColor != null
-                ? [buttonColor!, buttonColor!.withOpacity(0.8)]
-                : [AppColors.c0000ff, AppColors.c5454FF],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-          borderRadius: BorderRadius.circular(12.r),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.2),
-              blurRadius: 6,
-              offset: Offset(0, 3),
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(12.r),
+        child: Container(
+          width: buttonWidth ?? double.infinity,
+          height: 50.h,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: buttonColor != null
+                  ? [buttonColor!, buttonColor!.withOpacity(0.8)]
+                  : [AppColors.c0000ff, AppColors.c5454FF],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
             ),
-          ],
-        ),
-        child: Center(
-          child: Text(
-            buttonTitle,
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'Inter',
-              fontWeight: FontWeight.w600,
-              fontSize: 18.sp,
+            borderRadius: BorderRadius.circular(12.r),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                blurRadius: 6,
+                offset: Offset(0, 3),
+              ),
+            ],
+          ),
+          child: Center(
+            child: Text(
+              buttonTitle,
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w600,
+                fontSize: 18.sp,
+              ),
             ),
           ),
         ),
@@ -172,23 +176,27 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: width,
-        height: height,
-        decoration: BoxDecoration(
-          color: color ?? AppColors.cE6E8ED,
-          borderRadius: BorderRadius.circular(10.r),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 4,
-              offset: Offset(0, 2),
-            ),
-          ],
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(10.r),
+        child: Container(
+          width: width,
+          height: height,
+          decoration: BoxDecoration(
+            color: color ?? AppColors.cE6E8ED,
+            borderRadius: BorderRadius.circular(10.r),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 4,
+                offset: Offset(0, 2),
+              ),
+            ],
+          ),
+          child: child,
         ),
-        child: child,
       ),
     );
   }
@@ -266,6 +274,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         return PopScope(
           canPop: false, // Prevent default pop, handle manually
           onPopInvokedWithResult: (didPop, result) async {
+            // Handle iOS and Android differently
+            if (didPop) return; // Already popped, don't handle again
+            
             if (onboardingProvider.currentQuestionIndex == 0) {
               final now = DateTime.now();
               if (_lastBackPressed == null ||
@@ -279,12 +290,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 );
                 return;
               }
-              // Allow pop
-              Navigator.of(context).maybePop();
+              // Force exit for iOS compatibility
+              if (Navigator.of(context).canPop()) {
+                Navigator.of(context).pop();
+              }
               return;
             } else {
+              // Navigate to previous question
               onboardingProvider.goToPreviousQuestion();
-              _pageController.previousPage(
+              await _pageController.previousPage(
                 duration: Duration(milliseconds: 300),
                 curve: Curves.easeInOut,
               );
@@ -292,7 +306,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             }
           },
           child: Scaffold(
-            resizeToAvoidBottomInset: false,
+            resizeToAvoidBottomInset: true, // Allow iOS keyboard handling
 
             ///AppBar
             appBar: AppBar(
@@ -300,6 +314,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ? AppColors.c0000ff
                   : Color(0xFFFFFFFF),
               elevation: 0,
+              systemOverlayStyle: SystemUiOverlayStyle.dark, // iOS status bar
               leading: IconButton(
                 icon: Icon(Icons.arrow_back_ios, color: Colors.black, size: 24.sp),
                 onPressed: () {
@@ -330,10 +345,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
 
             ///Body
-            body: PageView.builder(
-              controller: _pageController,
-              physics: NeverScrollableScrollPhysics(), // Disable manual swiping
-              pageSnapping: false,
+            body: SafeArea(
+              child: PageView.builder(
+                controller: _pageController,
+                physics: NeverScrollableScrollPhysics(), // Disable manual swiping
+                pageSnapping: false,
               itemCount: onboardingProvider.currentQuestions.length,
               onPageChanged: (index) {
                 onboardingProvider.setCurrentQuestionIndex(index);
@@ -1182,6 +1198,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                 );
               },
+              ),
             ),
           ),
         );
