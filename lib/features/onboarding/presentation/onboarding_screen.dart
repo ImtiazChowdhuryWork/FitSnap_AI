@@ -376,7 +376,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         : null,
                   ),
                   child: Column(
-                    spacing: 20.h,
+                    spacing: 10.h,
                     children: [
                       CustomProgressBar(
                         currentStep: index + 1,
@@ -575,7 +575,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           if (question.questionType == QuestionType.textInput)
                             Expanded(
                               child: Column(
-                                spacing: 20.h,
+                                spacing: 10.h,
                                 children: [
                                   CustomFormField(
                                     controller: _getController(
@@ -1015,7 +1015,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             )
                           ],
                         ),
-                        UIHelper.verticalSpaceLarge,
+                        UIHelper.verticalSpaceSmall,
                         RichText(
                             textAlign: TextAlign.center,
                             text: TextSpan(
@@ -1149,7 +1149,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           ),
                         ),
                       ],
-                      if (question.questionType != QuestionType.yesNo) Spacer(),
+                      // if (question.questionType != QuestionType.yesNo) Spacer(),
                       // Show continue button only when an option is selected
                       if (onboardingProvider.hasSelectedOption ||
                           onboardingProvider.currentQuestionIndex == 4 ||
@@ -1193,7 +1193,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             }
                           },
                         ),
-                      UIHelper.verticalSpaceMedium,
+                      // UIHelper.verticalSpaceMedium,
                     ],
                   ),
                 );

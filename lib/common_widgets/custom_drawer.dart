@@ -50,7 +50,7 @@ class CustomDrawer extends StatelessWidget {
                 ),
               ),
             ),
-            UIHelper.verticalSpace(25.h),
+            // UIHelper.verticalSpace(8.h),
 
             ///Profile
             ///Favourites
@@ -61,6 +61,7 @@ class CustomDrawer extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.all(8.sp),
                 child: Column(
+                  spacing: 4.h,
                   children: [
                     /// Drawer Menu Items
                     CustomContainer(
@@ -74,7 +75,7 @@ class CustomDrawer extends StatelessWidget {
                         leadingIcon: Icons.person,
                       ),
                     ),
-                    UIHelper.verticalSpace(15.h),
+                    // UIHelper.verticalSpace(15.h),
 
                     ///Favourites
                     CustomContainer(
@@ -88,7 +89,7 @@ class CustomDrawer extends StatelessWidget {
                         leadingIcon: Icons.favorite,
                       ),
                     ),
-                    UIHelper.verticalSpace(15.h),
+                    // UIHelper.verticalSpace(15.h),
 
                     ///Subscriptions & Billing
                     CustomContainer(
@@ -103,7 +104,7 @@ class CustomDrawer extends StatelessWidget {
                         leadingIcon: Icons.payment,
                       ),
                     ),
-                    UIHelper.verticalSpace(15.h),
+                    // UIHelper.verticalSpace(15.h),
 
                     ///Terms of Services
                     CustomContainer(
@@ -118,7 +119,7 @@ class CustomDrawer extends StatelessWidget {
                         leadingIcon: Icons.description,
                       ),
                     ),
-                    UIHelper.verticalSpace(15.h),
+                    // UIHelper.verticalSpace(15.h),
 
                     ///Privacy Policy
                     CustomContainer(
@@ -156,9 +157,9 @@ class CustomDrawer extends StatelessWidget {
                         leadingIcon: Icons.privacy_tip,
                       ),
                     ),
-                    UIHelper.verticalSpace(15.h),
+                    // UIHelper.verticalSpace(15.h),
 
-                    Spacer(),
+                    // Spacer(),
 
                     /// Button : Logout Button
                     CustomContainer(
