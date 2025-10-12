@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:fitsnap_ai/features/explore/data/show_categories/api.dart';
-import 'package:fitsnap_ai/networks/rx_base.dart';
+import 'package:fitai/features/explore/data/show_categories/api.dart';
+import 'package:fitai/networks/rx_base.dart';
 import 'package:rxdart/streams.dart';
 
 final class GetExploreCategoriesRx extends RxResponseInt {

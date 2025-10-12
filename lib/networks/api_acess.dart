@@ -102,14 +102,14 @@
 // PutUpdatePasswordRX putUpdatePasswordRXObj =
 //     PutUpdatePasswordRX(empty: {}, dataFetcher: BehaviorSubject<Map>());
 
-import 'package:fitsnap_ai/features/auth/data/rx_post_sign_up/rx.dart';
-import 'package:fitsnap_ai/features/auth/presentation/sign_up/model/sign_up_model.dart';
-import 'package:fitsnap_ai/features/ai_cam/data/rx.dart';
-import 'package:fitsnap_ai/features/onboarding/data/rx.dart';
-import 'package:fitsnap_ai/features/onboarding/models/plan_intro_response_result.dart';
-import 'package:fitsnap_ai/features/my_plan/data/progress_history_rx.dart';
-import 'package:fitsnap_ai/features/workouts/data/suggested_workouts_rx.dart';
-import 'package:fitsnap_ai/features/meal/data/meal_plan_rx.dart';
+import 'package:fitai/features/auth/data/rx_post_sign_up/rx.dart';
+import 'package:fitai/features/auth/presentation/sign_up/model/sign_up_model.dart';
+import 'package:fitai/features/ai_cam/data/rx.dart';
+import 'package:fitai/features/onboarding/data/rx.dart';
+import 'package:fitai/features/onboarding/models/plan_intro_response_result.dart';
+import 'package:fitai/features/my_plan/data/progress_history_rx.dart';
+import 'package:fitai/features/workouts/data/suggested_workouts_rx.dart';
+import 'package:fitai/features/meal/data/meal_plan_rx.dart';
 import 'package:rxdart/subjects.dart';
 
 import '../features/auth/data/rx_post_login/rx.dart';

@@ -1,6 +1,6 @@
-import 'package:fitsnap_ai/common_widgets/custom_elevated_button.dart';
-import 'package:fitsnap_ai/helpers/all_routes.dart';
-import 'package:fitsnap_ai/helpers/navigation_service.dart';
+import 'package:fitai/common_widgets/custom_elevated_button.dart';
+import 'package:fitai/helpers/all_routes.dart';
+import 'package:fitai/helpers/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

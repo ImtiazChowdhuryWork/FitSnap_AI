@@ -1,5 +1,5 @@
-import 'package:fitsnap_ai/gen/colors.gen.dart';
-import 'package:fitsnap_ai/helpers/navigation_service.dart';
+import 'package:fitai/gen/colors.gen.dart';
+import 'package:fitai/helpers/navigation_service.dart';
 import 'package:flutter/material.dart';
 
 class CustomBackButton extends StatelessWidget {

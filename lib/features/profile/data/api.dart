@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:fitsnap_ai/networks/dio/dio.dart';
-import 'package:fitsnap_ai/networks/endpoints.dart';
+import 'package:fitai/networks/dio/dio.dart';
+import 'package:fitai/networks/endpoints.dart';
 
 import '../../../networks/exception_handler/data_source.dart';
 

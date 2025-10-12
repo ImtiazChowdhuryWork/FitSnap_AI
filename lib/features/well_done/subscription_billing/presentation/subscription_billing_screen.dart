@@ -1,6 +1,6 @@
-import 'package:fitsnap_ai/features/well_done/subscription_billing/widgets/show_date.dart';
-import 'package:fitsnap_ai/features/well_done/subscription_billing/widgets/subcription_package_type.dart';
-import 'package:fitsnap_ai/features/well_done/subscription_billing/widgets/upgrade_plan_button.dart';
+import 'package:fitai/features/well_done/subscription_billing/widgets/show_date.dart';
+import 'package:fitai/features/well_done/subscription_billing/widgets/subcription_package_type.dart';
+import 'package:fitai/features/well_done/subscription_billing/widgets/upgrade_plan_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

@@ -1,5 +1,5 @@
-import 'package:fitsnap_ai/features/ceckout/models/subscription_type_model.dart';
-import 'package:fitsnap_ai/gen/assets.gen.dart';
+import 'package:fitai/features/ceckout/models/subscription_type_model.dart';
+import 'package:fitai/gen/assets.gen.dart';
 
 import '../features/meal/models/custom_meal_card_model.dart';
 import '../features/onboarding/models/onboarding_model.dart';

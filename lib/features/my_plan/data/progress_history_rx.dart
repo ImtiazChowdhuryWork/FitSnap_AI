@@ -1,10 +1,10 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:fitsnap_ai/common_widgets/custom_toast.dart';
-import 'package:fitsnap_ai/features/my_plan/data/progress_history_api.dart';
-import 'package:fitsnap_ai/features/my_plan/models/progress_history_model.dart';
-import 'package:fitsnap_ai/networks/rx_base.dart';
+import 'package:fitai/common_widgets/custom_toast.dart';
+import 'package:fitai/features/my_plan/data/progress_history_api.dart';
+import 'package:fitai/features/my_plan/models/progress_history_model.dart';
+import 'package:fitai/networks/rx_base.dart';
 import 'package:rxdart/rxdart.dart';
 
 final class GetProgressHistoryRx extends RxResponseInt {

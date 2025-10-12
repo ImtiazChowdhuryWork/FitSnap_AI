@@ -2,21 +2,21 @@
 /// Currently If I tap on categories it does not change videos accourding to categories
 library;
 
-import 'package:fitsnap_ai/common_widgets/custom_container.dart';
-import 'package:fitsnap_ai/common_widgets/custom_list_tile.dart';
-import 'package:fitsnap_ai/common_widgets/not_found_widget.dart';
-import 'package:fitsnap_ai/common_widgets/waiting_widget.dart';
-import 'package:fitsnap_ai/constants/app_constants.dart';
-import 'package:fitsnap_ai/features/profile/mdoel/view_profile_info_model.dart';
-import 'package:fitsnap_ai/features/profile/presentation/widgets/delete_account_bottom_sheet.dart';
-import 'package:fitsnap_ai/features/profile/presentation/widgets/sign_out_bottom_sheet.dart';
-import 'package:fitsnap_ai/features/profile/presentation/widgets/user_image_name_widget.dart';
-import 'package:fitsnap_ai/gen/colors.gen.dart';
-import 'package:fitsnap_ai/helpers/all_routes.dart';
-import 'package:fitsnap_ai/helpers/di.dart';
-import 'package:fitsnap_ai/helpers/navigation_service.dart';
-import 'package:fitsnap_ai/helpers/ui_helpers.dart';
-import 'package:fitsnap_ai/networks/api_acess.dart';
+import 'package:fitai/common_widgets/custom_container.dart';
+import 'package:fitai/common_widgets/custom_list_tile.dart';
+import 'package:fitai/common_widgets/not_found_widget.dart';
+import 'package:fitai/common_widgets/waiting_widget.dart';
+import 'package:fitai/constants/app_constants.dart';
+import 'package:fitai/features/profile/mdoel/view_profile_info_model.dart';
+import 'package:fitai/features/profile/presentation/widgets/delete_account_bottom_sheet.dart';
+import 'package:fitai/features/profile/presentation/widgets/sign_out_bottom_sheet.dart';
+import 'package:fitai/features/profile/presentation/widgets/user_image_name_widget.dart';
+import 'package:fitai/gen/colors.gen.dart';
+import 'package:fitai/helpers/all_routes.dart';
+import 'package:fitai/helpers/di.dart';
+import 'package:fitai/helpers/navigation_service.dart';
+import 'package:fitai/helpers/ui_helpers.dart';
+import 'package:fitai/networks/api_acess.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

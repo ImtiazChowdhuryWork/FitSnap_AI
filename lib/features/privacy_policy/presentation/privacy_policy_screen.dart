@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:fitsnap_ai/helpers/ui_helpers.dart';
-import 'package:fitsnap_ai/networks/api_acess.dart';
+import 'package:fitai/helpers/ui_helpers.dart';
+import 'package:fitai/networks/api_acess.dart';
 
 import '../../../common_widgets/not_found_widget.dart';
 import '../../../common_widgets/waiting_widget.dart';

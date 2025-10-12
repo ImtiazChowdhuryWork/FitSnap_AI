@@ -1,11 +1,11 @@
-import 'package:fitsnap_ai/common_widgets/custom_elevated_button.dart';
-import 'package:fitsnap_ai/constants/app_constants.dart';
-import 'package:fitsnap_ai/gen/assets.gen.dart';
-import 'package:fitsnap_ai/gen/colors.gen.dart';
-import 'package:fitsnap_ai/helpers/all_routes.dart';
-import 'package:fitsnap_ai/constants/app_list.dart';
-import 'package:fitsnap_ai/helpers/di.dart';
-import 'package:fitsnap_ai/helpers/navigation_service.dart';
+import 'package:fitai/common_widgets/custom_elevated_button.dart';
+import 'package:fitai/constants/app_constants.dart';
+import 'package:fitai/gen/assets.gen.dart';
+import 'package:fitai/gen/colors.gen.dart';
+import 'package:fitai/helpers/all_routes.dart';
+import 'package:fitai/constants/app_list.dart';
+import 'package:fitai/helpers/di.dart';
+import 'package:fitai/helpers/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gpt_markdown/gpt_markdown.dart';
@@ -48,7 +48,7 @@ class PlanIntroScreen extends StatelessWidget {
               children: [
                 // Welcome Header
                 Text(
-                  "Welcome to FitSnap AI",
+                  "Welcome to FitAI",
                   style: TextStyle(
                     fontFamily: 'Satoshi',
                     fontSize: 32.sp,

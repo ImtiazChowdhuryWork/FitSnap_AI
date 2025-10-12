@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:fitsnap_ai/constants/app_constants.dart';
-import 'package:fitsnap_ai/helpers/di.dart';
+import 'package:fitai/constants/app_constants.dart';
+import 'package:fitai/helpers/di.dart';
 
 import '../../../../networks/dio/dio.dart';
 import '../../../../networks/endpoints.dart';

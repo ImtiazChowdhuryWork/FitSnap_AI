@@ -1,9 +1,9 @@
 import 'dart:developer';
 
-import 'package:fitsnap_ai/common_widgets/custom_toast.dart';
-import 'package:fitsnap_ai/constants/app_constants.dart';
-import 'package:fitsnap_ai/helpers/di.dart';
-import 'package:fitsnap_ai/helpers/loading_helper.dart';
+import 'package:fitai/common_widgets/custom_toast.dart';
+import 'package:fitai/constants/app_constants.dart';
+import 'package:fitai/helpers/di.dart';
+import 'package:fitai/helpers/loading_helper.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../../constants/app_list.dart';

@@ -7,7 +7,7 @@
     <!-- Android 13+ media permission -->
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <application
-        android:label="fitsnap_ai"
+        android:label="FitAI"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
