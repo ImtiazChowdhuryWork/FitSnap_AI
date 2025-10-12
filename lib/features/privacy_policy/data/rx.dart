@@ -1,5 +1,5 @@
-import 'package:fitsnap_ai/features/privacy_policy/data/api.dart';
-import 'package:fitsnap_ai/networks/rx_base.dart';
+import 'package:fitai/features/privacy_policy/data/api.dart';
+import 'package:fitai/networks/rx_base.dart';
 import 'package:rxdart/streams.dart';
 
 final class GetPrivacyPolicyRx extends RxResponseInt {

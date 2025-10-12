@@ -1,11 +1,11 @@
-import 'package:fitsnap_ai/constants/app_list.dart';
-import 'package:fitsnap_ai/features/ceckout/widgets/subscriptionTypeWidget.dart';
+import 'package:fitai/constants/app_list.dart';
+import 'package:fitai/features/ceckout/widgets/subscriptionTypeWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fitsnap_ai/constants/text_font_style.dart';
-import 'package:fitsnap_ai/gen/assets.gen.dart';
-import 'package:fitsnap_ai/gen/colors.gen.dart';
-import 'package:fitsnap_ai/helpers/ui_helpers.dart';
+import 'package:fitai/constants/text_font_style.dart';
+import 'package:fitai/gen/assets.gen.dart';
+import 'package:fitai/gen/colors.gen.dart';
+import 'package:fitai/helpers/ui_helpers.dart';
 
 import '../../../common_widgets/custom_elevated_button.dart';
 import '../../../helpers/all_routes.dart';

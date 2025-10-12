@@ -1,6 +1,6 @@
-# fitsnap_ai
+# FitAI
 
-A new Flutter project.
+Your personal fitness coach application built with Flutter.
 
 ## Getting Started
 

@@ -1,13 +1,13 @@
 import 'dart:developer';
 
-import 'package:fitsnap_ai/common_widgets/custom_container.dart';
-import 'package:fitsnap_ai/common_widgets/custom_list_tile.dart';
-import 'package:fitsnap_ai/common_widgets/waiting_widget.dart';
-import 'package:fitsnap_ai/constants/app_constants.dart';
-import 'package:fitsnap_ai/gen/colors.gen.dart';
-import 'package:fitsnap_ai/helpers/di.dart';
-import 'package:fitsnap_ai/helpers/ui_helpers.dart';
-import 'package:fitsnap_ai/networks/api_acess.dart';
+import 'package:fitai/common_widgets/custom_container.dart';
+import 'package:fitai/common_widgets/custom_list_tile.dart';
+import 'package:fitai/common_widgets/waiting_widget.dart';
+import 'package:fitai/constants/app_constants.dart';
+import 'package:fitai/gen/colors.gen.dart';
+import 'package:fitai/helpers/di.dart';
+import 'package:fitai/helpers/ui_helpers.dart';
+import 'package:fitai/networks/api_acess.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

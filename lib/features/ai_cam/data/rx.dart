@@ -2,9 +2,9 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:fitsnap_ai/common_widgets/custom_toast.dart';
-import 'package:fitsnap_ai/features/ai_cam/data/api.dart';
-import 'package:fitsnap_ai/networks/rx_base.dart';
+import 'package:fitai/common_widgets/custom_toast.dart';
+import 'package:fitai/features/ai_cam/data/api.dart';
+import 'package:fitai/networks/rx_base.dart';
 import 'package:rxdart/rxdart.dart';
 
 final class AiCamUploadImageRx extends RxResponseInt {

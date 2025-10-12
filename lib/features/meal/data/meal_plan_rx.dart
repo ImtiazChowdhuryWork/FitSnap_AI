@@ -1,9 +1,9 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
-import 'package:fitsnap_ai/common_widgets/custom_toast.dart';
-import 'package:fitsnap_ai/features/meal/data/meal_plan_api.dart';
-import 'package:fitsnap_ai/features/meal/models/meal_plan_model.dart';
-import 'package:fitsnap_ai/networks/rx_base.dart';
+import 'package:fitai/common_widgets/custom_toast.dart';
+import 'package:fitai/features/meal/data/meal_plan_api.dart';
+import 'package:fitai/features/meal/models/meal_plan_model.dart';
+import 'package:fitai/networks/rx_base.dart';
 import 'package:rxdart/rxdart.dart';
 
 final class GetMealPlanRx extends RxResponseInt {

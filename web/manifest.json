@@ -1,6 +1,6 @@
 {
-    "name": "fitsnap_ai",
-    "short_name": "fitsnap_ai",
+    "name": "FitAI",
+    "short_name": "FitAI",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

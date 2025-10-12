@@ -1,4 +1,4 @@
-import 'package:fitsnap_ai/networks/endpoints.dart';
+import 'package:fitai/networks/endpoints.dart';
 
 class SuggestedWorkoutsModel {
   bool? success;

@@ -1,7 +1,7 @@
-import 'package:fitsnap_ai/constants/validator.dart';
-import 'package:fitsnap_ai/helpers/loading_helper.dart';
-import 'package:fitsnap_ai/networks/api_acess.dart';
-import 'package:fitsnap_ai/provider/sign_up_screen_provider.dart';
+import 'package:fitai/constants/validator.dart';
+import 'package:fitai/helpers/loading_helper.dart';
+import 'package:fitai/networks/api_acess.dart';
+import 'package:fitai/provider/sign_up_screen_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

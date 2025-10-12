@@ -1,6 +1,6 @@
-import 'package:fitsnap_ai/features/onboarding/data/api.dart';
-import 'package:fitsnap_ai/features/onboarding/models/onboarding_model.dart';
-import 'package:fitsnap_ai/features/onboarding/models/plan_intro_response_result.dart';
+import 'package:fitai/features/onboarding/data/api.dart';
+import 'package:fitai/features/onboarding/models/onboarding_model.dart';
+import 'package:fitai/features/onboarding/models/plan_intro_response_result.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../../networks/rx_base.dart';

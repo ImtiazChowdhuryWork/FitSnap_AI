@@ -1,4 +1,4 @@
-import 'package:fitsnap_ai/features/terms_of_services/data/api.dart';
+import 'package:fitai/features/terms_of_services/data/api.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../../networks/rx_base.dart';

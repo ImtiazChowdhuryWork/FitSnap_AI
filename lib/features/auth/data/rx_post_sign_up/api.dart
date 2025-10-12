@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:fitsnap_ai/features/auth/presentation/sign_up/model/sign_up_model.dart';
-import 'package:fitsnap_ai/networks/dio/dio.dart';
-import 'package:fitsnap_ai/networks/endpoints.dart';
-import 'package:fitsnap_ai/networks/exception_handler/data_source.dart';
+import 'package:fitai/features/auth/presentation/sign_up/model/sign_up_model.dart';
+import 'package:fitai/networks/dio/dio.dart';
+import 'package:fitai/networks/endpoints.dart';
+import 'package:fitai/networks/exception_handler/data_source.dart';
 
 final class SignUpApi {
   SignUpApi._internal();

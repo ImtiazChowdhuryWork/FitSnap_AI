@@ -1,4 +1,4 @@
-// import 'package:fitsnap_ai/navigation_screen.dart';
+// import 'package:fitai/navigation_screen.dart';
 // import 'package:flutter/material.dart';
 // import 'constants/app_constants.dart';
 // import 'features/terms_condition/presentation/terms_conditions_accept_screen.dart';
@@ -59,9 +59,9 @@ import 'dart:async';
 import 'dart:developer';
 
 
-import 'package:fitsnap_ai/features/auth/presentation/sign_in/sign_in_screen.dart';
-import 'package:fitsnap_ai/features/onboarding/presentation/onboarding_screen.dart';
-import 'package:fitsnap_ai/navigation_screen.dart';
+import 'package:fitai/features/auth/presentation/sign_in/sign_in_screen.dart';
+import 'package:fitai/features/onboarding/presentation/onboarding_screen.dart';
+import 'package:fitai/navigation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -178,7 +178,7 @@ class _LoadingState extends State<Loading> {
               SizedBox(height: 32.h),
               // App name
               Text(
-                "FitSnap AI",
+                "FitAI",
                 style: TextStyle(
                   fontSize: 32.sp,
                   fontWeight: FontWeight.bold,
