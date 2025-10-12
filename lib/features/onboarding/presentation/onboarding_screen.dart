@@ -1118,7 +1118,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         ),
                       ],
                       // Reasonable Goal Card for target weight questions
-                      if (question.questionText.contains("target weight") &&
+                      if (question.questionText.toLowerCase().contains("target weight") &&
                           onboardingProvider
                                   .responses[questionKey]?.isNotEmpty ==
                               true) ...[
@@ -1136,14 +1136,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                     color: Colors.redAccent,
                                   )),
                               SizedBox(height: 8.h),
-                              Text(
-                                _getReasonableGoalText(),
-                                style: TextStyle(
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 12.sp,
-                                  color: AppColors.c000000,
-                                ),
+                              Consumer<OnboardingProvider>(
+                                builder: (context, provider, child) {
+                                  return Text(
+                                    _getReasonableGoalText(provider),
+                                    style: TextStyle(
+                                      fontFamily: 'Inter',
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 12.sp,
+                                      color: AppColors.c000000,
+                                    ),
+                                  );
+                                },
                               ),
                             ],
                           ),
@@ -1221,7 +1225,50 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     }
   }
 
-  String _getReasonableGoalText() {
-    return "You will lose 15% of your weight; there is scientific evidence that some obesity-related conditions improve with 5% or higher weight loss.";
+  String _getReasonableGoalText(OnboardingProvider onboardingProvider) {
+    
+    // Use the same normalization approach as the provider's _find method
+    String? findResponse(String canonical) {
+      String normalize(String s) => s
+          .toLowerCase()
+          .replaceAll(RegExp(r"[''`\u2019]"), '')
+          .replaceAll(RegExp(r"[^a-z0-9]"), '_')
+          .replaceAll(RegExp(r"_+"), '_')
+          .replaceAll(RegExp(r"^_|_"), '');
+
+      final target = normalize(canonical);
+      for (final entry in onboardingProvider.responses.entries) {
+        if (normalize(entry.key) == target) return entry.value;
+      }
+      return null;
+    }
+    
+    // Find current and target weight using the same approach as the provider
+    final currentWeightStr = findResponse('whats_your_current_weight') ?? 
+                            findResponse('what_is_your_current_weight') ?? '';
+    final targetWeightStr = findResponse('whats_your_target_weight') ?? 
+                           findResponse('target_weight') ?? '';
+    
+    // Parse weights and calculate percentage (remove units like 'kg', 'lbs')
+    final currentWeight = double.tryParse(currentWeightStr.replaceAll(RegExp(r'[a-zA-Z\s]'), ''));
+    final targetWeight = double.tryParse(targetWeightStr.replaceAll(RegExp(r'[a-zA-Z\s]'), ''));
+    
+    if (currentWeight != null && targetWeight != null && currentWeight > 0 && targetWeight > 0) {
+      final percentage = ((currentWeight - targetWeight).abs() / currentWeight * 100).round();
+      
+      if (currentWeight > targetWeight) {
+        // Weight loss scenario: current weight is higher than target
+        return "You will lose $percentage% of your weight; there is scientific evidence that some obesity-related conditions improve with 5% or higher weight loss.";
+      } else if (targetWeight > currentWeight) {
+        // Weight gain scenario: target weight is higher than current
+        return "You will gain $percentage% of your weight; this healthy weight gain can help improve muscle mass and overall strength.";
+      } else {
+        // Same weight - maintenance
+        return "You want to maintain your current weight; this is great for maintaining your current fitness level and body composition.";
+      }
+    }
+    
+    // Fallback to static message if weights are not available
+    return "You will work towards your weight goal; there is scientific evidence that healthy weight changes can improve overall health markers.";
   }
 }
