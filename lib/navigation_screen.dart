@@ -75,7 +75,7 @@ class NavigationScreen extends StatelessWidget {
                           : Colors.black54,
                     ),
                     title: Text(
-                      "Workouts",
+                      "My Plan",
                       style: TextStyle(
                           color: currentIndex == 1
                               ? AppColors.c0000ff
@@ -120,7 +120,7 @@ class NavigationScreen extends StatelessWidget {
                           : Colors.black54,
                     ),
                     title: Text(
-                      "Explore",
+                      "Workouts",
                       style: TextStyle(
                           color: currentIndex == 4
                               ? AppColors.c0000ff

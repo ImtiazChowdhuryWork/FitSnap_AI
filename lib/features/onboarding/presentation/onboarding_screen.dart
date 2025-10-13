@@ -1093,7 +1093,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                     text: "+ FitAI users\n\n",
                                   ),
                                   TextSpan(
-                                      text: "87% of FitSnap AI users",
+                                      text: "87% of FitAI users",
                                       style: TextStyle(
                                         fontSize: 20.sp,
                                         fontWeight: FontWeight.w700,

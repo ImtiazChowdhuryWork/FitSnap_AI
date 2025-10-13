@@ -38,7 +38,7 @@ final class NavigationService {
   ) =>
       navigatorKey.currentState!.pushNamed(routeName, arguments: obj);
 
-  static get goBack => navigatorKey.currentState!.pop();
+  static void goBack() => navigatorKey.currentState?.pop();
 
   static get goBeBack => navigatorKey.currentState!.canPop();
 

@@ -57,9 +57,9 @@ class _SigninScreenState extends State<SigninScreen> {
                     child: CustomBackButton(),
                   ),
 
-                  ///Text : FitSnap AI
+                  ///Text : FitAI
                   Text(
-                    "FitSnap AI",
+                    "FitAI",
                     style:
                         TextFontStyle.headline25BoldcFFFFFFStyleInter.copyWith(
                       color: AppColors.c0000ff,
@@ -90,9 +90,14 @@ class _SigninScreenState extends State<SigninScreen> {
                     hintText: "Password",
                     borderColor: AppColors.c000000,
                     borderRadius: 8.h,
-                    suffixIcon: Icon(controller.isPasswordVisible
-                        ? Icons.visibility_off
-                        : Icons.visibility),
+                    isPass: true,
+                    isObsecure: !controller.isPasswordVisible,
+                    suffixIcon: IconButton(
+                      onPressed: () => controller.togglePasswordVisibility(),
+                      icon: Icon(controller.isPasswordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off),
+                    ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Please enter your password";

@@ -16,7 +16,7 @@ final class WelcomeScreen extends StatelessWidget {
         color: AppColors.c0000ff,
         alignment: Alignment.center,
         child: Text(
-          "FitSnap AI",
+          "FitAI",
           style: TextFontStyle.textStyle28cffffffRobotoBold,
         ),
       ),
