@@ -34,19 +34,32 @@ final class GetSuggestedWorkoutsRx extends RxResponseInt {
     bool success = data["success"] ?? false;
 
     if (success) {
-      List<dynamic> workoutsData = data["data"] ?? [];
-      suggestedWorkouts = workoutsData
-          .map((item) => SuggestedWorkoutItem.fromJson(item))
-          .toList();
-
-      log("Suggested workouts retrieved successfully: ${suggestedWorkouts.length} items");
+      // Handle the new day-wise response format
+      Map<String, dynamic>? workoutDaysData = data["data"];
+      if (workoutDaysData != null) {
+        // Flatten all workouts from all days into a single list for backward compatibility
+        suggestedWorkouts = [];
+        workoutDaysData.forEach((day, dayWorkouts) {
+          if (dayWorkouts is List) {
+            for (var dayWorkoutItem in dayWorkouts) {
+              if (dayWorkoutItem['workout'] != null) {
+                suggestedWorkouts.add(
+                  SuggestedWorkoutItem.fromJson(dayWorkoutItem['workout'])
+                );
+              }
+            }
+          }
+        });
+        
+        log("Suggested workouts retrieved successfully: ${suggestedWorkouts.length} total exercises across ${workoutDaysData.keys.length} days");
+      } else {
+        suggestedWorkouts = [];
+        log("No workout data received");
+      }
+      
       return true;
     } else {
-      CustomToastMessage(
-        title: 'Error',
-        description: message,
-      );
-      log("Failed to retrieve suggested workouts: $message");
+      log("API returned success=false: $message");
       return false;
     }
   }
@@ -57,7 +70,6 @@ final class GetSuggestedWorkoutsRx extends RxResponseInt {
       message = "Network error occurred";
       log("Network error while fetching suggested workouts: ${error.message}");
     } else {
-      message = "Failed to load suggested workouts";
       log("Error fetching suggested workouts: ${error.toString()}");
     }
 
