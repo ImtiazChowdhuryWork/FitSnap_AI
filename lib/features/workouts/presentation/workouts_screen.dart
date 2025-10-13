@@ -5,13 +5,14 @@ import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
 import '../../../common_widgets/custom_drawer.dart';
-import '../../../common_widgets/not_found_widget.dart';
+
 import '../../../common_widgets/waiting_widget.dart';
 import '../../../gen/colors.gen.dart';
 import '../../../networks/api_acess.dart';
 import '../../../provider/navigation_provider.dart';
-import '../../explore/presentation/widget/catched_video_player.dart';
+
 import '../../explore/presentation/widget/video_cache_manager.dart';
+import '../../explore/presentation/widget/catched_video_player.dart';
 import '../models/suggested_workouts_model.dart';
 
 class WorkoutsScreen extends StatefulWidget {
@@ -162,108 +163,17 @@ class _WorkoutsScreenState extends State<WorkoutsScreen> {
                   } else if (snapshot.hasData && snapshot.data != null) {
                     SuggestedWorkoutsModel suggestedWorkouts =
                         SuggestedWorkoutsModel.fromJson(snapshot.data);
-                    final workoutsList = suggestedWorkouts.data ?? [];
+                    final workoutDays = suggestedWorkouts.data ?? {};
 
-                    if (workoutsList.isEmpty) {
+                    if (workoutDays.isEmpty) {
                       return _buildErrorState();
                     }
 
-                    log("Number of suggested workouts: ${workoutsList.length}");
+                    log("Number of workout days: ${workoutDays.length}");
 
-                    return ListView.builder(
-                      itemCount: workoutsList.length,
-                      padding: EdgeInsets.zero,
-                      itemBuilder: (context, index) {
-                        final workout = workoutsList[index];
-                        final videoUrl = workout.fullVideoUrl;
-                        final workoutTitle = workout.displayTitle;
-
-                        log("Workout Url : $videoUrl");
-
-                        return Padding(
-                          padding: EdgeInsets.only(bottom: 16.h),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              // Workout Title
-                              Text(
-                                workoutTitle,
-                                style: TextStyle(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black87,
-                                ),
-                              ),
-
-                              // Gender and Category Info
-                              if (workout.gender != null || workout.category != null)
-                                Padding(
-                                  padding: EdgeInsets.only(top: 4.h, bottom: 8.h),
-                                  child: Row(
-                                    children: [
-                                      if (workout.gender != null)
-                                        Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 8.w, vertical: 2.h),
-                                          decoration: BoxDecoration(
-                                            color: Colors.blue.withOpacity(0.1),
-                                            borderRadius: BorderRadius.circular(12.r),
-                                            border: Border.all(
-                                              color: Colors.blue.withOpacity(0.3),
-                                              width: 1,
-                                            ),
-                                          ),
-                                          child: Text(
-                                            workout.displayGender,
-                                            style: TextStyle(
-                                              fontSize: 12.sp,
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.blue[700],
-                                            ),
-                                          ),
-                                        ),
-                                      if (workout.gender != null &&
-                                          workout.category != null)
-                                        SizedBox(width: 8.w),
-                                      if (workout.category != null)
-                                        Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 8.w, vertical: 2.h),
-                                          decoration: BoxDecoration(
-                                            color: Colors.green.withOpacity(0.1),
-                                            borderRadius: BorderRadius.circular(12.r),
-                                            border: Border.all(
-                                              color: Colors.green.withOpacity(0.3),
-                                              width: 1,
-                                            ),
-                                          ),
-                                          child: Text(
-                                            workout.category?.name ?? 'Unknown',
-                                            style: TextStyle(
-                                              fontSize: 12.sp,
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.green[700],
-                                            ),
-                                          ),
-                                        ),
-                                    ],
-                                  ),
-                                ),
-
-                              // Video Player
-                              CachedVideoPlayerWidget(
-                                key: ValueKey(videoUrl),
-                                url: videoUrl,
-                              ),
-                              SizedBox(height: 8.h),
-                              const Divider(),
-                            ],
-                          ),
-                        );
-                      },
-                    );
+                    return _buildDayWiseWorkoutPlan(suggestedWorkouts);
                   } else {
-                    return const Center(child: NotFoundWidget());
+                    return _buildErrorState();
                   }
                 },
               ),
@@ -271,6 +181,180 @@ class _WorkoutsScreenState extends State<WorkoutsScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildDayWiseWorkoutPlan(SuggestedWorkoutsModel suggestedWorkouts) {
+    final sortedDays = suggestedWorkouts.sortedDays;
+    
+    return ListView.builder(
+      itemCount: sortedDays.length,
+      padding: EdgeInsets.zero,
+      itemBuilder: (context, index) {
+        final day = sortedDays[index];
+        final dayWorkouts = suggestedWorkouts.data![day] ?? [];
+        
+        return Padding(
+          padding: EdgeInsets.only(bottom: 16.h),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12.r),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 10,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Theme(
+              data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+              child: ExpansionTile(
+                initiallyExpanded: index == 0, // Expand first day by default
+                tilePadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+                childrenPadding: EdgeInsets.only(bottom: 16.h),
+                leading: Container(
+                  width: 40.w,
+                  height: 40.h,
+                  decoration: BoxDecoration(
+                    color: AppColors.c0000ff.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  child: Center(
+                    child: Text(
+                      day.replaceAll('Day ', ''),
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.c0000ff,
+                      ),
+                    ),
+                  ),
+                ),
+                title: Text(
+                  day,
+                  style: TextStyle(
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+                ),
+                subtitle: Text(
+                  '${dayWorkouts.length} workouts',
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    color: Colors.grey[600],
+                  ),
+                ),
+                children: dayWorkouts.map<Widget>((dayWorkout) {
+                  final workout = dayWorkout.workout;
+                  if (workout == null) return const SizedBox.shrink();
+                  
+                  final videoUrl = workout.fullVideoUrl;
+                  final workoutTitle = workout.displayTitle;
+
+                  return Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[50],
+                        borderRadius: BorderRadius.circular(8.r),
+                        border: Border.all(color: Colors.grey[200]!),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Workout Title
+                          Padding(
+                            padding: EdgeInsets.all(12.sp),
+                            child: Text(
+                              workoutTitle,
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black87,
+                              ),
+                            ),
+                          ),
+
+                          // Gender and Category Info
+                          if (workout.gender != null || workout.category != null)
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 12.w),
+                              child: Row(
+                                children: [
+                                  if (workout.gender != null) ...[
+                                    Icon(
+                                      workout.gender!.toLowerCase() == 'male'
+                                          ? Icons.male
+                                          : Icons.female,
+                                      size: 16.sp,
+                                      color: Colors.grey[600],
+                                    ),
+                                    SizedBox(width: 4.w),
+                                    Text(
+                                      workout.gender!.toUpperCase(),
+                                      style: TextStyle(
+                                        fontSize: 12.sp,
+                                        color: Colors.grey[600],
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
+                                  if (workout.gender != null && workout.category != null)
+                                    Text(
+                                      ' • ',
+                                      style: TextStyle(
+                                        fontSize: 12.sp,
+                                        color: Colors.grey[600],
+                                      ),
+                                    ),
+                                  if (workout.category != null)
+                                    Expanded(
+                                      child: Text(
+                                        workout.category!.name ?? '',
+                                        style: TextStyle(
+                                          fontSize: 12.sp,
+                                          color: Colors.grey[600],
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ),
+
+                          SizedBox(height: 12.h),
+
+                          // Video Player or Thumbnail
+                          if (videoUrl.isNotEmpty)
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 12.w),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8.r),
+                                child: Container(
+                                  height: 200.h,
+                                  width: double.infinity,
+                                  color: Colors.black12,
+                                  child: CachedVideoPlayerWidget(
+                                    url: videoUrl,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          
+                          SizedBox(height: 12.h),
+                        ],
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 
