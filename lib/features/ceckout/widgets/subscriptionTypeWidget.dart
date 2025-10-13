@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fitsnap_ai/constants/text_font_style.dart';
-import 'package:fitsnap_ai/gen/colors.gen.dart';
-import 'package:fitsnap_ai/helpers/ui_helpers.dart';
+import 'package:fitai/constants/text_font_style.dart';
+import 'package:fitai/gen/colors.gen.dart';
+import 'package:fitai/helpers/ui_helpers.dart';
 import '../../../common_widgets/custom_radius_button.dart';
 
 class Subscriptiontypewidget extends StatelessWidget {

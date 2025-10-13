@@ -1,4 +1,4 @@
-import 'package:fitsnap_ai/provider/impage_picker_provider_fitsnap.dart';
+import 'package:fitai/provider/image_picker_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../features/onboarding/providers/onboarding_provider.dart';

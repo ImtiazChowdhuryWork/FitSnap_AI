@@ -1,9 +1,9 @@
-import 'package:fitsnap_ai/networks/endpoints.dart';
+import 'package:fitai/networks/endpoints.dart';
 
 class SuggestedWorkoutsModel {
   bool? success;
   String? message;
-  List<SuggestedWorkoutItem>? data;
+  Map<String, List<WorkoutDayItem>>? data;
 
   SuggestedWorkoutsModel({
     this.success,
@@ -16,18 +16,36 @@ class SuggestedWorkoutsModel {
         success: json["success"],
         message: json["message"],
         data: json["data"] == null
-            ? []
-            : List<SuggestedWorkoutItem>.from(
-                json["data"]!.map((x) => SuggestedWorkoutItem.fromJson(x))),
+            ? {}
+            : Map<String, List<WorkoutDayItem>>.from(
+                json["data"]!.map((key, value) => MapEntry(
+                      key,
+                      List<WorkoutDayItem>.from(
+                          value.map((x) => WorkoutDayItem.fromJson(x))),
+                    ))),
       );
 
   Map<String, dynamic> toJson() => {
         "success": success,
         "message": message,
         "data": data == null
-            ? []
-            : List<dynamic>.from(data!.map((x) => x.toJson())),
+            ? {}
+            : Map<String, dynamic>.from(data!.map((key, value) => MapEntry(
+                key,
+                List<dynamic>.from(value.map((x) => x.toJson())),
+              ))),
       };
+
+  /// Get all days sorted
+  List<String> get sortedDays {
+    if (data == null) return [];
+    return data!.keys.toList()..sort((a, b) {
+      // Extract day numbers for proper sorting (Day 1, Day 2, etc.)
+      int dayA = int.tryParse(a.replaceAll(RegExp(r'[^0-9]'), '')) ?? 0;
+      int dayB = int.tryParse(b.replaceAll(RegExp(r'[^0-9]'), '')) ?? 0;
+      return dayA.compareTo(dayB);
+    });
+  }
 }
 
 class WorkoutCategory {
@@ -48,6 +66,29 @@ class WorkoutCategory {
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
+      };
+}
+
+class WorkoutDayItem {
+  int? id;
+  SuggestedWorkoutItem? workout;
+
+  WorkoutDayItem({
+    this.id,
+    this.workout,
+  });
+
+  factory WorkoutDayItem.fromJson(Map<String, dynamic> json) =>
+      WorkoutDayItem(
+        id: json["id"],
+        workout: json["workout"] == null
+            ? null
+            : SuggestedWorkoutItem.fromJson(json["workout"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "workout": workout?.toJson(),
       };
 }
 

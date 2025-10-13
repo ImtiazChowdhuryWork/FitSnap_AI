@@ -1,8 +1,8 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
-import 'package:fitsnap_ai/features/ai_cam/presentation/ai_cam_screen.dart';
-import 'package:fitsnap_ai/features/explore/presentation/explore_screen.dart';
-import 'package:fitsnap_ai/features/meal/presentation/meal_screen.dart';
-import 'package:fitsnap_ai/features/my_plan/presentation/progress_screen.dart';
+import 'package:fitai/features/ai_cam/presentation/ai_cam_screen.dart';
+import 'package:fitai/features/explore/presentation/explore_screen.dart';
+import 'package:fitai/features/meal/presentation/meal_screen.dart';
+import 'package:fitai/features/my_plan/presentation/progress_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -75,7 +75,7 @@ class NavigationScreen extends StatelessWidget {
                           : Colors.black54,
                     ),
                     title: Text(
-                      "Workouts",
+                      "My Plan",
                       style: TextStyle(
                           color: currentIndex == 1
                               ? AppColors.c0000ff
@@ -120,7 +120,7 @@ class NavigationScreen extends StatelessWidget {
                           : Colors.black54,
                     ),
                     title: Text(
-                      "Explore",
+                      "Workouts",
                       style: TextStyle(
                           color: currentIndex == 4
                               ? AppColors.c0000ff

@@ -1,9 +1,9 @@
-import 'package:fitsnap_ai/constants/text_font_style.dart';
-import 'package:fitsnap_ai/gen/assets.gen.dart';
-import 'package:fitsnap_ai/gen/colors.gen.dart';
-import 'package:fitsnap_ai/helpers/all_routes.dart';
-import 'package:fitsnap_ai/helpers/navigation_service.dart';
-import 'package:fitsnap_ai/helpers/ui_helpers.dart';
+import 'package:fitai/constants/text_font_style.dart';
+import 'package:fitai/gen/assets.gen.dart';
+import 'package:fitai/gen/colors.gen.dart';
+import 'package:fitai/helpers/all_routes.dart';
+import 'package:fitai/helpers/navigation_service.dart';
+import 'package:fitai/helpers/ui_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

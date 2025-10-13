@@ -1,13 +1,13 @@
 import 'dart:developer';
 
-import 'package:fitsnap_ai/common_widgets/custom_elevated_button.dart';
-import 'package:fitsnap_ai/common_widgets/custom_text_form_field.dart';
-import 'package:fitsnap_ai/constants/text_font_style.dart';
-import 'package:fitsnap_ai/gen/colors.gen.dart';
-import 'package:fitsnap_ai/helpers/all_routes.dart';
-import 'package:fitsnap_ai/helpers/loading_helper.dart';
-import 'package:fitsnap_ai/helpers/navigation_service.dart';
-import 'package:fitsnap_ai/provider/sign_in_screen_controller.dart';
+import 'package:fitai/common_widgets/custom_elevated_button.dart';
+import 'package:fitai/common_widgets/custom_text_form_field.dart';
+import 'package:fitai/constants/text_font_style.dart';
+import 'package:fitai/gen/colors.gen.dart';
+import 'package:fitai/helpers/all_routes.dart';
+import 'package:fitai/helpers/loading_helper.dart';
+import 'package:fitai/helpers/navigation_service.dart';
+import 'package:fitai/provider/sign_in_screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -57,9 +57,9 @@ class _SigninScreenState extends State<SigninScreen> {
                     child: CustomBackButton(),
                   ),
 
-                  ///Text : FitSnap AI
+                  ///Text : FitAI
                   Text(
-                    "FitSnap AI",
+                    "FitAI",
                     style:
                         TextFontStyle.headline25BoldcFFFFFFStyleInter.copyWith(
                       color: AppColors.c0000ff,
@@ -90,9 +90,14 @@ class _SigninScreenState extends State<SigninScreen> {
                     hintText: "Password",
                     borderColor: AppColors.c000000,
                     borderRadius: 8.h,
-                    suffixIcon: Icon(controller.isPasswordVisible
-                        ? Icons.visibility_off
-                        : Icons.visibility),
+                    isPass: true,
+                    isObsecure: !controller.isPasswordVisible,
+                    suffixIcon: IconButton(
+                      onPressed: () => controller.togglePasswordVisibility(),
+                      icon: Icon(controller.isPasswordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off),
+                    ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Please enter your password";

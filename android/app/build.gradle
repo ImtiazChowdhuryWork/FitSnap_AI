@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.fitsnap_ai"
+    namespace = "com.example.fitai"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 

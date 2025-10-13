@@ -1,25 +1,25 @@
 import 'dart:io';
 
-import 'package:fitsnap_ai/features/add_payment_method/presentation/add_payment_method_screen.dart';
-import 'package:fitsnap_ai/features/auth/presentation/reset_password/reset_pasword_screen.dart';
-import 'package:fitsnap_ai/features/auth/presentation/send_verification_code/send_verificatin_code_screen.dart';
-import 'package:fitsnap_ai/features/auth/presentation/sign_in/sign_in_screen.dart';
-import 'package:fitsnap_ai/features/auth/presentation/sign_up/presentation/sign_up_screen.dart';
-import 'package:fitsnap_ai/features/auth/presentation/verify_code/verify_code_screen.dart';
-import 'package:fitsnap_ai/features/ceckout/presentation/checkout_screen.dart';
-import 'package:fitsnap_ai/features/create_customize_plan/presentation/create_customize_plan_screen.dart';
-import 'package:fitsnap_ai/features/explore/presentation/explore_screen.dart';
-import 'package:fitsnap_ai/features/first_day/presentation/first_day_screen.dart';
-import 'package:fitsnap_ai/features/my_plan/presentation/progress_screen.dart';
-import 'package:fitsnap_ai/features/plan_intro/presentation/plan_intro_screen.dart';
-import 'package:fitsnap_ai/features/profile/presentation/profile_screen.dart';
-import 'package:fitsnap_ai/features/profile/sub_screens/update_profile_info/presentation/update_profile_info_screen.dart';
-import 'package:fitsnap_ai/features/profile/sub_screens/view_profile_info/presentation/view_profile_info_screen.dart';
-import 'package:fitsnap_ai/features/registration_successful/presentation/registration_successful_screen.dart';
-import 'package:fitsnap_ai/features/terms_of_services/presentation/terms_of_services_screen.dart';
-import 'package:fitsnap_ai/features/well_done/presentation/well_done_screen.dart';
-import 'package:fitsnap_ai/features/well_done/subscription_billing/presentation/subscription_billing_screen.dart';
-import 'package:fitsnap_ai/navigation_screen.dart';
+import 'package:fitai/features/add_payment_method/presentation/add_payment_method_screen.dart';
+import 'package:fitai/features/auth/presentation/reset_password/reset_pasword_screen.dart';
+import 'package:fitai/features/auth/presentation/send_verification_code/send_verificatin_code_screen.dart';
+import 'package:fitai/features/auth/presentation/sign_in/sign_in_screen.dart';
+import 'package:fitai/features/auth/presentation/sign_up/presentation/sign_up_screen.dart';
+import 'package:fitai/features/auth/presentation/verify_code/verify_code_screen.dart';
+import 'package:fitai/features/ceckout/presentation/checkout_screen.dart';
+import 'package:fitai/features/create_customize_plan/presentation/create_customize_plan_screen.dart';
+import 'package:fitai/features/explore/presentation/explore_screen.dart';
+import 'package:fitai/features/first_day/presentation/first_day_screen.dart';
+import 'package:fitai/features/my_plan/presentation/progress_screen.dart';
+import 'package:fitai/features/plan_intro/presentation/plan_intro_screen.dart';
+import 'package:fitai/features/profile/presentation/profile_screen.dart';
+import 'package:fitai/features/profile/sub_screens/update_profile_info/presentation/update_profile_info_screen.dart';
+import 'package:fitai/features/profile/sub_screens/view_profile_info/presentation/view_profile_info_screen.dart';
+import 'package:fitai/features/registration_successful/presentation/registration_successful_screen.dart';
+import 'package:fitai/features/terms_of_services/presentation/terms_of_services_screen.dart';
+import 'package:fitai/features/well_done/presentation/well_done_screen.dart';
+import 'package:fitai/features/well_done/subscription_billing/presentation/subscription_billing_screen.dart';
+import 'package:fitai/navigation_screen.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../customer/job_posts/presentation/job_posts_screen.dart';
@@ -36,11 +36,10 @@ final class Routes {
 
   static const String jobPostsScreen = '/jobPostsScreen';
 
-  ///FitSnap AI Routes Start
-  ///
+  ///FitAI Routes Start
   ///
 
-  ///FitSnap AI Routes End
+  ///FitAI Routes End
 
   static const String signinScreen = '/signinScreen';
   static const String signUpScreen = '/signUpScreen';

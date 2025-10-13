@@ -1,5 +1,5 @@
 // file: widgets/custom_pin_input.dart
-import 'package:fitsnap_ai/gen/colors.gen.dart';
+import 'package:fitai/gen/colors.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';

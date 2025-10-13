@@ -1,7 +1,7 @@
-import 'package:fitsnap_ai/constants/validator.dart';
-import 'package:fitsnap_ai/helpers/loading_helper.dart';
-import 'package:fitsnap_ai/networks/api_acess.dart';
-import 'package:fitsnap_ai/provider/sign_up_screen_provider.dart';
+import 'package:fitai/constants/validator.dart';
+import 'package:fitai/helpers/loading_helper.dart';
+import 'package:fitai/networks/api_acess.dart';
+import 'package:fitai/provider/sign_up_screen_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,9 +40,9 @@ class SignUpScreen extends StatelessWidget {
                     child: CustomBackButton(),
                   ),
 
-                  ///Text : FitSnap AI
+                  ///Text : FitAI
                   Text(
-                    "FitSnap AI",
+                    "FitAI",
                     style:
                         TextFontStyle.headline25BoldcFFFFFFStyleInter.copyWith(
                       color: AppColors.c0000ff,
@@ -73,21 +73,6 @@ class SignUpScreen extends StatelessWidget {
                         ),
                         UIHelper.verticalSpace(20.h),
 
-                        ///Last Name Field
-                        // CustomFormField(
-                        //   controller: controller.lastNameController,
-                        //   hintText: "Enter last name",
-                        //   borderColor: AppColors.c000000,
-                        //   borderRadius: 8.h,
-                        //   validator: (value) {
-                        //     if (controller.lastNameController.text.isEmpty) {
-                        //       return 'Enter your last name';
-                        //     } else {
-                        //       return null;
-                        //     }
-                        //   },
-                        // ),
-                        // UIHelper.verticalSpace(20.h),
 
                         ///Email Field
                         CustomFormField(
@@ -104,6 +89,8 @@ class SignUpScreen extends StatelessWidget {
                         CustomFormField(
                           controller: controller.passwordController,
                           hintText: "Enter password",
+                          isPass: true,
+                          isObsecure: controller.passwordMode,
                           borderColor: AppColors.c000000,
                           borderRadius: 8.h,
                           suffixIcon: IconButton(

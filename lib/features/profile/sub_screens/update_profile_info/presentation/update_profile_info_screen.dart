@@ -1,10 +1,10 @@
-import 'package:fitsnap_ai/common_widgets/custom_container.dart';
-import 'package:fitsnap_ai/common_widgets/custom_elevated_button.dart';
-import 'package:fitsnap_ai/common_widgets/custom_text_form_field.dart';
-import 'package:fitsnap_ai/constants/text_font_style.dart';
-import 'package:fitsnap_ai/features/profile/presentation/widgets/pick_profile_image_bottom_sheet.dart';
-import 'package:fitsnap_ai/helpers/ui_helpers.dart';
-import 'package:fitsnap_ai/provider/update_profile_info_provider.dart';
+import 'package:fitai/common_widgets/custom_container.dart';
+import 'package:fitai/common_widgets/custom_elevated_button.dart';
+import 'package:fitai/common_widgets/custom_text_form_field.dart';
+import 'package:fitai/constants/text_font_style.dart';
+import 'package:fitai/features/profile/presentation/widgets/pick_profile_image_bottom_sheet.dart';
+import 'package:fitai/helpers/ui_helpers.dart';
+import 'package:fitai/provider/update_profile_info_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

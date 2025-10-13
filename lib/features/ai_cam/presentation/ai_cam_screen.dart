@@ -1,10 +1,10 @@
-import 'package:fitsnap_ai/common_widgets/cam_option_button.dart';
-import 'package:fitsnap_ai/common_widgets/custom_elevated_button.dart';
-import 'package:fitsnap_ai/features/ai_cam/widgets/remove_image_widget.dart';
-import 'package:fitsnap_ai/gen/assets.gen.dart';
-import 'package:fitsnap_ai/helpers/loading_helper.dart';
-import 'package:fitsnap_ai/helpers/ui_helpers.dart';
-import 'package:fitsnap_ai/networks/api_acess.dart';
+import 'package:fitai/common_widgets/cam_option_button.dart';
+import 'package:fitai/common_widgets/custom_elevated_button.dart';
+import 'package:fitai/features/ai_cam/widgets/remove_image_widget.dart';
+import 'package:fitai/gen/assets.gen.dart';
+import 'package:fitai/helpers/loading_helper.dart';
+import 'package:fitai/helpers/ui_helpers.dart';
+import 'package:fitai/networks/api_acess.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';

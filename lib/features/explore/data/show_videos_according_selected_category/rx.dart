@@ -1,5 +1,5 @@
 // import 'dart:developer';
-// import 'package:fitsnap_ai/features/explore/data/show_videos_according_selected_category/api.dart';
+// import 'package:fitai/features/explore/data/show_videos_according_selected_category/api.dart';
 // import 'package:rxdart/rxdart.dart';
 
 // import '../../../../networks/rx_base.dart';
@@ -36,7 +36,7 @@
 
 import 'dart:developer';
 
-import 'package:fitsnap_ai/features/explore/data/show_videos_according_selected_category/api.dart';
+import 'package:fitai/features/explore/data/show_videos_according_selected_category/api.dart';
 import 'package:rxdart/rxdart.dart';
 import '../../../../networks/rx_base.dart';
 import '../../model/show_selected_category_video_model/show_selected_category_video_model.dart';
