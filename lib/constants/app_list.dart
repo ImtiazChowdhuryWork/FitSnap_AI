@@ -293,7 +293,7 @@ class AppList {
         ],
       ),
       QuestionModel(
-        questionText: "FitSnap AI was made for people just like you!",
+        questionText: "FitAI was made for people just like you!",
         questionImage: Assets.images.fjustLikeYou.path,
         options: [],
       ),
@@ -510,7 +510,7 @@ class AppList {
         ],
       ),
       QuestionModel(
-        questionText: "FitSnap AI was made for people just like you!",
+        questionText: "FitAI was made for people just like you!",
         questionImage: Assets.images.fjustLikeYou.path,
         options: [],
       ),

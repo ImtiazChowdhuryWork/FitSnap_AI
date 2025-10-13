@@ -39,7 +39,7 @@ class TermsConditionsAcceptScreen extends StatelessWidget {
                     ],
                   )),
               child: Text(
-                'FitSnap AI',
+                'FitAI',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 28,

@@ -214,6 +214,8 @@ class _ProgressScreenState extends State<ProgressScreen> {
 
   Widget _buildProgressCard(ProgressHistoryItem progress, int index) {
     final currentProgress = _progressList[index];
+    // Try to extract a numeric percent (0.0 - 1.0) from the difference string
+    final double? _extractedPercent = _extractPercentFromString(currentProgress.differentiateFromPrevious);
     return 
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -404,6 +406,41 @@ class _ProgressScreenState extends State<ProgressScreen> {
                     ),
                   ),
                   UIHelper.verticalSpace(16.h),
+                ],
+
+                // Progress percent indicator (improved visuals)
+                if (_extractedPercent != null) ...[
+                  UIHelper.verticalSpace(16.h),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Semantics(
+                          label: 'Progress ${(_extractedPercent * 100).toStringAsFixed(0)} percent',
+                          value: '${(_extractedPercent * 100).toStringAsFixed(0)}',
+                          child: _NiceProgressBar(
+                            percent: _extractedPercent,
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 12.w),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.h),
+                        decoration: BoxDecoration(
+                          color: AppColors.c0000ff,
+                          borderRadius: BorderRadius.circular(8.r),
+                        ),
+                        child: Text(
+                          '${(_extractedPercent * 100).toStringAsFixed(0)}%',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14.sp,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
 
                 // Current Analysis Section
@@ -711,5 +748,62 @@ class _ProgressScreenState extends State<ProgressScreen> {
     } else {
       return AppColors.c0000ff;
     }
+  }
+}
+
+// Helper: extract a numeric percent (0.0 - 1.0) from a string like "+3%" or "-2.5%".
+double? _extractPercentFromString(String? s) {
+  if (s == null) return null;
+  try {
+    final match = RegExp(r"([-+]?\d+(?:\.\d+)?)%")
+        .firstMatch(s.replaceAll(',', ''));
+    if (match != null) {
+      final value = double.tryParse(match.group(1)!);
+      if (value != null) return (value.abs() / 100.0);
+    }
+  } catch (_) {}
+  return null;
+}
+
+class _NiceProgressBar extends StatelessWidget {
+  final double percent; // 0.0 - 1.0
+  const _NiceProgressBar({Key? key, required this.percent}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Container(
+      height: 12.h,
+      decoration: BoxDecoration(
+        color: theme.dividerColor.withOpacity(0.08),
+        borderRadius: BorderRadius.circular(12.r),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12.r),
+        child: LayoutBuilder(builder: (context, constraints) {
+          final width = constraints.maxWidth * percent.clamp(0.0, 1.0);
+          return Stack(
+            children: [
+              Positioned.fill(
+                child: Container(
+                  color: Colors.transparent,
+                ),
+              ),
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 600),
+                width: width,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Color(0xFF3B13CA), Color(0xFF0000FF)],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ),
+                ),
+              ),
+            ],
+          );
+        }),
+      ),
+    );
   }
 }

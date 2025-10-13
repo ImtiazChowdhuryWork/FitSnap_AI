@@ -36,11 +36,10 @@ final class Routes {
 
   static const String jobPostsScreen = '/jobPostsScreen';
 
-  ///FitSnap AI Routes Start
-  ///
+  ///FitAI Routes Start
   ///
 
-  ///FitSnap AI Routes End
+  ///FitAI Routes End
 
   static const String signinScreen = '/signinScreen';
   static const String signUpScreen = '/signUpScreen';
