@@ -33,7 +33,7 @@ class PlanIntroScreen extends StatelessWidget {
         ),
         child: CustomElevatedButton(
           onTap: () {
-            NavigationService.navigateTo(Routes.signUpScreen);
+            NavigationService.navigateTo(Routes.paywallScreen);
           },
             buttonTitle: "Subscribe Now",
             // buttonStyle removed as it was invalid

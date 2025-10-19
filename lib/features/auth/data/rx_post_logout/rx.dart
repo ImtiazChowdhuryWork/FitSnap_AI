@@ -59,7 +59,7 @@ final class PostLogOutRX extends RxResponseInt {
 
     if (success) {
       await appData.remove(kKeyAccessToken);
-      // await appData.remove(kKeyRefreshToken);
+      await appData.remove(kKeyRefreshToken);
       await appData.write(kKeyIsLoggedIn, false);
       await appData.write(kKeyfirstTime, false);
       return true;

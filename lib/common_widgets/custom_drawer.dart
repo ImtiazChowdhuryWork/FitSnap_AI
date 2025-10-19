@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:fitai/common_widgets/custom_container.dart';
 import 'package:fitai/common_widgets/custom_list_tile.dart';
 import 'package:fitai/common_widgets/custom_toast.dart';
-import 'package:fitai/helpers/loading_helper.dart';
 import 'package:fitai/helpers/ui_helpers.dart';
 import 'package:fitai/networks/api_acess.dart';
 import 'package:flutter/material.dart';
@@ -97,11 +96,12 @@ class CustomDrawer extends StatelessWidget {
                       alignment: Alignment.centerRight,
                       child: CustomListTile(
                         onTap: () {
+                          Navigator.pop(context);
                           NavigationService.navigateTo(
-                              Routes.subscriptionAndBillingScreen);
+                              Routes.paywallScreen);
                         },
-                        title: "Subscriptions & Billing",
-                        leadingIcon: Icons.payment,
+                        title: "Upgrade to Premium",
+                        leadingIcon: Icons.workspace_premium_rounded,
                       ),
                     ),
                     // UIHelper.verticalSpace(15.h),
@@ -167,30 +167,56 @@ class CustomDrawer extends StatelessWidget {
                       alignment: Alignment.centerRight,
                       child: CustomListTile(
                         onTap: () async {
-                           NavigationService.navigateToUntilReplacement(
-                                  Routes.signinScreen);
-                          await postLogOutRX
-                              .logOut()
-                              .waitingForFutureWithoutBg()
-                              .then((value) {
-                            if (value) {
-                             
-                              appData.write(kKeyfirstTime, false);
-                              appData.write(kKeyIsLoggedIn, false);
-                              log("User First Time after logingout : ${appData.read(kKeyfirstTime)}");
-                              log("User Logged In after logingout: ${appData.read(kKeyIsLoggedIn)}");
-                            } else {
-                              // Show some error message
-                              CustomToastMessage(
-                                  title: value ? "Success" : "Error",
-                                  description:
-                                      "Logout failed. Please try again.");
-                              log("Logout failed. Please try again.");
-                              log("User First Time : ${appData.read(kKeyfirstTime)}");
-                              log("User Logged In : ${appData.read(kKeyIsLoggedIn)}");
+                          // Show loading dialog
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (context) => const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          );
+                          
+                          try {
+                            // Perform logout
+                            bool logoutSuccess = await postLogOutRX.logOut();
+                            
+                            // Close loading dialog
+                            if (context.mounted) {
+                              Navigator.of(context).pop();
                             }
-                          });
-                          // NavigationService.navigateTo(Routes.checkoutScreen);
+                            
+                            if (logoutSuccess) {
+                              // Show success message
+                              CustomToastMessage(
+                                title: "Success",
+                                description: "Logged out successfully"
+                              );
+                              
+                              // Navigate to sign in screen
+                              NavigationService.navigateToUntilReplacement(
+                                Routes.signinScreen
+                              );
+                            } else {
+                              // Show error message
+                              CustomToastMessage(
+                                title: "Error",
+                                description: "Logout failed. Please try again."
+                              );
+                              log("Logout failed. Please try again.");
+                            }
+                          } catch (e) {
+                            // Close loading dialog on error
+                            if (context.mounted) {
+                              Navigator.of(context).pop();
+                            }
+                            
+                            // Show error message
+                            CustomToastMessage(
+                              title: "Error",
+                              description: "An error occurred. Please try again."
+                            );
+                            log("Logout error: $e");
+                          }
                         },
                         title: "Sign Out",
                         titleColor: AppColors.cdc2626,
