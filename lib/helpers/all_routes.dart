@@ -19,6 +19,7 @@ import 'package:fitai/features/registration_successful/presentation/registration
 import 'package:fitai/features/terms_of_services/presentation/terms_of_services_screen.dart';
 import 'package:fitai/features/well_done/presentation/well_done_screen.dart';
 import 'package:fitai/features/well_done/subscription_billing/presentation/subscription_billing_screen.dart';
+import 'package:fitai/features/well_done/subscription_billing/presentation/paywall_screen.dart';
 import 'package:fitai/navigation_screen.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -56,6 +57,7 @@ final class Routes {
   static const String viewProfileInfoScreen = '/viewProfileInfoScreen';
   static const String subscriptionAndBillingScreen =
       '/subscriptionAndBillingScreen';
+  static const String paywallScreen = '/paywallScreen';
   static const String addPaymentMethodScreen = '/addPaymentMethodScreen';
   static const String sendVerificationScreen = '/sendVerificationScreen';
   static const String verifyCodeScreen = '/verifyCodeScreen';
@@ -293,6 +295,17 @@ final class RouteGenerator {
               )
             : CupertinoPageRoute(
                 builder: (context) => SubscriptionBillingScreen(),
+              );
+
+      ///paywallScreen
+      case Routes.paywallScreen:
+        return Platform.isAndroid
+            ? _FadedTransitionRoute(
+                widget: PaywallScreen(),
+                settings: settings,
+              )
+            : CupertinoPageRoute(
+                builder: (context) => PaywallScreen(),
               );
 
       ///viewProfileInfoScreen
