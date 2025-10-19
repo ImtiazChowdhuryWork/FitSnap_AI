@@ -102,7 +102,7 @@ class SignUpScreen extends StatelessWidget {
         ),
         SizedBox(height: 24.h),
         Text(
-          "FitSnap AI",
+          "FitAI",
           style: TextStyle(
             fontSize: 32.sp,
             fontWeight: FontWeight.bold,
@@ -273,7 +273,7 @@ class SignUpScreen extends StatelessWidget {
                 NavigationService.navigateTo(Routes.signinScreen);
                 CustomToastMessage(
                   title: 'Success',
-                  description: 'Sign up succeeded. Welcome to FitSnap AI!',
+                  description: 'Sign up succeeded. Welcome to FitAI!',
                 );
               } else {
                 CustomToastMessage(

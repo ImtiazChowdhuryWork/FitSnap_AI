@@ -116,7 +116,7 @@ class _SigninScreenState extends State<SigninScreen> {
         ),
         SizedBox(height: 24.h),
         Text(
-          "FitSnap AI",
+          "FitAI",
           style: TextStyle(
             fontSize: 32.sp,
             fontWeight: FontWeight.bold,
@@ -287,7 +287,7 @@ class _SigninScreenState extends State<SigninScreen> {
               );
               CustomToastMessage(
                 title: 'Success',
-                description: 'Sign in succeeded. Welcome to FitSnap AI!',
+                description: 'Sign in succeeded. Welcome to FitAI!',
               );
               log("Checking email ===== 2 ${controller.emailController.text}");
             } else {
