@@ -96,11 +96,12 @@ class CustomDrawer extends StatelessWidget {
                       alignment: Alignment.centerRight,
                       child: CustomListTile(
                         onTap: () {
+                          Navigator.pop(context);
                           NavigationService.navigateTo(
-                              Routes.subscriptionAndBillingScreen);
+                              Routes.paywallScreen);
                         },
-                        title: "Subscriptions & Billing",
-                        leadingIcon: Icons.payment,
+                        title: "Upgrade to Premium",
+                        leadingIcon: Icons.workspace_premium_rounded,
                       ),
                     ),
                     // UIHelper.verticalSpace(15.h),
