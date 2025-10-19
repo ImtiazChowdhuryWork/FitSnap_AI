@@ -215,7 +215,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
   Widget _buildProgressCard(ProgressHistoryItem progress, int index) {
     final currentProgress = _progressList[index];
     // Try to extract a numeric percent (0.0 - 1.0) from the difference string
-    final double? _extractedPercent = _extractPercentFromString(currentProgress.differentiateFromPrevious);
+    final double? extractedPercent = _extractPercentFromString(currentProgress.differentiateFromPrevious);
     return 
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -409,17 +409,17 @@ class _ProgressScreenState extends State<ProgressScreen> {
                 ],
 
                 // Progress percent indicator (improved visuals)
-                if (_extractedPercent != null) ...[
+                if (extractedPercent != null) ...[
                   UIHelper.verticalSpace(16.h),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Expanded(
                         child: Semantics(
-                          label: 'Progress ${(_extractedPercent * 100).toStringAsFixed(0)} percent',
-                          value: '${(_extractedPercent * 100).toStringAsFixed(0)}',
+                          label: 'Progress ${(extractedPercent * 100).toStringAsFixed(0)} percent',
+                          value: (extractedPercent * 100).toStringAsFixed(0),
                           child: _NiceProgressBar(
-                            percent: _extractedPercent,
+                            percent: extractedPercent,
                           ),
                         ),
                       ),
@@ -431,7 +431,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                           borderRadius: BorderRadius.circular(8.r),
                         ),
                         child: Text(
-                          '${(_extractedPercent * 100).toStringAsFixed(0)}%',
+                          '${(extractedPercent * 100).toStringAsFixed(0)}%',
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -767,7 +767,7 @@ double? _extractPercentFromString(String? s) {
 
 class _NiceProgressBar extends StatelessWidget {
   final double percent; // 0.0 - 1.0
-  const _NiceProgressBar({Key? key, required this.percent}) : super(key: key);
+  const _NiceProgressBar({super.key, required this.percent});
 
   @override
   Widget build(BuildContext context) {

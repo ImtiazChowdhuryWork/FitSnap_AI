@@ -471,7 +471,7 @@ class _WorkoutsScreenState extends State<WorkoutsScreen> {
                                 ],
                               ),
                             );
-                          }).toList(),
+                          }),
                           
                           if (dayWorkouts.length > 3)
                             Padding(

@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
-import 'package:fitai/common_widgets/custom_toast.dart';
 import 'package:fitai/features/meal/data/meal_plan_api.dart';
 import 'package:fitai/features/meal/models/meal_plan_model.dart';
 import 'package:fitai/networks/rx_base.dart';

@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:fitai/features/meal/models/meal_plan_model.dart';
 import 'package:fitai/gen/colors.gen.dart';
 import 'package:fitai/helpers/ui_helpers.dart';
