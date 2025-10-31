@@ -3,6 +3,7 @@ import 'package:fitai/gen/colors.gen.dart';
 import 'package:fitai/helpers/all_routes.dart';
 import 'package:fitai/helpers/navigation_service.dart';
 import 'package:fitai/helpers/ui_helpers.dart';
+import 'package:fitai/helpers/responsive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,275 +12,8 @@ import 'package:fitai/common_widgets/custom_text_form_field.dart';
 import '../models/onboarding_model.dart';
 import '../providers/onboarding_provider.dart';
 import '../../../../provider/image_picker_provider.dart';
-
-// Responsive Helper Class
-class ResponsiveHelper {
-  static bool isSmallScreen(BuildContext context) => MediaQuery.of(context).size.width < 360;
-  static bool isMobile(BuildContext context) => MediaQuery.of(context).size.width < 768;
-  static bool isTablet(BuildContext context) => 
-      MediaQuery.of(context).size.width >= 768 && MediaQuery.of(context).size.width < 1024;
-  static bool isDesktop(BuildContext context) => MediaQuery.of(context).size.width >= 1024;
-  
-  // Responsive font scaling
-  static double fontSize(BuildContext context, double baseSize) {
-    if (isSmallScreen(context)) return (baseSize * 0.85).sp;
-    if (isTablet(context)) return (baseSize * 1.1).sp;
-    if (isDesktop(context)) return (baseSize * 1.2).sp;
-    return baseSize.sp;
-  }
-  
-  // Responsive spacing
-  static double spacing(BuildContext context, double baseSpacing) {
-    if (isSmallScreen(context)) return (baseSpacing * 0.8).h;
-    if (isTablet(context)) return (baseSpacing * 1.2).h;
-    if (isDesktop(context)) return (baseSpacing * 1.5).h;
-    return baseSpacing.h;
-  }
-  
-  // Responsive padding
-  static EdgeInsets padding(BuildContext context, double horizontal, double vertical) {
-    final hPad = isSmallScreen(context) ? horizontal * 0.7 : 
-               isTablet(context) ? horizontal * 1.2 : 
-               isDesktop(context) ? horizontal * 1.5 : horizontal;
-    final vPad = isSmallScreen(context) ? vertical * 0.8 : 
-               isTablet(context) ? vertical * 1.1 : 
-               isDesktop(context) ? vertical * 1.3 : vertical;
-    return EdgeInsets.symmetric(horizontal: hPad.w, vertical: vPad.h);
-  }
-  
-  // Maximum content width for larger screens
-  static double maxContentWidth(BuildContext context) {
-    if (isDesktop(context)) return 600.w;
-    if (isTablet(context)) return MediaQuery.of(context).size.width * 0.8;
-    return MediaQuery.of(context).size.width;
-  }
-}
-
-// Custom Progress Bar Widget
-class CustomProgressBar extends StatelessWidget {
-  final int currentStep;
-  final int totalSteps;
-  final double height;
-  final Color backgroundColor;
-  final List<Color> gradientColors;
-
-  const CustomProgressBar({
-    super.key,
-    required this.currentStep,
-    required this.totalSteps,
-    this.height = 14.0,
-    this.backgroundColor = AppColors.cE6E8ED,
-    this.gradientColors = const [
-      AppColors.c3B13CA,
-      AppColors.c0000ff,
-      AppColors.c5454FF,
-    ],
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    // Calculate progress: 0% for first step, 100% for last step
-    final progress = totalSteps > 1 ? (currentStep) / (totalSteps - 1) : 0.0;
-
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Container(
-            height: height.h,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: backgroundColor,
-              borderRadius: BorderRadius.circular(20.r),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.15),
-                  blurRadius: 8,
-                  offset: Offset(0, 3),
-                ),
-              ],
-            ),
-            child: Stack(
-              children: [
-                FractionallySizedBox(
-                  widthFactor: progress.clamp(0.0, 1.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: gradientColors,
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                      ),
-                      borderRadius: BorderRadius.circular(20.r),
-                    ),
-                  ),
-                ),
-                Center(
-                  child: Text(
-                    "${(progress * 100).toInt()}%",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Inter',
-                      fontWeight: FontWeight.w700,
-                      fontSize: ResponsiveHelper.fontSize(context, 10),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: ResponsiveHelper.spacing(context, 8)),
-          Text(
-            "Step $currentStep of $totalSteps",
-            style: TextStyle(
-              color: AppColors.c000000,
-              fontFamily: 'Inter',
-              fontWeight: FontWeight.w500,
-              fontSize: ResponsiveHelper.fontSize(context, 12),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-// Updated CustomElevatedButton for a professional look
-class CustomElevatedButton extends StatelessWidget {
-  final String buttonTitle;
-  final double? buttonWidth;
-  final Color? buttonColor;
-  final VoidCallback? onTap;
-
-  const CustomElevatedButton({
-    super.key,
-    required this.buttonTitle,
-    this.buttonWidth,
-    this.buttonColor,
-    this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(12.r),
-        child: Container(
-          width: buttonWidth ?? double.infinity,
-          height: ResponsiveHelper.spacing(context, 50),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: buttonColor != null
-                  ? [buttonColor!, buttonColor!.withOpacity(0.8)]
-                  : [AppColors.c0000ff, AppColors.c5454FF],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
-            borderRadius: BorderRadius.circular(12.r),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.2),
-                blurRadius: 6,
-                offset: Offset(0, 3),
-              ),
-            ],
-          ),
-          child: Center(
-            child: Text(
-              buttonTitle,
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: 'Inter',
-                fontWeight: FontWeight.w600,
-                fontSize: ResponsiveHelper.fontSize(context, 18),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-// Updated CustomCard for a professional look
-class CustomCard extends StatelessWidget {
-  final VoidCallback? onTap;
-  final double? width;
-  final double? height;
-  final Color? color;
-  final Widget? child;
-
-  const CustomCard({
-    super.key,
-    this.onTap,
-    this.width,
-    this.height,
-    this.color,
-    this.child,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(10.r),
-        child: Container(
-          width: width,
-          height: height,
-          decoration: BoxDecoration(
-            color: color ?? AppColors.cE6E8ED,
-            borderRadius: BorderRadius.circular(10.r),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 4,
-                offset: Offset(0, 2),
-              ),
-            ],
-          ),
-          child: child,
-        ),
-      ),
-    );
-  }
-}
-
-// Updated CustomContainer for a professional look
-class CustomContainer extends StatelessWidget {
-  final double? width;
-  final double? height;
-  final Widget? child;
-
-  const CustomContainer({
-    super.key,
-    this.width,
-    this.height,
-    this.child,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10.r),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 4,
-            offset: Offset(0, 2),
-          ),
-        ],
-      ),
-      child: child,
-    );
-  }
-}
+import 'widgets/custom_progress_bar.dart';
+import 'widgets/onboarding_widgets.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -404,34 +138,40 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 final questionKey =
                     onboardingProvider.getQuestionKey(question.questionText);
 
-                return SingleChildScrollView(
-                  child: Container(
-                    height: MediaQuery.of(context).size.height -
-                        kToolbarHeight -
-                        MediaQuery.of(context).padding.top,
-                    key: ValueKey(index),
-                    decoration: BoxDecoration(
-                      gradient: onboardingProvider.currentQuestionIndex == 4
-                          ? LinearGradient(
-                              colors: [
-                                AppColors.c0000ff,
-                                AppColors.c5454FF,
-                                AppColors.c95C5FA,
-                              ],
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                            )
-                          : null,
-                    ),
-                    child: Center(
+                return LayoutBuilder(
+                  builder: (context, constraints) {
+                    return SingleChildScrollView(
+                      physics: ClampingScrollPhysics(), // Better for iOS
                       child: ConstrainedBox(
                         constraints: BoxConstraints(
-                          maxWidth: ResponsiveHelper.maxContentWidth(context),
+                          minHeight: constraints.maxHeight,
                         ),
                         child: Container(
-                          padding: ResponsiveHelper.padding(context, 20, 0),
-                          child: Column(
-                      spacing: ResponsiveHelper.spacing(context, 10),
+                          key: ValueKey(index),
+                          decoration: BoxDecoration(
+                            gradient: onboardingProvider.currentQuestionIndex == 4
+                                ? LinearGradient(
+                                    colors: [
+                                      AppColors.c0000ff,
+                                      AppColors.c5454FF,
+                                      AppColors.c95C5FA,
+                                    ],
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                  )
+                                : null,
+                          ),
+                          child: Center(
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                maxWidth: ResponsiveHelper.maxContentWidth(context),
+                              ),
+                              child: Padding(
+                                padding: ResponsiveHelper.padding(context, 20, 0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  spacing: ResponsiveHelper.spacing(context, 10),
                       children: [
                         CustomProgressBar(
                           currentStep: index + 1,
@@ -1367,12 +1107,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           ),
                         // UIHelper.verticalSpaceMedium,
                       ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                );
+                                ), // Column
+                              ), // Padding
+                            ), // ConstrainedBox maxWidth
+                          ), // Center
+                        ), // Container with gradient
+                      ), // ConstrainedBox minHeight
+                    ); // SingleChildScrollView
+                  },
+                ); // LayoutBuilder
               },
               ),
             ),
